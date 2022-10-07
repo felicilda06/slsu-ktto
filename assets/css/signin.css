@@ -1,0 +1,215 @@
+.login-container {
+    width: 100%;
+    height: 100vh;
+    border-right: 1px solid #e4e4e4;
+    display: flex;
+}
+
+.login-container .display-img {
+    flex: 1;
+}
+
+.login-container .display-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login-container .form-login {
+    transition: .3s ease-in-out;
+}
+
+.login-container .form-login .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 0px 10px;
+    margin-top: 55px;
+}
+
+.login-container .form-login .logo .img-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid #038cfc;
+}
+
+.login-container .form-login .logo h1 {
+    font-size: 19px;
+    width: 50%;
+    text-align: center;
+    color: #038cfc;
+    letter-spacing: 1px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 70px;
+}
+
+.login-container .form-login span.sign-in {
+    margin: 0px 0px 0px 22px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #3a3a3a
+}
+
+.login-container .form-login form {
+    margin-top: 80px;
+    padding: 30px 60px;
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.login-container .form-login form .form-input {
+    position: relative;
+    display: flex;
+    gap: 1px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.login-container .form-login form .form-input i.focused {
+    color: #046cc0
+}
+
+.login-container .form-login form .form-input span {
+    position: absolute;
+    pointer-events: none;
+    font-size: 13px;
+    top: 18%;
+    transition: .2s ease-in-out;
+}
+
+.login-container .form-login form .form-input span.focused {
+    top: -60%;
+    color: #046cc0
+}
+
+.login-container .form-login form .form-input input {
+    outline: none;
+    border: none;
+    font-size: 14px;
+    border-bottom: 1px solid #3a3a3a;
+    padding: 3px 0px;
+    width: 320px;
+}
+
+.login-container .form-login form .form-input input.focused {
+    border-color: #046cc0;
+}
+
+.login-container .form-login form button {
+    margin: 5px 0px 20px;
+    font-size: 13px;
+}
+
+.login-container .form-login form .login-settings {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13.5px;
+}
+.login-container .form-login form .login-settings .remember{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.login-container .form-login form .login-settings .remember label{
+    margin-top: 7px;
+}
+.login-container .form-login form .login-settings .remember label,
+.login-container .form-login form .login-settings .remember input[type='checkbox'] {
+    cursor: pointer;
+}
+.login-container .form-login form .login-settings .forgot{
+    display: flex;
+    align-items: center;
+}
+.login-container .form-login span.sign-up {
+    font-size: 13.5px;
+    margin: 0px 0px 0px 60px
+}
+
+/* Responsive CSS */
+
+@media only screen and (max-width: 400px) {
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-container .form-login .logo h1 {
+        width: 70%;
+    }
+
+    .login-container .form-login {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 0px;
+    }
+
+    .login-container .form-login form {
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .login-container .form-login span.sign-up {
+        margin: 0px
+    }
+
+    .login-container .form-login .logo {
+        margin-top: 10px;
+    }
+
+    .login-container .form-login .logo .img-logo {
+        width: 95px;
+        height: 95px;
+    }
+
+    .login-container .form-login form .form-input {
+        gap: 5px
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    html {
+        overflow-y: scroll;
+    }
+
+    .login-container {
+        border: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .login-container .display-img {
+        display: none;
+    }
+
+    .login-container .form-login {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .login-container .form-login form {
+        justify-content: center;
+        padding: 30px 0px;
+    }
+
+    .login-container .form-login form .form-input input {
+        width: 275px;
+    }
+
+    .login-container .form-login span.sign-up {
+        margin: 0px
+    }
+}
