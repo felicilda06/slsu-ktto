@@ -57,7 +57,9 @@
     top: 18%;
     transition: .2s ease-in-out;
 }
-
+.reset-container .form-reset form .form-input i {
+    color: #535353
+}
 .reset-container .form-reset form .form-input input {
     outline: none;
     border: none;

@@ -72,6 +72,10 @@
     justify-content: space-evenly;
 }
 
+.login-container .form-login form .form-input i {
+    color: #535353
+}
+
 .login-container .form-login form .form-input i.focused {
     color: #046cc0
 }
@@ -103,7 +107,8 @@
 .login-container .form-login form .form-input input.focused {
     border-color: #046cc0;
 }
-.login-container .form-login form .form-input i#toggle-icon{
+
+.login-container .form-login form .form-input i#toggle-icon {
     position: absolute;
     right: 6%;
     cursor: pointer;
@@ -111,9 +116,11 @@
     transition: .3s ease-in-out;
     background-color: white;
 }
-.login-container .form-login form .form-input i#toggle-icon:hover{
+
+.login-container .form-login form .form-input i#toggle-icon:hover {
     color: #252525;
 }
+
 .login-container .form-login form button {
     margin: 5px 0px 20px;
     font-size: 13px;

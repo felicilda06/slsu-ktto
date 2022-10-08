@@ -73,6 +73,10 @@
     transition: .3s ease-in-out;
 }
 
+.register-container .form-register form .form-input i {
+    color: #535353
+}
+
 .register-container .form-register form .form-input i.focused {
     color: #046cc0
 }
@@ -167,6 +171,7 @@
 
     .register-container .form-register .logo h1 {
         width: 70%;
+        margin-bottom: 40px;
     }
 
     .register-container .form-register {
@@ -179,11 +184,12 @@
 
     .register-container .form-register form {
         justify-content: center;
-        margin-top: 40px;
+        margin-top: 30px;
     }
 
     .register-container .form-register span.sign-up {
-        margin: 0px
+        margin: 0px;
+        font-size: 16px;
     }
 
     .register-container .form-register .logo {

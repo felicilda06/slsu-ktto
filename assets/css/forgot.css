@@ -84,7 +84,9 @@
     width: 275px;
     letter-spacing: 1px;
 }
-
+.forgot-container .form-forgot form .form-input i {
+    color: #535353
+}
 .forgot-container .form-forgot form button {
     margin-top: 20px;
 }
