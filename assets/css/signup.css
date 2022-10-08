@@ -1,21 +1,25 @@
-.register-container{
+.register-container {
     width: 100%;
     height: 100vh;
     border-right: 1px solid #e4e4e4;
     display: flex;
 }
-.register-container .display-img{
+
+.register-container .display-img {
     flex: 1;
 }
-.register-container .display-img img{
+
+.register-container .display-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.register-container .form-register{
+
+.register-container .form-register {
     transition: .3s ease-in-out;
 }
-.register-container .form-register .logo{
+
+.register-container .form-register .logo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,31 +27,35 @@
     padding: 0px 10px;
     margin-top: 55px;
 }
-.register-container .form-register .logo .img-logo{
+
+.register-container .form-register .logo .img-logo {
     width: 120px;
     height: 120px;
     object-fit: cover;
     border-radius: 50%;
     border: 6px solid #038cfc;
 }
-.register-container .form-register .logo h1{
+
+.register-container .form-register .logo h1 {
     font-size: 19px;
     width: 50%;
     text-align: center;
-    color:#038cfc;
+    color: #038cfc;
     letter-spacing: 1px;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 70px;
 }
-.register-container .form-register span.sign-up{
+
+.register-container .form-register span.sign-up {
     margin: 0px 0px 0px 22px;
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 1px;
-    color:#3a3a3a
+    color: #3a3a3a
 }
-.register-container .form-register form{
+
+.register-container .form-register form {
     margin-top: 80px;
     padding: 30px 60px;
     display: flex;
@@ -55,49 +63,57 @@
     justify-content: flex-end;
     flex-direction: column;
 }
-.register-container .form-register form .form-input{
+
+.register-container .form-register form .form-input {
     position: relative;
     display: flex;
-    gap:1px;
+    gap: 1px;
     align-items: center;
     justify-content: space-evenly;
     transition: .3s ease-in-out;
 }
-.register-container .form-register form .form-input i.focused{
-    color:#046cc0
+
+.register-container .form-register form .form-input i.focused {
+    color: #046cc0
 }
-.register-container .form-register form .form-input span{
+
+.register-container .form-register form .form-input span {
     position: absolute;
     pointer-events: none;
     font-size: 13px;
     top: 18%;
     transition: .2s ease-in-out;
 }
-.register-container .form-register form .form-input span.focused{
+
+.register-container .form-register form .form-input span.focused {
     top: -60%;
-    color:#046cc0
+    color: #046cc0
 }
+
 .register-container .form-register form .form-input input,
-.register-container .form-register form .form-input select{
+.register-container .form-register form .form-input select {
     outline: none;
     border: none;
-    font-size:14px;
+    font-size: 14px;
     border-bottom: 1px solid #3a3a3a;
     padding: 3px 0px;
     width: 320px;
     background-color: white;
+    letter-spacing: 1px;
 }
-.register-container .form-register form .form-input input.focused{
+
+.register-container .form-register form .form-input input.focused {
     border-color: #046cc0;
 }
-.register-container .form-register form button{
+
+.register-container .form-register form button {
     margin: 5px 0px 20px;
     font-size: 13px;
 }
 
-.register-container .form-register span.sign-in{
-  font-size: 13.5px;
-  margin:0px 0px 0px 60px
+.register-container .form-register span.sign-in {
+    font-size: 13.5px;
+    margin: 0px 0px 0px 60px
 }
 
 
@@ -106,7 +122,7 @@
 
 @media only screen and (max-width: 768px) {
     html {
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 
     .register-container {

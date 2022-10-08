@@ -1,0 +1,117 @@
+.forgot-container {
+    width: 100%;
+    height: 100vh;
+    background: url('https://cdn.pixabay.com/photo/2017/09/25/17/38/chart-2785979_960_720.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.forgot-container .form-forgot {
+    width: auto;
+    height: auto;
+    padding: 25px 10px 80px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 3px 5px 7px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forgot-container .form-forgot .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 20px;
+}
+
+.forgot-container .form-forgot .logo .img-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border: 6px solid #038cfc;
+    border-radius: 50%;
+}
+
+.forgot-container .form-forgot .logo h1 {
+    font-size: 19px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #038cfc;
+    width: 50%;
+    text-align: center;
+}
+
+.forgot-container .form-forgot p {
+    text-align: justify;
+    font-size: 14px;
+    width: 75%;
+    margin-top: 40px;
+    letter-spacing: 1px;
+}
+
+.forgot-container .form-forgot form .form-input {
+    margin-top: 30px;
+    position: relative;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.forgot-container .form-forgot form .form-input span {
+    position: absolute;
+    pointer-events: none;
+    font-size: 13px;
+    top: 18%;
+    transition: .2s ease-in-out;
+    letter-spacing: 1px;
+}
+
+.forgot-container .form-forgot form .form-input input {
+    outline: none;
+    border: none;
+    font-size: 14px;
+    border-bottom: 1px solid #3a3a3a;
+    padding: 3px 0px;
+    width: 275px;
+    letter-spacing: 1px;
+}
+
+.forgot-container .form-forgot form button {
+    margin-top: 20px;
+}
+
+.forgot-container .form-forgot span.sign-up {
+    margin-top: 25px;
+    font-size: 15px;
+}
+
+
+/* Responsive CSS */
+@media only screen and (max-width: 400px) {
+    .forgot-container .form-forgot .logo .img-logo {
+        width: 70px;
+        height: 70px;
+    }
+    .forgot-container .form-forgot .logo h1 {
+        font-size: 15px;
+        width: 75%;
+    }
+    .forgot-container .form-forgot form .form-input input {
+        width: 200px;
+    }
+    .forgot-container .form-forgot span.sign-up {
+        font-size: 14px;
+    }
+    .forgot-container .form-forgot p {
+        font-size: 13px;
+    }
+}

@@ -3,7 +3,6 @@ $(document).ready(() => {
   const onLoadPage = ()=>{
     setTimeout(()=>{
       if(!done){
-        console.log(`hey`)
         done = true
       }
       $('.loader').addClass('done')
@@ -15,9 +14,13 @@ $(document).ready(() => {
     window.location.href = "sign-up.php";
   });
   $(".forgot-link").click(() => {
-    window.location.href = "forgot.php";
+    window.location.href = "forgot-password.php";
   });
   $("#signin-link").click(() => {
     window.location.href = "sign-in.php";
   });
+  $('#btn-continue').click((e)=>{
+    e.preventDefault();
+    window.location.href = 'confirmation.php'
+  })
 });
