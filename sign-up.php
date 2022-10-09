@@ -2,7 +2,8 @@
 
 <head>
     <?php
-    include 'dependencies.php'
+    include 'dependencies.php';
+    include './api/connection.php'
     ?>
 
     <link rel="icon" href="./assets/images/logo.png" type="image/icon type">
@@ -36,39 +37,34 @@
             <div class="form-input" id='form-input-student-id'>
                 <i class="fa fa-id-badge"></i>
                 <div class="input">
-                    <span class="txt-email">Student Id</span>
-                    <input type="text" id='student-id' autocomplete="off">
+                    <input type="text" id='student-id' autocomplete="off" placeholder="Student Id">
                 </div>
             </div>
             <div class="form-input">
                 <i class="fa fa-envelope"></i>
                 <div class="input">
-                    <span class="txt-email">Email address</span>
-                    <input type="email" id='email' autocomplete="off">
+                    <input type="email" id='email' autocomplete="off" placeholder="Email address">
                 </div>
             </div>
             <div class="form-input">
                 <i class="fa fa-address-card-o"></i>
                 <div class="input">
-                    <span class="txt-email">Name</span>
-                    <input type="text" id='fullname' autocomplete="off">
+                    <input type="text" id='fullname' autocomplete="off" placeholder="Fullname">
                 </div>
             </div>
             <div class="form-input">
                 <i class="fa fa-lock"></i>
                 <div class="input">
-                    <span class="txt-email">Password</span>
-                    <input type="password" id='password' autocomplete="off">
+                    <input type="password" id='password' autocomplete="off" placeholder="Password">
                 </div>
             </div>
             <div class="form-input">
                 <i class="fa fa-check"></i>
                 <div class="input">
-                    <span class="txt-email">Confirm password</span>
-                    <input type="password" id='confirm-pass' autocomplete="off">
+                    <input type="password" id='confirm-pass' autocomplete="off" placeholder="Confirm Password">
                 </div>
             </div>
-            <button type="submit" class="btn btn-block btn-sm btn-primary" id='submit'>Submit</button>
+            <button type="submit" class="btn btn-block btn-sm btn-primary" id='btn-submit'>Submit</button>
         </form>
         <span class="sign-in">Already have an Account? <a href="#" id='signin-link'>Sign In</a></span>
     </div>

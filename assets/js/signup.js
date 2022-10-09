@@ -9,4 +9,7 @@ $(document).ready(()=>{
             $('#form-input-student-id').css('display', 'none')
         }
     })
+    $('#btn-submit').click((e)=>{
+        e.preventDefault();
+    })
 })
