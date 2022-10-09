@@ -1,30 +1,82 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-html{
+
+html {
     overflow: hidden;
 }
-body{
-    height: 100%;
-    width: 100%;
+
+body {
+    overflow: hidden;
     font-family: 'Roboto', sans-serif;
+    position: relative;
 }
-.main-container{
+
+#message-container {
+    position: absolute;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 12px 45px;
+    top: 3%;
+    right: -50%;
+    transition: .3s ease-in-out;
+}
+
+#message-container.error {
+    right: 1%;
+    background-color: #f55f5f;
+    color: #f7f7f7;
+}
+
+#message-container.success {
+    right: 1%;
+    background-color: #5b9932;
+    color: #f7f7f7;
+}
+
+#message-container span {
+    letter-spacing: 1.5px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: justify;
+}
+
+
+.main-container {
     width: 100%;
     height: 100vh;
     display: flex;
 }
-.main-container .img-homepage{
+
+.main-container .img-homepage {
     flex: 1;
     width: 100%;
     height: 100vh;
 }
-.main-container .img-homepage img{
+
+.main-container .img-homepage img {
     height: 100%;
     width: 100%;
     object-fit: fill;
+}
+
+/* Responsive CSS */
+@media only screen and (max-width: 400px) {
+    #message-container {
+        padding: 10px 25px;
+    }
+    #message-container.error {
+        right: 3%;
+    }
+
+    #message-container span {
+        font-size: 11px;
+    }
 }

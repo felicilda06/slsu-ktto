@@ -15,6 +15,9 @@
 </head>
 
 <body id='body'>
+    <div class="" id="message-container">
+        <span id="message"></span>
+    </div>
     <div class="loader">
         <img src="./assets/images/loader.gif" class="img-loader">
     </div>
@@ -25,17 +28,17 @@
                 <h1>SLSU-KTTO Document Management System</h1>
             </div>
             <span class="sign-in">Sign In</span>
-            <form>
+            <form id="sign-in-form">
                 <div class="form-input">
                     <i class="fa fa-user icon-email"></i>
                     <div class="input">
-                        <input type="email" id='email' autocomplete="off" placeholder="Email address">
+                        <input type="email" id='email' autocomplete="off" placeholder="Email address" required>
                     </div>
                 </div>
                 <div class="form-input">
                     <i class="fa fa-lock icon-password"></i>
                     <div class="input">
-                        <input type="password" id="password" placeholder="Password">
+                        <input type="password" id="password" placeholder="Password" required>
                         <i class="fa fa-eye-slash" id="toggle-icon"></i>
                     </div>
                 </div>
@@ -48,7 +51,7 @@
                         <a href="#" class="forgot-link">Forgot Password?</a>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-block btn-sm btn-primary">Submit</button>
+                <button type="submit" class="btn btn-block btn-sm btn-primary" id="btn-submit">Submit</button>
             </form>
             <span class="sign-up">Don't have an account? <a href="#" id='signup-link'>Sign Up</a></span>
         </div>
