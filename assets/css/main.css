@@ -16,31 +16,6 @@ body {
     position: relative;
 }
 
-#message-container {
-    position: absolute;
-    width: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    padding: 12px 45px;
-    top: 3%;
-    right: -50%;
-    transition: .3s ease-in-out;
-}
-
-#message-container.error {
-    right: 1%;
-    background-color: #f55f5f;
-    color: #f7f7f7;
-}
-
-#message-container.success {
-    right: 1%;
-    background-color: #5b9932;
-    color: #f7f7f7;
-}
-
 #message-container span {
     letter-spacing: 1.5px;
     font-size: 14px;

@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   let arrOfInputs = [
     {
       id: "email",
@@ -9,8 +10,9 @@ $(document).ready(() => {
       value: "",
     },
   ];
-  let apiType = "";
+  let apiType;
   let validationResult = [];
+  let spanElement;
 
   const onChangeInput = (id, value) => {
     arrOfInputs = arrOfInputs.map((input) =>
@@ -18,7 +20,7 @@ $(document).ready(() => {
     );
   };
 
-  const validatorMessage = (id, value) => {
+  const validationMessage = (id, value, status) => {
     switch (id) {
       case "email": {
         if (!value) {
@@ -28,21 +30,43 @@ $(document).ready(() => {
               id?.charAt(0).toUpperCase() + id.slice(1)
             } address is required.`,
           };
+        } else if (!emailRegEx.test(value)) {
+          return {
+            id,
+            message: `Must be valid email address.`,
+          };
+        } else {
+          return {
+            id,
+            message: ``,
+          };
         }
       }
-      default:
-        return {
-          id,
-          message: `${id?.charAt(0).toUpperCase() + id.slice(1)}  is required.`,
-        };
+      default: {
+        if (!value) {
+          return {
+            id,
+            message: `${
+              id?.charAt(0).toUpperCase() + id.slice(1)
+            }  is required.`,
+          };
+        } else {
+          return {
+            id,
+            message: ``,
+          };
+        }
+      }
     }
   };
 
   const validator = () => {
     arrOfInputs.map((input) => {
-      return !input.value
-        ? validationResult?.push(validatorMessage(input.id, input.value))
-        : [];
+      const isExist = validationResult.find((res) => res?.id === input.id);
+      return (
+        !isExist &&
+        validationResult?.push(validationMessage(input.id, input.value))
+      );
     });
     return validationResult;
   };
@@ -59,27 +83,35 @@ $(document).ready(() => {
   });
   $("#email").change((event) => {
     const { id, value } = event?.target;
+    validationResult = [];
     onChangeInput(id, value);
   });
   $("#password").change((event) => {
     const { id, value } = event?.target;
+    validationResult = [];
     onChangeInput(id, value);
   });
   $("#btn-submit").click((event) => {
     event.preventDefault();
     apiType = "sign-in";
-    if (validator()?.length > 0) {
-      validator()?.map((res) => {
-        console.log(res?.message, `message`)
-        $("#message-container").addClass("error");
-        $("#message").html(res?.message);
+    let messages = [...validator()];
+    const messageContainer = $("#message-container");
 
-        setTimeout(() => {
-          $("#message-container").removeClass("error");
-          $("#message").html("");
-        }, 3500);
+    if (messages.length > 0) {
+      messages.map((e) => {
+        if (e?.message) {
+          spanElement = document.createElement("span");
+          spanElement.innerText = e?.message;
+          spanElement.className = "error";
+          messageContainer.addClass("error");
+          messageContainer.append(spanElement);
+
+          setTimeout(() => {
+            messageContainer.removeClass("error");
+            messageContainer.children().remove();
+          }, [4000]);
+        }
       });
-    } else {
     }
 
     // $.ajax({

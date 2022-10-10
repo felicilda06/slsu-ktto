@@ -29,8 +29,8 @@
 }
 
 .register-container .form-register .logo .img-logo {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 50%;
     border: 6px solid #038cfc;
@@ -159,6 +159,10 @@
 
     .register-container .form-register span.sign-in {
         margin: 0px
+    }
+
+    .register-container .form-register span.sign-up {
+        margin: 0px;
     }
 }
 

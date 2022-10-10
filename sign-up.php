@@ -69,7 +69,7 @@
         <span class="sign-in">Already have an Account? <a href="#" id='signin-link'>Sign In</a></span>
     </div>
     <div class="display-img">
-        <img src="https://cdn.pixabay.com/photo/2017/09/25/17/38/chart-2785979_960_720.jpg" alt="">
+        <img src="https://images.unsplash.com/photo-1583521214690-73421a1829a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
     </div>
 </div>
 
