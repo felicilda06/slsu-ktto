@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/signin.css">
     <link rel="stylesheet" href="./assets/css/loader.css">
+    <link rel="stylesheet" href="./assets/css/message.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
 
-<body id='body'>
+<body>
     <div class="" id="message-container"></div>
     <div class="loader">
         <img src="./assets/images/loader.gif" class="img-loader">
@@ -59,7 +60,8 @@
     </div>
 
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/signin.js"></script>
+    <script src="./assets/js/signin.js" type="text/javascript"></script>
+
 </body>
 
 </html>

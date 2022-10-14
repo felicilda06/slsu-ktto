@@ -70,7 +70,7 @@
     align-items: center;
     border-radius: 10px;
     background-color: white;
-    box-shadow: 4px 5px 7px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.5);
     padding: 35px 25px 80px;
 }
 
@@ -108,15 +108,29 @@
     border-bottom: 1px solid #3a3a3a;
     width: 55px;
     text-align: center;
+    transition: .2s ease-in-out;
+    background-color: white;
+}
+
+.confirmation-container .form-confirmation form .input input:focus {
+    border-bottom: 1px solid #046cc0;
 }
 
 .confirmation-container .form-confirmation form button {
     margin-top: 20px;
 }
 
+.confirmation-container .form-confirmation form button.disabled {
+    cursor: not-allowed;
+}
+
 .confirmation-container .form-confirmation span {
     margin-top: 45px;
     font-size: 14px;
+}
+
+.confirmation-container .form-confirmation span #resend {
+    outline: none;
 }
 
 .confirmation-container .expiration {
@@ -134,9 +148,11 @@
         font-size: 13px;
         bottom: 12%;
     }
-    .alert-message{
+
+    .alert-message {
         padding: 0px 10px;
     }
+
     .alert-message .box span {
         width: 200px;
     }

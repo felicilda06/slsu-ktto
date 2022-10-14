@@ -38,12 +38,12 @@ if (!$code) {
             <p>Enter the 4 digit code we sent you via email to continue.</p>
             <form>
                 <div class="input">
-                    <input type="email" id='email' autocomplete="off" placeholder="0">
-                    <input type="email" id='email' autocomplete="off" placeholder="0">
-                    <input type="email" id='email' autocomplete="off" placeholder="0">
-                    <input type="email" id='email' autocomplete="off" placeholder="0">
+                    <input type="text" id='code1' autocomplete="off" placeholder="•" maxlength="1">
+                    <input type="text" id='code2' autocomplete="off" placeholder="•" maxlength="1">
+                    <input type="text" id='code3' autocomplete="off" placeholder="•" maxlength="1">
+                    <input type="text" id='code4' autocomplete="off" placeholder="•" maxlength="1">
                 </div>
-                <button type="submit" class="btn btn-sm btn-block btn-primary">Submit</button>
+                <button type="submit" class="btn btn-sm btn-block btn-primary" id='btn-submit' disabled>Submit</button>
             </form>
             <span>Did'nt get the code? <a href="#" id='resend'>Resend code</a></span>
         </div>
@@ -51,7 +51,7 @@ if (!$code) {
     </div>
 
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/signup.js"></script>
+    <script src="./assets/js/confirmation.js"></script>
     <script src="./assets/js/timer.js"></script>
 </body>
 

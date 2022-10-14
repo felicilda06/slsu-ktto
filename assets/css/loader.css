@@ -10,13 +10,17 @@
 .loader.done {
     display: none;
 }
+.loader img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
 
 
 /* Responsive CSS */
 @media only screen and (max-width: 400px) {
     .loader img {
-        width: 130px;
-        height: 130px;
-        object-fit: cover;
+        width: 120px;
+        height: 120px;
     }
 }

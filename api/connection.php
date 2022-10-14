@@ -1,13 +1,16 @@
 <?php
-    $host = 'localhost';
-    $username = 'root';
-    $password = '';
-    $database = 'slsu-kttoDb';
+$server = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'slsu_kttoDb';
 
-    $conn  = mysqli_connect($host, $username, $password, $database);
+date_default_timezone_set('Asia/Manila');
 
-    if(!$conn){
-        echo 'Unable to Connect to Database';
-        return;
-    }
-?>
+$conn  = mysqli_connect($server, $username, $password, $database);
+
+// echo phpinfo();
+
+if (!$conn) {
+    echo 'Unable to Connect to Database';
+}
+

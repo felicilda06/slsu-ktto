@@ -84,6 +84,11 @@
     padding: 3px 0px;
     width: 275px;
     letter-spacing: 1px;
+    transition: .2s ease-in-out;
+}
+
+.forgot-container .form-forgot form .form-input input:focus {
+    border-bottom: 1px solid #046cc0;
 }
 
 .forgot-container .form-forgot form .form-input i {
