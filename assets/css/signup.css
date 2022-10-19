@@ -144,6 +144,21 @@
 
 /* Responsive CSS */
 
+@media only screen and (max-width: 1024px) {
+    html {
+        overflow-y: auto;
+    }
+
+    .register-container .form-register .logo h1 {
+        margin-bottom: 50px;
+    }
+
+    .register-container .form-register form {
+        margin-top: 60px;
+        padding: 0px 60px;
+    }
+}
+
 
 @media only screen and (max-width: 768px) {
     html {

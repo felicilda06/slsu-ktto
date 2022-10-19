@@ -143,6 +143,24 @@
 }
 
 /* Responsive CSS */
+
+@media only screen and (max-width: 1024px) {
+    .confirmation-container .expiration {
+        bottom: 5%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .confirmation-container .expiration {
+        bottom: 8%;
+    }
+    .confirmation-container .expiration {
+        font-size: 14px;
+    }
+}
+
+
+
 @media only screen and (max-width: 400px) {
     .confirmation-container .expiration {
         font-size: 13px;

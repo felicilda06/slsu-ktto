@@ -170,6 +170,22 @@
 
 /* Responsive CSS */
 
+@media only screen and (max-width: 1024px) {
+    html {
+        overflow-y: auto;
+    }
+
+    .login-container .form-login .logo h1 {
+        margin-bottom: 50px;
+    }
+
+    .login-container .form-login form {
+        margin-top: 50px;
+        padding: 0px 60px;
+    }
+
+}
+
 @media only screen and (max-width: 768px) {
     html {
         overflow-y: auto;
