@@ -18,9 +18,25 @@ $(document).ready(() => {
   };
 
   setInterval(() => {
+    const isShow = $(".alert-message").hasClass("show");
     if (s === 0) {
+      $("#resend").css("font-weight", "bold");
       return;
     }
-    timerStart();
+    if (isShow) {
+      return;
+    } else {
+      timerStart();
+    }
   }, 1000);
+
+  $("#resend").click(() => {
+    $(".alert-message").addClass("show");
+    $("#resend").css("font-weight", "normal");
+  });
+
+  $("#icon-close").click(() => {
+    $(".alert-message").removeClass("show");
+    window.location.href = "confirmation.php";
+  });
 });

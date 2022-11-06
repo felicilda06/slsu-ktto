@@ -10,14 +10,13 @@
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/signin.css">
     <link rel="stylesheet" href="./assets/css/loader.css">
+    <link rel="stylesheet" href="./assets/css/message.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
 
-<body id='body'>
-    <div class="" id="message-container">
-        <span id="message"></span>
-    </div>
+<body>
+    <div class="" id="message-container"></div>
     <div class="loader">
         <img src="./assets/images/loader.gif" class="img-loader">
     </div>
@@ -32,13 +31,13 @@
                 <div class="form-input">
                     <i class="fa fa-user icon-email"></i>
                     <div class="input">
-                        <input type="email" id='email' autocomplete="off" placeholder="Email address" required>
+                        <input type="text" id='email' autocomplete="off" placeholder="Email address">
                     </div>
                 </div>
                 <div class="form-input">
                     <i class="fa fa-lock icon-password"></i>
                     <div class="input">
-                        <input type="password" id="password" placeholder="Password" required>
+                        <input type="password" id="password" placeholder="Password">
                         <i class="fa fa-eye-slash" id="toggle-icon"></i>
                     </div>
                 </div>
@@ -56,12 +55,15 @@
             <span class="sign-up">Don't have an account? <a href="#" id='signup-link'>Sign Up</a></span>
         </div>
         <div class="display-img">
-            <img src="https://cdn.pixabay.com/photo/2017/09/25/17/38/chart-2785979_960_720.jpg" alt="">
+            <img src="https://images.unsplash.com/photo-1583521214690-73421a1829a9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="">
         </div>
     </div>
 
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/signin.js"></script>
+    <script src="./assets/js/signin.js" type="text/javascript"></script>
+
 </body>
 
 </html>
+
+<!-- https://images.unsplash.com/photo-1565688534245-05d6b5be184a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80 -->

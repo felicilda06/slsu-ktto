@@ -16,29 +16,8 @@ body {
     position: relative;
 }
 
-#message-container {
-    position: absolute;
-    width: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    padding: 12px 45px;
-    top: 3%;
-    right: -50%;
-    transition: .3s ease-in-out;
-}
-
-#message-container.error {
-    right: 1%;
-    background-color: #f55f5f;
-    color: #f7f7f7;
-}
-
-#message-container.success {
-    right: 1%;
-    background-color: #5b9932;
-    color: #f7f7f7;
+#message-container{
+    z-index: 10;
 }
 
 #message-container span {
@@ -48,6 +27,56 @@ body {
     text-align: justify;
 }
 
+#verify_container{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    padding: 10px;
+    z-index: 3;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#verify_container.hide{
+    display: none;
+}
+
+#verify_container .verify_modal{
+    position: relative;
+    background-color: white;
+    box-shadow: 4px 5px 7px rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+    padding: 35px 25px;
+}
+
+#verify_container .verify_modal p{
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-top: 15px;
+}
+
+#verify_container .verify_modal form{
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-top: 25px;
+}
+
+#verify_container .verify_modal i#btn_close{
+    position: absolute;
+    right: 4%;
+    top: 5%;
+    font-size: 18px;
+    cursor: pointer;
+    color: #5d5d5d;
+    transition: .2s ease-in-out;
+}
+
+#verify_container .verify_modal i#btn-close:hover{
+    color: #3f3f3f;
+}
 
 .main-container {
     width: 100%;
@@ -73,10 +102,14 @@ body {
         padding: 10px 25px;
     }
     #message-container.error {
-        right: 3%;
+        right: 0%;
     }
 
     #message-container span {
         font-size: 11px;
+    }
+
+    #verify_container .verify_modal p{
+        text-align: center;
     }
 }

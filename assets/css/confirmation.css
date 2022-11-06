@@ -1,3 +1,57 @@
+.alert-message {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0%;
+    z-index: 10;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 50px;
+}
+
+.alert-message.show {
+    display: flex;
+}
+
+.alert-message .box {
+    position: relative;
+    border-radius: 5px;
+    border-left: 4px solid #5b9932;
+    box-shadow: 4px 5px 7px rgba(0, 0, 0, 0.6);
+    background-color: white;
+    padding: 45px 35px 45px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.alert-message .box i#icon-check {
+    color: #5b9932;
+    font-size: 30px;
+}
+
+.alert-message .box i#icon-close {
+    position: absolute;
+    right: 4%;
+    top: 12%;
+    color: #525252;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+.alert-message .box i#icon-close:hover {
+    color: #2e2e2e;
+}
+
+.alert-message .box span {
+    text-align: justify;
+    width: 300px;
+    font-size: 14px;
+}
+
 .confirmation-container {
     width: 100%;
     height: 100vh;
@@ -16,7 +70,7 @@
     align-items: center;
     border-radius: 10px;
     background-color: white;
-    box-shadow: 4px 5px 7px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.5);
     padding: 35px 25px 80px;
 }
 
@@ -27,38 +81,59 @@
     color: #038cfc;
     margin-top: 15px;
 }
-.confirmation-container .form-confirmation p{
+
+.confirmation-container .form-confirmation p {
     margin-top: 25px;
     font-size: 14px;
     width: 75%;
     text-align: center;
 }
+
 .confirmation-container .form-confirmation form {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0px 10px;
 }
+
 .confirmation-container .form-confirmation form .input {
     display: flex;
-    gap:10px;
+    gap: 10px;
     margin-top: 50px;
 }
-.confirmation-container .form-confirmation form .input input{
+
+.confirmation-container .form-confirmation form .input input {
     outline: none;
     border: none;
     border-bottom: 1px solid #3a3a3a;
     width: 55px;
     text-align: center;
+    transition: .2s ease-in-out;
+    background-color: white;
 }
-.confirmation-container .form-confirmation form button{
+
+.confirmation-container .form-confirmation form .input input:focus {
+    border-bottom: 1px solid #046cc0;
+}
+
+.confirmation-container .form-confirmation form button {
     margin-top: 20px;
 }
-.confirmation-container .form-confirmation span{
+
+.confirmation-container .form-confirmation form button.disabled {
+    cursor: not-allowed;
+}
+
+.confirmation-container .form-confirmation span {
     margin-top: 45px;
     font-size: 14px;
 }
-.confirmation-container .expiration{
+
+.confirmation-container .form-confirmation span #resend {
+    outline: none;
+}
+
+.confirmation-container .expiration {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -68,9 +143,35 @@
 }
 
 /* Responsive CSS */
+
+@media only screen and (max-width: 1024px) {
+    .confirmation-container .expiration {
+        bottom: 5%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .confirmation-container .expiration {
+        bottom: 8%;
+    }
+    .confirmation-container .expiration {
+        font-size: 14px;
+    }
+}
+
+
+
 @media only screen and (max-width: 400px) {
-    .confirmation-container .expiration{
+    .confirmation-container .expiration {
         font-size: 13px;
-        bottom: 10%;
+        bottom: 12%;
+    }
+
+    .alert-message {
+        padding: 0px 10px;
+    }
+
+    .alert-message .box span {
+        width: 200px;
     }
 }

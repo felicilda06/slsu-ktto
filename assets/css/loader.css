@@ -1,4 +1,4 @@
-.loader{
+.loader {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -6,6 +6,21 @@
     align-items: center;
     z-index: 10;
 }
-.loader.done{
+
+.loader.done {
     display: none;
+}
+.loader img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+
+/* Responsive CSS */
+@media only screen and (max-width: 400px) {
+    .loader img {
+        width: 120px;
+        height: 120px;
+    }
 }

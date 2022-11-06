@@ -19,8 +19,4 @@ $(document).ready(() => {
   $("#signin-link").click(() => {
     window.location.href = "sign-in.php";
   });
-  $('#btn-continue').click((e)=>{
-    e.preventDefault();
-    window.location.href = 'confirmation.php'
-  })
 });

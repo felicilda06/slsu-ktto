@@ -7,6 +7,16 @@
 
 .login-container .display-img {
     flex: 1;
+    position: relative;
+}
+
+.login-container .display-img::before {
+    content: " ";
+    position: absolute;
+    top: 0%;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
 }
 
 .login-container .display-img img {
@@ -16,6 +26,9 @@
 }
 
 .login-container .form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     transition: .3s ease-in-out;
 }
 
@@ -24,13 +37,11 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    padding: 0px 10px;
-    margin-top: 55px;
 }
 
 .login-container .form-login .logo .img-logo {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 50%;
     border: 6px solid #038cfc;
@@ -44,7 +55,7 @@
     letter-spacing: 1px;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 70px;
+   
 }
 
 .login-container .form-login span.sign-in {
@@ -56,18 +67,16 @@
 }
 
 .login-container .form-login form {
-    margin-top: 80px;
-    padding: 30px 60px;
+    padding: 0px 60px;
     display: flex;
     gap: 20px;
-    justify-content: flex-end;
     flex-direction: column;
 }
 
 .login-container .form-login form .form-input {
     position: relative;
     display: flex;
-    gap: 1px;
+    gap: 6px;
     align-items: center;
     justify-content: space-evenly;
 }
@@ -102,9 +111,10 @@
     padding: 3px 0px;
     width: 320px;
     letter-spacing: 1px;
+    transition: .2s ease-in-out;
 }
 
-.login-container .form-login form .form-input input.focused {
+.login-container .form-login form .form-input input:focus {
     border-color: #046cc0;
 }
 
@@ -159,6 +169,13 @@
 
 /* Responsive CSS */
 
+@media only screen and (max-width: 1024px) {
+    html {
+        overflow-y: auto;
+    }
+
+}
+
 @media only screen and (max-width: 768px) {
     html {
         overflow-y: auto;
@@ -178,13 +195,13 @@
     .login-container .form-login {
         display: flex;
         flex: 1;
+        gap: 25px;
         flex-direction: column;
         align-items: center;
     }
 
     .login-container .form-login form {
         justify-content: center;
-        padding: 30px 0px;
     }
 
     .login-container .form-login form .form-input input {
@@ -194,6 +211,11 @@
     .login-container .form-login span.sign-up {
         margin: 0px
     }
+
+    .login-container .form-login span.sign-in {
+        margin: 0px;
+    }
+
 }
 
 @media only screen and (max-width: 400px) {
@@ -210,6 +232,7 @@
     .login-container .form-login {
         display: flex;
         flex: 1;
+        gap: 25px;
         flex-direction: column;
         align-items: center;
         padding: 15px 0px;
@@ -217,23 +240,30 @@
 
     .login-container .form-login form {
         justify-content: center;
-        margin-top: 40px;
     }
 
     .login-container .form-login span.sign-up {
         margin: 0px
     }
 
-    .login-container .form-login .logo {
-        margin-top: 10px;
-    }
-
     .login-container .form-login .logo .img-logo {
-        width: 95px;
-        height: 95px;
+        width: 80px;
+        height: 80px;
     }
 
     .login-container .form-login form .form-input {
         gap: 5px
+    }
+
+    #message-container span {
+        width: 250px;
+    }
+
+    #message-container.error {
+        right: -7%;
+    }
+
+    #message-container.success {
+        right: -7%;
     }
 }
