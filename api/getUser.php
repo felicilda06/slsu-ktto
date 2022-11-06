@@ -6,11 +6,15 @@ class User
 {
     public $email;
     public $password;
+    public $message;
+    public $usertype;
 }
 
 class ResponseMessage
 {
+    public $status_code;
     public $message;
+    public $usertype;
 }
 
 
@@ -36,15 +40,19 @@ function checkIfEmailExist($email)
     $user = new User();
     $response = new ResponseMessage();
 
-    $query = "Select (email, password) from tbl_accounts where email = '" . $email . "'";
+    $query = "Select * from tbl_accounts where email = '" . $email . "'";
     $executeQuery = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($executeQuery) <= 0) {
-        $response->message = "Email address does'nt exist";
+        $response->status_code = 409;
+        $response->message = "Email address does'nt exist.";
+        
         return $response;
     } else {
         $userDetails = mysqli_fetch_assoc($executeQuery);
         $user->email = $userDetails['email'];
-        echo $user;
+        $user->password = $userDetails['password'];
+        $user->usertype = $userDetails['usertype'];
+        return $user;
     }
 }

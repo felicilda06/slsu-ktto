@@ -105,6 +105,23 @@
     color: #046cc0
 }
 
+.register-container .form-register form .form-input .input{
+    position: relative;
+}
+
+.register-container .form-register form .form-input i#toggle-icon {
+    position: absolute;
+    right: 4%;
+    cursor: pointer;
+    color: #838383;
+    transition: .3s ease-in-out;
+    background-color: white;
+}
+
+.register-container .form-register form .form-input i#toggle-icon:hover {
+    color: #252525;
+}
+
 .register-container .form-register form .form-input input,
 .register-container .form-register form .form-input select {
     outline: none;

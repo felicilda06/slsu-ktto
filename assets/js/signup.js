@@ -82,7 +82,7 @@ $(document).ready(() => {
     } else if (status === 500) {
       return {
         message: message ?? `An error occur in saving data.`,
-      };
+      };  
     }
   };
 
@@ -131,7 +131,9 @@ $(document).ready(() => {
   $("#fullname").change((event) => {
     const { id, value } = event.target;
     validationResult = [];
-    onChangeInput(id, value);
+    const capitalizeValue = value?.split(' ').map(str=> str.at(0).toUpperCase() + str.slice(1)).join(' ')
+    $('#fullname').val(capitalizeValue)
+    onChangeInput(id, capitalizeValue);
   });
   $("#password").change((event) => {
     const { id, value } = event.target;
@@ -192,7 +194,7 @@ $(document).ready(() => {
           }, 1200);
 
          if(!res) setTimeout(()=> {
-           window.location.href = "forgot-password.php";
+           window.location.href = "sign-in.php";
            $('#verify_container').addClass('hide')
            $('#verificaition_code').val('')
          }, 300)
@@ -253,4 +255,17 @@ $(document).ready(() => {
     $('#verify_container').addClass('hide')
     $('#verificaition_code').val('')
 })
+
+$("#toggle-icon").click(() => {
+  const type = $("#password").attr("type");
+  if (type === "password") {
+    $("#password").attr("type", "text");
+    $("#confirmPass").attr("type", "text");
+    $("#toggle-icon").attr("class", "fa fa-eye");
+  } else {
+    $("#password").attr("type", "password");
+    $("#confirmPass").attr("type", "password");
+    $("#toggle-icon").attr("class", "fa fa-eye-slash");
+  }
+});
 

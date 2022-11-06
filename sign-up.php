@@ -61,6 +61,7 @@
                     <i class="fa fa-lock"></i>
                     <div class="input">
                         <input type="password" id='password' autocomplete="off" placeholder="Password">
+                        <i class="fa fa-eye-slash" id="toggle-icon"></i>
                     </div>
                 </div>
                 <div class="form-input">
