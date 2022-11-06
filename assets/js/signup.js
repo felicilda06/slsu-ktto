@@ -199,7 +199,7 @@ $(document).ready(() => {
            $('#verificaition_code').val('')
          }, 300)
 
-         return message_func([validationMessage('', '', 500, res)])
+         message_func([validationMessage('', '', 500, res)])
 
         },
         error: (err) => {

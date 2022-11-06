@@ -19,6 +19,68 @@ $(document).ready(() => {
     }
   };
 
+  const validationMessage = (id, value, status, message) => {
+    if (status === 400) {
+      switch (id) {
+        case "email": {
+          if (!value) {
+            return {
+              id,
+              message: `${
+                id?.charAt(0).toUpperCase() + id.slice(1)
+              } address is required.`,
+            };
+          } else if (!emailRegEx.test(value)) {
+            return {
+              id,
+              message: `Must be valid email address.`,
+            };
+          } else {
+            return false;
+          }
+        }
+        default: {
+          if (!value) {
+            return {
+              id,
+              message: `${
+                id?.charAt(0).toUpperCase() + id.slice(1)
+              }  is required.`,
+            };
+          } else {
+            return false;
+          }
+        }
+      }
+    }else{
+      return {
+        message: message ?? `An error occur in saving data.`,
+      };
+    }
+  };
+
+  const message_func = (messages = []) => {
+    const messageContainer = $("#message-container");
+    timeOut = messages.length > 2 ? 4150 : 2500
+    messages.map((e) => {
+      spanElement = document.createElement("span");
+      if (e?.message) {
+        isSubmit = true;
+        spanElement.innerText = e?.message;
+        spanElement.className = "error";
+        messageContainer.addClass("error");
+        messageContainer.append(spanElement);
+
+        setTimeout(() => {
+          messageContainer.removeClass("error");
+          isSubmit = false;
+        }, [4000]);
+
+        setTimeout(() => messageContainer.children().remove(), timeOut);
+      }
+    });
+  }
+
   const pushToCodes = (id, value) => {
     const codeVal = { id, value };
     const isCodeExist = codes.find((code) => code?.id === id);
@@ -43,6 +105,7 @@ $(document).ready(() => {
   $("#btn-submit").click((event) => {
     event?.preventDefault();
     apiType = "verify";
+    const code = codes.map(code=> code?.value).join('');
 
     $.ajax({
       url: "./api/auth.php",
@@ -50,8 +113,20 @@ $(document).ready(() => {
       cache: false,
       data: {
         api: apiType,
+        code
       },
-      success: (res, status, code) => {},
+      success: (res) => {
+        const res_obj = res && JSON.parse(res);
+        const { status_code, message } = res_obj;
+
+        if(message){
+          message_func([validationMessage('', '', status_code, message)]);
+        }
+
+        window.location.href = 'reset-password.php';
+        arrOfInput.map(input=> $(`${input}`).val(''));
+
+      },
       error: (err) => {
         console.log(`Error: ${err}`);
       },
