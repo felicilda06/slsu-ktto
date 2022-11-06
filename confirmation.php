@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
 <?php
-$code = $_POST['code'];
+session_start();
+ global $code;
+  $code = $_SESSION['code'];
 if (!$code) {
     header('Location: forgot-password.php');
 }
@@ -17,16 +19,18 @@ if (!$code) {
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/loader.css">
     <link rel="stylesheet" href="./assets/css/confirmation.css">
+    <link rel="stylesheet" href="./assets/css/message.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
 
 <body>
+    <div class="" id="message-container"></div>
     <div class="alert-message">
         <div class="box">
             <i class="fa fa-close" id="icon-close"></i>
             <i class="fa fa-check-circle" id="icon-check"></i>
-            <span>We have send you to your email the another OTP Code. Please check your inbox and spam messages.</span>
+            <span>We have send to your email the another OTP Code. Please check your inbox and spam messages.</span>
         </div>
     </div>
     <div class="loader">

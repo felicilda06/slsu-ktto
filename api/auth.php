@@ -2,6 +2,7 @@
 
 include './connection.php';
 include_once './getUser.php';
+include_once './code.php';
 
 session_start();
 
@@ -45,7 +46,24 @@ if ($apiType == 'login') {
         $executeQuery = mysqli_query($conn, $query);
     }
 } else if ($apiType === 'verify') {
+    $code = $_POST['code'];
+    $verify = verifyCode($code);
+
+    if($verify->message){
+        echo json_encode($verify);
+    }else{
+       $_SESSION['email'] = $verify->email; 
+    }
 } else if ($apiType === 'forgot') {
+    $email = htmlspecialchars($_POST['email']);
+    $user = checkIfEmailExist($email);
+
+    if($user->message){
+       echo json_encode($user);
+    }else{
+        $_SESSION['code'] = $_POST['code'];
+        insertCode($email, $_POST['code']);
+    }
 } else if($apiType === 'redirect'){
    $usertype = $_POST['usertype'];
    $_SESSION['usertype'] = $usertype;

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
 <?php
-global $email;
-$email = $_POST['email'];
+session_start();
+$email = $_SESSION['email'];
 
 if (!$email) {
     header('Location: confirmation.php');
@@ -27,7 +27,7 @@ if (!$email) {
 </div>
 <div class="reset-container">
     <h1>Reset account password</h1>
-    <p>Enter a new password for <span class="email"><?php echo $email; ?></span></p>
+    <p>Enter a new password for <span class="email"><?php echo $_SESSION['email']; ?></span></p>
     <div class="form-reset">
         <form>
             <div class="form-input">

@@ -41,7 +41,7 @@
     </div>
 
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/forgot.js" type="text/javascript"></script>
+    <script src="./assets/js/forgot.js"></script>
 </body>
 
 </html>
