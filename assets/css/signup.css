@@ -27,6 +27,9 @@
 
 .register-container .form-register {
     transition: .3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .register-container .form-register .logo {
@@ -35,7 +38,7 @@
     align-items: center;
     gap: 8px;
     padding: 0px 10px;
-    margin-top: 55px;
+    margin-top: 25px;
 }
 
 .register-container .form-register .logo .img-logo {
@@ -54,7 +57,6 @@
     letter-spacing: 1px;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 70px;
 }
 
 .register-container .form-register span.sign-up {
@@ -66,7 +68,6 @@
 }
 
 .register-container .form-register form {
-    margin-top: 80px;
     padding: 30px 60px;
     display: flex;
     gap: 20px;
@@ -148,15 +149,6 @@
     html {
         overflow-y: auto;
     }
-
-    .register-container .form-register .logo h1 {
-        margin-bottom: 50px;
-    }
-
-    .register-container .form-register form {
-        margin-top: 60px;
-        padding: 0px 60px;
-    }
 }
 
 
@@ -179,13 +171,9 @@
     .register-container .form-register {
         display: flex;
         flex: 1;
+        gap: 25px;
         flex-direction: column;
         align-items: center;
-    }
-
-    .register-container .form-register form {
-        justify-content: center;
-        padding: 30px 0px;
     }
 
     .register-container .form-register form .form-input input,
@@ -203,6 +191,9 @@
 }
 
 @media only screen and (max-width: 400px) {
+    html{
+        overflow: auto;
+    }
     .register-container {
         display: flex;
         justify-content: center;
@@ -211,20 +202,15 @@
 
     .register-container .form-register .logo h1 {
         width: 70%;
-        margin-bottom: 40px;
     }
 
     .register-container .form-register {
         display: flex;
         flex: 1;
+        gap: 10px;
         flex-direction: column;
         align-items: center;
         padding: 15px 0px;
-    }
-
-    .register-container .form-register form {
-        justify-content: center;
-        margin-top: 30px;
     }
 
     .register-container .form-register span.sign-up {
@@ -233,12 +219,12 @@
     }
 
     .register-container .form-register .logo {
-        margin-top: 10px;
+        margin-top: 0px;
     }
 
     .register-container .form-register .logo .img-logo {
-        width: 95px;
-        height: 95px;
+        width: 80px;
+        height: 80px;
     }
 
     .register-container .form-register form .form-input {

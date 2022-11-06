@@ -18,6 +18,7 @@
 
 <body>
     <div class="" id="message-container"></div>
+    <?php include_once('./verify_patent.php'); ?>
     <div class="loader">
         <img src="./assets/images/loader.gif" class="img-loader">
     </div>

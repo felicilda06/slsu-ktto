@@ -35,16 +35,10 @@ if ($apiType == 'login') {
     $getUser = getUserByEmail($email);
 
     if ($getUser) {
-        return $getUser;
+      echo $getUser->message;
     } else {
         $query = "Insert into tbl_accounts values ('', '" . $studentId . "', '" . $email . "', '" . $name . "', '" . $password . "', '" . $usertype . "')";
         $executeQuery = mysqli_query($conn, $query);
-
-        if ($executeQuery) {
-            echo 'Success';
-        } else {
-            echo 'Failed';
-        }
     }
 } else if ($apiType == 'forgot') {
 } else if ($apiType == 'verify') {

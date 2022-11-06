@@ -127,7 +127,7 @@ $(document).ready(() => {
         data: {
           api: apiType,
         },
-        success: (res, status, code) => {},
+        success: (res) => {},
         error: (err) => {
           console.log(`Error: ${err}`);
         },

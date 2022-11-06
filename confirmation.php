@@ -26,7 +26,7 @@ if (!$code) {
         <div class="box">
             <i class="fa fa-close" id="icon-close"></i>
             <i class="fa fa-check-circle" id="icon-check"></i>
-            <span>We have send you an another OTP Code. Please check your inbox and spam messages.</span>
+            <span>We have send you to your email the another OTP Code. Please check your inbox and spam messages.</span>
         </div>
     </div>
     <div class="loader">

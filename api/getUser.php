@@ -10,7 +10,6 @@ class User
 
 class ResponseMessage
 {
-    public $status_code;
     public $message;
 }
 
@@ -24,12 +23,10 @@ function getUserByEmail($email)
     $response = new ResponseMessage();
 
     if (mysqli_num_rows($executeQuery) > 0) {
-        $response->status_code = 400;
-        $response->message = `Email Already Exist`;
-        echo $response;
-        return;
-    } else {
-        echo "";
+        $response->message = 'Email address already exist.';
+        return $response;
+    }else{
+        return '';
     }
 }
 
@@ -43,14 +40,11 @@ function checkIfEmailExist($email)
     $executeQuery = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($executeQuery) <= 0) {
-        $response->status_code = 400;
-        $response->message = `Email address does'nt exist`;
-        echo $response;
-        return;
+        $response->message = "Email address does'nt exist";
+        return $response;
     } else {
         $userDetails = mysqli_fetch_assoc($executeQuery);
         $user->email = $userDetails['email'];
-        $user->password = $userDetails['password'];
         echo $user;
     }
 }

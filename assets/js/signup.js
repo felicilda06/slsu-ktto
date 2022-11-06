@@ -24,6 +24,8 @@ $(document).ready(() => {
   let apiType;
   let validationResult = [];
   let spanElement;
+  let timeOut;
+  let messages = [];
   let isSubmit = false;
   const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -33,7 +35,7 @@ $(document).ready(() => {
     );
   };
 
-  const validationMessage = (id, value, status) => {
+  const validationMessage = (id, value, status, message) => {
     if (status === 400) {
       switch (id) {
         case "email": {
@@ -79,7 +81,7 @@ $(document).ready(() => {
       }
     } else if (status === 500) {
       return {
-        message: `An error occur in saving data.`,
+        message: message ?? `An error occur in saving data.`,
       };
     }
   };
@@ -87,6 +89,7 @@ $(document).ready(() => {
   const validator = () => {
     arrOfInputs.map((input) => {
       const isExist = validationResult.find((res) => res?.id === input.id);
+      
       return (
         !isExist &&
         validationResult?.push(validationMessage(input.id, input.value, 400))
@@ -140,57 +143,62 @@ $(document).ready(() => {
     validationResult = [];
     onChangeInput(id, value);
   });
-  $("#btn-submit").click((event) => {
-    event.preventDefault();
-    apiType = "register";
-    let messages = [...validator()];
+
+  const message_func = (messages = []) => {
     const messageContainer = $("#message-container");
-    const hasNoError = messages.map((res) => !!res?.message).every((b) => !b);
+    timeOut = messages.length > 2 ? 4150 : 2500
+    messages.map((e) => {
+      spanElement = document.createElement("span");
+      if (e?.message) {
+        isSubmit = true;
+        spanElement.innerText = e?.message;
+        spanElement.className = "error";
+        messageContainer.addClass("error");
+        messageContainer.append(spanElement);
 
-    if (isSubmit) return;
-    if (!hasNoError) {
-      messages.map((e) => {
-        spanElement = document.createElement("span");
-        if (e?.message) {
-          isSubmit = true;
-          spanElement.innerText = e?.message;
-          spanElement.className = "error";
-          messageContainer.addClass("error");
-          messageContainer.append(spanElement);
+        setTimeout(() => {
+          messageContainer.removeClass("error");
+          isSubmit = false;
+        }, [4000]);
 
-          setTimeout(() => {
-            messageContainer.removeClass("error");
-            isSubmit = false;
-          }, [4000]);
+        setTimeout(() => messageContainer.children().remove(), timeOut);
+      }
+    });
+  }
 
-          setTimeout(() => messageContainer.children().remove(), 4150);
-        }
-      });
-    } else {
-      $.ajax({
+  const saveUser = (api)=>{
+    $.ajax({
         url: "./api/auth.php",
         method: "POST",
         cache: false,
         data: {
-          api: apiType,
+          api: api,
           usertype: arrOfInputs.find((arr) => arr.id === "usertype")?.value,
           studentId:
-            arrOfInputs.find((arr) => arr.id === "studentId")?.value ?? "",
-          fullname: arrOfInputs.find((arr) => arr.id === "name")?.value,
+            arrOfInputs.find((arr) => arr.id === "studentId")?.value ?? null,
+          fullname: arrOfInputs.find((arr) => arr.id === "fullname")?.value,
           password: arrOfInputs.find((arr) => arr.id === "password")?.value,
           email: arrOfInputs.find((arr) => arr.id === "email")?.value,
         },
         beforeSend: () => {
+          if(!$('#verify_container').hasClass('hide')) return
           $("#spinner").addClass("load");
           $("#btn-submit").prop("disabled", true);
         },
-        success: (res, status, code) => {
+        success: (res) => {
           setTimeout(() => {
             $("#spinner").removeClass("load");
             $("#btn-submit").prop("disabled", false);
           }, 1200);
 
-          console.log(res, status, code, `logs`);
+         if(!res) setTimeout(()=> {
+           window.location.href = "forgot-password.php";
+           $('#verify_container').addClass('hide')
+           $('#verificaition_code').val('')
+         }, 300)
+
+         return message_func([validationMessage('', '', 500, res)])
+
         },
         error: (err) => {
           if (err) {
@@ -205,6 +213,44 @@ $(document).ready(() => {
           }
         },
       });
+  }
+
+  $("#btn-submit").click((event) => {
+    event.preventDefault();
+    apiType = "register";
+    messages = [...validator()];
+    const hasNoError = messages.filter((res) => !!res?.message)
+    const userType = arrOfInputs.find(user=> user.id === 'usertype')?.value ?? ''
+
+    if (isSubmit) return;
+    if (hasNoError.length) {
+       message_func(messages);
+    } else {
+      if(userType === 'patent drafter'){
+        $('#verify_container').removeClass('hide')
+      }else{
+        saveUser(apiType)
+      }
     }
   });
+
+  $(document).on('click', '#btn_verify', (event)=>{
+     event.preventDefault();
+     const verification_code = $('#verificaition_code').val()
+
+     if (isSubmit) return;
+     if(verification_code?.toLowerCase() === 'ktto'){
+      saveUser('register');
+     }else if(!verification_code){
+      return message_func([validationMessage('', '', 500, 'Please Enter Verification Code.')]);
+     }else{
+        return message_func([validationMessage('', '', 500, 'Incorrect Verification Code.')]);
+     }
+  })
 });
+
+  $(document).on('click', '#btn_close', ()=>{
+    $('#verify_container').addClass('hide')
+    $('#verificaition_code').val('')
+})
+

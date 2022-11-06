@@ -108,8 +108,8 @@
 /* Responsive CSS */
 @media only screen and (max-width: 400px) {
     .forgot-container .form-forgot .logo .img-logo {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
     }
 
     .forgot-container .form-forgot .logo h1 {
