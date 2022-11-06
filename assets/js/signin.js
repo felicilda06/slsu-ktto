@@ -12,6 +12,7 @@ $(document).ready(() => {
   let apiType;
   let validationResult = [];
   let spanElement;
+  let messages = [];
   let isSubmit = false;
   const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -21,7 +22,7 @@ $(document).ready(() => {
     );
   };
 
-  const validationMessage = (id, value, status) => {
+  const validationMessage = (id, value, status, message) => {
     if (status === 400) {
       switch (id) {
         case "email": {
@@ -54,10 +55,9 @@ $(document).ready(() => {
           }
         }
       }
-    } else if (status === 200) {
+    }else{
       return {
-        status: 200,
-        message: "Successully Login.",
+        message: message ?? `An error occur in saving data.`,
       };
     }
   };
@@ -93,32 +93,62 @@ $(document).ready(() => {
     validationResult = [];
     onChangeInput(id, value);
   });
+
+  const message_func = (messages = []) => {
+    const messageContainer = $("#message-container");
+    timeOut = messages.length > 2 ? 4150 : 2500
+    messages.map((e) => {
+      spanElement = document.createElement("span");
+      if (e?.message) {
+        isSubmit = true;
+        spanElement.innerText = e?.message;
+        spanElement.className = "error";
+        messageContainer.addClass("error");
+        messageContainer.append(spanElement);
+
+        setTimeout(() => {
+          messageContainer.removeClass("error");
+          isSubmit = false;
+        }, [4000]);
+
+        setTimeout(() => messageContainer.children().remove(), timeOut);
+      }
+    });
+  }
+
+  const redirect = (usertype = '')=>{
+    apiType = 'redirect';
+    if(!usertype) return
+    
+    $.ajax({
+       url: './api/auth.php',
+       type:'POST',
+       cache: false,
+       data: {
+        api: apiType,
+        usertype
+       },
+       success: (res)=>{
+        if(res === '0'){
+          window.location.href = 'patent-drafter.php';
+        }
+        window.location.href = 'maker.php';
+       },
+       error: (err)=>{
+        console.log(`Error: ${err}`);
+       }
+    })
+  }
+
   $("#btn-submit").click((event) => {
     event.preventDefault();
     apiType = "login";
-    let messages = [...validator()];
-    const messageContainer = $("#message-container");
-    const hasNoError = messages.map((res) => !!res?.message).every((b) => !b);
+    messages = [...validator()];
+    const hasNoError = messages.filter((res) => !!res?.message)
 
     if (isSubmit) return;
-    if (!hasNoError) {
-      messages.map((e) => {
-        spanElement = document.createElement("span");
-        if (e?.message) {
-          isSubmit = true;
-          spanElement.innerText = e?.message;
-          spanElement.className = "error";
-          messageContainer.addClass("error");
-          messageContainer.append(spanElement);
-
-          setTimeout(() => {
-            messageContainer.removeClass("error");
-            isSubmit = false;
-          }, [4000]);
-
-          setTimeout(() => messageContainer.children().remove(), [4150]);
-        }
-      });
+    if (hasNoError.length) {
+     message_func(messages);
     } else {
       $.ajax({
         url: "./api/auth.php",
@@ -126,8 +156,18 @@ $(document).ready(() => {
         cache: false,
         data: {
           api: apiType,
+          email:  arrOfInputs.find((arr) => arr.id === "email")?.value ?? '',
+          password:  arrOfInputs.find((arr) => arr.id === "password")?.value ?? '',
         },
-        success: (res) => {},
+        success: (res) => {
+          const res_obj = JSON.parse(res)
+          const { status_code, message, usertype } = res_obj
+          if(status_code !== 200 && message){
+            message_func([validationMessage('', '', status_code, message)]);
+          }
+          redirect(usertype);
+          
+        },
         error: (err) => {
           console.log(`Error: ${err}`);
         },
