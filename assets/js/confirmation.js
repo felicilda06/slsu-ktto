@@ -97,8 +97,20 @@ $(document).ready(() => {
 
   arrOfInput.map((input) => {
     $(`#${input}`).change((event) => {
+      const regChars = /[!@#$%^&*()_+:"|<>?.,]/
+      const regWhiteSpace = `^\\s+$`
+      const regLetters = /[a-z]/gi
       const { id, value } = event?.target;
-      pushToCodes(id, value);
+      if(regLetters.test(value)) {
+        $(`#${input}`).val('');
+      }else if(regChars.test(value)){
+        $(`#${input}`).val('');
+      }else if(value?.match(regWhiteSpace)){
+        $(`#${input}`).val('');
+      }else{
+        pushToCodes(id, value)
+      }
+      
     });
   });
 
@@ -121,12 +133,14 @@ $(document).ready(() => {
 
         if(message){
           message_func([validationMessage('', '', status_code, message)]);
+          return;
+        }else{
+          window.location.href = 'reset-password.php';
+          arrOfInput.map(input=> $(`${input}`).val(''));
         }
 
-        window.location.href = 'reset-password.php';
-        arrOfInput.map(input=> $(`${input}`).val(''));
-
       },
+      
       error: (err) => {
         console.log(`Error: ${err}`);
       },

@@ -62,7 +62,8 @@ if ($apiType == 'login') {
        echo json_encode($user);
     }else{
         $_SESSION['code'] = $_POST['code'];
-        insertCode($email, $_POST['code']);
+        isEmailExistToTableCodes($email, $_POST['code']);
+        $_SESSION['email'] = $_POST['email'];
     }
 } else if($apiType === 'redirect'){
    $usertype = $_POST['usertype'];
@@ -71,4 +72,6 @@ if ($apiType == 'login') {
    if($usertype === 'patent drafter'){
      echo 0;
    }
-}
+} else if($apiType === 'resend_code'){
+    updateOldCode($_POST['email'], $_POST['code']);
+ }
