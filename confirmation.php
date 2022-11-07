@@ -25,6 +25,7 @@ if (!$code) {
 </head>
 
 <body>
+    <input type="text" id="email" class="d-none" value="<?php echo $_SESSION['email']; ?>">
     <div class="" id="message-container"></div>
     <div class="alert-message">
         <div class="box">

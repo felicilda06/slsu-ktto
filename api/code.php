@@ -2,6 +2,18 @@
   include './connection.php';
   include_once './getUser.php';
 
+  function isEmailExistToTableCodes($email, $code){
+    global $conn;
+    $query = "Select * from tbl_codes where email = '".$email."'";
+    $executeQuery = mysqli_query($conn, $query);
+
+    if(mysqli_num_rows($executeQuery) > 0){
+      updateOldCode($email, $code); 
+    }else{
+      insertCode($email, $code);
+    }
+  }
+  
   function insertCode($email, $code){
     global $conn;
     $query = "Insert into tbl_codes values ('', '".$email."', '".$code."')";
@@ -26,7 +38,7 @@
     }
   }
 
-  function generateNewCode($email, $code){
+  function updateOldCode($email, $code){
     global $conn;
     $query = "Update tbl_codes set code = '".$code."' where email = '".$email."'";
     mysqli_query($conn, $query);
