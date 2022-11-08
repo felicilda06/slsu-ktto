@@ -1,6 +1,5 @@
 $(document).ready(() => {
-  let time = "00:60";
-  let forceStopRequest = false;
+  let time = "00:90";
   let [m, s] = time.split(":");
 
   const timerStart = () => {
@@ -30,9 +29,8 @@ $(document).ready(() => {
      return code.length < 4 ? `${code}0`: code;
   }
   
-  const setExpiredCode = ()=>{
+  const resendOTPCode = ()=>{
     const email = $('#email').val();
-    if(forceStopRequest) return
     $.ajax({
       url: './api/auth.php',
       type:'POST',
@@ -54,8 +52,6 @@ $(document).ready(() => {
     if (s === 0) {
       $("#resend").css("font-weight", "bold");
       $('.expiration').text('The OTP Code has expired. Please re-send the OTP Code to try again.');
-      setExpiredCode();
-      setTimeout(()=> forceStopRequest = true, 250)
       return;
     }
     if (isShow) {
@@ -69,6 +65,7 @@ $(document).ready(() => {
   $("#resend").click(() => {
     $(".alert-message").addClass("show");
     $("#resend").css("font-weight", "normal");
+    resendOTPCode();
   });
 
   $("#icon-close").click(() => {

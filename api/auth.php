@@ -52,7 +52,9 @@ if ($apiType == 'login') {
     if($verify->message){
         echo json_encode($verify);
     }else{
-       $_SESSION['email'] = $verify->email; 
+       $_SESSION['email'] = $verify->email;
+       $_SESSION['code'] = '';
+       deleteCode($code);
     }
 } else if ($apiType === 'forgot') {
     $email = htmlspecialchars($_POST['email']);
@@ -64,14 +66,24 @@ if ($apiType == 'login') {
         $_SESSION['code'] = $_POST['code'];
         isEmailExistToTableCodes($email, $_POST['code']);
         $_SESSION['email'] = $_POST['email'];
+        sendCode($email, $_POST['code']);
     }
 } else if($apiType === 'redirect'){
-   $usertype = $_POST['usertype'];
-   $_SESSION['usertype'] = $usertype;
-   
-   if($usertype === 'patent drafter'){
-     echo 0;
-   }
+    $usertype = $_POST['usertype'];
+    $_SESSION['usertype'] = $usertype;
+    
+    if($usertype === 'patent drafter'){
+        echo 0;
+    }
 } else if($apiType === 'resend_code'){
-    updateOldCode($_POST['email'], $_POST['code']);
- }
+     updateOldCode($_POST['email'], $_POST['code']);
+     sendCode($_POST['email'], $_POST['code']);
+} else if($apiType === 'reset-password'){
+         $validatePassword = validatePassword($_SESSION['email'], sha1(htmlspecialchars($_POST['newPassword'])));
+   if($validatePassword->message){
+        echo json_encode($validatePassword);
+   }else{
+       $_SESSION['email'] = '';
+       echo json_encode($validatePassword);
+   }
+}

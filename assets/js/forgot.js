@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  setTimeout(()=>   $('#email').focus(), 1000)
   let arrOfInputs = [
     {
       id: "email",
