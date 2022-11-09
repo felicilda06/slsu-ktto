@@ -56,3 +56,22 @@ function checkIfEmailExist($email)
         return $user;
     }
 }
+
+function validatePassword($email, $newPassword){
+    global $conn;
+    $response = new ResponseMessage();
+    $query = "Select * from tbl_accounts where password = '".$newPassword."'";
+    $executeQuery = mysqli_query($conn, $query);
+
+    if(mysqli_num_rows($executeQuery) > 0){
+        $response->status_code = 500;
+        $response->message = "You entered an older password.";
+        return $response;
+    }else{
+       $query = "Update tbl_accounts set password = '".$newPassword."' where email = '".$email."'";
+       mysqli_query($conn, $query);
+       $response->status_code = 200;
+       $response->message = "";
+       return $response;
+    }
+}

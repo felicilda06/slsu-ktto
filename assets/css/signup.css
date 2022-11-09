@@ -71,8 +71,42 @@
     padding: 30px 60px;
     display: flex;
     gap: 20px;
-    justify-content: flex-end;
+    justify-content: center;
     flex-direction: column;
+}
+
+.register-container .form-register form .wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.register-container .form-register form .wrapper .form-input{
+    display: flex;
+    gap:5px;
+}
+
+.register-container .form-register form .wrapper #technology_wrapper.hide{
+    display: none;
+}
+
+.register-container .form-register form .wrapper .form-input select{
+    outline: none;
+    border: none;
+    font-size: 14px;
+    border-bottom: 1px solid #3a3a3a;
+    padding: 3px 0px;
+    width: 143px;
+    background-color: white;
+    letter-spacing: 1px;
+}
+
+.register-container .form-register form .wrapper .form-input #usertype.show{
+    width: 320px;
+}
+.register-container .form-register form .wrapper .form-input select:focus {
+    border-color: #046cc0;
 }
 
 .register-container .form-register form .form-input {
@@ -100,6 +134,7 @@
     transition: .2s ease-in-out;
 }
 
+
 .register-container .form-register form .form-input span.focused {
     top: -60%;
     color: #046cc0
@@ -122,8 +157,7 @@
     color: #252525;
 }
 
-.register-container .form-register form .form-input input,
-.register-container .form-register form .form-input select {
+.register-container .form-register form .form-input input {
     outline: none;
     border: none;
     font-size: 14px;
@@ -135,8 +169,7 @@
     transition: .2s ease-in-out;
 }
 
-.register-container .form-register form .form-input input:focus,
-.register-container .form-register form .form-input select:focus {
+.register-container .form-register form .form-input input:focus {
     border-color: #046cc0;
 }
 
@@ -205,6 +238,15 @@
     .register-container .form-register span.sign-up {
         margin: 0px;
     }
+
+    .register-container .form-register form .wrapper{
+        flex-direction: column;
+        padding: 0px;
+     }
+     
+     .register-container .form-register form .wrapper .form-input select{
+         width: 276px;
+     }
 }
 
 @media only screen and (max-width: 400px) {

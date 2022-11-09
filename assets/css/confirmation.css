@@ -134,6 +134,9 @@
 .confirmation-container .form-confirmation span #resend {
     outline: none;
 }
+.confirmation-container .form-confirmation span #resend:focus {
+    text-decoration: underline;
+}
 
 .confirmation-container .expiration {
     font-weight: 600;

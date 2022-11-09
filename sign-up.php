@@ -30,13 +30,24 @@
             </div>
             <span class="sign-up">Sign Up</span>
             <form>
-                <div class="form-input">
-                    <i class="fa fa-address-book"></i>
-                    <div class="input">
-                        <select id='usertype'>
-                            <option value="patent drafter">Patent Drafter</option>
-                            <option value="maker">Maker</option>
-                        </select>
+                <div class="wrapper">
+                    <div class="form-input">
+                        <i class="fa fa-address-book"></i>
+                        <div class="input">
+                            <select id='usertype'>
+                                <option value="patent drafter">Patent Drafter</option>
+                                <option value="maker">Maker</option>
+                            </select>
+                    </div>
+                </div>
+                    <div class="form-input" id="technology_wrapper">
+                        <i class="fa fa-cogs"></i>
+                        <div class="input">
+                            <select id='techology_type'>
+                                <option value="chemical">Chemical</option>
+                                <option value="non-chemical">Non-Chemical</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="form-input" id='form-input-student-id'>

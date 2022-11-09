@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  setTimeout(()=>   $('#email').focus(), 1000)
   let arrOfInputs = [
     {
       id: "email",
@@ -104,7 +105,7 @@ $(document).ready(() => {
       code +=  numbers.substring(randomNumber, randomNumber + 1);
      }
 
-     return code;
+     return code.length < 4 ? `${code}0`: code;
   }
 
   $("#btn-continue").click((event) => {
@@ -134,6 +135,7 @@ $(document).ready(() => {
               message_func([validationMessage('', '', status_code, message)]);
             }else{
               window.location.href = 'confirmation.php';
+              $('#email').val('');
             }
           },
           error: (err) => {

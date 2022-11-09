@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
-<?php
-session_start();
- global $code;
-  $code = $_SESSION['code'];
-if (!$code) {
-    header('Location: forgot-password.php');
-}
-?>
+    <?php
+        session_start();
+        global $code;
+        $code = $_SESSION['code'];
+        if (!$code) {
+            header('Location: forgot-password.php');
+        }
+    ?>
 
 <head>
     <?php

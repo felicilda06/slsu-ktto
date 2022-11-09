@@ -2,7 +2,8 @@
 
 <head>
     <?php
-    include 'dependencies.php'
+       include 'dependencies.php';
+       session_start();
     ?>
 
     <link rel="icon" href="./assets/images/logo.png" type="image/icon type">
@@ -26,7 +27,7 @@
                 <img src="./assets/images/logo.png" alt="logo" class="img-logo">
                 <h1>SLSU-KTTO Document Management System</h1>
             </div>
-            <p>Enter the email address associated with your account and we will send you an OTP Code.</p>
+            <p>Enter the email address associated with your account and we will send you the OTP Code.</p>
             <form>
                 <div class="form-input">
                     <i class="fa fa-envelope icon-email"></i>
