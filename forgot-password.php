@@ -2,7 +2,8 @@
 
 <head>
     <?php
-    include 'dependencies.php'
+       include 'dependencies.php';
+       session_start();
     ?>
 
     <link rel="icon" href="./assets/images/logo.png" type="image/icon type">

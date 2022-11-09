@@ -2,7 +2,17 @@
 
 <head>
     <?php
-    include 'dependencies.php'
+       include 'dependencies.php';
+       session_start();
+       $usertype = $_SESSION['usertype'];
+
+       if($usertype === 'patent drafter'){
+           header('Location:patent-drafter.php');
+           return;
+        }else if($usertype === 'maker'){
+           header('Location:maker.php');
+           return;
+       }
     ?>
 
     <link rel="icon" href="./assets/images/logo.png" type="image/icon type">

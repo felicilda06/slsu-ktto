@@ -116,30 +116,6 @@ $(document).ready(() => {
     });
   }
 
-  const redirect = (usertype = '')=>{
-    apiType = 'redirect';
-    if(!usertype) return
-    
-    $.ajax({
-       url: './api/auth.php',
-       type:'POST',
-       cache: false,
-       data: {
-        api: apiType,
-        usertype
-       },
-       success: (res)=>{
-        if(res === '0'){
-          window.location.href = 'patent-drafter.php';
-        }
-        window.location.href = 'maker.php';
-       },
-       error: (err)=>{
-        console.log(`Error: ${err}`);
-       }
-    })
-  }
-
   $("#btn-submit").click((event) => {
     event.preventDefault();
     apiType = "login";
@@ -160,12 +136,18 @@ $(document).ready(() => {
           password:  arrOfInputs.find((arr) => arr.id === "password")?.value ?? '',
         },
         success: (res) => {
-          const res_obj = JSON.parse(res)
+          const res_obj = res && JSON.parse(res)
           const { status_code, message, usertype } = res_obj
           if(status_code !== 200 && message){
             message_func([validationMessage('', '', status_code, message)]);
+          }else{
+            if(usertype === 'patent drafter'){
+              window.location.href = 'patent-drafter.php';
+            }else{
+              window.location.href = 'maker.php';
+            }
           }
-          redirect(usertype);
+          
           
         },
         error: (err) => {

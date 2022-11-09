@@ -20,6 +20,10 @@ $(document).ready(() => {
       id: "confirmPass",
       value: "",
     },
+    {
+      id: "techology_type",
+      value: "chemical",
+    },
   ];
   let apiType;
   let validationResult = [];
@@ -112,12 +116,30 @@ $(document).ready(() => {
     if (value === "maker") {
       $("#form-input-student-id").css("display", "flex");
       arrOfInputs.unshift(studentInput);
+      $('#technology_wrapper').addClass('hide')
+      $('#techology_type').val('chemical')
+      $('#usertype').addClass('show');
+      arrOfInputs[6] = {
+        ... arrOfInputs[6],
+        value:''
+      }
     } else {
       $("#form-input-student-id").css("display", "none");
       $("#studentId").val("");
+      $('#technology_wrapper').removeClass('hide')
+      $('#usertype').removeClass('show');
       arrOfInputs = arrOfInputs.filter((arr) => arr.id !== "studentId");
+      arrOfInputs[5] = {
+        ... arrOfInputs[5],
+        value:'chemical'
+      }
     }
   });
+  $("#techology_type").change((event) => {
+    const { id, value } = event.target;
+    validationResult = [];
+    onChangeInput(id, value);
+  })
   $("#studentId").change((event) => {
     const { id, value } = event.target;
     validationResult = [];
@@ -176,6 +198,7 @@ $(document).ready(() => {
         data: {
           api: api,
           usertype: arrOfInputs.find((arr) => arr.id === "usertype")?.value,
+          technology_type: arrOfInputs.find((arr) => arr.id === "techology_type")?.value,
           studentId:
             arrOfInputs.find((arr) => arr.id === "studentId")?.value ?? null,
           fullname: arrOfInputs.find((arr) => arr.id === "fullname")?.value,
@@ -218,6 +241,7 @@ $(document).ready(() => {
   }
 
   $("#btn-submit").click((event) => {
+    console.log(arrOfInputs);
     event.preventDefault();
     apiType = "register";
     messages = [...validator()];

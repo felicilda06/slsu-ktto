@@ -3,13 +3,6 @@
   include './connection.php';
   include_once './getUser.php';
 
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\Exception;
-
-  require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-  require '../vendor/phpmailer/phpmailer/src/Exception.php';
-  require '../vendor/phpmailer/phpmailer/src/SMTP.php';
-
   function isEmailExistToTableCodes($email, $code){
     global $conn;
     $query = "Select * from tbl_codes where email = '".$email."'";
@@ -48,39 +41,36 @@
 
   function updateOldCode($email, $code){
     global $conn;
-    $query = "Update tbl_codes set code = '".$code."' where email = '".$email."'";
-    mysqli_query($conn, $query);
+    $query = "Select * from tbl_codes where email = '".$email."'";
+    $executeQuery = mysqli_query($conn, $query);
+
+    if(mysqli_num_rows($executeQuery) > 0){
+       $queryUpdateCode = "Update tbl_codes set code = '".$code."' where email = '".$email."'";
+       mysqli_query($conn, $queryUpdateCode);
+    }else{
+      insertCode($email, $code);
+    }
+    
   }
 
-  function deleteCode($code){
+  function deleteCode($email){
     global $conn;
-    $query = "Delete from tbl_codes where code = '".$code."'";
+    $query = "Delete from tbl_codes where email = '".$email."'";
     mysqli_query($conn, $query);
   }
 
   function sendCode($email, $code){
-    $mail = new PHPMailer(true);
-    $response = new ResponseMessage();
+    $url = 'https://script.google.com/macros/s/AKfycbw9emxOFRI05eUmp-aUyuyouS5v_H7uo7Gg6oOl3KMg2mGrOUzd-E9BauRrblk8kIY/exec';
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [
+       CURLOPT_RETURNTRANSFER => true,
+       CURLOPT_POSTFIELDS => http_build_query([
+          "recipient" => $email,
+          "subject"   => 'OTP Code',
+          "body"      => "OTP Code: ".$code.". This email is auto-generated. Do not reply this email."
+       ])
+    ]);
 
-   try{
-      $mail->isSMTP();
-      $mail->Host = 'smtp.gmail.com';
-      $mail->SMTPAuth = true;
-      $mail->Username = 'felicilda@gmail.com';
-      $mail->Password = 'rif1610131';
-      $mail->SMTPSecure = 'ssl';
-      $mail->Port = 465;
-
-      $mail->setFrom('felicilda@gmail.com');
-      $mail->addAddress($email);
-      $mail->isHTML(true);
-      $mail->Subject = 'OTP Code';
-      $mail->Body = $code;
-      $mail->send();
-   }catch(Exception $err){
-      $response->status_code = 500;
-      $response->message = $err;
-      return $response;
-   }
+    $result = curl_exec($ch);
   }
 ?>

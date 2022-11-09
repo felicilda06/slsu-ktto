@@ -100,7 +100,7 @@ $(document).ready(()=>{
    $('#btn-reset').click(event=> {
       event.preventDefault();
       messages = [...validator()];
-      apiType = 'reset-password';
+      apiType = 'reset_password';
 
       const hasNoError = messages.filter((res) => !!res?.message)
       

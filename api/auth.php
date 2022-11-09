@@ -26,6 +26,7 @@ if ($apiType == 'login') {
         } else {
             $response->status_code = 200;
             $response->usertype = $user->usertype;
+            $_SESSION['usertype'] = $user->usertype;
             echo json_encode($response);
         }
     }
@@ -36,13 +37,14 @@ if ($apiType == 'login') {
     $studentId = $_POST['studentId'];
     $usertype = $_POST['usertype'];
     $name = $_POST['fullname'];
+    $technology_type = $_POST['technology_type'];
 
     $getUser = getUserByEmail($email);
 
     if ($getUser) {
       echo $getUser->message;
     } else {
-        $query = "Insert into tbl_accounts values ('', '" . $studentId . "', '" . $email . "', '" . $name . "', '" . $password . "', '" . $usertype . "')";
+        $query = "Insert into tbl_accounts values ('', '" . $studentId . "', '" . $email . "', '" . $name . "', '" . $password . "', '" . $usertype . "', '". $technology_type."')";
         $executeQuery = mysqli_query($conn, $query);
     }
 } else if ($apiType === 'verify') {
@@ -68,17 +70,11 @@ if ($apiType == 'login') {
         $_SESSION['email'] = $_POST['email'];
         sendCode($email, $_POST['code']);
     }
-} else if($apiType === 'redirect'){
-    $usertype = $_POST['usertype'];
-    $_SESSION['usertype'] = $usertype;
-    
-    if($usertype === 'patent drafter'){
-        echo 0;
-    }
 } else if($apiType === 'resend_code'){
      updateOldCode($_POST['email'], $_POST['code']);
-     sendCode($_POST['email'], $_POST['code']);
-} else if($apiType === 'reset-password'){
+     $_SESSION['code'] = $_POST['code'];
+     //sendCode($_POST['email'], $_POST['code']);
+} else if($apiType === 'reset_password'){
          $validatePassword = validatePassword($_SESSION['email'], sha1(htmlspecialchars($_POST['newPassword'])));
    if($validatePassword->message){
         echo json_encode($validatePassword);
@@ -86,4 +82,7 @@ if ($apiType == 'login') {
        $_SESSION['email'] = '';
        echo json_encode($validatePassword);
    }
+}
+else if($apiType === 'remove_code'){
+    deleteCode($_SESSION['email']);
 }
