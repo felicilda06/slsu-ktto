@@ -1,0 +1,216 @@
+.navbar_wrapper{
+    width: 100%;
+    color: #e2e2e2;
+    display: flex;
+    align-items: center;
+    background-color: #0d7edb;
+    padding: 0px 4px;
+    transition: .2s ease-in-out;
+    border-bottom: 1px solid #959595;
+    box-shadow: 0px 5px 7px rgba(128, 128, 128, 0.3);
+}
+#burger{
+    position: fixed;
+    z-index: 10;
+    right: 3%;
+    font-size: 21px;
+    cursor: pointer;
+    display: none;
+}
+#burger:hover{
+    color: #efbf23;
+}
+.navbar_wrapper .logo{
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #e2e2e2;
+    padding: 10px 0px;
+}
+.navbar_wrapper .logo img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.navbar_wrapper .logo h1.title{
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+.navbar_wrapper nav{
+    width: 100%;
+    height: auto;
+    padding: 10px 0px;
+}
+.navbar_wrapper nav ul{
+    display: flex;
+    padding: 0px 5px;
+    justify-content: space-around;
+}
+.navbar_wrapper nav ul li{
+    list-style-type: none;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+.navbar_wrapper nav ul li#menu{
+   border-radius: 3px;
+   padding: 5px 10px;
+   z-index: 99;
+   position: relative;
+}
+
+.navbar_wrapper nav ul li#menu:hover{
+    background-color: #0761aa;
+ }
+
+ .navbar_wrapper nav ul li#menu.active{
+    background-color: #06477b;
+ }
+
+ .navbar_wrapper nav ul li#chat_menu,
+ .navbar_wrapper nav ul .settings_wrapper i#caret_down{
+    font-size: 18px;
+ }
+
+ .navbar_wrapper nav ul li#chat_menu:hover,
+ .navbar_wrapper nav ul .settings_wrapper i#caret_down:hover{
+    color: #efbf23;
+ }
+
+ .navbar_wrapper nav ul .settings_wrapper{
+    transition: .3s ease-in-out;
+    position: relative;
+    margin-right: 26px !important;
+ }
+
+ .navbar_wrapper nav ul .settings_wrapper i#caret_down{
+    cursor: pointer;
+ }
+
+ .navbar_wrapper nav ul .settings_wrapper .settings{
+    position: absolute;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #eaeaea;
+    width: 80px;
+    color: #494949;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+ }
+
+ .navbar_wrapper nav ul .settings_wrapper .settings.show{
+    display: flex;
+ }
+
+ .navbar_wrapper nav ul .settings_wrapper .settings .settings_menu{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+ }
+
+ .navbar_wrapper nav ul .settings_wrapper .settings .settings_menu:hover{
+    color: #0761aa;
+ }
+
+ /* Responsive CSS */
+
+@media only screen and (max-width: 1024px) {
+    .navbar_wrapper .logo img{
+        width: 50px;
+        height: 50px;
+    }
+    .navbar_wrapper .logo h1.title{
+        font-size: 14px;
+    }
+
+    .navbar_wrapper nav ul li{
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar_wrapper{
+        padding: 10px 0px;
+        flex-direction: column;
+        height: 120px;
+    }
+    .navbar_wrapper.expand{
+        height: 100vh;
+    }
+    #burger{
+        display: block;
+        top: 8%;
+        right: 5%;
+    }
+
+    .navbar_wrapper .logo{
+        gap: 10px;
+        border-right: 0px;
+    }
+
+    .navbar_wrapper nav ul{
+        padding: 0px 3px;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+    }
+
+    .navbar_wrapper nav ul li{
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar_wrapper nav ul li#menu,
+    .navbar_wrapper nav ul li#chat_menu,
+    .navbar_wrapper nav ul .settings{
+        padding: 10px 0px;
+    }
+
+    .navbar_wrapper nav ul.show{
+        display: flex;
+    }
+
+    
+}
+
+@media only screen and (max-width: 400px) {
+    .navbar_wrapper{
+        padding: 35px 4px;
+    }
+    .navbar_wrapper.expand{
+        height: 100vh;
+    }
+    #burger{
+        display: block;
+        top: 8%;
+        right: 5%;
+    }
+    .navbar_wrapper .logo{
+        gap: 15px;
+    }
+    .navbar_wrapper .logo img{
+        width: 80px;
+        height: 80px;
+    }
+    .navbar_wrapper .logo h1.title{
+       width: 75%;
+       font-size: 18px;
+    }
+    .navbar_wrapper nav ul{
+        gap: 8px;
+        margin-top: 10px;
+    }
+    .navbar_wrapper nav ul li{
+        font-size: 16px;
+    }
+}
+
+

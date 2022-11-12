@@ -4,15 +4,18 @@
     <?php
        include 'dependencies.php';
        session_start();
-       $usertype = $_SESSION['usertype'];
+    //    if(!$_SESSION['usertype']) {
+    //     $_SESSION['usertype'] == '';
+    //    }
+    //   $usertype = $_SESSION['usertype'];
 
-       if($usertype === 'patent drafter'){
-           header('Location:patent-drafter.php');
-           return;
-        }else if($usertype === 'maker'){
-           header('Location:maker.php');
-           return;
-       }
+    //    if($usertype === 'patent drafter'){
+    //        header('Location:patent-drafter.php');
+    //        return;
+    //     }else if($usertype === 'maker'){
+    //        header('Location:maker.php');
+    //        return;
+    //    }
     ?>
 
     <link rel="icon" href="./assets/images/logo.png" type="image/icon type">
