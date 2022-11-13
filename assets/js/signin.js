@@ -142,7 +142,7 @@ $(document).ready(() => {
             message_func([validationMessage('', '', status_code, message)]);
           }else{
             if(usertype === 'patent drafter'){
-              window.location.href = 'patent-drafter.php';
+              window.location.href = './patent-drafter/dashboard.php';
             }else{
               window.location.href = 'maker.php';
             }

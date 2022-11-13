@@ -27,6 +27,7 @@ if ($apiType == 'login') {
             $response->status_code = 200;
             $response->usertype = $user->usertype;
             $_SESSION['usertype'] = $user->usertype;
+            $_SESSION['email'] = $_POST['email'];
             echo json_encode($response);
         }
     }

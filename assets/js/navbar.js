@@ -1,56 +1,78 @@
 $(document).ready(()=>{
+    const urlPath = window.location.pathname.split('/')
+    const filepath = urlPath.slice(-1).toString();
+    const usertype = urlPath[urlPath.length - 2] ?? ''
+    const [file, _ext] = filepath.split('.');
+    const arrOfMenus = [
+    {
+        usertype: 'patent-drafter',
+        urls: [
+        {
+          id: 'dashboard',
+          active: false
+        },
+        {
+          id: 'log',
+          active: false
+        },
+        {
+          id: 'submission',
+          active: false
+        },
+        {
+          id: 'documents',
+          active: false
+        }
+      ]
+    },
+    {
+        usertype: 'maker',
+        url: [{
+
+        }]
+    }
+    ]
+
+    const getUrls = arrOfMenus.find((menu)=> menu.usertype === usertype).urls ?? []
+
     $('#burger').click(()=>{
        $('.navbar_wrapper').toggleClass('expand')
        $('.navbar_wrapper nav ul').toggleClass('show')
-
     })
 
-    const ajaxRequest = (type = '')=>{
-        if(!type) return
-
+    const redirecToPatentDashboard = ()=>{
+        if(filepath && filepath === 'dashboard.php'){
+            $.ajax({
+                url:'../patent-drafter/main.php',
+                type: 'GET',
+                cache: false,
+                success: (res)=> $('#main').html(res)
+            })
+        }
     }
 
-    // document.addEventListener('click', ()=>{
-    //   if($('.settings').hasClass('show')){
-    //     $('.settings').removeClass('show');
-    //   }
-    // })
+    redirecToPatentDashboard();
 
-    $('.navbar_wrapper nav ul li#menu:nth-child(1)').addClass('active')
+    const activeMenu = (id)=>{
+      getUrls.filter(url=> url.id === id).map(act=> $(`#${act.id}`).addClass('active'))
+      getUrls.filter(url=> url.id !== id).map(act=> $(`#${act.id}`).removeClass('active'))
+    }
 
-    $('.navbar_wrapper nav ul li#menu:nth-child(1)').click(()=>{
-        $('.navbar_wrapper nav ul li#menu:nth-child(1)').addClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(2)').removeClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(3)').removeClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(4)').removeClass('active')
-        ajaxRequest('dashboard')
+    getUrls.map(url=> {
+       return  $(`#${url.id}`).click(event=> {
+         const { id } = event?.currentTarget
+         activeMenu(id)
+         window.location.href = `../${usertype}/${id}.php`
+       })
+
     })
 
-    $('.navbar_wrapper nav ul li#menu:nth-child(2)').click(()=>{
-        $('.navbar_wrapper nav ul li#menu:nth-child(2)').addClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(1)').removeClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(3)').removeClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(4)').removeClass('active')
-        ajaxRequest('log_submission')
-    })
+    activeMenu(file)
 
-    $('.navbar_wrapper nav ul li#menu:nth-child(3)').click(()=>{
-        $('.navbar_wrapper nav ul li#menu:nth-child(3)').addClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(1)').removeClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(2)').removeClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(4)').removeClass('active')
-        ajaxRequest('view_submission')
-    })
-
-    $('.navbar_wrapper nav ul li#menu:nth-child(4)').click(()=>{
-        $('.navbar_wrapper nav ul li#menu:nth-child(4)').addClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(1)').removeClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(2)').removeClass('active')
-        $('.navbar_wrapper nav ul li#menu:nth-child(3)').removeClass('active')
-        ajaxRequest('documents')
-    })
-
-    $('#caret_down').click(()=>{
+    $('#caret_down').click(()=> {
         $('.settings').toggleClass('show')
     })
+
+    $('#signout').click(()=> window.location.href = '../logout.php')
+
 })

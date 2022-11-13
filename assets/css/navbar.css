@@ -22,20 +22,20 @@
 }
 .navbar_wrapper .logo{
     display: flex;
-    gap: 5px;
+    gap: 6px;
     flex-direction: column;
     align-items: center;
-    border-right: 1px solid #e2e2e2;
+    border-right: 1px solid #b7b7b7;
     padding: 10px 0px;
 }
 .navbar_wrapper .logo img{
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     object-fit: cover;
     border-radius: 50%;
 }
 .navbar_wrapper .logo h1.title{
-    font-size: 15px;
+    font-size: 16px;
     text-align: center;
     letter-spacing: 1px;
     font-weight: 600;
@@ -56,18 +56,21 @@
     cursor: pointer;
     transition: .2s ease-in-out;
 }
-.navbar_wrapper nav ul li#menu{
+.navbar_wrapper nav ul li.menu{
    border-radius: 3px;
    padding: 5px 10px;
    z-index: 99;
    position: relative;
 }
 
-.navbar_wrapper nav ul li#menu:hover{
+.navbar_wrapper nav ul li.menu:hover{
     background-color: #0761aa;
  }
 
- .navbar_wrapper nav ul li#menu.active{
+ .navbar_wrapper nav ul li#dashboard.active,
+ .navbar_wrapper nav ul li#log.active,
+ .navbar_wrapper nav ul li#submission.active,
+ .navbar_wrapper nav ul li#documents.active{
     background-color: #06477b;
  }
 
@@ -168,7 +171,7 @@
         text-align: center;
     }
 
-    .navbar_wrapper nav ul li#menu,
+    .navbar_wrapper nav ul li.menu,
     .navbar_wrapper nav ul li#chat_menu,
     .navbar_wrapper nav ul .settings{
         padding: 10px 0px;
@@ -212,5 +215,3 @@
         font-size: 16px;
     }
 }
-
-
