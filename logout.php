@@ -1,6 +1,8 @@
 <?php
-    session_destroy();
-    $_SESSION['usertype'] = '';
-    $_SESSION['email'] = '';
-    header('Location: sign-in.php');
+    session_start();
+
+    if($_SESSION['usertype'] != ''){
+        session_destroy();
+        header('Location:sign-in.php');
+    }
 ?>

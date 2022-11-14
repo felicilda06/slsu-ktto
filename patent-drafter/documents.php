@@ -3,8 +3,15 @@
 <head>
     <?php
        include '../dependencies.php';
-      //  session_start();
-    ?>
+      session_start();
+
+      $user = $_SESSION['usertype'];
+
+      if(empty($user)){
+          header('Location: ../sign-in.php');
+          return;
+      }
+    ?> 
 
     <link rel="icon" href="../assets/images/logo.png" type="image/icon type">
 
@@ -38,7 +45,7 @@
                 <?php
                     $query = "Select * from tbl_document_types";
                     $executeQuery = mysqli_query($conn, $query);
-                    while($docType = mysqli_fetch_array($executeQuery)){                        
+                    while($docType = mysqli_fetch_assoc($executeQuery)){                        
                       $output.="<option value=".$docType['value'].">".$docType['label']."</option>";
                     }
                     echo $output;
@@ -46,7 +53,7 @@
                 ?>
               </select>
             </div>
-            <input type="text" id="filter_by" placeholder="Find documents by titles, dates & etc...">
+            <input type="text" id="textfield_document_type" placeholder="Search documents...">
           </div>
           <button class="btn btn-sm btn-primary" id="btn_new_document">Upload New Document</button>
         </div>
@@ -59,29 +66,32 @@
               <th scope="col">Handle</th>
             </tr>
           </thead>
-          <tbody id="tbl_body_documents">
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
+          <tbody id="tbl_body_documents"></tbody>
         </table>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal_document" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
