@@ -9,15 +9,13 @@
             <li class="menu" id="dashboard">Dashboard</li>
              <?php
                 $user = $_SESSION['usertype'];
-                $output = '';
+                $output = '<li class="menu" id="log">Log Submission</li>
+                <li class="menu" id="submission">View Submission</li>';
+                
                 if(isset($user) && $user === 'patent drafter'){
-                    $output.=`
-                        <li class="menu" id="log">Log Submission</li>
-                        <li class="menu" id="submission">View Submission</li>
-                    `;
+                    echo $output;
                 }
 
-                echo $output;
              ?>
             <li class="menu" id="documents">Documents</li>
             <!-- <li id="chat_menu">

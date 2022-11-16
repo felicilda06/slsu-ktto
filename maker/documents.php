@@ -6,6 +6,7 @@
       session_start();
 
       $user = $_SESSION['usertype'];
+      echo $user;
 
       if(empty($user) || $user != 'maker'){
           header('Location: ../sign-in.php');
@@ -55,7 +56,7 @@
             </div>
             <input type="text" id="textfield_document_type" placeholder="Search documents..." autocomplete="off">
           </div>
-          <button class="btn btn-sm btn-primary" id="btn_new_document">Upload New Document</button>
+          <button class="btn btn-sm btn-primary" id="btn_new_document"  data-toggle="modal" data-backdrop="static" data-keyboard="false">Add New Study</button>
         </div>
         <table class="table table-striped table-hover" id="tbl_documents">
           <thead>
@@ -72,21 +73,38 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modal_document" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modal_document">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+          <div class="modal-header bg-primary d-block">
+            <h5 class="modal-title" id="exampleModalLabel">New Study</h5>
           </div>
-          <div class="modal-body">
-            ...
+          <div class="modal-body d-flex flex-column">
+                  <select id="document_type" class="form-control mt-4 mb-3">
+                    <option value="">Document Type</option>
+                      <?php
+                          $query = "Select * from tbl_document_types";
+                          $executeQuery = mysqli_query($conn, $query);
+                          while($docType = mysqli_fetch_assoc($executeQuery)){                        
+                            $output.="<option value=".$docType['value'].">".$docType['label']."</option>";
+                          }
+                          echo $output;
+                          
+                      ?>
+                  </select>
+                  <input type="text" class="form-control my-3" placeholder="Document Title">
+                  <input type="text" class="form-control my-3" placeholder="Proponent">
+                  <select name="" id="" class="form-control my-3">
+                    <option value="">Type of Technology</option>
+                    <option value="non-chemical">Non-Chemical</option>
+                    <option value="chemical">Chemical</option>
+                  </select>
+                  <input type="text" class="form-control my-3" placeholder="Contact Information">
+                  <input type="file" class="form-control my-3">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="btn_sav">Submit</button>
           </div>
         </div>
       </div>

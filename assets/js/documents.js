@@ -41,7 +41,11 @@ $(document).ready(()=>{
     })
 
     $('#btn_new_document').click(()=>{
-        $('#modal_document').modal('show')
+        $('#modal_document').modal({
+            backdrop: 'static',
+            keyboard: false,            
+       });
     })
+
 
 })
