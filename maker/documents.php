@@ -7,7 +7,7 @@
 
       $user = $_SESSION['usertype'];
 
-      if(empty($user) || $user != 'patent drafter'){
+      if(empty($user) || $user != 'maker'){
           header('Location: ../sign-in.php');
           return;
       }

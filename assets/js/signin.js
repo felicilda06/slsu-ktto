@@ -144,7 +144,7 @@ $(document).ready(() => {
             if(usertype === 'patent drafter'){
               window.location.href = './patent-drafter/dashboard.php';
             }else{
-              window.location.href = 'maker.php';
+              window.location.href = './maker/dashboard.php';
             }
           }
           

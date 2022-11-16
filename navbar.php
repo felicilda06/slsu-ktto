@@ -7,8 +7,18 @@
     <nav>
         <ul class="menus">
             <li class="menu" id="dashboard">Dashboard</li>
-            <li class="menu" id="log">Log Submission</li>
-            <li class="menu" id="submission">View Submission</li>
+             <?php
+                $user = $_SESSION['usertype'];
+                $output = '';
+                if(isset($user) && $user === 'patent drafter'){
+                    $output.=`
+                        <li class="menu" id="log">Log Submission</li>
+                        <li class="menu" id="submission">View Submission</li>
+                    `;
+                }
+
+                echo $output;
+             ?>
             <li class="menu" id="documents">Documents</li>
             <!-- <li id="chat_menu">
                 <i class="fa fa-comments"></i>

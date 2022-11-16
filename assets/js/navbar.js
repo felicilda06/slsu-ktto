@@ -27,9 +27,16 @@ $(document).ready(()=>{
     },
     {
         usertype: 'maker',
-        url: [{
-
-        }]
+        urls: [
+          {
+            id: 'dashboard',
+            active: false
+          },
+          {
+            id: 'documents',
+            active: false
+          }
+        ]
     }
     ]
 
@@ -40,10 +47,10 @@ $(document).ready(()=>{
        $('.navbar_wrapper nav ul').toggleClass('show')
     })
 
-    const redirecToPatentDashboard = ()=>{
+    const redirecToDashboard = ()=>{
         if(filepath && filepath === 'dashboard.php'){
             $.ajax({
-                url:'../patent-drafter/main.php',
+                url:`../${usertype}/main.php`,
                 type: 'GET',
                 cache: false,
                 success: (res)=> $('#main').html(res)
@@ -51,7 +58,7 @@ $(document).ready(()=>{
         }
     }
 
-    redirecToPatentDashboard();
+    redirecToDashboard();
 
     const activeMenu = (id)=>{
       getUrls.filter(url=> url.id === id).map(act=> $(`#${act.id}`).addClass('active'))

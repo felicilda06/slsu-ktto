@@ -119,10 +119,7 @@ $(document).ready(() => {
       $('#technology_wrapper').addClass('hide')
       $('#techology_type').val('chemical')
       $('#usertype').addClass('show');
-      arrOfInputs[6] = {
-        ... arrOfInputs[6],
-        value:''
-      }
+      arrOfInputs = arrOfInputs.filter((arr)=> arr.id !== "techology_type" )
     } else {
       $("#form-input-student-id").css("display", "none");
       $("#studentId").val("");
@@ -198,7 +195,7 @@ $(document).ready(() => {
         data: {
           api: api,
           usertype: arrOfInputs.find((arr) => arr.id === "usertype")?.value,
-          technology_type: arrOfInputs.find((arr) => arr.id === "techology_type")?.value,
+          technology_type: arrOfInputs.find((arr) => arr.id === "techology_type")?.value ?? '',
           studentId:
             arrOfInputs.find((arr) => arr.id === "studentId")?.value ?? null,
           fullname: arrOfInputs.find((arr) => arr.id === "fullname")?.value,
