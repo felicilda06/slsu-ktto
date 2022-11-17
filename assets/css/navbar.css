@@ -22,7 +22,6 @@
 }
 .navbar_wrapper .logo{
     display: flex;
-    gap: 6px;
     flex-direction: column;
     align-items: center;
     border-right: 1px solid #b7b7b7;
@@ -70,7 +69,7 @@
  .navbar_wrapper nav ul li#dashboard.active,
  .navbar_wrapper nav ul li#log.active,
  .navbar_wrapper nav ul li#submission.active,
- .navbar_wrapper nav ul li#documents.active{
+ .navbar_wrapper nav ul li#studies.active{
     background-color: #06477b;
  }
 

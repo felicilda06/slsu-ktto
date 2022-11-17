@@ -20,7 +20,7 @@
     <div class="" id="message-container"></div>
     <?php include_once('./verify_patent.php'); ?>
     <div class="loader">
-        <img src="./assets/images/loader.gif" class="img-loader">
+        <img src="./assets/images/loader1.gif" class="img-loader">
     </div>
     <div class="register-container">
         <div class="form-register">

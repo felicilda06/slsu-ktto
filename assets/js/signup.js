@@ -238,7 +238,6 @@ $(document).ready(() => {
   }
 
   $("#btn-submit").click((event) => {
-    console.log(arrOfInputs);
     event.preventDefault();
     apiType = "register";
     messages = [...validator()];

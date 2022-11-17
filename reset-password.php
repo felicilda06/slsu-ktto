@@ -24,7 +24,7 @@ if (!$email) {
     <title>SLSU-KTTO Document Management System</title>
 </head>
 <div class="loader">
-    <img src="./assets/images/loader.gif" class="img-loader">
+    <img src="./assets/images/loader1.gif" class="img-loader">
 </div>
 <div class="reset-container">
     <div class="" id="message-container"></div>

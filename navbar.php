@@ -17,7 +17,7 @@
                 }
 
              ?>
-            <li class="menu" id="documents">Documents</li>
+            <li class="menu" id="studies">Reseach Studies</li>
             <!-- <li id="chat_menu">
                 <i class="fa fa-comments"></i>
             </li> -->

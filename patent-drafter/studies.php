@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../assets/css/loader.css">
     <link rel="stylesheet" href="../assets/css/message.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
-    <link rel="stylesheet" href="../assets/css/documents.css">
+    <link rel="stylesheet" href="../assets/css/studies.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
@@ -27,7 +27,7 @@
 <body>
     <div class="" id="message-container"></div>
     <div class="loader">
-      <img src="../assets/images/loader.gif" class="img-loader">
+      <img src="../assets/images/loader1.gif" class="img-loader">
     </div>
     <?php
       include '../navbar.php';
@@ -60,7 +60,7 @@
         <table class="table table-striped table-hover" id="tbl_documents">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">Document Id</th>
               <th scope="col">First</th>
               <th scope="col">Last</th>
               <th scope="col">Handle</th>
@@ -95,7 +95,7 @@
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
-    <script src="../assets/js/documents.js"></script>
+    <script src="../assets/js/studies.js"></script>
 
 </body>
 

@@ -6,7 +6,6 @@
       session_start();
 
       $user = $_SESSION['usertype'];
-      echo $user;
 
       if(empty($user) || $user != 'maker'){
           header('Location: ../sign-in.php');
@@ -20,7 +19,8 @@
     <link rel="stylesheet" href="../assets/css/loader.css">
     <link rel="stylesheet" href="../assets/css/message.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
-    <link rel="stylesheet" href="../assets/css/documents.css">
+    <link rel="stylesheet" href="../assets/css/studies.css">
+    <link rel="stylesheet" href="../assets/css/placeholder.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
@@ -28,7 +28,7 @@
 <body>
     <div class="" id="message-container"></div>
     <div class="loader">
-      <img src="../assets/images/loader.gif" class="img-loader">
+      <img src="../assets/images/loader1.gif" class="img-loader">
     </div>
     <?php
       include '../navbar.php';
@@ -58,17 +58,31 @@
           </div>
           <button class="btn btn-sm btn-primary" id="btn_new_document"  data-toggle="modal" data-backdrop="static" data-keyboard="false">Add New Study</button>
         </div>
-        <table class="table table-striped table-hover" id="tbl_documents">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody id="tbl_body_documents"></tbody>
-        </table>
+        <div class="table_render_wrapper">
+          <table class="table" id="tbl_documents">
+            <thead>
+              <tr class="text-secondary">
+                <th class="text-center" scope="col">Id</th>
+                <th class="text-center" scope="col">Type</th>
+                <th class="text-center" scope="col">Title</th>
+                <th class="text-center" scope="col">Proponent</th>
+                <th class="text-center" scope="col">Type of Technology</th>
+                <th class="text-center" scope="col">Contact Information</th>
+                <th class="text-center" scope="col">File</th>
+                <th class="text-center" scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_body_documents">
+              <tr id="tbl_row_placeholder" class="hide">
+                <td colspan="8">
+                  <?php
+                    include_once '../placeholder.php';
+                  ?>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -80,31 +94,31 @@
             <h5 class="modal-title" id="exampleModalLabel">New Study</h5>
           </div>
           <div class="modal-body d-flex flex-column">
-                  <select id="document_type" class="form-control mt-4 mb-3">
+                  <select id="tbl_document_type" class="form-control mt-4 mb-3">
                     <option value="">Document Type</option>
                       <?php
                           $query = "Select * from tbl_document_types";
                           $executeQuery = mysqli_query($conn, $query);
-                          while($docType = mysqli_fetch_assoc($executeQuery)){                        
-                            $output.="<option value=".$docType['value'].">".$docType['label']."</option>";
+                          $output1 = '';
+                          while($docType = mysqli_fetch_array($executeQuery)){                        
+                            $output1.='<option value="'.$docType[1].'">'.$docType[1].'</option>';
                           }
-                          echo $output;
-                          
+                          echo $output1;
                       ?>
                   </select>
-                  <input type="text" class="form-control my-3" placeholder="Document Title">
-                  <input type="text" class="form-control my-3" placeholder="Proponent">
-                  <select name="" id="" class="form-control my-3">
+                  <input type="text" id="doc_title" class="form-control my-3" placeholder="Document Title" autocomplete="off">
+                  <input type="text" id="proponent" class="form-control my-3" placeholder="Proponent" autocomplete="off">
+                  <select id="technology_type" class="form-control my-3">
                     <option value="">Type of Technology</option>
                     <option value="non-chemical">Non-Chemical</option>
                     <option value="chemical">Chemical</option>
                   </select>
-                  <input type="text" class="form-control my-3" placeholder="Contact Information">
-                  <input type="file" class="form-control my-3">
+                  <input type="text" id="contact_info" class="form-control my-3" placeholder="Contact Information" autocomplete="off" maxlength="11">
+                  <input type="file" id="file" class="form-control my-3" accept="image/*,.doc, .docx, .pdf, .odt">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" id="btn_sav">Submit</button>
+            <button type="button" class="btn btn-primary" id="btn_maker_save">Submit</button>
           </div>
         </div>
       </div>
@@ -113,7 +127,7 @@
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
-    <script src="../assets/js/documents.js"></script>
+    <script src="../assets/js/studies.js"></script>
 
 </body>
 

@@ -1,0 +1,14 @@
+.placeholder_wrapper{
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a7d3ff22;
+}
+.placeholder_wrapper span{
+    color: #8ecafc;
+    font-size: 5.5rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+}

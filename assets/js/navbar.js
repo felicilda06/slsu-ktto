@@ -20,7 +20,7 @@ $(document).ready(()=>{
           active: false
         },
         {
-          id: 'documents',
+          id: 'studies',
           active: false
         }
       ]
@@ -33,7 +33,7 @@ $(document).ready(()=>{
             active: false
           },
           {
-            id: 'documents',
+            id: 'studies',
             active: false
           }
         ]
