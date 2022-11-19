@@ -4,10 +4,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #a7d3ff22;
+    background-color: #f2f7fb;
 }
 .placeholder_wrapper span{
-    color: #8ecafc;
+    color: #a9d7fd;
     font-size: 5.5rem;
     letter-spacing: 1px;
     font-weight: 600;

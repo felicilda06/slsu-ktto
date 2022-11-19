@@ -27,6 +27,7 @@ if ($apiType == 'login') {
             $response->status_code = 200;
             $response->usertype = $user->usertype;
             $_SESSION['usertype'] = $user->usertype;
+            $_SESSION['name'] = $user->name;
             $_SESSION['email'] = $_POST['email'];
             echo json_encode($response);
         }
@@ -74,7 +75,7 @@ if ($apiType == 'login') {
 } else if($apiType === 'resend_code'){
      updateOldCode($_POST['email'], $_POST['code']);
      $_SESSION['code'] = $_POST['code'];
-     //sendCode($_POST['email'], $_POST['code']);
+     sendCode($_POST['email'], $_POST['code']);
 } else if($apiType === 'reset_password'){
          $validatePassword = validatePassword($_SESSION['email'], sha1(htmlspecialchars($_POST['newPassword'])));
    if($validatePassword->message){

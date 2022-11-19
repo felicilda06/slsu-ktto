@@ -2,7 +2,7 @@
 
 <head>
     <?php
-       include '../dependencies.php';
+      include '../dependencies.php';
       session_start();
 
       $user = $_SESSION['usertype'];
@@ -26,6 +26,7 @@
 </head>
 
 <body>
+     <input type="text" class="d-none" value="<?php echo $_SESSION['email']?>" id="user_email">
     <div class="" id="message-container"></div>
     <div class="loader">
       <img src="../assets/images/loader1.gif" class="img-loader">
@@ -44,10 +45,11 @@
               <select id="document_type">
                 <option value="all">All</option>
                 <?php
+                    $output = '';
                     $query = "Select * from tbl_document_types";
                     $executeQuery = mysqli_query($conn, $query);
-                    while($docType = mysqli_fetch_assoc($executeQuery)){                        
-                      $output.="<option value=".$docType['value'].">".$docType['label']."</option>";
+                    while($docType = mysqli_fetch_array($executeQuery)){                        
+                      $output.='<option value="'.$docType[1].'">'.$docType[1].'</option>';
                     }
                     echo $output;
                     
@@ -59,7 +61,7 @@
           <button class="btn btn-sm btn-primary" id="btn_new_document"  data-toggle="modal" data-backdrop="static" data-keyboard="false">Add New Study</button>
         </div>
         <div class="table_render_wrapper">
-          <table class="table" id="tbl_documents">
+          <table class="table table-stripped" id="tbl_documents">
             <thead>
               <tr class="text-secondary">
                 <th class="text-center" scope="col">Id</th>
@@ -69,12 +71,14 @@
                 <th class="text-center" scope="col">Type of Technology</th>
                 <th class="text-center" scope="col">Contact Information</th>
                 <th class="text-center" scope="col">File</th>
+                <th class="text-center" scope="col">Authors</th>
+                <th class="text-center" scope="col">Create At</th>
                 <th class="text-center" scope="col">Actions</th>
               </tr>
             </thead>
             <tbody id="tbl_body_documents">
               <tr id="tbl_row_placeholder" class="hide">
-                <td colspan="8">
+                <td colspan="10">
                   <?php
                     include_once '../placeholder.php';
                   ?>

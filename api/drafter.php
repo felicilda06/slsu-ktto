@@ -1,35 +1,21 @@
 <?php
-    include_once './connection.php';
+    include '../api/connection.php';
     global $conn;
-    $apiType = $_POST['api'];
 
-    if($apiType){
-      if($apiType === 'add_new_study'){
-            $docType = $_POST['tbl_document_type'];
-            $title = $_POST['doc_title'];
-            $proponent = $_POST['proponent'];
-            $technology_type = $_POST['technology_type'];
-            $contact_info = $_POST['contact_info'];
+    $api = $_POST['api'];
 
-            $file = $_FILES['file']['name'];
-            $file_tmp_name = $_FILES['file']['tmp_name'];
-            $file_ex = pathinfo($file, PATHINFO_EXTENSION);
-            $file_ex_loc = strtolower($file_ex);
-            $filepath = '../uploads/'.$_FILES['file']['name'];
-            move_uploaded_file($file_tmp_name, $filepath);
+    if(isset($api)){
+      if($api === 'get_list_of_studies'){
+        $technology_type = $_POST['technology_type'];
+        $query = "Select * from tbl_studies where technology_type = '".$technology_type."'";
+        $executeQuery = mysqli_query($conn, $query);
+
+        $rows = array();
+        while($r = mysqli_fetch_assoc($executeQuery)) {
+            $rows[] = $r;
+        }
+        echo json_encode($rows);
+
       }
-    }
-
-    // if($apiType){
-    //    if($apiType === 'get_document_types'){
-         
-
-    //       if(mysqli_num_rows($executeQuery) > 0){
-    //         $docType = mysqli_fetch_assoc($executeQuery);
-    //         for($docs in $docType  ){
-                
-    //         }
-    //       }
-    //    }
-    // }else{return;}
+    }else{return;}
 ?>

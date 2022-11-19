@@ -1,8 +1,10 @@
 $(document).ready(()=>{
+    const user = $('#user_email').val();
     let apiType = '';
     let arrOfDocuments = [];
     let arrOfInputs = [
         {id: 'tbl_document_type', value:''},
+        {id: 'author', value: user},
         {id: 'doc_title', value:''},
         {id: 'proponent', value:''},
         {id: 'technology_type', value:''},
@@ -15,33 +17,77 @@ $(document).ready(()=>{
     let messages = [];
     let isSubmit = false;
 
+
     const renderTable = (documents = [])=>{
        if(documents.length > 0){
-            $('#tbl_body_documents').empty();
-            documents.map(document=> $('#tbl_body_documents').append(`<tr>
-            <td>${document.id}</td>
-            <td>${document.title}</td>
-            <td>${document.author}</td>
-            <td>${document.docType}</td>
-            <td>${document.date_created}</td>
-            </tr>`))
+            $('#tbl_body_documents tr.studies').remove();
+            documents.map((document, i)=>{
+              const isSameToUser = document?.authors?.toLowerCase() === user.toLowerCase() ? true : false
+              $('#tbl_body_documents').append(`<tr class="studies">
+                <td class="text-center py-3">${i + 1}</td>
+                <td class="text-center py-3">${document?.doc_type}</td>
+                <td class="text-center py-3">${document?.title}</td>
+                <td class="text-center py-3">${document?.proponent}</td>
+                <td class="text-center py-3">${document?.technology_type}</td>
+                <td class="text-center py-3">${document?.contact_information}</td>
+                <td class="text-center py-3">${document?.file}</td>
+                <td class="text-center py-3">
+                  ${isSameToUser ? 'Me' : document?.authors}
+                </td>
+                <td class="text-center py-3">${document?.created_at}</td>
+                <td class="text-center py-3" style="font-size:15px;">
+                  <i title="${isSameToUser ? 'Remove' : ''}" id="${document?.id}" style="${isSameToUser? 'cursor:pointer' : 'cursor:not-allowed'}" class="${isSameToUser ? 'btn_remove text-danger' : 'text-secondary'} fa fa-trash mx-3"><i>
+                  <i title="${isSameToUser ? 'Edit' : ''}" id="${document?.id}"   style="${isSameToUser? 'cursor:pointer' : 'cursor:not-allowed'}" class="${isSameToUser ? 'btn_edit text-warning' : 'text-secondary'} fa fa-pencil mx-3"><i>
+                </td>
+              </tr>`)
+            })
+           $('#tbl_row_placeholder').addClass('hide')
+       }else{
+          $('#tbl_body_documents tr.studies').addClass('filtered')
+          $('#tbl_row_placeholder').removeClass('hide')
        }
+     
     }
 
-    if(arrOfDocuments.length <= 0){
-        $('#tbl_row_placeholder').removeClass('hide')
-    }else{
-        renderTable(arrOfDocuments);
+    $(document).on('click', '.btn_remove', (event)=>{
+       const { id } = event?.currentTarget
+       alert(id)
+    })
+
+    $(document).on('click', '.btn_edit', (event)=>{
+      const { id } = event?.currentTarget
+      
+    })
+
+
+    const fetchStudies = (api)=>{
+       $.ajax({
+          url: '.././api/maker.php',
+          type:'POST',
+          cache: false,
+          data: {api},
+          success: (res)=>{
+            arrOfDocuments = res && JSON.parse(res)
+            renderTable(arrOfDocuments);
+          },
+          error: (err)=>{
+            console.log(`Error`, err);
+          }
+       })
     }
+
+    // setInterval(()=>  , 1000)
+
+    fetchStudies('get_record_studies');
 
     $('#document_type').change(event=>{
         const { value } = event?.target
 
         if(value?.toLowerCase() === 'all'){
-            renderTable(arrOfDocuments)
+           renderTable(arrOfDocuments)
         }else{
-            const filterByDocumentType = arrOfDocuments.filter(document=> document.docType === value)
-            renderTable(filterByDocumentType)
+            const filterByDocumentType = arrOfDocuments.filter(document=> document?.doc_type === value)
+           renderTable(filterByDocumentType)
         }
     })
 
@@ -50,8 +96,8 @@ $(document).ready(()=>{
        if(!value){
              renderTable(arrOfDocuments)
        }else{
-            const filterDocument = arrOfDocuments.filter(document => JSON.stringify(document).toLowerCase().match(value?.toLowerCase()))
-            renderTable(filterDocument);
+          const filterDocument = arrOfDocuments.filter(document => JSON.stringify(document).toLowerCase().match(value?.toLowerCase()))
+           renderTable(filterDocument);
        }
     })
 
@@ -101,6 +147,11 @@ $(document).ready(()=>{
                     id,
                     message: `Contact Information is required.`,
                   };
+                }else if(value?.length !== 11){
+                  return {
+                    id,
+                    message: `Must be valid Contact Number.`,
+                  };
                 } else {
                   return false;
                 }
@@ -128,6 +179,11 @@ $(document).ready(()=>{
               }
             }
           }
+        }else if(status === 200 && message){
+          return {
+            status,
+            message
+          };
         }else{
           return {
             message: message ?? `An error occur in saving data.`,
@@ -152,20 +208,33 @@ $(document).ready(()=>{
         timeOut = messages.length > 2 ? 4300 : 2500
         messages.map((e) => {
           spanElement = document.createElement("span");
-          if (e?.message) {
+          if (e?.status !== 200) {
+            if(e?.message){
+              isSubmit = true;
+              spanElement.innerText = e?.message;
+              spanElement.className = "error";
+              messageContainer.addClass("error");
+              messageContainer.append(spanElement);
+
+              setTimeout(() => {
+                messageContainer.removeClass("error");
+                isSubmit = false;
+              }, [timeOut]);
+            }
+          }else{
             isSubmit = true;
             spanElement.innerText = e?.message;
-            spanElement.className = "error";
-            messageContainer.addClass("error");
+            spanElement.className = "success";
+            messageContainer.addClass("success");
             messageContainer.append(spanElement);
-    
+
             setTimeout(() => {
-              messageContainer.removeClass("error");
+              messageContainer.removeClass("success");
               isSubmit = false;
-            }, [4000]);
-    
-            setTimeout(() => messageContainer.children().remove(), timeOut);
+            }, [timeOut]);
           }
+  
+          setTimeout(() => messageContainer.children().remove(), timeOut);
         });
       }
 
@@ -183,9 +252,10 @@ $(document).ready(()=>{
       };
 
     arrOfInputs.map((arr)=>{
-       $(`#${arr.id}`).change(event=>{
-            const { id, value } = event?.target
-            pushToArray(id, value)
+        $(`#${arr.id}`).change(event=>{
+          validationResult = [];
+          const { id, value } = event?.target
+          return pushToArray(id, value)
        })
     })
     
@@ -194,6 +264,7 @@ $(document).ready(()=>{
         let formData = new FormData()
         let file = $('#file')[0].files;
         pushToArray('file', file)
+        const created_at = moment(new Date()).format('MMMM DD, y')
        
         messages = [...validator()];
         const hasNoError = messages.filter((res) => !!res?.message)
@@ -204,22 +275,25 @@ $(document).ready(()=>{
         }else{
            arrOfInputs.map(arr=> arr.id !== 'file' ? formData.append(`${arr.id}`, `${arr.value}`): formData.append(`${arr.id}`, arr.value[0]))
            formData.append('api', apiType)
+           formData.append('created_at', created_at)
           
             $.ajax({
-                url: '.././api/drafter.php',
+                url: '.././api/maker.php',
                 type: 'POST',
                 cache:false,
                 data:formData,
                 processData:false,
                 contentType: false,
                 success: (res)=>{
+                    const { status_code, message } = res && JSON.parse(res);
                     arrOfInputs = arrOfInputs.map((arr, i)=> i > 0 ? {...arr, value: ''} : arr)
                     arrOfInputs.map(arr=> $(`#${arr.id}`).val(''))
+                    message_func([validationMessage('', '', status_code, message)])
                     $('#modal_document').modal('hide');
+                    fetchStudies('get_record_studies');
                 },
                 error: (err)=> console.log(`Error: ${err}`)
             })
-
 
         }
     })

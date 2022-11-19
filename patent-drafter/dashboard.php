@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
 <head>
-    <?php
-       include '../dependencies.php';
+<?php
+      include '../dependencies.php';
       session_start();
 
-      if(isset($_SESSION['email'])){}
-      else{
-        header('Location: ../sign-in.php');
+      $user = $_SESSION['usertype'];
+
+      if(empty($user) || $user != 'patent drafter'){
+          header('Location: ../sign-in.php');
+          return;
       }
-     
-    ?>
+    ?> 
 
     <link rel="icon" href="../assets/images/logo.png" type="image/icon type">
 

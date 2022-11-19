@@ -1,0 +1,87 @@
+.submission_wrapper{
+    width: 100%;
+    height: 100%;
+    padding: 25px 15px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.submission_wrapper .filter_settings{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 15px;
+    padding-left: 5px;
+    justify-content: flex-start;
+}
+.submission_wrapper .filter_settings #input_anything{
+  width: 225px;
+}
+.submission_wrapper .filter_settings .filter_inputs{
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+.submission_wrapper .filter_settings .filter_inputs span{
+    font-size: 14px;
+}
+.submission_wrapper .filter_settings .filter_inputs input{
+    width: 160px;
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper{
+    font-size: 13px;
+    width: auto;
+    height: auto;
+    border: 1px solid #d6d6d6;
+    position: relative;
+    overflow: auto;
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper::-webkit-scrollbar{
+    width: 8px;
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper::-webkit-scrollbar-track{
+    background: #d8d8d8;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.submission_wrapper .tbl_drafter_studies_wrapper::-webkit-scrollbar-thumb{
+    background: rgb(182, 182, 182);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.submission_wrapper .tbl_drafter_studies_wrapper::-webkit-scrollbar-thumb:hover{
+    background: rgb(193, 193, 193);
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies{
+    position: relative;
+    width: 100%;
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies tr{
+    cursor: default;
+    transition: .2s ease-in;
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies tr td{
+   padding: 0;
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies tr#tbl_row_placeholder.hide{
+   display: none;
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies tr.studies.filtered{
+    display: none;
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies tr.studies:hover{
+    background: rgb(235, 235, 235);
+}
+
+.submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies tr td i{
+    cursor: pointer;
+}

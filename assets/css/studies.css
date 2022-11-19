@@ -48,8 +48,7 @@
     width: 100%;
     height: 63vh;
     position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
     border: 1px solid #d8d8d8;
 }
 
@@ -71,7 +70,6 @@
 
 .documents_wrapper .table_wrapper .table_render_wrapper::-webkit-scrollbar-thumb:hover{
     background: rgb(193, 193, 193);
-
 }
 
 .documents_wrapper .table_wrapper .table_render_wrapper table{
@@ -79,13 +77,29 @@
     top: 0;
     height: 0;
     width: 100%;
-    height: 100;
+    height: auto;
 }
 
 .documents_wrapper .table_wrapper .table_render_wrapper table td{
     padding: 0;
 }
+.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr{
+    border-bottom: 1px solid #d0d0d0;
+    transition: .2s ease-in;
+    cursor: default;
+}
+.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr:hover{
+  background-color: #ececec;
+}
+
+.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr:active{
+    background-color: #bebebe;
+  }
 
 .documents_wrapper .table_wrapper .table_render_wrapper table tbody #tbl_row_placeholder.hide{
    display: none;
+}
+
+.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents .studies.filtered{
+    display: none;
 }
