@@ -12,7 +12,6 @@ $(document).ready(()=>{
             studies.map((study, i)=>{
               $('#tbl_body_drafter_studies').append(`<tr class="studies">
                 <td class="text-center py-3">${i + 1}</td>
-                <td class="text-center py-3">${study?.doc_type}</td>
                 <td class="text-center py-3">${study?.title}</td>
                 <td class="text-center py-3">${study?.proponent}</td>
                 <td class="text-center py-3">${study?.technology_type}</td>
@@ -66,9 +65,15 @@ $(document).ready(()=>{
         const { value } = event?.target
         const date = moment(value).format('MMMM DD, y')
         const filterByDate = arrOfStudies.filter(studies=> studies?.created_at === date)
-        console.log(filterByDate);
         isFiltered = true;
         renderTable(filterByDate)
+    })
+
+    $('#input_anything').change(event=>{
+      const { value } = event?.target
+      const inputFiltered = arrOfStudies.filter(studies=> JSON.stringify(studies).toLowerCase().match(value?.toLowerCase()))
+      isFiltered = true;
+      renderTable(inputFiltered)
     })
     
     $(document).on('click', '.btn_view', (event)=>{

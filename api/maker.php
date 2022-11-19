@@ -6,13 +6,14 @@
 
     if($apiType){
       if($apiType === 'add_new_study'){
-        $docType = $_POST['tbl_document_type'];
         $title = $_POST['doc_title'];
         $proponent = $_POST['proponent'];
         $technology_type = $_POST['technology_type'];
         $contact_info = $_POST['contact_info'];
         $created_at = $_POST['created_at'];
         $author = $_POST['author'];
+        $status = $_POST['status'];
+        $color = $_POST['color'];
         
         $file = $_FILES['file']['name'];
         $file_tmp_name = $_FILES['file']['tmp_name'];
@@ -21,7 +22,7 @@
         $filepath = '../uploads/'.$_FILES['file']['name'];
         move_uploaded_file($file_tmp_name, $filepath);
         
-        $query = "Insert into tbl_studies values ('', '".$docType."', '".$title."', '".$proponent."', '".$technology_type."', '".$contact_info."', '".$file."', '".$author."', '".$created_at."')";
+        $query = "Insert into tbl_studies values ('', '".$title."', '".$proponent."', '".$technology_type."', '".$contact_info."', '".$file."', '".$author."', '".$created_at."', '".$status."', '".$color."')";
         $executeQuery = mysqli_query($conn, $query);
 
         $response = new Response();

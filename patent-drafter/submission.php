@@ -58,7 +58,6 @@
               <thead>
                 <tr class="text-secondary">
                   <th class="text-center" scope="col">Id</th>
-                  <th class="text-center" scope="col">Type</th>
                   <th class="text-center" scope="col">Title</th>
                   <th class="text-center" scope="col">Proponent</th>
                   <th class="text-center" scope="col">Type of Technology</th>

@@ -29,6 +29,27 @@
     gap: 15px;
     align-items: center;
 }
+.documents_wrapper .table_wrapper .search_options .filter_wrapper .legends{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.documents_wrapper .table_wrapper .search_options .filter_wrapper .legends .box_wrapper{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+} 
+
+.documents_wrapper .table_wrapper .search_options .filter_wrapper .legends .box_wrapper .box{
+   width: 11px;
+   height: 11px;
+
+}
+.documents_wrapper .table_wrapper .search_options .filter_wrapper .legends .box_wrapper span{
+    font-size: 12px;
+    font-weight: 600;
+}
+
 .documents_wrapper .table_wrapper .search_options .filter_wrapper #textfield_document_type{
     outline: none;
     border: none;
@@ -82,19 +103,22 @@
 
 .documents_wrapper .table_wrapper .table_render_wrapper table td{
     padding: 0;
+    border-bottom: 1px solid rgb(188, 188, 188);
 }
-.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr{
-    border-bottom: 1px solid #d0d0d0;
+.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr.studies{
     transition: .2s ease-in;
-    cursor: default;
-}
-.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr:hover{
-  background-color: #ececec;
+    cursor: pointer;
 }
 
-.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr:active{
-    background-color: #bebebe;
-  }
+.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr.studies td i{
+   position: relative;
+   z-index: 99;
+}
+
+.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr.studies:hover,
+.documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr.studies.active{
+  background-color: #b7d3ff !important;
+}
 
 .documents_wrapper .table_wrapper .table_render_wrapper table tbody #tbl_row_placeholder.hide{
    display: none;

@@ -40,23 +40,21 @@
       <div class="table_wrapper">
         <div class="search_options">
           <div class="filter_wrapper">
-            <div class="document_type_wrapper">
-              <span>Document type: </span>
-              <select id="document_type">
-                <option value="all">All</option>
-                <?php
-                    $output = '';
-                    $query = "Select * from tbl_document_types";
-                    $executeQuery = mysqli_query($conn, $query);
-                    while($docType = mysqli_fetch_array($executeQuery)){                        
-                      $output.='<option value="'.$docType[1].'">'.$docType[1].'</option>';
-                    }
-                    echo $output;
-                    
-                ?>
-              </select>
-            </div>
             <input type="text" id="textfield_document_type" placeholder="Search documents..." autocomplete="off">
+            <div class="legends">
+              <div class="box_wrapper">
+                <div class="box bg-success"></div>
+                <span>Accept</span>
+              </div>
+              <div class="box_wrapper">
+                <div class="box bg-danger"></div>
+                <span>Decline</span>
+              </div>
+              <div class="box_wrapper">
+                <div class="box bg-secondary"></div>
+                <span>Pending</span>
+              </div>
+            </div>
           </div>
           <button class="btn btn-sm btn-primary" id="btn_new_document"  data-toggle="modal" data-backdrop="static" data-keyboard="false">Add New Study</button>
         </div>
@@ -66,7 +64,6 @@
               <tr class="text-secondary">
                 <th class="text-center" scope="col">Id</th>
                 <th class="text-center" scope="col">Type</th>
-                <th class="text-center" scope="col">Title</th>
                 <th class="text-center" scope="col">Proponent</th>
                 <th class="text-center" scope="col">Type of Technology</th>
                 <th class="text-center" scope="col">Contact Information</th>
@@ -78,7 +75,7 @@
             </thead>
             <tbody id="tbl_body_documents">
               <tr id="tbl_row_placeholder" class="hide">
-                <td colspan="10">
+                <td colspan="9">
                   <?php
                     include_once '../placeholder.php';
                   ?>
@@ -90,7 +87,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal For Adding New Study -->
     <div class="modal fade" id="modal_document">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -98,18 +95,6 @@
             <h5 class="modal-title" id="exampleModalLabel">New Study</h5>
           </div>
           <div class="modal-body d-flex flex-column">
-                  <select id="tbl_document_type" class="form-control mt-4 mb-3">
-                    <option value="">Document Type</option>
-                      <?php
-                          $query = "Select * from tbl_document_types";
-                          $executeQuery = mysqli_query($conn, $query);
-                          $output1 = '';
-                          while($docType = mysqli_fetch_array($executeQuery)){                        
-                            $output1.='<option value="'.$docType[1].'">'.$docType[1].'</option>';
-                          }
-                          echo $output1;
-                      ?>
-                  </select>
                   <input type="text" id="doc_title" class="form-control my-3" placeholder="Document Title" autocomplete="off">
                   <input type="text" id="proponent" class="form-control my-3" placeholder="Proponent" autocomplete="off">
                   <select id="technology_type" class="form-control my-3">
@@ -127,6 +112,67 @@
         </div>
       </div>
     </div>
+
+   <!-- Modal For Removing Study -->
+    <div class="modal fade" id="modal_delete">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-primary d-block">
+            <h5 class="modal-title" id="exampleModalLabel">Remove Study</h5>
+          </div>
+          <div class="modal-body d-flex flex-column ml-3 mr-2">
+              <div class="d-flex align-items-center mt-2">
+                <i class="fa fa-question-circle mr-2"></i>
+                <span>Are you sure you want to remove this record?</span>
+              </div>
+               <div class="reminder text-danger d-flex justify-content-end w-100 mt-5" style="font-size:13px;">
+                  <i class="fa fa-exclamation-circle mr-2"></i>
+                  <small>Note: Studies that are deleted are move to Archieve Studies.</small>
+               </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="btn_maker_delete">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal For Editing Study -->
+    <div class="modal fade" id="modal_maker_edit">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-primary d-block">
+              <h5 class="modal-title" id="exampleModalLabel">Update Study</h5>
+            </div>
+            <div class="modal-body d-flex flex-column">
+                Edit
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="btn_maker_delete">Save Changes</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+     <!-- Modal For Viewing Status Of Study-->
+     <div class="modal fade" id="modal_maker_study">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-primary d-block">
+              <h5 class="modal-title" id="exampleModalLabel">Status of Study</h5>
+            </div>
+            <div class="modal-body d-flex flex-column">
+                Status
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
 
 
     <script src="../assets/js/main.js"></script>

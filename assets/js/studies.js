@@ -3,13 +3,14 @@ $(document).ready(()=>{
     let apiType = '';
     let arrOfDocuments = [];
     let arrOfInputs = [
-        {id: 'tbl_document_type', value:''},
         {id: 'author', value: user},
         {id: 'doc_title', value:''},
         {id: 'proponent', value:''},
         {id: 'technology_type', value:''},
         {id: 'contact_info', value:''},
         {id: 'file', value:{}},
+        {id: 'status', value:'Pending'},
+        {id: 'color', value:'e3e5e6'},
     ];
     let validationResult = [];
     let spanElement;
@@ -22,10 +23,10 @@ $(document).ready(()=>{
        if(documents.length > 0){
             $('#tbl_body_documents tr.studies').remove();
             documents.map((document, i)=>{
+              const status = document?.status === 'Pending' || document?.status === 'Decline' ? true : false
               const isSameToUser = document?.authors?.toLowerCase() === user.toLowerCase() ? true : false
-              $('#tbl_body_documents').append(`<tr class="studies">
+              $('#tbl_body_documents').append(`<tr class="studies" id="${!status ? document?.status : ''}" style="background: #${document?.bg_color}">
                 <td class="text-center py-3">${i + 1}</td>
-                <td class="text-center py-3">${document?.doc_type}</td>
                 <td class="text-center py-3">${document?.title}</td>
                 <td class="text-center py-3">${document?.proponent}</td>
                 <td class="text-center py-3">${document?.technology_type}</td>
@@ -36,8 +37,8 @@ $(document).ready(()=>{
                 </td>
                 <td class="text-center py-3">${document?.created_at}</td>
                 <td class="text-center py-3" style="font-size:15px;">
-                  <i title="${isSameToUser ? 'Remove' : ''}" id="${document?.id}" style="${isSameToUser? 'cursor:pointer' : 'cursor:not-allowed'}" class="${isSameToUser ? 'btn_remove text-danger' : 'text-secondary'} fa fa-trash mx-3"><i>
-                  <i title="${isSameToUser ? 'Edit' : ''}" id="${document?.id}"   style="${isSameToUser? 'cursor:pointer' : 'cursor:not-allowed'}" class="${isSameToUser ? 'btn_edit text-warning' : 'text-secondary'} fa fa-pencil mx-3"><i>
+                  <i title="${isSameToUser && status? 'Remove' : ''}" id="${document?.id}" style="${isSameToUser && status? 'cursor:pointer' : 'cursor:not-allowed; text-decoration: line-through'}" class="${isSameToUser && status ? 'btn_remove text-danger' : 'text-secondary'} fa fa-trash mx-2"></i>
+                  <i title="${isSameToUser && status? 'Edit' : ''}" id="${document?.id}"   style="${isSameToUser && status? 'cursor:pointer' : 'cursor:not-allowed; text-decoration: line-through'}" class="${isSameToUser && status ? 'btn_edit text-secondary' : 'text-secondary'} fa fa-pencil mx-2"></i>
                 </td>
               </tr>`)
             })
@@ -51,12 +52,32 @@ $(document).ready(()=>{
 
     $(document).on('click', '.btn_remove', (event)=>{
        const { id } = event?.currentTarget
-       alert(id)
+       if(id){
+          $('#modal_delete').modal({
+              backdrop: 'static',
+              keyboard: false,            
+          });
+       }
     })
 
     $(document).on('click', '.btn_edit', (event)=>{
       const { id } = event?.currentTarget
-      
+      if(id){
+        $('#modal_maker_edit').modal({
+            backdrop: 'static',
+            keyboard: false,            
+        });
+      }
+    })
+
+    $(document).on('click', '#tbl_body_documents tr.studies', (event)=>{
+        const { id } = event?.currentTarget
+        if(id){
+          $('#modal_maker_study').modal({
+              backdrop: 'static',
+              keyboard: false,            
+          });
+        }
     })
 
 
@@ -75,8 +96,6 @@ $(document).ready(()=>{
           }
        })
     }
-
-    // setInterval(()=>  , 1000)
 
     fetchStudies('get_record_studies');
 
@@ -111,16 +130,6 @@ $(document).ready(()=>{
     const validationMessage = (id, value, status, message) => {
         if (status === 400) {
           switch (id) {
-            case "tbl_document_type": {
-              if (!value) {
-                return {
-                  id,
-                  message: `Document Type is required.`,
-                };
-              } else {
-                return false;
-              }
-            }
             case "doc_title": {
                 if (!value) {
                   return {
