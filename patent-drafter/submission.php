@@ -111,7 +111,7 @@
           </div>
           <div class="modal-body" style="font-size:17px;">
             <i class="fa fa-question-circle text-secondary mr-1"></i>
-            <span>Are you sure you want to accept this decline?</span>
+            <span>Are you sure you want to decline this record?</span>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
