@@ -16,6 +16,8 @@ $(document).ready(() => {
   let isSubmit = false;
   const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
+  setTimeout(()=> $('#email').focus(), 1000);
+
   const onChangeInput = (id, value) => {
     arrOfInputs = arrOfInputs.map((input) =>
       input.id === id ? { ...input, value } : input

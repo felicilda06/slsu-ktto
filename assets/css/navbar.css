@@ -68,6 +68,7 @@
 
  .navbar_wrapper nav ul li#dashboard.active,
  .navbar_wrapper nav ul li#log.active,
+ .navbar_wrapper nav ul li#archive.active,
  .navbar_wrapper nav ul li#submission.active,
  .navbar_wrapper nav ul li#studies.active{
     background-color: #06477b;

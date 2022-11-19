@@ -3,17 +3,11 @@
 <head>
     <?php
        include '../dependencies.php';
-      session_start();
+       session_start();
 
-      $user = $_SESSION['usertype'];
+    ?>
 
-      if(empty($user) || $user != 'patent drafter'){
-          header('Location: ../sign-in.php');
-          return;
-      }
-    ?> 
-
-    <link rel="icon" href="../assets/images/logo.png" type="image/icon type">
+    <link rel="icon" href="../assets/images/logo.png" type="image/icon">
 
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/loader.css">
@@ -35,6 +29,7 @@
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
+
 
 </body>
 

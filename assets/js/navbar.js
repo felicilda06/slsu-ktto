@@ -33,6 +33,10 @@ $(document).ready(()=>{
             active: false
           },
           {
+            id: 'archive',
+            active: false
+          },
+          {
             id: 'studies',
             active: false
           }
