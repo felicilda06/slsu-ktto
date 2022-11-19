@@ -89,13 +89,39 @@
           <div class="modal-header bg-primary d-block">
             <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
           </div>
-          <div class="modal-body" style="font-size:17px;">
-            <i class="fa fa-question-circle text-secondary mr-1"></i>
-            <span>Are you sure you want to accept this record?</span>
+          <div class="modal-body" style="font-size:14px;">
+            <div class="input">
+              <span>Formality Exam Result</span>
+              <input type="file" class="form-control mt-1">
+            </div>
+            <div class="input mt-4">
+              <span>Acknowledgement Reciept from IPOPHIL</span>
+              <input type="file" class="form-control mt-1">
+            </div>
+            <div class="input mt-4">
+              <span>Notice of Withdrawal Application</span>
+              <input type="file" class="form-control mt-1">
+            </div>
+            <div class="input mt-4">
+              <span>Notice of Publication</span>
+              <input type="file" class="form-control mt-1">
+            </div>
+            <div class="input mt-4">
+              <span>Certification</span>
+              <input type="file" class="form-control mt-1">
+            </div>
+            <div class="input mt-4">
+              <span>Log Submission Status</span>
+              <input type="file" class="form-control mt-1">
+            </div>
+            <div class="input mt-4">
+              <span>Response</span>
+              <input type="file" class="form-control mt-1">
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Accept</button>
+            <button type="button" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </div>
