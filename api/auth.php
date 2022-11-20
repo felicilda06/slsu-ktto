@@ -29,6 +29,7 @@ if ($apiType == 'login') {
             $_SESSION['usertype'] = $user->usertype;
             $_SESSION['name'] = $user->name;
             $_SESSION['email'] = $_POST['email'];
+            $_SESSION['user_id'] = $user->userId;
             echo json_encode($response);
         }
     }

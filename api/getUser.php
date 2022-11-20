@@ -9,6 +9,7 @@ class User
     public $message;
     public $usertype;
     public $name;
+    public $userId;
 }
 
 class ResponseMessage
@@ -17,6 +18,7 @@ class ResponseMessage
     public $message;
     public $usertype;
     public $name;
+    public $userId;
 }
 
 
@@ -56,6 +58,7 @@ function checkIfEmailExist($email)
         $user->password = $userDetails['password'];
         $user->usertype = $userDetails['usertype'];
         $user->name = $userDetails['name'];
+        $user->userId = $userDetails['id'];
         return $user;
     }
 }
