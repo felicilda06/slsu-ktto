@@ -91,10 +91,14 @@
             <h5 class="modal-title" id="exampleModalLabel">Accept New Study</h5>
           </div>
           <div class="modal-body" style="font-size:14px;">
-            <input type="text" id="maker_id" class="d-none">
-            <div class="input">
+             <input type="text" id="maker_id" class="d-none">
+             <div class="d-flex justify-content-end align-items-center text-success w-100 mb-2 hide" id="notification">
+                <i class="fa fa-check-circle mr-2"></i>
+                <span style="font-size: 13px;" id="notification_message">Message</span>
+             </div>
+            <div class="input" id="formality" data-title="Formality Exam Result">
               <div class="d-flex justify-content-between" id="label_wrapper">
-                <span>Formality Exam Result</span>
+                <span style="font-size: 14px;">Formality Exam Result</span>
                 <span id="formality" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
               </div>
               <div class="input_wrapper d-flex align-items-center">
@@ -105,7 +109,7 @@
                 </div>
               </div>
             </div>
-            <div class="input mt-4">
+            <div class="input mt-4" id="acknowledgement" data-title="Acknowledgement Reciept">
               <div class="d-flex justify-content-between" id="label_wrapper">
                 <span>Acknowledgement Reciept from IPOPHIL</span>
                 <span id="acknowledgement" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
@@ -118,7 +122,7 @@
                 </div>
               </div>
             </div>
-            <div class="input mt-4">
+            <div class="input mt-4" id="withdrawal" data-title="Notice of Withdrawal">
               <div class="d-flex justify-content-between" id="label_wrapper">
                 <span>Notice of Withdrawal Application</span>
                 <span id="withdrawal" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
@@ -131,7 +135,7 @@
                 </div>
               </div>
             </div>
-            <div class="input mt-4">
+            <div class="input mt-4" id="publication" data-title="Notice of Publication">
               <div class="d-flex justify-content-between" id="label_wrapper">
                 <span>Notice of Publication</span>
                 <span id="publication" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
@@ -144,7 +148,7 @@
                 </div>
               </div>
             </div>
-            <div class="input mt-4">
+            <div class="input mt-4" id="certification" data-title="Certification">
               <div class="d-flex justify-content-between" id="label_wrapper">
                 <span>Certification</span>
                 <span id="certification" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
@@ -157,7 +161,7 @@
                 </div>
               </div>
             </div>
-            <div class="input mt-4">
+            <div class="input mt-4" id="log_submission" data-title="Log Submission Status">
               <div class="d-flex justify-content-between" id="label_wrapper">
                 <span>Log Submission Status</span>
                 <span id="log_submission" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
@@ -170,7 +174,7 @@
                 </div>
               </div>
             </div>
-            <div class="input mt-4">
+            <div class="input mt-4" id="response" data-title="Response">
               <div class="d-flex justify-content-between" id="label_wrapper">
                 <span>Response</span>
                 <span id="response" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
@@ -200,11 +204,12 @@
             <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
           </div>
           <div class="modal-body" style="font-size:17px;">
-            <i class="fa fa-question-circle text-secondary mr-1"></i>
-            <span>Are you sure you want to decline this record?</span>
+            <input type="text" id="maker_id" class="d-none">
+             <span style="font-size:14px;">Feedback: <small class="ml-1 text-danger" style="font-size:12px;">(This field is required.)</small></span>
+             <textarea id="feedback" cols="30" rows="5" class="form-control mt-2" placeholder="Type something..."></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" id="btn_cancel_accept" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-primary">Submit</button>
           </div>
         </div>

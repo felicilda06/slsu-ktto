@@ -7,7 +7,7 @@
       $executeQuery = mysqli_query($conn, $query);
       
       if(mysqli_num_rows($executeQuery) > 0){
-         return true;
+        return true;
       }else{
          return false;
       }
@@ -19,26 +19,28 @@
       mysqli_query($conn, $query);
    }
 
-   function saveNewDocument($file, $maker_id, $patent_id, $query, $status, $color){
-    global $conn;
+   function saveNewDocument($file, $maker_id, $patent_id, $query, $status, $color, $queryUpdate, $removeFile, $fileName){
+     global $conn;
      $isExist = isDocumentExist($maker_id, $patent_id);
 
-     if($isExist){
-         
-     }else{
-         $document = $file['name'];
-         $document_tmp_name = $file['tmp_name'];
-         $documentPath = '../files/'.'formality_result_'.$maker_id.'_'.$document;
-         move_uploaded_file($document_tmp_name, $documentPath);
-         $executeQuery =  mysqli_query($conn, $query);
+     $document_tmp_name = $file['tmp_name'];
+     $documentPath = '../files/'.$fileName;
+     move_uploaded_file($document_tmp_name, $documentPath);
 
-         if($executeQuery){
-            updateStatusOfStudy($maker_id, $status, $color);
-            echo '1';
-         }else{
-            echo `0`;
-         }
-         
-     }
+     try{
+         if($isExist){
+            mysqli_query($conn, $queryUpdate);
+            unlink('../files/'.$removeFile);
+      }else{
+            
+            $executeQuery =  mysqli_query($conn, $query);
+            if($executeQuery){
+               updateStatusOfStudy($maker_id, $status, $color);
+               echo '1';
+            }else{
+               echo `0`;
+            } 
+      }
+     }catch(Exception $e){}
    }
 ?>

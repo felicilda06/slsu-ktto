@@ -43,6 +43,8 @@ $(document).ready(()=>{
                     </a>
                     <i title="Accept" id="${study?.id}" class="btn_accept fa fa-check mx-2 text-success" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                     <i title="Decline" id="${study?.id}" class="btn_decline fa fa-times mx-2 text-danger" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                    <i title="Comments" class="fa fa-comments text-info mr-2"></i>
+                    <i title="Edit" class="fa fa-pencil text-warning"></i>
                 </td>
               </tr>`)
             })
@@ -61,6 +63,7 @@ $(document).ready(()=>{
           cache:false,
           data: {
             api,
+            status: 'Pending',
             technology_type: type_of_technology
           },
           success: (res)=>{
@@ -192,7 +195,7 @@ $(document).ready(()=>{
           processData: false,
           contentType: false,
           success: (res)=>{
-            console.log(res);
+            console.log(res, `res`);
           },
           error: (err)=>{
             console.log(`Error`, err);
@@ -211,8 +214,17 @@ $(document).ready(()=>{
 
       $(`.input_wrapper .icon_wrapper i.btn_save#${input.id}`).click((event)=>{
           const { id } = event?.currentTarget
-          saveDocument(id)
+          const dataTitle = $(`.input#${input.id}`).attr('data-title')
+
+          if(hasError) return
+          $(`.input#${input.id}`).addClass('hide')
+          $('#notification').removeClass('hide');
+          $(`#notification_message`).text(`${dataTitle} is now successfully added.`)
           $('#btn_done_accept_modal').removeAttr('disabled');
+          $('#btn_close_accept_modal').prop('disabled', true)
+          saveDocument(id)
+
+          setTimeout(()=> $('#notification').addClass('hide'), 3200)
       })
 
       $(`.input_wrapper .icon_wrapper i.btn_cancel#${input.id}`).click((event)=>{
@@ -242,6 +254,10 @@ $(document).ready(()=>{
     })
 
     $('#btn_done_accept_modal').click(()=>{
-      alert()
+      getListOfStudies('get_list_of_studies');
+    })
+
+    $('#btn_cancel_accept').click(()=>{
+       $('#feedback').val('')
     })
 })

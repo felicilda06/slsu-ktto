@@ -110,3 +110,6 @@
     text-decoration: line-through;
     pointer-events: none;
 }
+.modal .modal-dialog .modal-content .modal-body #notification{
+    transition: .2s ease-in-out !important;
+}
