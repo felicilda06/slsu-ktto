@@ -40,7 +40,7 @@
       <div class="table_wrapper">
         <div class="search_options">
           <div class="filter_wrapper">
-            <input type="text" id="textfield_document_type" placeholder="Search documents..." autocomplete="off">
+            <input type="text" id="textfield_document_type" placeholder="Search documents..." autocomplete="off" class="form-control">
             <div class="legends">
               <div class="box_wrapper">
                 <div class="box bg-success"></div>

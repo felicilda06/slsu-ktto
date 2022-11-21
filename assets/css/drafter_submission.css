@@ -92,6 +92,13 @@
 .submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies tr td i{
     cursor: pointer;
 }
+
+.submission_wrapper .tbl_drafter_studies_wrapper #tbl_studies #tbl_body_drafter_studies tr td i.disable{
+    cursor: not-allowed !important;
+    text-decoration: line-through;
+    color: #acacac !important;
+}
+
 .modal .modal-dialog .modal-content .modal-body .input .input_wrapper input{
     cursor: default !important;
 }

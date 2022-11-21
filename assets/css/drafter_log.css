@@ -1,0 +1,52 @@
+.drafter_log_wrapper{
+    width: 100%;
+    height: 100%;
+}
+.drafter_log_wrapper input#log_filter{
+    width: 225px;
+}
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper{
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    overflow: auto;
+    border: 1px solid #d8d8d8;
+}
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper::-webkit-scrollbar{
+    width: 8px;
+}
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper::-webkit-scrollbar-track{
+    background: #d8d8d8;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper::-webkit-scrollbar-thumb{
+    background: rgb(182, 182, 182);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper::-webkit-scrollbar-thumb:hover{
+    background: rgb(193, 193, 193);
+}
+
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies{
+    position: absolute;
+    top: 0;
+    height: 0;
+    width: 100%;
+    height: auto;
+}
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tr.mounted{
+    transition: .2s ease-in;
+    cursor: pointer;
+}
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tr.mounted:hover{
+    background-color: #e5e5e5 !important;
+}

@@ -1,6 +1,7 @@
 <?php
     include '../api/connection.php';
     include '../api/utils.php';
+    include_once '../api/feedback.php';
     global $conn;
 
     $api = $_POST['api'];
@@ -8,7 +9,7 @@
     if(isset($api)){
       if($api === 'get_list_of_studies'){
         $technology_type = $_POST['technology_type'];
-        $query = "Select * from tbl_studies where technology_type = '".$technology_type."' and status = '".$_POST['status']."'";
+        $query = "Select * from tbl_studies where technology_type = '".$technology_type."' and status = 'Pending' or status = 'Decline'";
         $executeQuery = mysqli_query($conn, $query);
 
         $rows = array();
@@ -115,7 +116,22 @@
         }else{
           saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], $query, $_POST['status'], $_POST['color'], '', '', $fileName);
         }
-      }
+      } else if($api === 'accept_study_new_comment'){
+          $maker_id = $_POST['maker_id'];
+          $feedback = $_POST['feedback'];
+          $query = "Update tbl_studies set is_new_uploaded = 1 where id = '".$maker_id."'";
+          $executeQuery = mysqli_query($conn, $query);
+          newFeedback($maker_id, $_POST['patent_id'],$feedback);
+       } else if($api === 'accepted_studies'){
+          $query = "Select * from tbl_studies where status = 'Accept' and technology_type = '".$_POST['technology_type']."'";
+          $executeQuery = mysqli_query($conn, $query);
+
+          $rows_array = array();
+          while($r = mysqli_fetch_assoc($executeQuery)) {
+              $rows_array[] = $r;
+          }
+          echo json_encode($rows_array);
+       }
     }else{
       return;
     }

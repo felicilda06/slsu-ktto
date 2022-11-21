@@ -1,0 +1,29 @@
+.drafter_studies_wrapper{
+    width: 100%;
+    height: 75vh;
+}
+.drafter_studies_wrapper .drafter_studies_filter input{
+    width: 210px;
+}
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper{
+    border: 1px solid #d3d3d3;
+    font-size: 13px;
+}
+
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper #tbl_patent_drafter_studies tbody tr{
+    cursor: default;
+    transition: .2s ease-in;
+}
+
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper #tbl_patent_drafter_studies tbody tr:hover{
+    background-color: #e5e5e5;
+}
+
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper #tbl_patent_drafter_studies tbody tr i{
+    cursor: pointer;
+}
+
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper #tbl_patent_drafter_studies tbody tr i:hover{
+    color: #1437b6 !important;
+}
+

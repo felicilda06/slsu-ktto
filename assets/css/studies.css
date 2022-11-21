@@ -51,11 +51,8 @@
 }
 
 .documents_wrapper .table_wrapper .search_options .filter_wrapper #textfield_document_type{
-    outline: none;
-    border: none;
-    letter-spacing: .5px;
-    width: 270px;
-    border-bottom: 1px solid #535353;
+    width: 225px;
+    font-size: 13px;
 }
 .documents_wrapper .table_wrapper .search_options .filter_wrapper #document_type{
     outline: none;

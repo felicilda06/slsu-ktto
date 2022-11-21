@@ -190,7 +190,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" id="btn_close_accept_modal" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-            <button type="button" id="btn_done_accept_modal" class="btn btn-success btn-sm" data-dismiss="modal" disabled>Done</button>
+            <button type="button" id="btn_done_accept_modal" class="btn btn-success btn-sm" disabled>Done</button>
           </div>
         </div>
       </div>
@@ -205,12 +205,34 @@
           </div>
           <div class="modal-body" style="font-size:17px;">
             <input type="text" id="maker_id" class="d-none">
-             <span style="font-size:14px;">Feedback: <small class="ml-1 text-danger" style="font-size:12px;">(This field is required.)</small></span>
+             <span style="font-size:14px;">Feedback: <small class="ml-1" style="font-size:12px; color: #f5c81f;"><i class="fa fa-exclamation-circle mr-1"></i>This field is required.</small></span>
              <textarea id="feedback" cols="30" rows="5" class="form-control mt-2" placeholder="Type something..."></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" id="btn_cancel_accept" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal For Uploading New Document For Maker Study -->
+    <div class="modal fade" id="modal_upload_new_document" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-primary d-block">
+            <h5 class="modal-title" id="exampleModalLabel">Upload New Document</h5>
+          </div>
+          <div class="modal-body" style="font-size:17px;">
+             <input type="text" id="maker_id" class="d-none">
+             <input type="text" id="uploaded_id" class="d-none">
+             <input type="file" class="form-control my-3" id="new_file">
+             <span style="font-size:13px;">Feedback: <span style="font-size:11px;">(Optional)</span></span>
+             <textarea id="feedback_move" cols="30" rows="5" class="form-control mt-2" placeholder="Type something..." value="This study is now submitted to IPOPHIL.">This study is now submitted to IPOPHIL.</textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="btn_cancel_upload_document" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" id="btn_save_upload_document" class="btn btn-primary">Submit</button>
           </div>
         </div>
       </div>

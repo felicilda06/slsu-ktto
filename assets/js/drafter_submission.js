@@ -25,6 +25,7 @@ $(document).ready(()=>{
         if(studies.length > 0){
             $('#tbl_body_drafter_studies tr.studies').remove();
             studies.map((study, i)=>{
+               const is_new_uploaded = study?.is_new_uploaded !== '0' ? true : false
               $('#tbl_body_drafter_studies').append(`<tr class="studies">
                 <td class="text-center py-3">${i + 1}</td>
                 <td class="text-center py-3">${study?.title}</td>
@@ -34,17 +35,17 @@ $(document).ready(()=>{
                 <td class="text-center py-3">${study?.file}</td>
                 <td class="text-center py-3">${study?.authors}</td>
                 <td class="text-center py-3">${study?.created_at}</td>
-                <td class="text-center py-3" style="font-size:14px;">
+                <td class="text-center py-3 align-items-center" style="font-size:14px;">
                     <a href='#' class="btn_view" id="${study?.file}" style='text-decoration:none;'>
                         <i title="View" class="fa fa-external-link mx-2 text-secondary"></i>
                     </a>
                     <a href='../uploads/${study?.file}' download style='text-decoration:none;'>
                         <i title="Download" class="fa fa-download mx-2 text-primary"></i>
                     </a>
-                    <i title="Accept" id="${study?.id}" class="btn_accept fa fa-check mx-2 text-success" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                    <i title="Upload" id="${study?.id}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
+                    <i title="Accept" id="${study?.id}" class="fa fa-check mx-2 text-success ${is_new_uploaded ? 'btn_accept' :'disable'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                     <i title="Decline" id="${study?.id}" class="btn_decline fa fa-times mx-2 text-danger" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
-                    <i title="Comments" class="fa fa-comments text-info mr-2"></i>
-                    <i title="Edit" class="fa fa-pencil text-warning"></i>
+                   
                 </td>
               </tr>`)
             })
@@ -63,7 +64,6 @@ $(document).ready(()=>{
           cache:false,
           data: {
             api,
-            status: 'Pending',
             technology_type: type_of_technology
           },
           success: (res)=>{
@@ -92,6 +92,15 @@ $(document).ready(()=>{
       isFiltered = true;
       renderTable(inputFiltered)
     })
+
+    $(document).on('click', '.btn_upload', (event)=>{
+      const { id } = event?.currentTarget
+        $('#maker_id').val(id)
+        $('#modal_upload_new_document').modal({
+            backdrop: 'static',
+            keyboard: false,            
+       });
+    })
     
     $(document).on('click', '.btn_view', (event)=>{
         const { id } = event?.currentTarget
@@ -102,6 +111,35 @@ $(document).ready(()=>{
         }else{
             // window.open(`${baseURL}${id}`);
         }
+    })
+
+    $('#btn_cancel_upload_document').click(()=>{
+       $('#new_file').val('')
+    })
+
+    $('#btn_save_upload_document').click(()=>{
+        apiType = 'accept_study_new_comment'
+        formData.append('api', apiType)
+        formData.append('maker_id', $('#maker_id').val())
+        formData.append('patent_id', userId)
+        formData.append('feedback', $('#feedback_move').val())
+
+        $.ajax({
+           url: '.././api/drafter.php',
+           type: 'POST',
+           cache: false,
+           data: formData,
+           processData: false,
+           contentType: false,
+           success: (res)=>{
+              console.log(res);
+              getListOfStudies('get_list_of_studies');
+              $('#modal_upload_new_document').modal('hide');
+           },
+           error: (err)=>{
+            console.log(`Error`, err);
+           }
+        })
     })
 
     $(document).on('click', '.btn_accept', (event)=>{
@@ -254,6 +292,7 @@ $(document).ready(()=>{
     })
 
     $('#btn_done_accept_modal').click(()=>{
+      $('#modal_accept').modal('hide')
       getListOfStudies('get_list_of_studies');
     })
 
