@@ -16,10 +16,12 @@
 
 #message-container.error {
     right: 0%;
+    z-index: 20;
 }
 
 #message-container.success {
     right: 0%;
+    z-index: 20;
 }
 
 #message-container span {

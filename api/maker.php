@@ -22,7 +22,7 @@
         $filepath = '../uploads/'.$_FILES['file']['name'];
         move_uploaded_file($file_tmp_name, $filepath);
         
-        $query = "Insert into tbl_studies values ('', '".$title."', '".$proponent."', '".$technology_type."', '".$contact_info."', '".$file."', '".$author."', '".$created_at."', '".$status."', '".$color."')";
+        $query = "Insert into tbl_studies values ('', '".$title."', '".$proponent."', '".$technology_type."', '".$contact_info."', '".$file."', '".$author."', '".$created_at."', '".$status."', '".$color."', 0)";
         $executeQuery = mysqli_query($conn, $query);
 
         $response = new Response();
@@ -32,7 +32,7 @@
           $response->message = 'New Study Successfully Added.';
         }else{
           $response->status_code = 500;
-          $response->message = 'Something went wrong in saveing data.';
+          $response->message = 'Something went wrong in saving data.';
         }
         echo json_encode($response);
 

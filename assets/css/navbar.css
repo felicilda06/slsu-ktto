@@ -58,7 +58,7 @@
 .navbar_wrapper nav ul li.menu{
    border-radius: 3px;
    padding: 5px 10px;
-   z-index: 99;
+   z-index: 10;
    position: relative;
 }
 

@@ -17,6 +17,7 @@ $(document).ready(()=>{
     let timeOut;
     let messages = [];
     let isSubmit = false;
+    console.log(arrOfInputs, `arrOfInputs`);
 
 
     const renderTable = (documents = [])=>{
@@ -282,7 +283,7 @@ $(document).ready(()=>{
         if(hasNoError.length){
             message_func(messages);
         }else{
-           arrOfInputs.map(arr=> arr.id !== 'file' ? formData.append(`${arr.id}`, `${arr.value}`): formData.append(`${arr.id}`, arr.value[0]))
+           arrOfInputs.map(arr=> arr.id !== 'file' ? formData.append(`${arr.id}`, arr?.value): formData.append(`${arr.id}`, arr?.value[0]))
            formData.append('api', apiType)
            formData.append('created_at', created_at)
           
