@@ -116,7 +116,7 @@
                           <option value=""></option>
                           <?php
                             $option = '';
-                            $query1 = "Select title from tbl_studies where technology_type = '".$type_of_technology."' and status != 'Accept'";
+                            $query1 = "Select title from tbl_studies where technology_type = '".$type_of_technology."' and status = 'Accept'";
                             $executeQuery = mysqli_query($conn, $query1);
                             while($r = mysqli_fetch_array($executeQuery)){
                                 $option.='
