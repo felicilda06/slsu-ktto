@@ -131,6 +131,23 @@
               $rows_array[] = $r;
           }
           echo json_encode($rows_array);
+       } else if($api === 'insert_new_log_submission'){
+          $query = "Insert into tbl_log_submission values ('', '".$_POST['application_no']."', '".$_POST['title']."', '".$_POST['creator']."', '".$_POST['ip_type']."', '".$_POST['college']."', '".$_POST['dragon_pay']."', '".$_POST['application_date']."', '".$_POST['agent']."', '".$_POST['drafter']."', '".$_POST['document_where_about']."', '".$_POST['publication_date']."', '".$_POST['publication_vol']."', '".$_POST['publication_no']."', '".$_POST['registration_date']."', '".$_POST['registration_date_vol']."', '".$_POST['registration_date_no']."', '".$_POST['examiner']."', '".$_POST['status']."', '".$_POST['remark_1']."', '".$_POST['remark_2']."', '".$_POST['office_remark']."', '".$_POST['action_step_1']."', '".$_POST['action_step_2']."', '".$_POST['certificate_office']."')";
+          $executeQuery = mysqli_query($conn, $query);
+          if($executeQuery){
+            echo 1;
+          }else{
+            echo 0;
+          }
+       } else if($api === 'get_list_of_log_submission'){
+          $query = "Select * from tbl_log_submission";
+          $executeQuery = mysqli_query($conn, $query);
+          $arrLog = array();
+
+          while($r = mysqli_fetch_assoc($executeQuery)) {
+            $arrLog[] = $r;
+          }
+          echo json_encode($arrLog);
        }
     }else{
       return;

@@ -3,19 +3,22 @@
     height: 100%;
 }
 .drafter_log_wrapper input#log_filter{
-    width: 225px;
+    width: 275px;
 }
 
 .drafter_log_wrapper .tbl_drafter_log_wrapper{
     position: relative;
     width: 100%;
     height: 65vh;
-    overflow: auto;
-    border: 1px solid #d8d8d8;
+    overflow-y: auto;
+    border-bottom: 1px solid #a9a9a9;
+    border-left: 1px solid #a9a9a9;
+    border-right: 1px solid #a9a9a9;
 }
 
 .drafter_log_wrapper .tbl_drafter_log_wrapper::-webkit-scrollbar{
     width: 8px;
+    height: 8px;
 }
 
 .drafter_log_wrapper .tbl_drafter_log_wrapper::-webkit-scrollbar-track{
@@ -42,6 +45,10 @@
     width: 100%;
     height: auto;
 }
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tr td{
+    padding: 0;
+}
+
 .drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tr.mounted{
     transition: .2s ease-in;
     cursor: pointer;
@@ -49,4 +56,34 @@
 
 .drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tr.mounted:hover{
     background-color: #e5e5e5 !important;
+}
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies thead tr th{
+    width: 1px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #a9a9a9;
+    font-size: 12px !important;
+    cursor: default;
+    transition: .2s ease-in;
+    background-color: #d3d3d3 !important;
+}
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies thead tr th:hover{
+    background-color: #e5e5e5 !important;
+}
+
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tbody tr{
+    border: 1px solid #a9a9a9;
+    transition: .2s ease-in;
+    font-size: 13px;
+    cursor: zoom-in !important;
+}
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tbody tr:hover{
+    background-color: #606060 !important;
+    color: #eeeeee;
+}
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tbody tr td{
+    padding: 0;
+    border: 1px solid #a9a9a9 !important;
 }
