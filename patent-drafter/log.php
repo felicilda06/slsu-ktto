@@ -261,6 +261,170 @@
     </div>
 
 
+     <!-- Modal For Editing Record for Log Submission -->
+     <div class="modal fade" id="modal_drafter_log_update" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-primary d-block">
+            <h5 class="modal-title" id="exampleModalLabel">Update Record</h5>
+          </div>
+          <div class="modal-body relative" style="font-size:13px;">
+              <div class="" id="updt_form_log_1">
+                  <div class="input d-flex mt-3">
+                      <div class="input_wrapper w-100 mx-2">
+                        <span>Application Number</span>
+                        <input type="text" class="form-control" id="updt_application_no" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                        <span>Title</span>
+                        <select id="updt_title" class="form-control">
+                          <?php
+                            $option = '';
+                            $query1 = "Select title from tbl_studies where technology_type = '".$type_of_technology."' and status = 'Accept'";
+                            $executeQuery = mysqli_query($conn, $query1);
+                            while($r = mysqli_fetch_array($executeQuery)){
+                                $option.='
+                                  <option value="'.$r['title'].'">'.$r['title'].'</option>
+                                ';
+                            }
+
+                           echo $option;
+                          ?>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Creator(s)</span>
+                          <input type="text" class="form-control mx-2" placeholder="" id="updt_creator" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>IP Type</span>
+                          <select id="updt_ip_type" class="form-control">
+                            <option value="INV">INV</option>
+                            <option value="UM">UM</option>
+                          </select>
+                      </div>  
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>College</span>
+                            <input type="text" class="form-control" placeholder="" id="updt_college" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Dragon Pay Code</span>
+                          <input type="text" class="form-control" placeholder="" id="updt_dragon_pay" autocomplete="off">
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>Application Date</span>
+                            <input type="date" class="form-control" placeholder="" id="updt_application_date">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Agent</span>
+                          <input type="text" class="form-control" placeholder="" id="updt_agent" autocomplete="off">
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>Drafter</span>
+                            <input type="text" class="form-control" placeholder="" id="updt_drafter" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Document Where Abouts</span>
+                          <input type="text" class="form-control" placeholder="" id="updt_document_where_about" autocomplete="off">
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>Publication Date</span>
+                            <input type="date" class="form-control" placeholder="" id="updt_publication_date">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Vol.</span>
+                          <input type="number" class="form-control" placeholder="" id="updt_publication_vol" autocomplete="off">
+                      </div>
+                  </div>
+              </div>
+              <div class="hide" id="updt_form_log_2">
+                  <div class="input d-flex mt-3">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>No.</span>
+                            <input type="number" class="form-control" placeholder="" id="updt_publication_no" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Registration Date</span>
+                          <input type="date" class="form-control" placeholder="" id="updt_registration_date">
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>Vol.</span>
+                            <input type="number" class="form-control" placeholder="" id="updt_registration_date_vol" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>No.</span>
+                          <input type="number" class="form-control" placeholder="" id="updt_registration_date_no" autocomplete="off">
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Examiner</span>
+                          <input type="text" class="form-control" placeholder="" id="updt_examiner" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Status</span>
+                          <select  id="updt_status" class="form-control">
+                            <option value="Registered">Registered</option>
+                            <option value="Under Substantive Examination">Under Substantive Examination</option>
+                            <option value="Under Formality Examination">Under Formality Examination</option>
+                            <option value="Forfeited">Forfeited</option>
+                            <option value="Published">Published</option>
+                          </select>
+                      </div>   
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>IPOPHL Remarks 1</span>
+                            <input type="text" class="form-control" placeholder="" id="updt_remark_1" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>IPOPHL Remarks 2</span>
+                          <input type="text" class="form-control" placeholder="" id="updt_remark_2" autocomplete="off">
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>Office Remarks</span>
+                            <input type="text" class="form-control" placeholder="" id="updt_office_remark" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Action Steps</span>
+                          <input type="text" class="form-control" placeholder="" id="updt_action_step_1" autocomplete="off">
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>Action Steps 2</span>
+                            <input type="text" class="form-control" placeholder="" id="updt_action_step_2" autocomplete="off">
+                      </div>
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>CERTIFICATE IN OFFICE?</span>
+                          <input type="text" class="form-control" placeholder="" id="updt_certificate_office" autocomplete="off">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="btn_drafter_cancel_update_log" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button type="button" id="btn_drafter_next_update_log" class="btn btn-primary" disabled>Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
     <script src="../assets/js/drafter_log_submission.js"></script>

@@ -2,6 +2,7 @@
     include '../api/connection.php';
     include '../api/utils.php';
     include_once '../api/feedback.php';
+    include './response.php';
     global $conn;
 
     $api = $_POST['api'];
@@ -148,6 +149,28 @@
             $arrLog[] = $r;
           }
           echo json_encode($arrLog);
+       } else if($api === 'get_data_of_log_submission'){
+          $query = "Select * from tbl_log_submission where id = '".$_POST['id']."'";
+          $executeQuery = mysqli_query($conn, $query);
+          $arrLog = array();
+
+          while($r = mysqli_fetch_assoc($executeQuery)) {
+            $arrLog[] = $r;
+          }
+          echo json_encode($arrLog);
+       } else if($api === 'update_log_submission'){
+           $res = new Response();
+           $query = "Update tbl_log_submission set application_no = '".$_POST['application_no']."', title = '".$_POST['title']."', creator = '".$_POST['creator']."', ip_type = '".$_POST['ip_type']."', college = '".$_POST['college']."', dragon_pay = '".$_POST['dragon_pay']."', application_date = '".$_POST['application_date']."', agent = '".$_POST['agent']."', drafter = '".$_POST['drafter']."', document_where_about = '".$_POST['document_where_about']."', publication_date = '".$_POST['publication_date']."', publication_vol = '".$_POST['publication_vol']."', publication_no = '".$_POST['publication_no']."', registration_date = '".$_POST['registration_date']."', registration_date_vol = '".$_POST['registration_date_vol']."', registration_date_no = '".$_POST['registration_date_no']."', examiner= '".$_POST['examiner']."', status = '".$_POST['status']."', remark_1 = '".$_POST['remark_1']."', remark_2 = '".$_POST['remark_2']."', office_remark = '".$_POST['office_remark']."', action_step_1 = '".$_POST['action_step_1']."', action_step_2 = '".$_POST['action_step_2']."', certificate_office = '".$_POST['certificate_office']."' where id = '".$_POST['id']."'";
+           $executeQuery = mysqli_query($conn, $query);
+           if($executeQuery){
+              $res->status_code = 200;
+              $res->message = 'Record Successfully Updated.';
+           }else{
+              $res->status_code = 400;
+              $res->message = 'Something went wrong in updating record. Please try again.';
+           }
+
+           echo json_encode($res);
        }
     }else{
       return;

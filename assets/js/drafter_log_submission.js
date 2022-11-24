@@ -30,7 +30,8 @@ $(document).ready(()=>{
     {id: 'action_step_2', value: ''},
     {id: 'certificate_office', value: ''},
   ]
-   
+  let arrOfUpdateDataLogFields = []
+
    let arrOfLogs = []
    const statusColor = [
      {status: 'Registered', color:'#c7fdb5'}, //green
@@ -40,12 +41,12 @@ $(document).ready(()=>{
      {status: 'Forfeited', color:'#fbafa3'} // red
    ]
 
-   const renderTable = (logs = [])=>{
+   const renderTable = (logs = [], activeRow)=>{
      if(logs.length > 0){
         $('#tbl_body_drafter_log  tr.fetch_logs').remove();
         logs.map((log, i)=> {
             const color = statusColor.find(stat=> stat.status ===log?.status)?.color
-            $('#tbl_body_drafter_log').append(`<tr key="${i}" class='fetch_logs' style="background: ${color};">
+            $('#tbl_body_drafter_log').append(`<tr key="${i}" id="${log?.id}" class='fetch_logs ${log?.id === activeRow ? 'selected': ''}' style="background: ${color};">
                 <td class="text-center py-4 px-3">${i + 1}</td>
                 <td class="text-center py-4 px-3">${log?.application_no}</td>
                 <td class="text-center py-4 px-3">${log?.title}</td>
@@ -78,10 +79,97 @@ $(document).ready(()=>{
         $('#tbl_row_placeholder').removeClass('hide')
      }
    }
-   
-   renderTable()
 
-   getListOfLogSubmission = ()=>{
+   $(document).on('click', '#tbl_body_drafter_log  tr.fetch_logs', event=>{
+      const { id } = event?.currentTarget
+      $('#modal_drafter_log_update').modal({
+        backdrop: 'static',
+        keyboard: false,            
+      });
+     
+      apiType = 'get_data_of_log_submission'
+      $.ajax({
+        url: '.././api/drafter.php',
+        type:'POST',
+        cache: false,
+        data: {
+            id,
+            api: apiType
+        },
+        success: (res)=>{
+           const getData = res && JSON.parse(res)
+           Object.entries(getData[0]).map(([key, value])=> {
+             $(`#updt_${key}`).val(value)
+              
+              if($(`#updt_title`).val()){
+                $('#btn_drafter_next_update_log').removeAttr('disabled')
+              }
+           })
+           console.log(getData);
+        },
+        error: (err)=>{
+            console.log(`Error`, err);
+        }
+      })
+      getListOfLogSubmission(id)
+
+   })
+
+
+
+
+
+    $('#btn_drafter_next_update_log').click(event=>{
+        if(event?.currentTarget?.innerText === 'Next'){
+            $('#updt_form_log_2').removeClass('hide')
+            $('#updt_form_log_1').addClass('hide')
+            $('#btn_drafter_next_update_log').text('Save Changes')
+            $('#btn_drafter_next_update_log').css('border', 'none')
+            $('#btn_drafter_cancel_update_log').addClass('bg-secondary')
+            $('#btn_drafter_cancel_update_log').removeClass('bg-danger')
+            $('#btn_drafter_cancel_update_log').css('border', 'none')
+            $('#btn_drafter_cancel_update_log').text('Previous')
+            $('#btn_drafter_cancel_update_log').removeAttr('data-dismiss')
+        }else{
+           apiType = 'update_log_submission'
+           Object.entries(arrOfUpdateDataLogFields[0]).map(([key, value])=> formData.append(key, value ?? ''))
+           formData.append('api', apiType)
+           console.log(arrOfUpdateDataLogFields, `arrOfUpdateDataLogFields`);
+            //    $.ajax({
+            //     url: '.././api/drafter.php',
+            //     type:'POST',
+            //     cache: false,
+            //     data: formData,
+            //     processData: false,
+            //     contentType: false,
+            //     success: (res)=>{
+            //         console.log(res);
+            //         getListOfLogSubmission(undefined)
+            //         $('#modal_drafter_log_update').modal('hide');
+            //     },
+            //     error: (err)=>{
+            //         console.log(`Error`, err);
+            //     }
+            // })
+        }
+    })
+
+    $('#btn_drafter_cancel_update_log').click(event=>{
+        const { innerText } = event?.currentTarget
+        if(innerText === 'Previous'){
+           $('#btn_drafter_cancel_update_log').text('Cancel')
+           $('#btn_drafter_cancel_update_log').removeClass('bg-secondary')
+           $('#btn_drafter_cancel_update_log').addClass('bg-danger')
+           $('#updt_form_log_2').addClass('hide')
+           $('#updt_form_log_1').removeClass('hide')
+           $('#btn_drafter_next_update_log').text('Next')
+        }else{
+            $('#btn_drafter_cancel_update_log').attr('data-dismiss', 'modal')
+            setTimeout(()=> getListOfLogSubmission(undefined), 275)
+        }
+    })
+
+   getListOfLogSubmission = (activeRow)=>{
       apiType = 'get_list_of_log_submission'
       $.ajax({
         url: '.././api/drafter.php',
@@ -92,7 +180,7 @@ $(document).ready(()=>{
         },
         success: (res)=>{
             arrOfLogs = res && JSON.parse(res)
-            renderTable(arrOfLogs);
+            renderTable(arrOfLogs, activeRow);
         },
         error: (err)=>{
             console.log(`Error`, err);
@@ -100,7 +188,7 @@ $(document).ready(()=>{
       })
    }
 
-   getListOfLogSubmission()
+   getListOfLogSubmission(undefined)
    
 
    $('#btn_drafter_new_log').click(()=>{
@@ -133,7 +221,6 @@ $(document).ready(()=>{
                 processData: false,
                 contentType: false,
                 success: (res)=>{
-                    console.log(res);
                     getListOfLogSubmission();
                     $('#modal_drafter_log').modal('hide');
                     arrOfLogFields.map(field=> $(`#${field.id}`).val(''))

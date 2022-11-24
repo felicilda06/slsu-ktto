@@ -9,7 +9,7 @@
 .drafter_log_wrapper .tbl_drafter_log_wrapper{
     position: relative;
     width: 100%;
-    height: 65vh;
+    height: 60vh;
     overflow-y: auto;
     border-bottom: 1px solid #a9a9a9;
     border-left: 1px solid #a9a9a9;
@@ -79,7 +79,8 @@
     font-size: 13px;
     cursor: zoom-in !important;
 }
-.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tbody tr:hover{
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tbody tr:hover,
+.drafter_log_wrapper .tbl_drafter_log_wrapper #tbl_patent_drafter_studies tbody tr.fetch_logs.selected{
     background-color: #606060 !important;
     color: #eeeeee;
 }
