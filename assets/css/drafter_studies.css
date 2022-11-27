@@ -1,6 +1,6 @@
 .drafter_studies_wrapper{
     width: 100%;
-    height: 75vh;
+    height: auto;
 }
 .drafter_studies_wrapper .drafter_studies_filter input{
     width: 210px;
@@ -8,6 +8,17 @@
 .drafter_studies_wrapper .tbl_drafter_studies_wrapper{
     border: 1px solid #d3d3d3;
     font-size: 13px;
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    overflow: auto;
+}
+
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper table{
+    position: absolute;
+    top: 0;
+    height: 0;
+    width: 100%;
 }
 
 .drafter_studies_wrapper .tbl_drafter_studies_wrapper #tbl_patent_drafter_studies tbody tr{
@@ -25,5 +36,31 @@
 
 .drafter_studies_wrapper .tbl_drafter_studies_wrapper #tbl_patent_drafter_studies tbody tr i:hover{
     color: #1437b6 !important;
+}
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper #tbl_patent_drafter_studies tbody tr#tbl_row_placeholder td{
+    padding: 0 !important;
+}
+
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper #tbl_patent_drafter_studies tbody tr.studies td{
+   border-bottom: 1px solid #dbdbdb;
+}
+
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+}
+
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper::-webkit-scrollbar-track{
+    background: #d8d8d8;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper::-webkit-scrollbar-thumb{
+    background: rgb(182, 182, 182);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.drafter_studies_wrapper .tbl_drafter_studies_wrapper::-webkit-scrollbar-thumb:hover{
+    background: rgb(193, 193, 193);
 }
 

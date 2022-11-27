@@ -1,7 +1,6 @@
 <?php
     include '../api/connection.php';
     include '../api/utils.php';
-    include_once '../api/feedback.php';
     include './response.php';
     global $conn;
 
@@ -118,11 +117,43 @@
           saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], $query, $_POST['status'], $_POST['color'], '', '', $fileName);
         }
       } else if($api === 'accept_study_new_comment'){
-          $maker_id = $_POST['maker_id'];
-          $feedback = $_POST['feedback'];
-          $query = "Update tbl_studies set is_new_uploaded = 1 where id = '".$maker_id."'";
-          $executeQuery = mysqli_query($conn, $query);
-          newFeedback($maker_id, $_POST['patent_id'],$feedback);
+        $maker_id = $_POST['maker_id'];
+        $feedback = $_POST['feedback'];
+        $res = new Response();
+
+        try{
+          if(isset($_FILES['new_file'])){
+            $query =  "Select * from tbl_studies where id = '".$maker_id."'";
+            $executeQuery = mysqli_query($conn, $query);
+            $newFile =  $_FILES['new_file'];
+            if(mysqli_num_rows($executeQuery) > 0){
+              $row = mysqli_fetch_assoc($executeQuery);
+              $query = "Update tbl_studies set is_new_uploaded = 1, file = '".$newFile['name']."' where id = '".$maker_id."'";
+              $executeQuery = mysqli_query($conn, $query);
+              unlink('../uploads/'.$row['file']);
+              $document_tmp_name = $newFile['tmp_name'];
+              $documentPath = '../uploads/'.$newFile['name'];
+              move_uploaded_file($document_tmp_name, $documentPath);
+              $res->status_code = 200;
+              $res->message = "This record is now succssully updated and send feedback to maker.";
+              echo json_encode($res);
+            }
+          
+          }else{
+             $query = "Update tbl_studies set is_new_uploaded = 1 where id = '".$maker_id."'";
+             $executeQuery = mysqli_query($conn, $query);
+             $res->status_code = 200;
+             $res->message = "This record is now succssully updated and send feedback to maker.";
+             echo json_encode($res);
+          }
+          sendFeedback($maker_id, $_POST['patent_id'], $feedback);
+
+        }catch(Exception $err){
+          $res->status_code = 400;
+          $res->message = "Something went wrong on updating record. Please try again.";
+          echo json_encode($res);
+        }
+         
        } else if($api === 'accepted_studies'){
           $query = "Select * from tbl_studies where status = 'Accept' and technology_type = '".$_POST['technology_type']."'";
           $executeQuery = mysqli_query($conn, $query);
@@ -175,6 +206,16 @@
            }
 
            echo json_encode($res);
+       } else if($api === 'send_feedback'){
+          $response = new Response();
+          if(sendFeedback($_POST['maker_id'], $_POST['patent_id'], $_POST['feedback'])){
+            $response->status_code = 200;
+            $response->message = "Successfully send a feedback.";
+          }else{
+            $response->status_code = 400;
+            $response->message = "Something went wrong.Please try again.";
+          }
+          echo json_encode($response);
        }
     }else{
       return;

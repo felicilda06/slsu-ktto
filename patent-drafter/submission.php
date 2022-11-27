@@ -102,7 +102,7 @@
                 <span id="formality" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
               </div>
               <div class="input_wrapper d-flex align-items-center">
-                <input type="file" class="form-control mt-1" id="formality">
+                <input type="file" class="form-control mt-1" id="formality" accept="image/*,.doc, .docx, .pdf, .odt">
                 <div class="icon_wrapper d-flex align-items-center ml-3">
                   <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="formality"></i>
                   <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="formality"></i>
@@ -115,7 +115,7 @@
                 <span id="acknowledgement" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
               </div>
               <div class="input_wrapper d-flex align-items-center">
-                <input type="file" class="form-control mt-1" id="acknowledgement">
+                <input type="file" class="form-control mt-1" id="acknowledgement" accept="image/*,.doc, .docx, .pdf, .odt">
                 <div class="icon_wrapper d-flex align-items-center ml-3">
                   <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="acknowledgement"></i>
                   <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="acknowledgement"></i>
@@ -128,7 +128,7 @@
                 <span id="withdrawal" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
               </div>
               <div class="input_wrapper d-flex align-items-center">
-                <input type="file" class="form-control mt-1" id="withdrawal">
+                <input type="file" class="form-control mt-1" id="withdrawal" accept="image/*,.doc, .docx, .pdf, .odt">
                 <div class="icon_wrapper d-flex align-items-center ml-3">
                   <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="withdrawal"></i>
                   <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="withdrawal"></i>
@@ -141,7 +141,7 @@
                 <span id="publication" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
               </div>
               <div class="input_wrapper d-flex align-items-center">
-                <input type="file" class="form-control mt-1" id="publication">
+                <input type="file" class="form-control mt-1" id="publication" accept="image/*,.doc, .docx, .pdf, .odt">
                 <div class="icon_wrapper d-flex align-items-center ml-3">
                   <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="publication"></i>
                   <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="publication"></i>
@@ -154,7 +154,7 @@
                 <span id="certification" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
               </div>
               <div class="input_wrapper d-flex align-items-center">
-                <input type="file" class="form-control mt-1" id="certification">
+                <input type="file" class="form-control mt-1" id="certification" accept="image/*,.doc, .docx, .pdf, .odt">
                 <div class="icon_wrapper d-flex align-items-center ml-3">
                   <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="certification"></i>
                   <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="certification"></i>
@@ -167,7 +167,7 @@
                 <span id="log_submission" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
               </div>
               <div class="input_wrapper d-flex align-items-center">
-                <input type="file" class="form-control mt-1" id="log_submission">
+                <input type="file" class="form-control mt-1" id="log_submission" accept="image/*,.doc, .docx, .pdf, .odt">
                 <div class="icon_wrapper d-flex align-items-center ml-3">
                   <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="log_submission"></i>
                   <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="log_submission"></i>
@@ -180,7 +180,7 @@
                 <span id="response" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
               </div>
               <div class="input_wrapper d-flex align-items-center">
-                <input type="file" class="form-control mt-1" id="response">
+                <input type="file" class="form-control mt-1" id="response" accept="image/*,.doc, .docx, .pdf, .odt">
                 <div class="icon_wrapper d-flex align-items-center ml-3">
                   <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="response"></i>
                   <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="response"></i>
@@ -204,13 +204,13 @@
             <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
           </div>
           <div class="modal-body" style="font-size:17px;">
-            <input type="text" id="maker_id" class="d-none">
-             <span style="font-size:14px;">Feedback: <small class="ml-1" style="font-size:12px; color: #f5c81f;"><i class="fa fa-exclamation-circle mr-1"></i>This field is required.</small></span>
-             <textarea id="feedback" cols="30" rows="5" class="form-control mt-2" placeholder="Type something..."></textarea>
+            <input type="text" id="maker_id_decline" class="d-none">
+             <span style="font-size:14px;">Feedback</span>
+             <textarea id="feedback_decline" cols="30" rows="5" class="form-control mt-2" placeholder="Type something..."></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" id="btn_cancel_accept" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary" id="btn_decline_send_feedback" disabled>Submit</button>
           </div>
         </div>
       </div>
@@ -226,10 +226,11 @@
           <div class="modal-body" style="font-size:17px;">
              <input type="text" id="maker_id" class="d-none">
              <input type="text" id="uploaded_id" class="d-none">
-             <input type="file" class="form-control my-3" id="new_file">
+             <input type="file" class="form-control my-3" id="new_file" accept="image/*,.doc, .docx, .pdf, .odt">
              <span style="font-size:13px;">Feedback: <span style="font-size:11px;">(Optional)</span></span>
-             <textarea id="feedback_move" cols="30" rows="5" class="form-control mt-2" placeholder="Type something..." value="This study is now submitted to IPOPHIL.">This study is now submitted to IPOPHIL.</textarea>
-          </div>
+             <textarea id="feedback_move" cols="30" rows="5" class="form-control mt-2 mb-3" placeholder="Type something..." value="This study is now submitted to IPOPHIL.">This study is now submitted to IPOPHIL.</textarea>
+             <span class="text-success" style="font-size: 12px;">This will help the maker to be notify about his/her study.</span>
+            </div>
           <div class="modal-footer">
             <button type="button" id="btn_cancel_upload_document" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="button" id="btn_save_upload_document" class="btn btn-primary">Submit</button>

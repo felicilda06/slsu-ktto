@@ -11,8 +11,7 @@
                 $user = $_SESSION['usertype'];
                 $output = '<li class="menu" id="log">Log Submission</li>
                 <li class="menu" id="submission">View Submission</li>';
-                $output2 = '<li class="menu" id="archive">Archived Studies</li>
-                <li class="menu" id="feedback">Feedbacks</li>';
+                $output2 = '<li class="menu" id="feedback">Feedbacks</li>';
                 
                 if(isset($user) && $user === 'patent drafter'){
                     echo $output;
@@ -21,7 +20,7 @@
                 }
 
              ?>
-            <li class="menu" id="studies">Research Studies</li>
+            <li class="menu" id="studies">Accepted Studies</li>
             <!-- <li id="chat_menu">
                 <i class="fa fa-comments"></i>
             </li> -->

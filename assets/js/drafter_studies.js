@@ -5,6 +5,7 @@ $(document).ready(()=>{
 
     const renderTable = (studies = [])=>{
        if(studies.length > 0){
+         $('#tbl_drafter_studies tr.studies').remove();
          studies.map((study, i)=>{
                 $('#tbl_drafter_studies').append(`<tr class="studies">
                 <td class="text-center py-3">${i + 1}</td>
@@ -20,9 +21,11 @@ $(document).ready(()=>{
                     <i title="Edit" id="${study?.id}" class="btn_drafter_studies_edit fa fa-pencil-square-o mx-2 text-info" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                 </td>
             </tr>`)
+            $('#tbl_row_placeholder').addClass('hide')
          })
        }else{
-         console.log(`test`);
+          $('#tbl_body_documents tr.studies').addClass('filtered')
+          $('#tbl_row_placeholder').removeClass('hide')
        }
     }
 
@@ -45,7 +48,14 @@ $(document).ready(()=>{
          })
     }
 
-    getAcceptedStudies('accepted_studies')
+   getAcceptedStudies('accepted_studies');
+   setInterval(()=> {
+     if($('#filter_input_accepted').val() || $('#filter_date_accepted').val()){
+      return;
+     }else{
+      getAcceptedStudies('accepted_studies')
+     }
+   }, 3800);
 
     $(document).on('click', '.btn_drafter_studies_edit', (event)=>{
         const { id } = event?.currentTarget
@@ -55,4 +65,29 @@ $(document).ready(()=>{
        });
         
     })
+
+
+    filter_date_accepted
+    $('#filter_input_accepted').change(event=>{
+       const { value } = event?.target
+
+       if(value){
+         const filterByInput = arrOfStudies.filter(studies=> JSON.stringify(studies)?.toLowerCase().match(value?.toLowerCase()))
+         renderTable(filterByInput);
+       }else{
+         renderTable(arrOfStudies);
+       }
+    })
+
+    $('#filter_date_accepted').change(event=>{
+      const { value } = event?.target
+      const date = moment(value).format('MMMM d, y')
+
+      if(value){
+        const filterByDate = arrOfStudies.filter(studies=> studies?.created_at === date)
+        renderTable(filterByDate);
+      }else{
+        renderTable(arrOfStudies);
+      }
+   })
 })

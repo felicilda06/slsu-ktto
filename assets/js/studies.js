@@ -17,8 +17,6 @@ $(document).ready(()=>{
     let timeOut;
     let messages = [];
     let isSubmit = false;
-    console.log(arrOfInputs, `arrOfInputs`);
-
 
     const renderTable = (documents = [])=>{
        if(documents.length > 0){

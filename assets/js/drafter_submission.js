@@ -80,10 +80,14 @@ $(document).ready(()=>{
 
     $('#filter_by_date').change(event=>{
         const { value } = event?.target
-        const date = moment(value).format('MMMM DD, y')
-        const filterByDate = arrOfStudies.filter(studies=> studies?.created_at === date)
-        isFiltered = true;
-        renderTable(filterByDate)
+        if(value){
+          const date = moment(value).format('MMMM DD, y')
+          const filterByDate = arrOfStudies.filter(studies=> studies?.created_at === date)
+          isFiltered = true;
+          renderTable(filterByDate)
+        }else{
+          renderTable(arrOfStudies)
+        }
     })
 
     $('#input_anything').change(event=>{
@@ -123,6 +127,7 @@ $(document).ready(()=>{
         formData.append('maker_id', $('#maker_id').val())
         formData.append('patent_id', userId)
         formData.append('feedback', $('#feedback_move').val())
+        formData.append('new_file', $(`#new_file`)[0].files[0] ?? '')
 
         $.ajax({
            url: '.././api/drafter.php',
@@ -132,9 +137,11 @@ $(document).ready(()=>{
            processData: false,
            contentType: false,
            success: (res)=>{
-              console.log(res);
+              const { status_code, message } = res && JSON.parse(res)
               getListOfStudies('get_list_of_studies');
               $('#modal_upload_new_document').modal('hide');
+              $('#new_file').val('');
+              message_func([{status: status_code, message}]);
            },
            error: (err)=>{
             console.log(`Error`, err);
@@ -152,11 +159,13 @@ $(document).ready(()=>{
        });
     })
 
-    $(document).on('click', '.btn_decline', ()=>{
+    $(document).on('click', '.btn_decline', (event)=>{
+        $('#maker_id_decline').val(event?.currentTarget.id)
         $('#modal_decline').modal({
             backdrop: 'static',
             keyboard: false,            
        });
+
     })
 
     const message_func = (messages = []) => {
@@ -164,34 +173,35 @@ $(document).ready(()=>{
       timeOut = 3500
       messages.map((e) => {
         spanElement = document.createElement("span");
-        if (e?.message) {
-          isSubmit = true;
-          spanElement.innerText = e?.message;
-          spanElement.className = "error";
-          messageContainer.addClass("error");
-          messageContainer.append(spanElement);
-  
-          setTimeout(() => {
-            messageContainer.removeClass("error");
-            isSubmit = false;
-          }, [4000]);
-  
-          setTimeout(() => messageContainer.children().remove(), timeOut);
+        if(e?.status !== 200){
+          if (e?.message) {
+            isSubmit = true;
+            spanElement.innerText = e?.message;
+            spanElement.className = "error";
+            messageContainer.addClass("error");
+            messageContainer.append(spanElement);
+    
+            setTimeout(() => {
+              messageContainer.removeClass("error");
+              isSubmit = false;
+            }, [4000]);
+          }
+        }else{
+            isSubmit = true;
+            spanElement.innerText = e?.message;
+            spanElement.className = "success";
+            messageContainer.addClass("success");
+            messageContainer.append(spanElement);
+    
+            setTimeout(() => {
+              messageContainer.removeClass("success");
+              isSubmit = false;
+            }, [4000]);
         }
+
+        setTimeout(() => messageContainer.children().remove(), timeOut);
       });
     }
-
-    const validationMessage = (_id, _value, status, message) => {
-      if (status === 400) {
-          return {
-            message: message ?? `An error occur in saving data.`,
-          };
-      }else{
-        return {
-          message: message ?? `An error occur in saving data.`,
-        };
-      }
-    };
 
     const pushToArray = (id, value) => {
       const newValue = { id, value };
@@ -297,6 +307,42 @@ $(document).ready(()=>{
     })
 
     $('#btn_cancel_accept').click(()=>{
-       $('#feedback').val('')
+       $('#feedback_decline').val('')
+       $('#btn_decline_send_feedback').attr('disabled', true);
     })
+
+    $('#feedback_decline').change(event=>{
+       const { value } = event?.target
+       if(value){
+         $('#btn_decline_send_feedback').removeAttr('disabled');
+       }else{
+         $('#btn_decline_send_feedback').attr('disabled', true);
+       }
+    })
+
+    $('#btn_decline_send_feedback').click(()=>{
+      apiType = "send_feedback";
+      $.ajax({
+        url: '.././api/drafter.php',
+        type: 'POST',
+        cache: false,
+        data: {
+          api: apiType,
+          patent_id: userId,
+          maker_id: $('#maker_id_decline').val(),
+          feedback: $('#feedback_decline').val()
+        },
+        success: (res)=>{
+           const { status_code, message } = res && JSON.parse(res)
+           $('#feedback_decline').val('')
+           $('#btn_decline_send_feedback').attr('disabled', true);
+           $('#modal_decline').modal('hide');
+           message_func([{status: status_code, message}]);
+        },
+        error: (err)=>{
+         console.log(`Error`, err);
+        }
+      })
+    })
+
 })

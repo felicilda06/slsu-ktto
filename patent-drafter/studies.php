@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="../assets/css/message.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/drafter_studies.css">
+    <link rel="stylesheet" href="../assets/css/placeholder.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
@@ -48,12 +49,8 @@
         <input type="text" class="d-none" value="<?php echo $type_of_technology;?>" id="type_of_technology">
         <div class="wrapper d-flex justify-content-between">
           <div class="drafter_studies_filter d-flex">
-              <input type="date" class="form-control mr-3">
-              <input type="text" class="form-control" placeholder="Type something...">
-          </div>
-          <div class="info d-flex align-items-center pr-2" style="font-size:12px; color:#e8c518;">
-            <i class="fa fa-exclamation-circle mr-2"></i>
-            <span>All visible studies here are already accepted.</span>
+              <input type="date" class="form-control mr-3" id="filter_date_accepted">
+              <input type="text" class="form-control" placeholder="Type something..." id="filter_input_accepted">
           </div>
         </div>
         <div class="tbl_drafter_studies_wrapper mt-4">
