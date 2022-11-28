@@ -216,7 +216,93 @@
             $response->message = "Something went wrong.Please try again.";
           }
           echo json_encode($response);
-       }
+       } else if($api === 'get_list_of_document_by_id'){
+          $query = "Select * from tbl_documents where id = '".$_POST['rowId']."'";
+          $executeQuery = mysqli_query($conn, $query);
+          $arrDocs = array();
+
+          while($r = mysqli_fetch_assoc($executeQuery)) {
+            $arrDocs[] = $r;
+          }
+          echo json_encode($arrDocs);
+       } else if($api === 'formality_result'){
+          $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
+          $executeQuery = mysqli_query($conn, $selectQuery);
+          if(mysqli_num_rows($executeQuery) > 0){
+            $row = mysqli_fetch_assoc($executeQuery);
+            $file = $_FILES['formality_result']['name'];
+            $fileName = 'formality_result_'.$_POST['maker_id'].'_'.$file;
+            $updateQuery = "Update tbl_documents set formality_result = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+            saveNewDocument($_FILES['formality_result'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['formality_result'], $fileName);
+            echo $fileName;
+          }
+       } else if($api === 'acknowledgement_receipt'){
+          $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
+          $executeQuery = mysqli_query($conn, $selectQuery);
+          if(mysqli_num_rows($executeQuery) > 0){
+            $row = mysqli_fetch_assoc($executeQuery);
+            $file = $_FILES['acknowledgement_receipt']['name'];
+            $fileName = 'acknowledgement_receipt_'.$_POST['maker_id'].'_'.$file;
+            $updateQuery = "Update tbl_documents set acknowledgement_receipt = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+            saveNewDocument($_FILES['acknowledgement_receipt'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['acknowledgement_receipt'], $fileName);
+            echo $fileName;
+        }
+      } else if($api === 'notice_of_withdrawal'){
+          $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
+          $executeQuery = mysqli_query($conn, $selectQuery);
+          if(mysqli_num_rows($executeQuery) > 0){
+            $row = mysqli_fetch_assoc($executeQuery);
+            $file = $_FILES['notice_of_withdrawal']['name'];
+            $fileName = 'notice_of_withdrawal_'.$_POST['maker_id'].'_'.$file;
+            $updateQuery = "Update tbl_documents set notice_of_withdrawal = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+            saveNewDocument($_FILES['notice_of_withdrawal'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_withdrawal'], $fileName);
+            echo $fileName;
+        }
+      } else if($api === 'notice_of_publication'){
+          $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
+          $executeQuery = mysqli_query($conn, $selectQuery);
+          if(mysqli_num_rows($executeQuery) > 0){
+            $row = mysqli_fetch_assoc($executeQuery);
+            $file = $_FILES['notice_of_publication']['name'];
+            $fileName = 'notice_of_publication_'.$_POST['maker_id'].'_'.$file;
+            $updateQuery = "Update tbl_documents set notice_of_publication = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+            saveNewDocument($_FILES['notice_of_publication'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_publication'], $fileName);
+            echo $fileName;
+        }
+      } else if($api === 'updt_certification'){
+          $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
+          $executeQuery = mysqli_query($conn, $selectQuery);
+          if(mysqli_num_rows($executeQuery) > 0){
+            $row = mysqli_fetch_assoc($executeQuery);
+            $file = $_FILES['certification']['name'];
+            $fileName = 'certification_'.$_POST['maker_id'].'_'.$file;
+            $updateQuery = "Update tbl_documents set certification = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+            saveNewDocument($_FILES['certification'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['certification'], $fileName);
+            echo $fileName;
+         }
+      } else if($api === 'log_submission_status'){
+          $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
+          $executeQuery = mysqli_query($conn, $selectQuery);
+          if(mysqli_num_rows($executeQuery) > 0){
+            $row = mysqli_fetch_assoc($executeQuery);
+            $file = $_FILES['log_submission_status']['name'];
+            $fileName = 'log_submission_status_'.$_POST['maker_id'].'_'.$file;
+            $updateQuery = "Update tbl_documents set log_submission_status = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+            saveNewDocument($_FILES['log_submission_status'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['log_submission_status'], $fileName);
+            echo $fileName;
+        }
+      } else if($api === 'updt_response'){
+          $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
+          $executeQuery = mysqli_query($conn, $selectQuery);
+          if(mysqli_num_rows($executeQuery) > 0){
+            $row = mysqli_fetch_assoc($executeQuery);
+            $file = $_FILES['response']['name'];
+            $fileName = 'response_'.$_POST['maker_id'].'_'.$file;
+            $updateQuery = "Update tbl_documents set response = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+            $save = saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['response'], $fileName);
+            echo $fileName;
+        }
+      }
     }else{
       return;
     }

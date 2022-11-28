@@ -1,7 +1,18 @@
 $(document).ready(()=>{
     let apiType = '';
     let arrOfStudies = [];
+    let formData = new FormData()
+    let arrOfDocuments = [
+      {id: 'formality_result', value: {}},
+      {id: 'acknowledgement_receipt', value: {}},
+      {id: 'notice_of_withdrawal', value: {}},
+      {id: 'notice_of_publication', value: {}},
+      {id: 'certification', value: {}},
+      {id: 'log_submission_status', value: {}},
+      {id: 'response', value: {}}
+    ]
     const type_of_technology = $('#type_of_technology').val()
+    const patent_id = $('#patent_id').val()
 
     const renderTable = (studies = [])=>{
        if(studies.length > 0){
@@ -57,17 +68,114 @@ $(document).ready(()=>{
      }
    }, 3800);
 
+   const pushToArray = (id, value) => {
+    const newValue = { id, value };
+    const isExist = arrOfDocuments.find((arr) => arr?.id === id);
+
+    if (isExist) {
+      arrOfDocuments = arrOfDocuments.map((arr) =>
+        arr?.id === id ? { ...arr, value } : arr
+      );
+    } else {
+      arrOfDocuments.push(newValue);
+    }
+  };
+
     $(document).on('click', '.btn_drafter_studies_edit', (event)=>{
+        apiType = 'get_list_of_document_by_id'
         const { id } = event?.currentTarget
-        $('#modal_drafter_upload_new_modal').modal({
+        $('#modal_drafter_update_doc_modal').modal({
             backdrop: 'static',
             keyboard: false,            
        });
-        
+       $('#maker_id_update_studies').val(id)
+
+       $.ajax({
+        url: '.././api/drafter.php',
+        type: 'POST',
+        cache:false,
+        data: {
+          rowId: id,
+          api: apiType,
+        },
+        success: (res)=>{
+          const documents = res && JSON.parse(res)
+          Object.entries(documents[0]).map(([key, value])=>{
+             $(`.input_wrapper > input#${key}`).val(value)
+             $(document).on('click', `.fa-pencil#${key}`, (event)=>{
+                const { id } = event?.currentTarget
+                $(`.input_wrapper > input#${id}`).removeAttr('readonly')
+                $(`.input_wrapper > input#${id}`).attr('type', 'file')
+                $(`.input_wrapper .icon_wrapper#${id}`).removeClass('hide')
+                $(`.input_wrapper .fa-pencil#${id}`).addClass('hide')
+             })
+
+             $(document).on('click', `.btn_cancel#${key}`, (event)=>{
+                const { id } = event?.currentTarget
+                $(`.input_wrapper > input#${id}`).attr('readonly', true)
+                $(`.input_wrapper > input#${id}`).attr('type', 'text')
+                $(`.input_wrapper > input#${key}`).val(value)
+                $(`.input_wrapper .fa-pencil#${id}`).removeClass('hide')
+                $(`.input_wrapper .icon_wrapper#${id}`).addClass('hide')
+             })
+
+             $(document).on('click', `.btn_save#${key}`, (event)=>{
+                const { id } = event?.currentTarget
+                const getFile = arrOfDocuments.find(doc=> doc.id === id)
+                formData.append('api', getFile.id === 'certification' ||  getFile.id === 'response' ? `updt_${getFile.id}` : getFile.id)
+                formData.append(getFile.id, getFile.value[0])
+                formData.append('maker_id',  $('#maker_id_update_studies').val())
+                formData.append('patent_id', patent_id)
+                $.ajax({
+                  url: '.././api/drafter.php',
+                  type: 'POST',
+                  cache:false,
+                  data: formData,
+                  processData: false,
+                  contentType: false,
+                  success: (res)=>{
+                      $('#notification').removeClass('hide');
+                      $('#notification_message').text('Document Successfully Updated.');
+                      $(`.input_wrapper > input#${id}`).attr('readonly', true)
+                      $(`.input_wrapper > input#${id}`).attr('type', 'text')
+                      $(`.input_wrapper > input#${id}`).val(res)
+                      $(`.input_wrapper .fa-pencil#${id}`).removeClass('hide')
+                      $(`.input_wrapper .icon_wrapper#${id}`).addClass('hide')
+
+                      setTimeout(()=>  $('#notification').addClass('hide'), 3000)
+                  },
+                  error: (err)=>{
+                    console.log(`Error`, err);
+                  }
+                })
+             })
+          })
+         
+        },
+        error: (err)=>{
+          console.log(`Error`, err);
+        }
+     })        
     })
 
+    $('#btn_drafer_cancel_update_doc').click(()=>{
+      $(`.input_wrapper .fa-pencil`).removeClass('hide')
+      $(`.input_wrapper .icon_wrapper`).addClass('hide')
+      $(`.input_wrapper > input`).attr('readonly', true)
+      $(`.input_wrapper > input`).attr('type', 'text')
+    })
 
-    filter_date_accepted
+    arrOfDocuments.map(doc=>{
+      $(`.input_wrapper > input#${doc.id}`).change((event)=>{
+         const file = $(`.input_wrapper > input#${doc.id}`)[0].files
+        
+         if(file){
+           $(`.btn_save#${doc.id}`).removeClass('disable')
+         }
+         pushToArray(event?.currentTarget.id, file)
+      })
+    })
+
     $('#filter_input_accepted').change(event=>{
        const { value } = event?.target
 

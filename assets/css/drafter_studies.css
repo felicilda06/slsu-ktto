@@ -64,3 +64,25 @@
     background: rgb(193, 193, 193);
 }
 
+#modal_drafter_update_doc_modal .modal-dialog .modal-content .modal-body > div .input_wrapper .fa-pencil{
+   cursor: pointer;
+   transition: .2s ease-in-out;
+}
+
+#modal_drafter_update_doc_modal .modal-dialog .modal-content .modal-body > div .input_wrapper .fa-pencil:hover{
+   color: #1761d7 !important;
+}
+
+#modal_drafter_update_doc_modal .modal-dialog .modal-content .modal-body > div .input_wrapper input{
+    cursor: default !important;
+}
+#modal_drafter_update_doc_modal .modal-dialog .modal-content .modal-body > div .input_wrapper .icon_wrapper i{
+    cursor: pointer;
+}
+
+#modal_drafter_update_doc_modal .modal-dialog .modal-content .modal-body > div .input_wrapper .icon_wrapper i.btn_save.disable{
+    color: #b3b3b4 !important;
+    text-decoration: line-through;
+    pointer-events: none;
+}
+

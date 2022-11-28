@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../assets/css/loader.css">
     <link rel="stylesheet" href="../assets/css/message.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
