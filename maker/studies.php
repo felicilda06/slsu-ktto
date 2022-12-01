@@ -63,7 +63,7 @@
             <thead>
               <tr class="text-secondary">
                 <th class="text-center" scope="col">Id</th>
-                <th class="text-center" scope="col">Type</th>
+                <th class="text-center" scope="col">Title</th>
                 <th class="text-center" scope="col">Proponent</th>
                 <th class="text-center" scope="col">Type of Technology</th>
                 <th class="text-center" scope="col">Contact Information</th>
@@ -121,14 +121,12 @@
             <h5 class="modal-title" id="exampleModalLabel">Remove Study</h5>
           </div>
           <div class="modal-body d-flex flex-column ml-3 mr-2">
+              <input type="text" class="d-none" id="study_id">
               <div class="d-flex align-items-center mt-2">
                 <i class="fa fa-question-circle mr-2"></i>
                 <span>Are you sure you want to remove this record?</span>
               </div>
-               <div class="reminder text-danger d-flex justify-content-end w-100 mt-5" style="font-size:13px;">
-                  <i class="fa fa-exclamation-circle mr-2"></i>
-                  <small>Note: Studies that are deleted are move to Archieve Studies.</small>
-               </div>
+             
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -146,34 +144,28 @@
               <h5 class="modal-title" id="exampleModalLabel">Update Study</h5>
             </div>
             <div class="modal-body d-flex flex-column">
-                Edit
+                  <input type="text" class="d-none" id="row_id">
+                  <input type="text" id="updt_title" class="form-control my-3" placeholder="Document Title" autocomplete="off">
+                  <input type="text" id="updt_proponent" class="form-control my-3" placeholder="Proponent" autocomplete="off">
+                  <select id="updt_technology_type" class="form-control my-3">
+                    <option value="">Type of Technology</option>
+                    <option value="non-chemical">Non-Chemical</option>
+                    <option value="chemical">Chemical</option>
+                  </select>
+                  <input type="text" id="updt_contact_information" class="form-control my-3" placeholder="Contact Information" autocomplete="off" maxlength="11">
+                  <div class="files d-flex align-items-center">
+                    <input readonly type="text" id="updt_file" class="form-control my-3" accept="image/*,.doc, .docx, .pdf, .odt" placeholder="File">
+                    <i title="Edit File" id="btn_edit_file" class="fa fa-pencil-square-o text-warning ml-3" style="cursor: pointer; font-size:15px;"></i>
+                    <i title="Cancel" id="btn_edit_cancel" class="fa fa-times text-danger ml-3 hide" style="cursor: pointer; font-size:15px;"></i>
+                  </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" id="btn_maker_delete">Save Changes</button>
+              <button type="button" class="btn btn-danger" id="btn_maker_cancel_delete" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="btn_maker_save_changes">Save Changes</button>
             </div>
           </div>
         </div>
     </div>
-
-     <!-- Modal For Viewing Status Of Study-->
-     <div class="modal fade" id="modal_maker_study">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header bg-primary d-block">
-              <h5 class="modal-title" id="exampleModalLabel">Status of Study</h5>
-            </div>
-            <div class="modal-body d-flex flex-column">
-                Status
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-    </div>
-
-
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>

@@ -290,6 +290,14 @@ $(document).ready(()=>{
                     $('#modal_drafter_log').modal('hide');
                     arrOfLogFields.map(field=> $(`#${field.id}`).val(''))
                     message_func([{status: status_code, message}])
+                    $('#form_log_2').addClass('hide')
+                    $('#form_log_1').removeClass('hide')
+                    $('#btn_drafter_next_log').text('Next')
+                    $('#btn_drafter_cancel_log').text('Cancel')
+                    $('#btn_drafter_cancel_log').addClass('btn-danger')
+                    $('#btn_drafter_cancel_log').removeClass('btn-secondary')
+                    $('#btn_drafter_cancel_log').attr('data-dismiss', true)
+                    $('#btn_drafter_next_log').attr('disabled', true)
                 },
                 error: (err)=>{
                     console.log(`Error`, err);

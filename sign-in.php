@@ -57,7 +57,7 @@
                 <div class="login-settings">
                     <div class="remember">
                         <input type="checkbox" id="remember">
-                        <label for="remember">Rememeber me</label>
+                        <label for="remember">Remember me</label>
                     </div>
                     <div class="forgot">
                         <a href="#" class="forgot-link">Forgot Password?</a>

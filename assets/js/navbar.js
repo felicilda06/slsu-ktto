@@ -33,7 +33,7 @@ $(document).ready(()=>{
             active: false
           },
           {
-            id: 'archive',
+            id: 'documents',
             active: false
           },
           {

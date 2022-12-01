@@ -68,7 +68,7 @@
 
  .navbar_wrapper nav ul li#dashboard.active,
  .navbar_wrapper nav ul li#log.active,
- .navbar_wrapper nav ul li#archive.active,
+ .navbar_wrapper nav ul li#documents.active,
  .navbar_wrapper nav ul li#submission.active,
  .navbar_wrapper nav ul li#studies.active{
     background-color: #06477b;
@@ -121,6 +121,19 @@
 
  .navbar_wrapper nav ul .settings_wrapper .settings .settings_menu:hover{
     color: #0761aa;
+ }
+
+ .navbar_wrapper nav ul li.menu span#notification_counter{
+    position: absolute;
+    font-weight: 600;
+    top:-40%;
+    right: -4%;
+    color: #f0f0f0;
+    padding: 4px 9px;
+    background-color: #ff3939;
+    border-radius: 50%;
+    font-size: 10.5px;
+    width: auto;
  }
 
  /* Responsive CSS */

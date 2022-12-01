@@ -2,6 +2,7 @@ $(document).ready(()=>{
     const user = $('#user_email').val();
     let apiType = '';
     let arrOfDocuments = [];
+    let formData = new FormData()
     let arrOfInputs = [
         {id: 'author', value: user},
         {id: 'doc_title', value:''},
@@ -17,6 +18,13 @@ $(document).ready(()=>{
     let timeOut;
     let messages = [];
     let isSubmit = false;
+    let arrOfUpdateInputs = [
+      {id: 'updt_title', value:''},
+      {id: 'updt_proponent', value:''},
+      {id: 'updt_technology_type', value:''},
+      {id: 'updt_contact_information', value:''},
+      {id: 'updt_file', value:{}},
+  ];
 
     const renderTable = (documents = [])=>{
        if(documents.length > 0){
@@ -56,8 +64,52 @@ $(document).ready(()=>{
               backdrop: 'static',
               keyboard: false,            
           });
+          $('#study_id').val(id)
        }
     })
+
+    const onUpdateStudy = (arr = [])=>{
+       arrOfUpdateInputs = Object.entries(arr[0]).map(([key, value])=> ({id: `updt_${key}`, value}))
+      
+       arrOfUpdateInputs.map(input=>{
+        $(`#${input.id}`).change(event=>{
+           const { id, value } = event.target
+           if(id === 'updt_file'){
+             const file = $(`#${id}`)[0].files
+             pushToUpdateArray(id, file)
+           }else{
+             pushToUpdateArray(id, value)
+           }
+  
+        })
+      })
+  
+      $('#btn_maker_save_changes').click(()=>{
+        apiType = 'update_study'
+         arrOfUpdateInputs.map(input=> formData.append(input.id, input.value ?? ''))
+         formData.append('api', apiType)
+         formData.append('rowId', $('#row_id').val())
+         $.ajax({
+            url: '.././api/maker.php',
+            type: 'POST',
+            cache:false,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: (res)=>{
+              const { status_code, message } = res && JSON.parse(res)
+              message_func([{status: status_code, message}])
+              $('#modal_maker_edit').modal('hide')
+            },
+            error: (err)=>{
+              message_func([{status: 501, message: err}]);
+            }
+         })
+         
+      })
+    }
+
+ 
 
     $(document).on('click', '.btn_edit', (event)=>{
       const { id } = event?.currentTarget
@@ -67,18 +119,54 @@ $(document).ready(()=>{
             keyboard: false,            
         });
       }
+        $('#row_id').val(id)
+        apiType = 'get_study_byId';
+        $.ajax({
+          url: '.././api/maker.php',
+          type:'POST',
+          cache: false,
+          data: {
+            rowId: id,
+            api: apiType
+          },
+          success: (res)=>{
+            const study = res && JSON.parse(res)
+            onUpdateStudy(study)
+            Object.entries(study[0]).map(([key, value])=> {
+               $(`#updt_${key}`).val(value)
+
+               $('#btn_edit_file').click(()=>{
+                $('#btn_edit_file').addClass('hide');
+                $('#btn_edit_cancel').removeClass('hide')
+                $('#updt_file').removeAttr('readonly')
+                $('#updt_file').attr('type', 'file')
+              })
+
+              $('#btn_edit_cancel').click(()=>{
+                $('#btn_edit_cancel').addClass('hide');
+                $('#btn_edit_file').removeClass('hide')
+                $('#updt_file').attr('readonly', true)
+                $('#updt_file').attr('type', 'text')
+                $('#updt_file').val(study[0]?.file)
+              })
+
+              $('#btn_maker_cancel_delete').click(()=>{
+                $('#btn_edit_cancel').addClass('hide');
+                $('#btn_edit_file').removeClass('hide')
+                $('#updt_file').attr('readonly', true)
+                $('#updt_file').attr('type', 'text')
+                $('#updt_file').val(study[0]?.file)
+              })
+            })
+
+          },
+          error: (err)=>{
+            message_func([{status: 501, message: err}]);
+          }
+        })
     })
 
-    $(document).on('click', '#tbl_body_documents tr.studies', (event)=>{
-        const { id } = event?.currentTarget
-        if(id){
-          $('#modal_maker_study').modal({
-              backdrop: 'static',
-              keyboard: false,            
-          });
-        }
-    })
-
+   
 
     const fetchStudies = (api)=>{
        $.ajax({
@@ -91,12 +179,19 @@ $(document).ready(()=>{
             renderTable(arrOfDocuments);
           },
           error: (err)=>{
-            console.log(`Error`, err);
+            message_func([{status: 501, message: err}]);
           }
        })
     }
 
     fetchStudies('get_record_studies');
+    setInterval(()=> {
+      if($('#textfield_document_type').val()){
+        return;
+      }else{
+        fetchStudies('get_record_studies');
+      }
+    }, 1000)
 
     $('#document_type').change(event=>{
         const { value } = event?.target
@@ -259,6 +354,19 @@ $(document).ready(()=>{
         }
       };
 
+      const pushToUpdateArray = (id, value) => {
+        const newValue = { id, value };
+        const isExist = arrOfUpdateInputs.find((arr) => arr?.id === id);
+    
+        if (isExist) {
+          arrOfUpdateInputs = arrOfUpdateInputs.map((arr) =>
+            arr?.id === id ? { ...arr, value } : arr
+          );
+        } else {
+          arrOfUpdateInputs.push(newValue);
+        }
+      };
+
     arrOfInputs.map((arr)=>{
         $(`#${arr.id}`).change(event=>{
           validationResult = [];
@@ -269,7 +377,6 @@ $(document).ready(()=>{
     
     $('#btn_maker_save').click(()=>{
         apiType = 'add_new_study'
-        let formData = new FormData()
         let file = $('#file')[0].files;
         pushToArray('file', file)
         const created_at = moment(new Date()).format('MMMM DD, y')
@@ -300,10 +407,30 @@ $(document).ready(()=>{
                     $('#modal_document').modal('hide');
                     fetchStudies('get_record_studies');
                 },
-                error: (err)=> console.log(`Error: ${err}`)
+                error: (err)=> message_func([{status: 501, message: err}])
             })
 
         }
     })
 
+    $('#btn_maker_delete').click(()=>{
+        apiType = 'remove_study';
+        $.ajax({
+          url: '.././api/maker.php',
+          type: 'POST',
+          cache:false,
+          data:{
+            rowId:$('#study_id').val(),
+            api:apiType
+          },
+          success:(res)=>{
+            const { status_code, message } = res && JSON.parse(res)
+            message_func([{status: status_code, message}]);
+            $('#modal_delete').modal('hide')
+          },
+          error: (err)=>{
+            message_func([{status: 501, message: err}]);
+          }
+        })
+    })
 })

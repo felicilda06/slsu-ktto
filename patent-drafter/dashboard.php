@@ -39,6 +39,7 @@
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 
 </body>
 

@@ -48,6 +48,44 @@
         echo json_encode($rows);
 
        
+      } else if($apiType === 'remove_study'){
+         $query = "Delete from tbl_studies WHERE id='".$_POST['rowId']."'";
+         $executeQuery = mysqli_query($conn, $query);
+         $response = new Response();
+         if($executeQuery){
+            $response->status_code = 200;
+            $response->message = "Study Successfully Deleted.";
+         }else{
+            $response->status_code = 400;
+            $response->message = "Something went wrong in removing study. Please try again.";
+         }
+
+         echo json_encode($response);
+      } else if($apiType === 'get_study_byId'){
+         $query = "Select * from tbl_studies where id = '".$_POST['rowId']."'";
+         $executeQuery = mysqli_query($conn,$query);
+         $arrOfStudies = array();
+         while($row = mysqli_fetch_assoc($executeQuery)){
+            $arrOfStudies[] = $row;
+         }
+         echo json_encode($arrOfStudies);
+      } else if($apiType === 'update_study'){
+         $response = new Response();
+         if(isset($_FILES['updt_file'])){
+           echo 1;
+         }else{
+           $query = "Update tbl_studies set title = '".$_POST['updt_title']."', proponent= '".$_POST['updt_proponent']."', technology_type = '".$_POST['updt_technology_type']."', contact_information = '".$_POST['updt_contact_information']."' where id = '".$_POST['rowId']."'";
+           $executeQuery = mysqli_query($conn, $query);
+           if($executeQuery){
+              $response->status_code = 200;
+              $response->message = "Study Successfully Updated.";
+           }else{
+              $response->status_code = 400;
+              $response->message = "Something went wrong on updating data. Please try again";
+           }
+
+           echo json_encode($response);
+         }
       }
     }
 

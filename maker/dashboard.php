@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../assets/css/loader.css">
     <link rel="stylesheet" href="../assets/css/message.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
@@ -39,6 +40,7 @@
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 
 </body>
 

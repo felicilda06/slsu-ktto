@@ -104,7 +104,7 @@
 }
 .documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr.studies{
     transition: .2s ease-in;
-    cursor: pointer;
+    cursor: default;
 }
 
 .documents_wrapper .table_wrapper .table_render_wrapper table #tbl_body_documents tr.studies td i{
