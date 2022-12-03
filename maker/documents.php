@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../assets/css/message.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/document.css">
+    <link rel="stylesheet" href="../assets/css/placeholder.css">
 
     <title>SLSU-KTTO Document Management System</title>
 </head>
@@ -34,67 +35,34 @@
       include_once '.././api/connection.php';
       global $conn;
     ?>
-    <div class="document_maker_wrapper">
+    <div class="document_maker_wrapper pl-1">
       <div class="document_menus relative">
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-           <div class="dot"></div>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-           <div class="dot"></div>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-           <div class="dot"></div>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-           <div class="dot"></div>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-           <div class="dot"></div>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
-        <div class="menu">
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. veniam blanditiis culpa nostrum eius quisquam.</p>
-        </div>
       </div>
        <div class="document_body">
-          sdasdasd
+          <div class="files">
+             <div class="placeholder w-100 hide">
+                <?php include_once '../placeholder.php'; ?>
+             </div>
+          </div>
+          <div class="comments_wrapper">
+            <div class="loading hide">
+               <img src="../assets/images/loader2.gif" alt="">
+            </div>
+            <div class="comments">
+
+            </div>
+            <div class="comment_input">
+               <textarea id="comment_field" class="form-control" cols="1" rows="3"></textarea>
+               <i title="Send" class="fa fa-paper-plane text-primary" id="btn_send_comment"></i>
+            </div>
+          </div>
        </div>
     </div>
 
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/document.js"></script>
 
 </body>
 

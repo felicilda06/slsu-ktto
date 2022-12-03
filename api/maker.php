@@ -86,6 +86,24 @@
 
            echo json_encode($response);
          }
+      } else if($apiType === 'get_accepted_studies'){
+         $query = "Select * from tbl_studies where status = 'Accept'";
+         $executeQuery = mysqli_query($conn, $query);
+ 
+         $rows_array = array();
+         while($r = mysqli_fetch_assoc($executeQuery)) {
+             $rows_array[] = $r;
+         }
+         echo json_encode($rows_array);
+      } else if($apiType === 'get_documents_by_makerId'){
+          $query = "Select * from tbl_documents where maker_id = '".$_POST['rowId']."'";
+          $executeQuery = mysqli_query($conn, $query);
+          
+         $rows_array = array();
+         while($r = mysqli_fetch_assoc($executeQuery)) {
+             $rows_array[] = $r;
+         }
+         echo json_encode($rows_array);
       }
     }
 

@@ -46,7 +46,7 @@
 
    function sendFeedback($maker_id, $patent_id, $feedback){
       global $conn;
-      $query = "Insert into tbl_comments values ('', '".$feedback."', '".$maker_id."', '".$patent_id."', '".$patent_id."', '".$maker_id."')";
+      $query = "Insert into tbl_comments values ('', '".$feedback."', '".$maker_id."', '".$patent_id."', '".$patent_id."', '".$maker_id."', 0)";
       $executeQuery = mysqli_query($conn, $query);
       if($executeQuery){
          return 1;

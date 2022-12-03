@@ -145,9 +145,11 @@ $(document).ready(() => {
           }else{
             if(usertype === 'patent drafter'){
               window.location.href = './patent-drafter/dashboard.php';
-            }else{
+            }else if(usertype === 'admin'){
+              window.location.href = './admin/dashboard.php';
+            }else if(usertype === 'maker'){
               window.location.href = './maker/dashboard.php';
-            }
+            }else{return}
           }
           
           

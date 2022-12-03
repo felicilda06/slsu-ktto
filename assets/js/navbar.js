@@ -4,6 +4,27 @@ $(document).ready(()=>{
     const usertype = urlPath[urlPath.length - 2] ?? ''
     const [file, _ext] = filepath.split('.');
     const arrOfMenus = [
+      {
+        usertype: 'admin',
+        urls: [
+        {
+          id: 'dashboard',
+          active: false
+        },
+        {
+          id: 'log',
+          active: false
+        },
+        {
+          id: 'submission',
+          active: false
+        },
+        {
+          id: 'studies',
+          active: false
+        }
+      ]
+    },
     {
         usertype: 'patent-drafter',
         urls: [

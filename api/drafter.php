@@ -7,7 +7,16 @@
     $api = $_POST['api'];
 
     if(isset($api)){
-      if($api === 'get_list_of_studies'){
+      if($api === 'get_all_studies'){
+        $query = "Select * from tbl_studies where status = 'Pending' or status = 'Decline'";
+        $executeQuery = mysqli_query($conn, $query);
+
+        $rows = array();
+        while($r = mysqli_fetch_assoc($executeQuery)) {
+            $rows[] = $r;
+        }
+        echo json_encode($rows);
+      } else if($api === 'get_list_of_studies'){
         $technology_type = $_POST['technology_type'];
         $query = "Select * from tbl_studies where technology_type = '".$technology_type."' and status = 'Pending' or status = 'Decline'";
         $executeQuery = mysqli_query($conn, $query);
@@ -154,7 +163,16 @@
           echo json_encode($res);
         }
          
-       } else if($api === 'accepted_studies'){
+       } else if($api === 'admin_accepted_studies'){
+        $query = "Select * from tbl_studies where status = 'Accept'";
+        $executeQuery = mysqli_query($conn, $query);
+
+        $rows_array = array();
+        while($r = mysqli_fetch_assoc($executeQuery)) {
+            $rows_array[] = $r;
+        }
+        echo json_encode($rows_array);
+     } else if($api === 'accepted_studies'){
           $query = "Select * from tbl_studies where status = 'Accept' and technology_type = '".$_POST['technology_type']."'";
           $executeQuery = mysqli_query($conn, $query);
 

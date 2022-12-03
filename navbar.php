@@ -16,7 +16,7 @@
                     <span id="notification_counter">5</span>
                 </li>';
                 
-                if(isset($user) && $user === 'patent drafter'){
+                if(isset($user) && $user === 'patent drafter' || $user === 'admin'){
                     echo $output;
                 }else{
                     echo $output2;
