@@ -25,6 +25,7 @@ $(document).ready(()=>{
       {id: 'updt_contact_information', value:''},
       {id: 'updt_file', value:{}},
   ];
+  const userId = $('#userId').val();
 
     const renderTable = (documents = [])=>{
        if(documents.length > 0){
@@ -391,6 +392,7 @@ $(document).ready(()=>{
            arrOfInputs.map(arr=> arr.id !== 'file' ? formData.append(`${arr.id}`, arr?.value): formData.append(`${arr.id}`, arr?.value[0]))
            formData.append('api', apiType)
            formData.append('created_at', created_at)
+           formData.append('userId', userId)
           
             $.ajax({
                 url: '.././api/maker.php',

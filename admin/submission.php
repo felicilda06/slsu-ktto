@@ -39,6 +39,7 @@
 <body>
     <input type="text" class="d-none" value="<?php echo $type_of_technology;?>" id="type_of_technology">
     <input type="text" class="d-none" value="<?php echo $_SESSION['user_id'];?>" id="user_id">
+    <input type="text" class="d-none" value="<?php echo $_SESSION['name']; ?>" id="user_name">
     <div class="" id="message-container"></div>
     <div class="loader">
       <img src="../assets/images/loader1.gif" class="img-loader">

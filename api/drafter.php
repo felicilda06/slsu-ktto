@@ -128,6 +128,9 @@
       } else if($api === 'accept_study_new_comment'){
         $maker_id = $_POST['maker_id'];
         $feedback = $_POST['feedback'];
+        $receiver = $_POST['userId'];
+        $createdAt = $_POST['createdAt'];
+        $senderName = $_POST['sender_name'];
         $res = new Response();
 
         try{
@@ -144,7 +147,7 @@
               $documentPath = '../uploads/'.$newFile['name'];
               move_uploaded_file($document_tmp_name, $documentPath);
               $res->status_code = 200;
-              $res->message = "This record is now succssully updated and send feedback to maker.";
+              $res->message = "This record is now successfully updated and send feedback to maker.";
               echo json_encode($res);
             }
           
@@ -152,10 +155,10 @@
              $query = "Update tbl_studies set is_new_uploaded = 1 where id = '".$maker_id."'";
              $executeQuery = mysqli_query($conn, $query);
              $res->status_code = 200;
-             $res->message = "This record is now succssully updated and send feedback to maker.";
+             $res->message = "This record is now successfully updated and send feedback to maker.";
              echo json_encode($res);
           }
-          sendFeedback($maker_id, $_POST['patent_id'], $feedback);
+          sendFeedback($maker_id, $_POST['patent_id'], $feedback, $receiver, $createdAt, $senderName);
 
         }catch(Exception $err){
           $res->status_code = 400;
@@ -226,7 +229,7 @@
            echo json_encode($res);
        } else if($api === 'send_feedback'){
           $response = new Response();
-          if(sendFeedback($_POST['maker_id'], $_POST['patent_id'], $_POST['feedback'])){
+          if(sendFeedback($_POST['maker_id'], $_POST['patent_id'], $_POST['feedback'], $_POST['userId'], $_POST['createdAt'], $_POST['senderName'])){
             $response->status_code = 200;
             $response->message = "Successfully send a feedback.";
           }else{
@@ -235,7 +238,7 @@
           }
           echo json_encode($response);
        } else if($api === 'get_list_of_document_by_id'){
-          $query = "Select * from tbl_documents where id = '".$_POST['rowId']."'";
+          $query = "Select * from tbl_documents where maker_id = '".$_POST['rowId']."'";
           $executeQuery = mysqli_query($conn, $query);
           $arrDocs = array();
 

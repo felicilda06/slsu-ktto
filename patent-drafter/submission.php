@@ -39,6 +39,7 @@
 <body>
     <input type="text" class="d-none" value="<?php echo $type_of_technology;?>" id="type_of_technology">
     <input type="text" class="d-none" value="<?php echo $_SESSION['user_id'];?>" id="user_id">
+    <input type="text" class="d-none" value="<?php echo $_SESSION['name']; ?>" id="user_name">
     <div class="" id="message-container"></div>
     <div class="loader">
       <img src="../assets/images/loader1.gif" class="img-loader">
@@ -205,6 +206,7 @@
           </div>
           <div class="modal-body" style="font-size:17px;">
             <input type="text" id="maker_id_decline" class="d-none">
+            <input type="text" class="d-none" id="userId_decline">
              <span style="font-size:14px;">Feedback</span>
              <textarea id="feedback_decline" cols="30" rows="5" class="form-control mt-2" placeholder="Type something..."></textarea>
           </div>
@@ -226,6 +228,7 @@
           <div class="modal-body" style="font-size:17px;">
              <input type="text" id="maker_id" class="d-none">
              <input type="text" id="uploaded_id" class="d-none">
+             <input type="text" class="d-none" id="userId">
              <input type="file" class="form-control my-3" id="new_file" accept="image/*,.doc, .docx, .pdf, .odt">
              <span style="font-size:13px;">Feedback: <span style="font-size:11px;">(Optional)</span></span>
              <textarea id="feedback_move" cols="30" rows="5" class="form-control mt-2 mb-3" placeholder="Type something..." value="This study is now submitted to IPOPHIL.">This study is now submitted to IPOPHIL.</textarea>

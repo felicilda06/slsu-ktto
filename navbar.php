@@ -10,11 +10,15 @@
              <?php
                 $user = $_SESSION['usertype'];
                 $output = '<li class="menu" id="log">Log Submission</li>
-                <li class="menu" id="submission">View Submission</li>';
+                <li class="menu" id="submission">View Submission</li>
+                <li class="menu" id="studies">Accepted Studies</li>
+                ';
                 $output2 = '<li class="menu relative" id="documents">
                     View Documents
                     <span id="notification_counter">5</span>
-                </li>';
+                </li>
+                <li class="menu" id="studies">View Studies</li>
+                ';
                 
                 if(isset($user) && $user === 'patent drafter' || $user === 'admin'){
                     echo $output;
@@ -23,7 +27,6 @@
                 }
 
              ?>
-            <li class="menu" id="studies">Accepted Studies</li>
             <!-- <li id="chat_menu">
                 <i class="fa fa-comments"></i>
             </li> -->

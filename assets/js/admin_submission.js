@@ -20,6 +20,7 @@ $(document).ready(()=>{
     {id: 'response', value: ''},
   ];
   const userId = $('#user_id').val()
+  const userName = $('#user_name').val()
 
   const renderTable = (studies = [])=>{
       if(studies.length > 0){
@@ -42,9 +43,9 @@ $(document).ready(()=>{
                   <a href='../uploads/${study?.file}' download style='text-decoration:none;'>
                       <i title="Download" class="fa fa-download mx-2 text-primary"></i>
                   </a>
-                  <i title="Upload" id="${study?.id}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
-                  <i title="Accept" id="${study?.id}" class="fa fa-check mx-2 text-success ${is_new_uploaded ? 'btn_accept' :'disable'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
-                  <i title="Decline" id="${study?.id}" class="btn_decline fa fa-times mx-2 text-danger" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                  <i title="Upload" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
+                  <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success ${is_new_uploaded ? 'btn_accept' :'disable'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                  <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${is_new_uploaded ? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                  
               </td>
             </tr>`)
@@ -104,6 +105,7 @@ $(document).ready(()=>{
           backdrop: 'static',
           keyboard: false,            
      });
+     $('#userId').val($('.btn_upload').attr('user-id'))
   })
   
   $(document).on('click', '.btn_view', (event)=>{
@@ -128,6 +130,8 @@ $(document).ready(()=>{
       formData.append('patent_id', userId)
       formData.append('feedback', $('#feedback_move').val())
       formData.append('new_file', $(`#new_file`)[0].files[0] ?? '')
+      formData.append('userId', $('#userId').val())
+      formData.append('createdAt', moment(new Date()).format('MMMM D, y hh:mm:ss'))
 
       $.ajax({
          url: '.././api/drafter.php',
@@ -165,7 +169,7 @@ $(document).ready(()=>{
           backdrop: 'static',
           keyboard: false,            
      });
-
+     $('#userId_decline').val($('.btn_decline').attr('user-id'))
   })
 
   const message_func = (messages = []) => {
@@ -330,7 +334,10 @@ $(document).ready(()=>{
         api: apiType,
         patent_id: userId,
         maker_id: $('#maker_id_decline').val(),
-        feedback: $('#feedback_decline').val()
+        feedback: $('#feedback_decline').val(),
+        userId: $('#userId_decline').val(),
+        createdAt: moment(new Date()).format('MMMM D, y hh:mm:ss'),
+        senderName: userName
       },
       success: (res)=>{
          const { status_code, message } = res && JSON.parse(res)

@@ -1,6 +1,8 @@
 <?php
     include_once './connection.php';
     include './response.php';
+    include './utils.php';
+
     global $conn;
     $apiType = $_POST['api'];
 
@@ -14,6 +16,7 @@
         $author = $_POST['author'];
         $status = $_POST['status'];
         $color = $_POST['color'];
+        $userId = $_POST['userId'];
         
         $file = $_FILES['file']['name'];
         $file_tmp_name = $_FILES['file']['tmp_name'];
@@ -22,7 +25,7 @@
         $filepath = '../uploads/'.$_FILES['file']['name'];
         move_uploaded_file($file_tmp_name, $filepath);
         
-        $query = "Insert into tbl_studies values ('', '".$title."', '".$proponent."', '".$technology_type."', '".$contact_info."', '".$file."', '".$author."', '".$created_at."', '".$status."', '".$color."', 0)";
+        $query = "Insert into tbl_studies values ('', '".$title."', '".$proponent."', '".$technology_type."', '".$contact_info."', '".$file."', '".$author."', '".$created_at."', '".$status."', '".$color."', 0, '".$userId."')";
         $executeQuery = mysqli_query($conn, $query);
 
         $response = new Response();
@@ -86,8 +89,8 @@
 
            echo json_encode($response);
          }
-      } else if($apiType === 'get_accepted_studies'){
-         $query = "Select * from tbl_studies where status = 'Accept'";
+      } else if($apiType === 'get_all_studies'){
+         $query = "Select * from tbl_studies where status = 'Accept' or status = 'Decline'";
          $executeQuery = mysqli_query($conn, $query);
  
          $rows_array = array();
@@ -104,19 +107,29 @@
              $rows_array[] = $r;
          }
          echo json_encode($rows_array);
+      } else if($apiType === 'get_feedback_by_id'){
+         $query = "Select * from tbl_comments where maker_id = '".$_POST['rowId']."'";
+          $executeQuery = mysqli_query($conn, $query);
+          
+         $rows_array = array();
+         while($r = mysqli_fetch_assoc($executeQuery)) {
+             $rows_array[] = $r;
+         }
+         echo json_encode($rows_array);
+      } else if($apiType === 'get_profile_by_userId'){
+         $query = "Select name from tbl_accounts where id = '".$_POST['userId']."'";
+         $executeQuery = mysqli_query($conn, $query);
+          
+         $rows_array = array();
+         while($r = mysqli_fetch_assoc($executeQuery)) {
+             $rows_array[] = $r;
+         }
+         echo json_encode($rows_array);
+      } else if ($apiType === 'reply_to_comment'){
+         replyToComment($_POST['studyId'], $_POST['patentId'], $_POST['feedback'], $_POST['receiver'], $_POST['createdAt'], $_POST['senderName'], $_POST['sender']);
+         echo $_POST['studyId'];
       }
+    }else{
+      return;
     }
-
-    // if($apiType){
-    //    if($apiType === 'get_document_types'){
-         
-
-    //       if(mysqli_num_rows($executeQuery) > 0){
-    //         $docType = mysqli_fetch_assoc($executeQuery);
-    //         for($docs in $docType  ){
-                
-    //         }
-    //       }
-    //    }
-    // }else{return;}
 ?>

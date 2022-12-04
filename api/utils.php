@@ -44,9 +44,21 @@
      }catch(Exception $e){}
    }
 
-   function sendFeedback($maker_id, $patent_id, $feedback){
+   function sendFeedback($maker_id, $patent_id, $feedback, $receiver, $created, $senderName){
       global $conn;
-      $query = "Insert into tbl_comments values ('', '".$feedback."', '".$maker_id."', '".$patent_id."', '".$patent_id."', '".$maker_id."', 0)";
+      $query = "Insert into tbl_comments values ('', '".$feedback."', '".$maker_id."', '".$patent_id."', '".$patent_id."', '".$receiver."', '".$senderName."' ,0, '".$created."')";
+      $executeQuery = mysqli_query($conn, $query);
+      if($executeQuery){
+         updateStatusOfStudy($maker_id, 'Decline', 'fbafa3');
+         return 1;
+      }else{
+         return 0;
+      }
+   }
+
+   function replyToComment($maker_id, $patent_id, $feedback, $receiver, $created, $senderName, $sender){
+      global $conn;
+      $query = "Insert into tbl_comments values ('', '".$feedback."', '".$maker_id."', '".$patent_id."', '".$sender."', '".$receiver."', '".$senderName."' ,0, '".$created."')";
       $executeQuery = mysqli_query($conn, $query);
       if($executeQuery){
          return 1;

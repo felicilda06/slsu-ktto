@@ -37,6 +37,7 @@
       global $conn;
     ?>
     <div class="documents_wrapper">
+      <input type="text" class="d-none" value="<?php echo $_SESSION['user_id'];?>" id="userId">
       <div class="table_wrapper">
         <div class="search_options">
           <div class="filter_wrapper">

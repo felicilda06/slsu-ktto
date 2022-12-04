@@ -25,7 +25,8 @@
 </head>
 
 <body>
-     <input type="text" class="d-none" value="<?php echo $_SESSION['email']?>" id="user_email">
+    <input type="text" class="d-none" value="<?php echo $_SESSION['email']?>" id="user_email">
+    <input type="text" class="d-none" value="<?php echo $_SESSION['name']; ?>" id="user_name">
     <div class="" id="message-container"></div>
     <div class="loader">
       <img src="../assets/images/loader1.gif" class="img-loader">
@@ -35,6 +36,9 @@
       include_once '.././api/connection.php';
       global $conn;
     ?>
+    <div class="main_placeholder">
+      <?php include_once '../placeholder.php'; ?>
+    </div>
     <div class="document_maker_wrapper pl-1">
       <div class="document_menus relative">
       </div>
@@ -49,10 +53,9 @@
                <img src="../assets/images/loader2.gif" alt="">
             </div>
             <div class="comments">
-
             </div>
             <div class="comment_input">
-               <textarea id="comment_field" class="form-control" cols="1" rows="3"></textarea>
+               <input id="comment_field" class="form-control" style="height: 50px;" placeholder="Type something..."></input>
                <i title="Send" class="fa fa-paper-plane text-primary" id="btn_send_comment"></i>
             </div>
           </div>
