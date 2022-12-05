@@ -150,6 +150,19 @@
     padding: 15px 20px;
 }
 
+.document_maker_wrapper .document_body .comments_wrapper #study_status_wrapper{
+    width: 100%;
+    padding: 0px 20px;
+    margin-top: 10px;
+}
+
+.document_maker_wrapper .document_body .comments_wrapper #study_status_wrapper #study_status{
+    padding: 5px 0px;
+    border-radius: 15px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
 .document_maker_wrapper .document_body .comments_wrapper .comments .comment{
     gap: 6px;
     font-size: 13px;
@@ -168,6 +181,8 @@
 
 .document_maker_wrapper .document_body .comments_wrapper .comments .comment .info .comment_information span{
     font-weight: 600;
+    font-size: 12px !important;
+    color: #585858;
 }
 .document_maker_wrapper .document_body .comments_wrapper .comments .comment .info .comment_information p{
     margin-top: 2px;
@@ -190,7 +205,12 @@
     resize: none;
 }
 
-.document_maker_wrapper .document_body .comments_wrapper .comment_input i{
+.document_maker_wrapper .document_body .comments_wrapper .comment_input button{
+    outline: none;
+    border: none;
+}
+
+.document_maker_wrapper .document_body .comments_wrapper .comment_input button i{
     cursor: pointer;
     transition: .2s ease-in-out;
 }

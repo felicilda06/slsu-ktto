@@ -5,6 +5,7 @@ $(document).ready(()=>{
     const dir = '../files'
     const imagesExt = ['png', 'jpg', 'jpeg', 'tiff', 'gif']
     const userName = $('#user_name').val()
+    const userId = $('#user_id').val()
     const commentsDiv = document.getElementsByClassName("comments");
 
     const message_func = (messages = []) => {
@@ -113,6 +114,7 @@ $(document).ready(()=>{
     }
 
     const getFeedbacksById = (id)=>{
+        isSelected = true;
         apiType = 'get_feedback_by_id'
         $.ajax({
             url: '.././api/maker.php',
@@ -128,14 +130,14 @@ $(document).ready(()=>{
               fetchFeedbacks?.map((feedback, index)=>{
                 $('#btn_send_comment').attr('study-id',feedback?.maker_id)
                 $('#btn_send_comment').attr('patent-id',feedback?.patent_id)
-                $('#btn_send_comment').attr('sender',feedback?.receiver)
-                $('#btn_send_comment').attr('receiver',feedback?.sender)
+                $('#btn_send_comment').attr('sender',feedback?.sender === userId ? feedback?.sender : feedback?.receiver )
+                $('#btn_send_comment').attr('receiver',feedback?.receiver === userId ? feedback?.sender : userId)
                 $('.comments').append(`
                     <div key="${index}" class="comment d-flex">
                         <img src="../assets/images/profile.jpg" alt="Profile" id="profile"/>
                         <div class="info">
                         <div class="comment_information">
-                            <span id="account_name">${feedback?.sender_name}</span>
+                            <span id="account_name">${feedback?.sender_name} - ${feedback?.usertype?.at(0).toUpperCase() + feedback?.usertype.slice(1)}</span>
                             <p>${feedback?.comments}</p>
                         </div>
                         <small>${feedback?.created_at}</small>
@@ -152,13 +154,17 @@ $(document).ready(()=>{
         
     }
 
-    renderMenu = (arrOfStudies = [], activeId)=>{
+    renderMenu = (arrOfStudies = [], activeId, status, bgColor)=>{
        if(arrOfStudies.length){
             $('.document_menus > div.menu').remove();
             arrOfStudies.map((studies, index)=> {
+                console.log(studies);
                 const [_fn, ext] = studies?.file.split('.')
+                $('#study_status').css('background-color', `#${bgColor}`)
+                $('#study_status').css('color', status === 'Decline' ? '#e21e1e' : '#28e16a')
+                $('#study_status').text(status === 'Decline' ? 'Declined' : 'Accepted')
                 $('.document_menus').append(`
-                    <div class="menu d-flex ${studies?.id === activeId ? 'active': ''}" id="${studies?.id}" key="${index}">
+                    <div status="${studies?.status}" color="${studies?.bg_color}" class="menu d-flex ${studies?.id === activeId ? 'active': ''}" id="${studies?.id}" key="${index}">
                         <i class="mr-2 mt-1 ${imagesExt.includes(ext) ? 'fa fa-file-picture-o' : 'fa fa-file'}"></i>
                         <p>${studies?.title}</p>
                         <div class="dot"></div>
@@ -172,7 +178,6 @@ $(document).ready(()=>{
             }
             $('.main_placeholder').addClass('hide')
             $('.document_maker_wrapper').removeClass('hide')
-            setTimeout(()=> $('#comment_field').focus() , 1000)
        }else{
         $('.document_maker_wrapper').addClass('hide')
         $('.main_placeholder').removeClass('hide')
@@ -180,22 +185,23 @@ $(document).ready(()=>{
     }
     
 
-    const getAcceptedStudies = (api, activeId)=>{
+    const getAcceptedStudies = (api, activeId, status, bgColor)=>{
       $.ajax({
         url: '.././api/maker.php',
         type:'POST',
         cache: false,
         data: {
+            userId,
             api: api
         },
         success: (res)=>{
            const arrOfStudies = res && JSON.parse(res)
            if(!isSelected){
              const id = arrOfStudies[0]?.id
-             renderMenu(arrOfStudies, id)
+             renderMenu(arrOfStudies, id, arrOfStudies[0]?.status, arrOfStudies[0]?.bg_color)
              getFeedbacksById(id)
            }else{
-             renderMenu(arrOfStudies, activeId)
+             renderMenu(arrOfStudies, activeId, status, bgColor)
            }
            
         },
@@ -218,7 +224,7 @@ $(document).ready(()=>{
     $(document).on('click', '.menu', event=>{
         isSelected = true;
         const { id } = event?.currentTarget
-        getAcceptedStudies('get_all_studies', id)
+        getAcceptedStudies('get_all_studies', id, event?.currentTarget.getAttribute('status'), event?.currentTarget.getAttribute('color'))
         getFeedbacksAndDocumentsById(id)
         getFeedbacksById(id)
         $('#comment_field').val('')
@@ -233,44 +239,46 @@ $(document).ready(()=>{
        isSelected = true;
     })
 
-    $('#btn_send_comment').click(()=>{
+    $('#btn_send_comment').click((event)=>{
+        event?.preventDefault();
         const sender = $('#btn_send_comment').attr('sender')
         const receiver = $('#btn_send_comment').attr('receiver')
         const feedback = $('#comment_field').val()
         const studyId =  $('#btn_send_comment').attr('study-id')
         const patentId = $('#btn_send_comment').attr('patent-id')
         apiType = 'reply_to_comment';
-       if(isSubmit) return
-       if(!feedback){
-         message_func([{status: 409, message: 'Please enter your comment.'}])
-         $('#comment_field').focus();
-       }else{
-        $.ajax({
-            url: '.././api/maker.php',
-            type:'POST',
-            cache: false,
-            data: {
-                api: apiType,
-                sender,
-                receiver,
-                feedback,
-                studyId,
-                patentId,
-                senderName: userName,
-                createdAt: moment(new Date()).format('MMMM D, y hh:mm:ss'),
+        
+        if(isSubmit) return
+        if(!feedback){
+            message_func([{status: 409, message: 'Please enter your comment.'}])
+            $('#comment_field').focus();
+        }else{
+            $.ajax({
+                url: '.././api/maker.php',
+                type:'POST',
+                cache: false,
+                data: {
+                    api: apiType,
+                    sender,
+                    receiver,
+                    feedback,
+                    studyId,
+                    patentId,
+                    senderName: userName,
+                    createdAt: moment(new Date()).format('MMMM D, y hh:mm:ss'),
 
-            },
-            success: (res)=>{
-                getFeedbacksById(res)
-                $('#comment_field').focus();
-                $('#comment_field').val('');
-            },
-            error: (err)=>{
-                console.log(`Error`, err);
-            }
-        })
+                },
+                success: (res)=>{
+                    getFeedbacksById(res)
+                    $('#comment_field').focus();
+                    $('#comment_field').val('');
+                },
+                error: (err)=>{
+                    console.log(`Error`, err);
+                }
+            })
 
-       }
+        }
     
     })
 })

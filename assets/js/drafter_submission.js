@@ -43,7 +43,7 @@ $(document).ready(()=>{
                     <a href='../uploads/${study?.file}' download style='text-decoration:none;'>
                         <i title="Download" class="fa fa-download mx-2 text-primary"></i>
                     </a>
-                    <i title="Upload" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
+                    <i title="Reply" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-share-square-o text-primary"></i>
                     <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success ${is_new_uploaded ? 'btn_accept' :'disable'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                     <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${is_new_uploaded ? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                    

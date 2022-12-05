@@ -7,10 +7,10 @@
     <nav>
         <ul class="menus">
             <li class="menu" id="dashboard">Dashboard</li>
+            <li class="menu" id="log">Log Submission</li>
              <?php
                 $user = $_SESSION['usertype'];
-                $output = '<li class="menu" id="log">Log Submission</li>
-                <li class="menu" id="submission">View Submission</li>
+                $output = '<li class="menu" id="submission">View Submission</li>
                 <li class="menu" id="studies">Accepted Studies</li>
                 ';
                 $output2 = '<li class="menu relative" id="documents">

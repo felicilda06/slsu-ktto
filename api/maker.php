@@ -90,7 +90,7 @@
            echo json_encode($response);
          }
       } else if($apiType === 'get_all_studies'){
-         $query = "Select * from tbl_studies where status = 'Accept' or status = 'Decline'";
+         $query = "Select * from tbl_studies where userId = '".$_POST['userId']."' and status != 'Pending'";
          $executeQuery = mysqli_query($conn, $query);
  
          $rows_array = array();
@@ -108,7 +108,7 @@
          }
          echo json_encode($rows_array);
       } else if($apiType === 'get_feedback_by_id'){
-         $query = "Select * from tbl_comments where maker_id = '".$_POST['rowId']."'";
+         $query = "Select tbl_comments.*, usertype from tbl_accounts INNER JOIN tbl_comments ON tbl_comments.sender = tbl_accounts.id where tbl_comments.maker_id = '".$_POST['rowId']."'";
           $executeQuery = mysqli_query($conn, $query);
           
          $rows_array = array();

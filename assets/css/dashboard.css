@@ -1,7 +1,23 @@
 .dashboard_wrapper{
     width: 100%;
-    height: auto;
-    padding: 30px 15px 20px;
+    height: 70vh;
+    padding: 30px 15px 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dashboard_wrapper::-webkit-scrollbar{
+    width: 8px;
+}
+
+.dashboard_wrapper::-webkit-scrollbar-thumb{
+    background-color: #a4a4a4;
+    border-radius: 10px;
+}
+
+.dashboard_wrapper::-webkit-scrollbar-track{
+    background-color: rgb(201, 201, 201);
+    border-radius: 10px;
 }
 
 .dashboard_wrapper .main-wrapper{

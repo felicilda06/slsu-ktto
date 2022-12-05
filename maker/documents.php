@@ -25,8 +25,9 @@
 </head>
 
 <body>
-    <input type="text" class="d-none" value="<?php echo $_SESSION['email']?>" id="user_email">
+    <input type="text" class="d-none" value="<?php echo $_SESSION['email'];?>" id="user_email">
     <input type="text" class="d-none" value="<?php echo $_SESSION['name']; ?>" id="user_name">
+    <input type="text" class="d-none" value="<?php echo $_SESSION['user_id'];?>" id="user_id">
     <div class="" id="message-container"></div>
     <div class="loader">
       <img src="../assets/images/loader1.gif" class="img-loader">
@@ -52,11 +53,19 @@
             <div class="loading hide">
                <img src="../assets/images/loader2.gif" alt="">
             </div>
+            <div class="d-flex align-items-center justify-content-center" id="study_status_wrapper">
+                <div class="w-100 text-center" id="study_status"></div>
+            </div>
             <div class="comments">
             </div>
             <div class="comment_input">
-               <input id="comment_field" class="form-control" style="height: 50px;" placeholder="Type something..."></input>
-               <i title="Send" class="fa fa-paper-plane text-primary" id="btn_send_comment"></i>
+               <form class="w-100 d-flex align-items-center">
+                  <input id="comment_field" class="form-control" style="height: 50px;" placeholder="Type something..."></input>
+                  <button type="submit" id="btn_send_comment">
+                    <i title="Send" class="fa fa-paper-plane text-primary ml-2"></i>
+                  </button>
+                  
+               </form>
             </div>
           </div>
        </div>

@@ -54,6 +54,10 @@ $(document).ready(()=>{
             active: false
           },
           {
+            id: 'log',
+            active: false
+          },
+          {
             id: 'documents',
             active: false
           },

@@ -18,7 +18,7 @@
         echo json_encode($rows);
       } else if($api === 'get_list_of_studies'){
         $technology_type = $_POST['technology_type'];
-        $query = "Select * from tbl_studies where technology_type = '".$technology_type."' and status = 'Pending' or status = 'Decline'";
+        $query = "Select * from tbl_studies where technology_type = '".$technology_type."' and status != 'Accept'";
         $executeQuery = mysqli_query($conn, $query);
 
         $rows = array();
