@@ -143,7 +143,7 @@
 .document_maker_wrapper .document_body .comments_wrapper .comments{
     position: relative;
     width: 100%;
-    height: 50vh;
+    height: 48vh;
     margin-top: 3px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -208,6 +208,7 @@
 .document_maker_wrapper .document_body .comments_wrapper .comment_input button{
     outline: none;
     border: none;
+    background-color: transparent !important;
 }
 
 .document_maker_wrapper .document_body .comments_wrapper .comment_input button i{

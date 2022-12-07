@@ -113,7 +113,7 @@
                         <span>Title</span>
                         <small class="text-warning" style="float: right;">This field is requried.</small>
                         <select id="title" class="form-control">
-                          <option value=""></option>
+                          <option value="">--Select--</option>
                           <?php
                             $option = '';
                             $query1 = "Select title from tbl_studies where technology_type = '".$type_of_technology."' and status = 'Accept'";

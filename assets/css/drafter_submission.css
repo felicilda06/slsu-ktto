@@ -22,11 +22,26 @@
     gap: 7px;
     align-items: center;
 }
-.submission_wrapper .filter_settings .filter_inputs span{
-    font-size: 14px;
-}
-.submission_wrapper .filter_settings .filter_inputs input{
+.submission_wrapper .filter_settings .sub_container input{
     width: 160px;
+}
+
+.submission_wrapper .filter_settings .sub_container button{
+    position: relative;
+    margin-right: 10px;
+    outline: none;
+}
+
+.submission_wrapper .filter_settings .sub_container button #feedback_counter{
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: auto;
+    padding: 3px 5px;
+    text-align: center;
+    background-color: #fc4242;
+    border-radius: 50%;
+    font-size: 13px;
 }
 
 .submission_wrapper .tbl_drafter_studies_wrapper{

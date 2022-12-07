@@ -1,0 +1,115 @@
+.feedback_wrapper{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: flex-end;
+    top: 0;
+    left: 0;
+}
+
+.feedback_wrapper .feedback_container{
+    height: 100%;
+    min-width: 0px;
+    background-color: white;
+    transition: 20s ease-in;
+    position: relative;
+    padding: 15px;
+}
+
+.feedback_wrapper .feedback_container.slide{
+    min-width: 575px;
+}
+
+.feedback_wrapper .feedback_container i{
+    font-size: 20px;
+    color: rgb(138, 138, 138);
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+.feedback_wrapper .feedback_container i:hover{
+    color: rgb(95, 95, 95);
+}
+.feedback_wrapper .feedback_container .feedback_menus{
+    margin-top: 25px;
+    display: flex;
+    overflow-x:auto ;
+    gap: 7px;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    padding: 0px 0px 10px;
+    position: relative;
+}
+.feedback_wrapper .feedback_container .feedback_menus .feedback_menu{
+    font-size: 13px;
+    padding: 5px 8px;
+    cursor: pointer;
+    background-color: rgb(236, 236, 236);
+    border-radius: 3px;
+}
+
+.feedback_wrapper .feedback_container .feedback_menus .feedback_menu:hover{
+    background-color: rgb(227, 227, 227);
+}
+.feedback_wrapper .feedback_container .feedback_menus .feedback_menu.active{
+    background-color: rgb(94, 152, 244);
+    color: white;
+}
+.feedback_wrapper .feedback_container .body{
+    width: 100%;
+    height: auto;
+}
+.feedback_wrapper .feedback_container .body .comments{
+    height: 70vh;
+    position: relative;
+    width: 100%;
+    margin-top: 3px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 15px;
+}
+.feedback_wrapper .feedback_container .body .comments .comment{
+    gap: 6px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.feedback_wrapper .feedback_container .body .comments .comment #profile{
+    margin-top: 10px;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.feedback_wrapper .feedback_container .body .comments .comment .info{
+    width: 100%;
+}
+
+.feedback_wrapper .feedback_container .body .comments .comment .info .comment_information{
+    width: 100%;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    padding: 7px 10px 1px;
+}
+.feedback_wrapper .feedback_container .body .comments .comment .info .comment_information span{
+    font-weight: 600;
+    font-size: 12px !important;
+    color: #585858;
+}
+.feedback_wrapper .feedback_container .body .comments .comment .info .comment_information p{
+    margin-top: 2px;
+}
+
+.feedback_wrapper .feedback_container .body .comments .comment .info small{
+    float: right;
+    margin: 5px 12px 0px 0px;
+}
+
+.feedback_wrapper .feedback_container .body .comment_input{
+    margin-top: 10px;
+    padding: 5px 0px;
+    border-top:  1px solid rgb(202, 202, 202);
+}
