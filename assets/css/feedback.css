@@ -22,14 +22,33 @@
 .feedback_wrapper .feedback_container.slide{
     min-width: 575px;
 }
-
-.feedback_wrapper .feedback_container i{
+.feedback_wrapper .feedback_container .placeholder_container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 20;
+    background-color: #e1f2ff;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.feedback_wrapper .feedback_container .placeholder_container #placeholder_text{
+    color: #91cdff;
+    font-size: 4rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+.feedback_wrapper .feedback_container i#btn_hide_feedback{
+    position: relative;
     font-size: 20px;
     color: rgb(138, 138, 138);
     cursor: pointer;
     transition: .2s ease-in-out;
+    z-index: 40;
 }
-.feedback_wrapper .feedback_container i:hover{
+.feedback_wrapper .feedback_container i#btn_hide_feedback:hover{
     color: rgb(95, 95, 95);
 }
 .feedback_wrapper .feedback_container .feedback_menus{
@@ -67,7 +86,24 @@
     margin-top: 3px;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 15px;
+    padding: 15px 5px;
+}
+.feedback_wrapper .feedback_container .body .comments::-webkit-scrollbar{
+    width: 8px;
+}
+.feedback_wrapper .feedback_container .body .comments::-webkit-scrollbar-track{
+    background: #d8d8d8;
+    border-radius: 10px;
+}
+
+.feedback_wrapper .feedback_container .body .comments::-webkit-scrollbar-thumb{
+    background: #b5b5b5;
+    transition: .2s ease-in;
+    border-radius: 10px;
+
+}
+.feedback_wrapper .feedback_container .body .comments::-webkit-scrollbar-thumb:hover{
+    background: #9d9d9d;
 }
 .feedback_wrapper .feedback_container .body .comments .comment{
     gap: 6px;
@@ -112,4 +148,17 @@
     margin-top: 10px;
     padding: 5px 0px;
     border-top:  1px solid rgb(202, 202, 202);
+}
+.feedback_wrapper .feedback_container .body .comment_input form button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.feedback_wrapper .feedback_container .body .comment_input form button i{
+    transition: .2s ease-in-out;
+}
+
+.feedback_wrapper .feedback_container .body .comment_input form button i:hover{
+    color: #2265b7 !important;
 }

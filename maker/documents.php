@@ -56,7 +56,7 @@
             <div class="d-flex align-items-center justify-content-center" id="study_status_wrapper">
                 <div class="w-100 text-center" id="study_status"></div>
             </div>
-            <div class="comments">
+            <div class="comments" id="comments">
             </div>
             <div class="comment_input">
                <form class="w-100 d-flex align-items-center">

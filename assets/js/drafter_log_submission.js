@@ -2,6 +2,7 @@ $(document).ready(()=>{
    const spreadSheetId = '1IyuIohoxUs-5917-B_MtoXEy5YD29UvyaT13MTNYfQM';
    const gid = '1415776155';
    const url = `https://docs.google.com/spreadsheets/d/${spreadSheetId}/gviz/tq?tqx=out:json&tq&gid=${gid}`;
+   const technology_type = $('#technology_type').val()
    let formData= new FormData()
    let apiType = ''
    let arrOfLogFields = [
@@ -140,6 +141,31 @@ $(document).ready(()=>{
     });
   }
 
+  const getStudiesWithNoLogSubmission = ()=>{
+    apiType = 'get_studies_with_no_log_submission';
+    $.ajax({
+      url: '.././api/drafter.php',
+      type:'POST',
+      cache: false,
+      data: {
+          api: apiType,
+          technology_type: technology_type
+      },
+      success: (res)=>{
+        const studies = res && JSON.parse(res)
+        $('#title .render_option').remove()
+        studies?.map((study, i)=>{
+           $('#title').append(`
+              <option key="${i}" email="${study?.authors}" class="render_option" value="${study?.title}">${study?.title}</option>
+           `)
+        })
+      },
+      error: (err)=>{
+        console.log(`Error`, err);
+      }
+    })
+  }
+
    $(document).on('click', '#tbl_body_drafter_log  tr.fetch_logs', event=>{
       const { id } = event?.currentTarget
       const rowId = { id: 'updt_id', value: id }
@@ -260,6 +286,7 @@ $(document).ready(()=>{
             backdrop: 'static',
             keyboard: false,            
         });
+        getStudiesWithNoLogSubmission()
    })
 
    $('#btn_drafter_next_log').click(event=>{
@@ -298,6 +325,7 @@ $(document).ready(()=>{
                     $('#btn_drafter_cancel_log').removeClass('btn-secondary')
                     $('#btn_drafter_cancel_log').attr('data-dismiss', true)
                     $('#btn_drafter_next_log').attr('disabled', true)
+                    getStudiesWithNoLogSubmission()
                 },
                 error: (err)=>{
                     console.log(`Error`, err);
@@ -357,8 +385,27 @@ $(document).ready(()=>{
          if(id === 'title'){
             if(value){
                 $('#btn_drafter_next_log').removeAttr('disabled')
+                const author = $('#title .render_option').attr('email')
+                $.ajax({
+                    url: '.././api/drafter.php',
+                    type:'POST',
+                    cache: false,
+                    data: {
+                      api:'get_author_of_study',
+                      email: author
+                    },
+                    success: (res)=>{
+                      pushToArray('creator', res)
+                       $('#creator').val(res)
+                    },
+                    error: (err)=>{
+                      console.log(`Error`, err);
+                    }
+                })
             }else{
                 $('#btn_drafter_next_log').attr('disabled', 'true')
+                $('#creator').val('')
+                pushToArray('creator', '')
             }
          }
       })

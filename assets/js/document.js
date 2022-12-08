@@ -6,7 +6,7 @@ $(document).ready(()=>{
     const imagesExt = ['png', 'jpg', 'jpeg', 'tiff', 'gif']
     const userName = $('#user_name').val()
     const userId = $('#user_id').val()
-    const commentsDiv = document.getElementsByClassName("comments");
+    const commentsDiv = document.getElementById("comments");
 
     const message_func = (messages = []) => {
         const messageContainer = $("#message-container");
@@ -145,7 +145,7 @@ $(document).ready(()=>{
                     </div>
                 `)
               })
-              //commentsDiv.scrollTop = 1000;
+              commentsDiv.scrollTop = commentsDiv.scrollHeight;
             },
             error:(err)=>{
                 console.log(`Error`, err)

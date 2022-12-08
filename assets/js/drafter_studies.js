@@ -117,6 +117,7 @@ $(document).ready(()=>{
                 $(`.input_wrapper > input#${key}`).val(value)
                 $(`.input_wrapper .fa-pencil#${id}`).removeClass('hide')
                 $(`.input_wrapper .icon_wrapper#${id}`).addClass('hide')
+                $(`.btn_save#${key}`).addClass('disable')
              })
 
              $(document).on('click', `.btn_save#${key}`, (event)=>{
@@ -141,7 +142,8 @@ $(document).ready(()=>{
                       $(`.input_wrapper > input#${id}`).val(res)
                       $(`.input_wrapper .fa-pencil#${id}`).removeClass('hide')
                       $(`.input_wrapper .icon_wrapper#${id}`).addClass('hide')
-
+                      
+                      $('#btn_drafer_upload_done').removeAttr('disabled')
                       setTimeout(()=>  $('#notification').addClass('hide'), 3000)
                   },
                   error: (err)=>{
@@ -163,6 +165,7 @@ $(document).ready(()=>{
       $(`.input_wrapper .icon_wrapper`).addClass('hide')
       $(`.input_wrapper > input`).attr('readonly', true)
       $(`.input_wrapper > input`).attr('type', 'text')
+      $(`.btn_save`).addClass('disable')
     })
 
     arrOfDocuments.map(doc=>{

@@ -189,6 +189,8 @@
           $executeQuery = mysqli_query($conn, $query);
           $res = new Response();
           if($executeQuery){
+            $updateStudyQuery = "Update tbl_studies set has_log_submission = 1 where title = '".$_POST['title']."'";
+             mysqli_query($conn, $updateStudyQuery);
             $res->status_code = 200;
             $res->message = 'New Record Successfully Created.';
          }else{
@@ -323,6 +325,23 @@
             $save = saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['response'], $fileName);
             echo $fileName;
         }
+      } else if ($api === 'get_studies_with_no_log_submission'){
+        $query1 = "Select authors,title from tbl_studies where technology_type = '".$_POST['technology_type']."' and status = 'Accept' and has_log_submission = 0";
+        $executeQuery = mysqli_query($conn, $query1);
+        $studies = array();
+        while($r = mysqli_fetch_array($executeQuery)){
+            $studies[] = $r;
+        }
+
+        echo json_encode($studies);
+      } else if($api === 'get_author_of_study'){
+         $query = "Select * from tbl_accounts where email = '".$_POST['email']."'";
+         $executeQuery = mysqli_query($conn, $query);
+         $details = mysqli_fetch_assoc($executeQuery);
+
+         echo $details['name'];
+      } else if($api === 'reply_to_feedback'){
+         replyToComment($_POST['studyId'], $_POST['sender'], $_POST['feedback'], $_POST['receiver'], $_POST['createdAt'], $_POST['senderName'], $_POST['sender']);
       }
     }else{
       return;

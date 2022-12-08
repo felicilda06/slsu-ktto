@@ -25,7 +25,7 @@
         $filepath = '../uploads/'.$_FILES['file']['name'];
         move_uploaded_file($file_tmp_name, $filepath);
         
-        $query = "Insert into tbl_studies values ('', '".$title."', '".$proponent."', '".$technology_type."', '".$contact_info."', '".$file."', '".$author."', '".$created_at."', '".$status."', '".$color."', 0, '".$userId."')";
+        $query = "Insert into tbl_studies values ('', '".$title."', '".$proponent."', '".$technology_type."', '".$contact_info."', '".$file."', '".$author."', '".$created_at."', '".$status."', '".$color."', 0, '".$userId."', 0)";
         $executeQuery = mysqli_query($conn, $query);
 
         $response = new Response();

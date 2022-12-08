@@ -185,7 +185,6 @@
           </div>
           <div class="modal-footer">
             <button type="button" id="btn_drafer_cancel_update_doc" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <button type="button" id="btn_drafer_upload_done" class="btn btn-primary">Save Changes</button>
           </div>
         </div>
       </div>
