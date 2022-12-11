@@ -8,6 +8,7 @@ $(document).ready(()=>{
     const userName = $('#user_name').val()
     const technologyType = $('#type_of_technology').val()
     const feedbackDiv = document.getElementById('comments')
+    
 
     $('#btn_see_feedback').click(()=>{
        $('.feedback_wrapper').removeClass('hide')
@@ -90,15 +91,23 @@ $(document).ready(()=>{
             },
             success: (res)=>{
                 const feedbacks = res && JSON.parse(res)
+                $('.comments > div.comment').remove()
                 if(feedbacks?.length){
-                   $('.comments > div.comment').remove()
+                   const unread = feedbacks?.filter(feedback=> feedback?.sender !== userId)?.length
+                   if(unread){
+                        $('#feedback_counter').text(unread)
+                        $('#feedback_counter').removeClass('hide')
+                    }else{
+                        $('#feedback_counter').addClass('hide')
+                    } 
                    feedbacks?.map((feedback, index)=>{
+                      const userType = feedback?.usertype === 'admin' ? 'Director' : feedback?.usertype?.at(0).toUpperCase() + feedback?.usertype.slice(1)
                       $('.comments').append(`
                         <div key="${index}" class="comment">
                             <img src="../assets/images/profile.jpg" alt="Profile" id="profile"/>
                             <div class="info">
                             <div class="comment_information">
-                                <span id="account_name">${feedback?.sender_name} - ${feedback?.usertype?.at(0).toUpperCase() + feedback?.usertype.slice(1)}</span>
+                                <span id="account_name">${feedback?.sender_name} - ${userType}</span>
                                 <p>${feedback?.comments}</p>
                             </div>
                             <small>${feedback?.created_at}</small>
@@ -106,7 +115,7 @@ $(document).ready(()=>{
                         </div>
                       `)
                    })
-                   feedbackDiv.scrollTop = feedbackDiv.scrollHeight; 
+                   feedbackDiv.scrollTop = feedbackDiv.scrollHeight;
                 }else{
                     return;
                 }
@@ -129,16 +138,24 @@ $(document).ready(()=>{
           },
           success: (res)=>{
              const fetchStudies = res && JSON.parse(res)
-             setInterval(()=>{
-                if(!isSelected){
-                    const activeId = fetchStudies[0]?.id
-                    renderMenus(fetchStudies, activeId)
-                    getFeedabackByStudyId(activeId)
-                 }else{
-                    renderMenus(fetchStudies, active, studyId, receiverId)
-                    getFeedabackByStudyId(active)
-                 }
-             } , 1200)
+             if(!isSelected){
+                const activeId = fetchStudies[0]?.id
+                renderMenus(fetchStudies, activeId)
+                getFeedabackByStudyId(activeId)
+             }else{
+                renderMenus(fetchStudies, active, studyId, receiverId)
+                getFeedabackByStudyId(active)
+             }
+            //  setInterval(()=>{
+            //     if(!isSelected){
+            //         const activeId = fetchStudies[0]?.id
+            //         renderMenus(fetchStudies, activeId)
+            //         getFeedabackByStudyId(activeId)
+            //      }else{
+            //         renderMenus(fetchStudies, active, studyId, receiverId)
+            //         getFeedabackByStudyId(active)
+            //      }
+            //  } , 1200)
             
           },
           error: (err)=>{
@@ -147,14 +164,20 @@ $(document).ready(()=>{
        })
     }
 
-
-    getStudesByPatentId('get_studies_by_patent_Id', technologyType, undefined)
+    if(technologyType){
+      getStudesByPatentId('get_studies_by_patent_Id', technologyType, undefined)
+    }else{
+      getStudesByPatentId('get_studies_by_patent_Id', '', undefined)
+    }
 
     $(document).on('click', '.feedback_menu', event=>{
         const { id } = event?.currentTarget
         isSelected = true;
-        getStudesByPatentId('get_studies_by_patent_Id', technologyType, id)
-        getFeedabackByStudyId(id)
+        if(technologyType){
+            getStudesByPatentId('get_studies_by_patent_Id', technologyType, id)
+        }else{
+            getStudesByPatentId('get_studies_by_patent_Id', '', undefined)
+        }
     })
 
     $('#btn_send_reply').click(event=>{

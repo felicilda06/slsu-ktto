@@ -36,14 +36,14 @@ $(document).ready(()=>{
               <td class="text-center py-3">${study?.file}</td>
               <td class="text-center py-3">${study?.authors}</td>
               <td class="text-center py-3">${study?.created_at}</td>
-              <td class="text-center py-3 align-items-center" style="font-size:14px;">
+              <td  width="20%" class="text-center py-3 align-items-center" style="font-size:14px;">
                   <a href='#' class="btn_view" id="${study?.file}" style='text-decoration:none;'>
                       <i title="View" class="fa fa-external-link mx-2 text-secondary"></i>
                   </a>
                   <a href='../uploads/${study?.file}' download style='text-decoration:none;'>
                       <i title="Download" class="fa fa-download mx-2 text-primary"></i>
                   </a>
-                  <i title="Upload" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
+                  <i title="Comment" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-share-square-o text-primary"></i>
                   <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success ${is_new_uploaded ? 'btn_accept' :'disable'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                   <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${is_new_uploaded ? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                  
@@ -112,10 +112,11 @@ $(document).ready(()=>{
       const { id } = event?.currentTarget
       const [_fileName, ext] = id?.split('.')
 
+      if(isSubmit) return
       if(imageExt.includes(ext) || ext === 'pdf'){
-          window.open(`${baseURL}${id}`);
+         window.open(`${baseURL}${id}`);
       }else{
-          // window.open(`${baseURL}${id}`);
+         message_func([{status: 409, message: 'This file is not supported of browser to preview. You can only download the file.'}], 'warning')
       }
   })
 
@@ -172,39 +173,48 @@ $(document).ready(()=>{
      $('#userId_decline').val($('.btn_decline').attr('user-id'))
   })
 
-  const message_func = (messages = []) => {
+  const message_func = (messages = [], status) => {
     const messageContainer = $("#message-container");
-    timeOut = 3500
-    messages.map((e) => {
-      spanElement = document.createElement("span");
-      if(e?.status !== 200){
-        if (e?.message) {
-          isSubmit = true;
-          spanElement.innerText = e?.message;
-          spanElement.className = "error";
-          messageContainer.addClass("error");
+      timeOut = 3500
+      messages.map((e) => {
+        spanElement = document.createElement("span");
+        spanElement.innerText = e?.message;
+        isSubmit = true
+        if(!status){
+          if(e?.status !== 200){
+            if (e?.message) {
+              spanElement.className = "error";
+              messageContainer.addClass("error");
+              messageContainer.append(spanElement);
+      
+              setTimeout(() => {
+                messageContainer.removeClass("error");
+                isSubmit = false;
+              }, [4000]);
+            }
+          }else{
+              spanElement.className = "success";
+              messageContainer.addClass("success");
+              messageContainer.append(spanElement);
+      
+              setTimeout(() => {
+                messageContainer.removeClass("success");
+                isSubmit = false;
+              }, [4000]);
+          }
+        }else{
+          spanElement.className = status;
+          messageContainer.addClass(status);
           messageContainer.append(spanElement);
   
           setTimeout(() => {
-            messageContainer.removeClass("error");
+            messageContainer.removeClass(status);
             isSubmit = false;
           }, [4000]);
         }
-      }else{
-          isSubmit = true;
-          spanElement.innerText = e?.message;
-          spanElement.className = "success";
-          messageContainer.addClass("success");
-          messageContainer.append(spanElement);
-  
-          setTimeout(() => {
-            messageContainer.removeClass("success");
-            isSubmit = false;
-          }, [4000]);
-      }
 
-      setTimeout(() => messageContainer.children().remove(), timeOut);
-    });
+        setTimeout(() => messageContainer.children().remove(), timeOut);
+      });
   }
 
   const pushToArray = (id, value) => {

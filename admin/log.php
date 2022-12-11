@@ -15,8 +15,6 @@
         $type_of_technology = $row[6];
        }
 
-      //  $query = "Select * from tbl_studies where technology_type = '".$technology_type."' and status = 'Pending' or status = 'Decline'"
- 
        $user = $_SESSION['usertype'];
  
        if(empty($user) || $user != 'admin'){
@@ -49,6 +47,7 @@
     <div class="drafter_log_wrapper pt-5 px-4">
       <div class="wrapper_2 d-flex justify-content-between">
        <input type="text" class="form-control" placeholder="Type something..." id="log_filter">
+       <input type="text" class="d-none" id="technology_type" value="<?php echo $type_of_technology; ?>">
        <button class="btn btn-primary btn-sm" id="btn_drafter_new_log">Add New Record</button>
       </div>
       <div class="tbl_drafter_log_wrapper mt-4">
@@ -113,26 +112,17 @@
                         <span>Title</span>
                         <small class="text-warning" style="float: right;">This field is requried.</small>
                         <select id="title" class="form-control">
-                          <option value="">Select</option>
-                          <?php
-                            $option = '';
-                            $query1 = "Select title from tbl_studies where status = 'Accept'";
-                            $executeQuery = mysqli_query($conn, $query1);
-                            while($r = mysqli_fetch_array($executeQuery)){
-                                $option.='
-                                  <option value="'.$r['title'].'">'.$r['title'].'</option>
-                                ';
-                            }
-
-                           echo $option;
-                          ?>
+                          <option value="">--Select--</option>
                         </select>
                       </div>
                   </div>
                   <div class="input d-flex mt-4">
                       <div class="input_wrapper w-100 mx-2">
-                          <span>Creator(s)</span>
-                          <input type="text" class="form-control mx-2" placeholder="" id="creator" autocomplete="off">
+                          <div class="d-flex justify-content-between">
+                            <span>Creator(s)</span>
+                            <small class="text-danger">This field is muted.</small>
+                          </div>
+                          <input type="text" class="form-control mx-2" placeholder="" id="creator" autocomplete="off" readonly style="background: white;">
                       </div>
                       <div class="input_wrapper w-100 mx-2">
                           <span>IP Type</span>
@@ -276,8 +266,11 @@
                         <input type="text" class="form-control" id="updt_application_no" autocomplete="off">
                       </div>
                       <div class="input_wrapper w-100 mx-2">
-                        <span>Title</span>
-                        <select id="updt_title" class="form-control">
+                        <div class="d-flex justify-content-between">
+                            <span>Title</span>
+                            <small class="text-danger">This field is muted.</small>
+                        </div>
+                        <select id="updt_title" class="form-control" disabled style="background: white;">
                           <?php
                             $option = '';
                             $query1 = "Select title from tbl_studies where technology_type = '".$type_of_technology."' and status = 'Accept'";
@@ -295,8 +288,11 @@
                   </div>
                   <div class="input d-flex mt-4">
                       <div class="input_wrapper w-100 mx-2">
-                          <span>Creator(s)</span>
-                          <input type="text" class="form-control mx-2" placeholder="" id="updt_creator" autocomplete="off">
+                          <div class="d-flex justify-content-between">
+                            <span>Creator(s)</span>
+                            <small class="text-danger">This field is muted.</small>
+                          </div>
+                          <input type="text" class="form-control mx-2" placeholder="" id="updt_creator" autocomplete="off" disabled style="background: white;">
                       </div>
                       <div class="input_wrapper w-100 mx-2">
                           <span>IP Type</span>

@@ -141,7 +141,7 @@ $(document).ready(()=>{
     });
   }
 
-  const getStudiesWithNoLogSubmission = ()=>{
+  const getStudiesWithNoLogSubmission = (techType)=>{
     apiType = 'get_studies_with_no_log_submission';
     $.ajax({
       url: '.././api/drafter.php',
@@ -149,7 +149,7 @@ $(document).ready(()=>{
       cache: false,
       data: {
           api: apiType,
-          technology_type: technology_type
+          technology_type: techType
       },
       success: (res)=>{
         const studies = res && JSON.parse(res)
@@ -286,7 +286,12 @@ $(document).ready(()=>{
             backdrop: 'static',
             keyboard: false,            
         });
-        getStudiesWithNoLogSubmission()
+        if(technology_type){
+          getStudiesWithNoLogSubmission(technology_type)
+          return
+        }else{
+          getStudiesWithNoLogSubmission('')
+        }
    })
 
    $('#btn_drafter_next_log').click(event=>{
@@ -325,7 +330,12 @@ $(document).ready(()=>{
                     $('#btn_drafter_cancel_log').removeClass('btn-secondary')
                     $('#btn_drafter_cancel_log').attr('data-dismiss', true)
                     $('#btn_drafter_next_log').attr('disabled', true)
-                    getStudiesWithNoLogSubmission()
+                    if(technology_type){
+                      getStudiesWithNoLogSubmission(technology_type)
+                      return
+                    }else{
+                      getStudiesWithNoLogSubmission('')
+                    }
                 },
                 error: (err)=>{
                     console.log(`Error`, err);

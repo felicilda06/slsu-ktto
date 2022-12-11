@@ -134,6 +134,7 @@ $(document).ready(()=>{
                 processData: false,
                 contentType: false,
                 success: (res)=>{
+                  console.log(res, `res`);
                     $('#notification').removeClass('hide');
                     $('#notification_message').text('Document Successfully Updated.');
                     $(`.input_wrapper > input#${id}`).attr('readonly', true)
@@ -163,6 +164,7 @@ $(document).ready(()=>{
     $(`.input_wrapper .icon_wrapper`).addClass('hide')
     $(`.input_wrapper > input`).attr('readonly', true)
     $(`.input_wrapper > input`).attr('type', 'text')
+    $(`.btn_save`).addClass('disable')
   })
 
   arrOfDocuments.map(doc=>{

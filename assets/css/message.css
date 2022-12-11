@@ -23,6 +23,11 @@
     right: 0%;
     z-index: 20;
 }
+#message-container.warning {
+    right: 0%;
+    z-index: 50;
+}
+
 
 #message-container span {
     border-radius: 5px;
@@ -43,6 +48,11 @@
 #message-container span.success {
     border-left: 3px solid #5b9932;
 }
+
+#message-container span.warning {
+    border-left: 3px solid #e0c63f;
+}
+
 
 /* Responsive CSS */
 

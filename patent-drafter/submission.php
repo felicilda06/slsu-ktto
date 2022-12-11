@@ -59,7 +59,7 @@
             <input type="text" class="form-control" placeholder="Type something..." id="input_anything">
             <button class="btn btn-primary" id="btn_see_feedback">
               See Feedback
-              <span id="feedback_counter">10</span>
+              <span class="hide" id="feedback_counter">0</span>
             </button>
           </div>
        </div>
@@ -101,6 +101,7 @@
           </div>
           <div class="modal-body" style="font-size:14px;">
              <input type="text" id="maker_id" class="d-none">
+             <input type="text" id="new_study_id" class="d-none">
              <div class="d-flex justify-content-end align-items-center text-success w-100 mb-2 hide" id="notification">
                 <i class="fa fa-check-circle mr-2"></i>
                 <span style="font-size: 13px;" id="notification_message">Message</span>

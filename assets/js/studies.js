@@ -403,7 +403,7 @@ $(document).ready(()=>{
                 contentType: false,
                 success: (res)=>{
                     const { status_code, message } = res && JSON.parse(res);
-                    arrOfInputs = arrOfInputs.map((arr, i)=> i > 0 ? {...arr, value: ''} : arr)
+                    // arrOfInputs = arrOfInputs.map((arr, i)=> i > 0 ? {...arr, value: ''} : arr)
                     arrOfInputs.map(arr=> $(`#${arr.id}`).val(''))
                     message_func([validationMessage('', '', status_code, message)])
                     $('#modal_document').modal('hide');

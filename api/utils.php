@@ -31,6 +31,7 @@
          if($isExist){
             mysqli_query($conn, $queryUpdate);
             unlink('../files/'.$removeFile);
+            return  $fileName;
       }else{
             
             $executeQuery =  mysqli_query($conn, $query);

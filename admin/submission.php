@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="../assets/css/message.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/placeholder.css">
+    <link rel="stylesheet" href="../assets/css/feedback.css">
     <link rel="stylesheet" href="../assets/css/drafter_submission.css">
 
     <title>SLSU-KTTO Document Management System</title>
@@ -45,15 +46,22 @@
       <img src="../assets/images/loader1.gif" class="img-loader">
     </div>
     <?php
+      include '../feedback.php';
       include '../navbar.php';
+
     ?>
     <div class="submission_wrapper">
        <div class="filter_settings">
           <div class="filter_inputs">
-            <span>Filter by: </span>
             <input type="date" class="form-control" id="filter_by_date">
           </div>
-          <input type="text" class="form-control" placeholder="Type something..." id="input_anything">
+          <div class="sub_container w-100 d-flex justify-content-between">
+            <input type="text" class="form-control" placeholder="Type something..." id="input_anything">
+            <button class="btn btn-primary" id="btn_see_feedback">
+              See Feedback
+              <span class="hide" id="feedback_counter">0</span>
+            </button>
+          </div>
        </div>
        <div class="tbl_drafter_studies_wrapper">
            <table class="table table-stripped" id="tbl_studies">
@@ -162,19 +170,6 @@
                 </div>
               </div>
             </div>
-            <div class="input mt-4" id="log_submission" data-title="Log Submission Status">
-              <div class="d-flex justify-content-between" id="label_wrapper">
-                <span>Log Submission Status</span>
-                <span id="log_submission" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
-              </div>
-              <div class="input_wrapper d-flex align-items-center">
-                <input type="file" class="form-control mt-1" id="log_submission" accept="image/*,.doc, .docx, .pdf, .odt">
-                <div class="icon_wrapper d-flex align-items-center ml-3">
-                  <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="log_submission"></i>
-                  <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="log_submission"></i>
-                </div>
-              </div>
-            </div>
             <div class="input mt-4" id="response" data-title="Response">
               <div class="d-flex justify-content-between" id="label_wrapper">
                 <span>Response</span>
@@ -206,6 +201,7 @@
           </div>
           <div class="modal-body" style="font-size:17px;">
             <input type="text" id="maker_id_decline" class="d-none">
+            <input type="text" class="d-none" id="userId_decline">
              <span style="font-size:14px;">Feedback</span>
              <textarea id="feedback_decline" cols="30" rows="5" class="form-control mt-2" placeholder="Type something..."></textarea>
           </div>
@@ -227,6 +223,7 @@
           <div class="modal-body" style="font-size:17px;">
              <input type="text" id="maker_id" class="d-none">
              <input type="text" id="uploaded_id" class="d-none">
+             <input type="text" class="d-none" id="userId">
              <input type="file" class="form-control my-3" id="new_file" accept="image/*,.doc, .docx, .pdf, .odt">
              <span style="font-size:13px;">Feedback: <span style="font-size:11px;">(Optional)</span></span>
              <textarea id="feedback_move" cols="30" rows="5" class="form-control mt-2 mb-3" placeholder="Type something..." value="This study is now submitted to IPOPHIL.">This study is now submitted to IPOPHIL.</textarea>
@@ -242,6 +239,7 @@
 
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
+    <script src="../assets/js/feedback.js"></script>
     <script src="../assets/js/admin_submission.js"></script>
 
 </body>

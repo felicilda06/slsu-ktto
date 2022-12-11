@@ -168,20 +168,6 @@
                   </div>
                 </div>
               </div>
-              <div class="input mt-4" id="log_submission_status" data-title="Log Submission Status">
-                <div class="d-flex justify-content-between" id="label_wrapper">
-                  <span>Log Submission Status</span>
-                  <span id="log_submission_status" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
-                </div>
-                <div class="input_wrapper d-flex align-items-center">
-                  <input readonly type="text" class="form-control mt-1" id="log_submission_status" accept="image/*,.doc, .docx, .pdf, .odt">
-                  <i class="fa fa-pencil ml-3 text-secondary" id="log_submission_status"></i>
-                  <div class="icon_wrapper d-flex align-items-center ml-3 hide" id="log_submission_status">
-                    <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="log_submission_status"></i>
-                    <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="log_submission_status"></i>
-                  </div>
-                </div>
-              </div>
               <div class="input mt-4" id="response" data-title="Response">
                 <div class="d-flex justify-content-between" id="label_wrapper">
                   <span>Response</span>
@@ -198,8 +184,7 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button type="button" id="btn_drafer_cancel_update_doc" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            <button type="button" id="btn_drafer_upload_done" class="btn btn-primary">Save Changes</button>
+            <button type="button" id="btn_drafer_cancel_update_doc" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
