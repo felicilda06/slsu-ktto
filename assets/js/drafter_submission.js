@@ -43,8 +43,8 @@ $(document).ready(()=>{
                     <a href='../uploads/${study?.file}' download style='text-decoration:none;'>
                         <i title="Download" class="fa fa-download mx-2 text-primary"></i>
                     </a>
-                    <i title="Comment" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-share-square-o text-primary"></i>
-                    <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success ${is_new_uploaded ? 'btn_accept' :'disable'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                    <i title="Upload New" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
+                    <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success btn_accept" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                     <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${is_new_uploaded ? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                    
                 </td>
@@ -124,6 +124,13 @@ $(document).ready(()=>{
        $('#new_file').val('')
     })
 
+    $('#new_file').change(()=>{
+      $('#error_file').addClass('hide');
+      $('#new_file').css('color','#555')
+      $('#new_file').css('border-color','#ccc')
+      $('#feedback_move').focus()
+    })
+
     $('#btn_save_upload_document').click(()=>{
         apiType = 'accept_study_new_comment'
         formData.append('api', apiType)
@@ -135,24 +142,31 @@ $(document).ready(()=>{
         formData.append('createdAt', moment(new Date()).format('MMMM D, y hh:mm:ss'))
         formData.append('sender_name', userName)
 
-        $.ajax({
-           url: '.././api/drafter.php',
-           type: 'POST',
-           cache: false,
-           data: formData,
-           processData: false,
-           contentType: false,
-           success: (res)=>{
-              const { status_code, message } = res && JSON.parse(res)
-              getListOfStudies('get_list_of_studies');
-              $('#modal_upload_new_document').modal('hide');
-              $('#new_file').val('');
-              message_func([{status: status_code, message}]);
-           },
-           error: (err)=>{
-            console.log(`Error`, err);
-           }
-        })
+        if(!$('#new_file')[0].files[0]){
+           $('#error_file').removeClass('hide');
+           $('#new_file').css('color','#f76556')
+           $('#new_file').css('border-color','#f76556')
+           return;
+        }else{
+            $.ajax({
+              url: '.././api/drafter.php',
+              type: 'POST',
+              cache: false,
+              data: formData,
+              processData: false,
+              contentType: false,
+              success: (res)=>{
+                  const { status_code, message } = res && JSON.parse(res)
+                  getListOfStudies('get_list_of_studies');
+                  $('#modal_upload_new_document').modal('hide');
+                  $('#new_file').val('');
+                  message_func([{status: status_code, message}]);
+              },
+              error: (err)=>{
+                message_func([{status: 500, message: err}])
+              }
+          })
+        }
     })
 
     $(document).on('click', '.btn_accept', (event)=>{
@@ -249,6 +263,8 @@ $(document).ready(()=>{
         formData.append('maker_id', $('#maker_id').val())
         formData.append('status', 'Accept')
         formData.append('color', 'a5ffc5')
+        formData.append('senderName', userName)
+        formData.append('createdAt', moment(new Date()).format('MMMM D, y hh:mm:ss'))
 
         $.ajax({
           url: '.././api/drafter.php',

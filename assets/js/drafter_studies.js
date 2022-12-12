@@ -13,6 +13,7 @@ $(document).ready(()=>{
     ]
     const type_of_technology = $('#type_of_technology').val()
     const patent_id = $('#patent_id').val()
+    const userName = $('#user_name').val()
 
     const renderTable = (studies = [])=>{
        if(studies.length > 0){
@@ -127,6 +128,8 @@ $(document).ready(()=>{
                 formData.append(getFile.id, getFile.value[0])
                 formData.append('maker_id',  $('#maker_id_update_studies').val())
                 formData.append('patent_id', patent_id)
+                formData.append('senderName', userName)
+                formData.append('createdAt', moment(new Date()).format('MMMM D, y hh:mm:ss'))
                 const fileName = `${getFile.id}_${$('#maker_id_update_studies').val()}_${getFile.value[0]?.name}`;
                 $.ajax({
                   url: '.././api/drafter.php',
@@ -135,7 +138,8 @@ $(document).ready(()=>{
                   data: formData,
                   processData: false,
                   contentType: false,
-                  success: (res)=>{
+                  success: (_res)=>{
+                    console.log(_res);
                       $('#notification').removeClass('hide');
                       $('#notification_message').text('Document Successfully Updated.');
                       $(`.input_wrapper > input#${id}`).attr('readonly', true)
@@ -167,6 +171,7 @@ $(document).ready(()=>{
       $(`.input_wrapper > input`).attr('readonly', true)
       $(`.input_wrapper > input`).attr('type', 'text')
       $(`.btn_save`).addClass('disable')
+      arrOfDocuments.map(doc=> $(`.input_wrapper > input#${doc.id}`).val(''))
     })
 
     arrOfDocuments.map(doc=>{

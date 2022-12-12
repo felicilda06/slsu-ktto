@@ -50,6 +50,7 @@
     <div class="drafter_studies_wrapper pt-5 px-3">
         <input type="text" class="d-none" value="<?php echo $type_of_technology;?>" id="type_of_technology">
         <input type="text" class="d-none" value="<?php echo $userId;?>" id="patent_id">
+        <input type="text" class="d-none" value="<?php echo $_SESSION['name'];?>" id="user_name">
         <div class="wrapper d-flex justify-content-between">
           <div class="drafter_studies_filter d-flex">
               <input type="date" class="form-control mr-3" id="filter_date_accepted">
@@ -93,7 +94,7 @@
             <h5 class="modal-title" id="exampleModalLabel">Edit Documents</h5>
           </div>
           <div class="modal-body" style="font-size:14px;">
-          <input type="text" id="maker_id_update_studies" class="d-none">
+             <input type="text" id="maker_id_update_studies" class="d-none">
              <div class="d-flex justify-content-end align-items-center text-success w-100 mb-2 hide" id="notification">
                 <i class="fa fa-check-circle mr-2"></i>
                 <span style="font-size: 13px;" id="notification_message">Message</span>

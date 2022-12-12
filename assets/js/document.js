@@ -153,7 +153,7 @@ $(document).ready(()=>{
         })
         
     }
-
+    //<div class="dot"></div>
     renderMenu = (arrOfStudies = [], activeId, status, bgColor)=>{
        if(arrOfStudies.length){
             $('.document_menus > div.menu').remove();
@@ -167,7 +167,6 @@ $(document).ready(()=>{
                     <div status="${studies?.status}" color="${studies?.bg_color}" class="menu d-flex ${studies?.id === activeId ? 'active': ''}" id="${studies?.id}" key="${index}">
                         <i class="mr-2 mt-1 ${imagesExt.includes(ext) ? 'fa fa-file-picture-o' : 'fa fa-file'}"></i>
                         <p>${studies?.title}</p>
-                        <div class="dot"></div>
                     </div>
                 `)
             })
@@ -241,13 +240,11 @@ $(document).ready(()=>{
 
     $('#btn_send_comment').click((event)=>{
         event?.preventDefault();
-        const sender = $('#btn_send_comment').attr('sender')
-        const receiver = $('#btn_send_comment').attr('receiver')
         const feedback = $('#comment_field').val()
         const studyId =  $('#btn_send_comment').attr('study-id')
         const patentId = $('#btn_send_comment').attr('patent-id')
         apiType = 'reply_to_comment';
-        
+
         if(isSubmit) return
         if(!feedback){
             message_func([{status: 409, message: 'Please enter your comment.'}])
@@ -259,8 +256,8 @@ $(document).ready(()=>{
                 cache: false,
                 data: {
                     api: apiType,
-                    sender,
-                    receiver,
+                    sender: userId,
+                    receiver: studyId,
                     feedback,
                     studyId,
                     patentId,

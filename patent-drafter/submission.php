@@ -225,10 +225,11 @@
              <input type="text" id="maker_id" class="d-none">
              <input type="text" id="uploaded_id" class="d-none">
              <input type="text" class="d-none" id="userId">
+             <small class="text-danger hide" id="error_file" style="float: right; font-size:12px;">Please add a file.</small>
              <input type="file" class="form-control my-3" id="new_file" accept="image/*,.doc, .docx, .pdf, .odt">
              <span style="font-size:13px;">Feedback: <span style="font-size:11px;">(Optional)</span></span>
-             <textarea id="feedback_move" cols="30" rows="5" class="form-control mt-2 mb-3" placeholder="Type something..." value="This study is now submitted to IPOPHIL.">This study is now submitted to IPOPHIL.</textarea>
-             <span class="text-success" style="font-size: 12px;">This will help the maker to be notify about his/her study.</span>
+             <textarea id="feedback_move" cols="30" rows="5" class="form-control mt-2 mb-3" placeholder="Type something..."></textarea>
+             <span class="text-success" style="font-size: 12px;">This will help the maker to be notify about their study.</span>
             </div>
           <div class="modal-footer">
             <button type="button" id="btn_cancel_upload_document" class="btn btn-danger" data-dismiss="modal">Cancel</button>

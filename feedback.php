@@ -1,4 +1,5 @@
 <div class="feedback_wrapper hide">
+    <input type="text" id="study_id" class="d-none">
     <div class="feedback_container slide">
         <div class="placeholder_container">
             <span id="placeholder_text">No Data Available</span>

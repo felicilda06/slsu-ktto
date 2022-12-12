@@ -87,7 +87,7 @@ $(document).ready(()=>{
   
       $('#btn_maker_save_changes').click(()=>{
         apiType = 'update_study'
-         arrOfUpdateInputs.map(input=> formData.append(input.id, input.value ?? ''))
+         arrOfUpdateInputs.map(input=> formData.append(input.id, input.id === 'updt_file' ? input.value[0] :input.value))
          formData.append('api', apiType)
          formData.append('rowId', $('#row_id').val())
          $.ajax({

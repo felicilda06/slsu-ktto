@@ -14,6 +14,7 @@ $(document).ready(()=>{
        $('.feedback_wrapper').removeClass('hide')
        $('.feedback_container').addClass('slide')
        $('#send_feedback_reply').focus()
+       feedbackDiv.scrollTop = feedbackDiv.scrollHeight;
     })
 
     $('#btn_hide_feedback').click(()=>{
@@ -61,12 +62,10 @@ $(document).ready(()=>{
         });
       }
 
-    const renderMenus = (studies = [], active , studyId, receiverId) =>{
+    const renderMenus = (studies = [], active, _studyId) =>{
         if(studies.length){
             $('.feedback_menus > div.feedback_menu').remove();
             studies.map((study, index)=>{
-                $('#btn_send_reply').attr('receiver', receiverId ?? study?.userId)
-                $('#btn_send_reply').attr('study-id', studyId ?? study?.id)
                 $('.feedback_menus').append(`
                    <div key="${index}" study-id="${study?.id}" receiver="${study?.userId}" class="feedback_menu ${active === study?.id ? 'active': ''}" id="${study?.id}">
                      <span>${study?.title}</span>
@@ -138,25 +137,17 @@ $(document).ready(()=>{
           },
           success: (res)=>{
              const fetchStudies = res && JSON.parse(res)
+             const activeId = fetchStudies[0]?.id
              if(!isSelected){
-                const activeId = fetchStudies[0]?.id
-                renderMenus(fetchStudies, activeId)
-                getFeedabackByStudyId(activeId)
+               $('#study_id').val(activeId)
+               renderMenus(fetchStudies, activeId, activeId, activeId)
+               getFeedabackByStudyId(activeId)
+               return
              }else{
-                renderMenus(fetchStudies, active, studyId, receiverId)
-                getFeedabackByStudyId(active)
-             }
-            //  setInterval(()=>{
-            //     if(!isSelected){
-            //         const activeId = fetchStudies[0]?.id
-            //         renderMenus(fetchStudies, activeId)
-            //         getFeedabackByStudyId(activeId)
-            //      }else{
-            //         renderMenus(fetchStudies, active, studyId, receiverId)
-            //         getFeedabackByStudyId(active)
-            //      }
-            //  } , 1200)
-            
+               $('#study_id').val(studyId)
+               renderMenus(fetchStudies, active, studyId, receiverId)
+               getFeedabackByStudyId(active)
+             }           
           },
           error: (err)=>{
             console.log(`Error`,err);
@@ -164,27 +155,19 @@ $(document).ready(()=>{
        })
     }
 
-    if(technologyType){
-      getStudesByPatentId('get_studies_by_patent_Id', technologyType, undefined)
-    }else{
-      getStudesByPatentId('get_studies_by_patent_Id', '', undefined)
-    }
+    getStudesByPatentId('get_studies_by_patent_Id', technologyType, undefined)
 
     $(document).on('click', '.feedback_menu', event=>{
         const { id } = event?.currentTarget
         isSelected = true;
-        if(technologyType){
-            getStudesByPatentId('get_studies_by_patent_Id', technologyType, id)
-        }else{
-            getStudesByPatentId('get_studies_by_patent_Id', '', undefined)
-        }
+        getStudesByPatentId('get_studies_by_patent_Id', technologyType, id, id)
+        feedbackDiv.scrollTop = feedbackDiv.scrollHeight;
     })
 
     $('#btn_send_reply').click(event=>{
         event?.preventDefault();
+        const studyId = $('#study_id').val()
         const feedback = $('#send_feedback_reply').val()
-        const receiver = $('#btn_send_reply').attr('receiver')
-        const studyId = $('#btn_send_reply').attr('study-id')
         apiType = 'reply_to_feedback';
 
         if(isSubmit) return
@@ -198,7 +181,7 @@ $(document).ready(()=>{
                 cache: false,
                 data:{
                     api: apiType,
-                    receiver,
+                    receiver: studyId,
                     studyId,
                     feedback,
                     sender: userId,
@@ -208,6 +191,8 @@ $(document).ready(()=>{
                 success: (_res)=>{
                     $('#send_feedback_reply').val('')
                     getFeedabackByStudyId(studyId)
+                    $('#send_feedback_reply').val('')
+                    feedbackDiv.scrollTop = feedbackDiv.scrollHeight;
                 },
                 error: (err)=>{
                     console.log(`Error`, err);
