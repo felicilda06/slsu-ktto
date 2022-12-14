@@ -18,13 +18,14 @@ $(document).ready(()=>{
     {id: 'certification', value: ''},
     {id: 'log_submission', value: ''},
     {id: 'response', value: ''},
+    {id: 'drafted_documents', value: ''},
   ];
   const userId = $('#user_id').val()
   const userName = $('#user_name').val()
 
   const renderTable = (studies = [])=>{
+    $('#tbl_body_drafter_studies tr.studies').remove();
       if(studies.length > 0){
-          $('#tbl_body_drafter_studies tr.studies').remove();
           studies.map((study, i)=>{
              const is_new_uploaded = study?.is_new_uploaded !== '0' ? true : false
             $('#tbl_body_drafter_studies').append(`<tr class="studies">
@@ -36,15 +37,15 @@ $(document).ready(()=>{
               <td class="text-center py-3">${study?.file}</td>
               <td class="text-center py-3">${study?.authors}</td>
               <td class="text-center py-3">${study?.created_at}</td>
-              <td  width="20%" class="text-center py-3 align-items-center" style="font-size:14px;">
+              <td width="20%" class="text-center py-3 align-items-center" style="font-size:14px;">
                   <a href='#' class="btn_view" id="${study?.file}" style='text-decoration:none;'>
                       <i title="View" class="fa fa-external-link mx-2 text-secondary"></i>
                   </a>
                   <a href='../uploads/${study?.file}' download style='text-decoration:none;'>
                       <i title="Download" class="fa fa-download mx-2 text-primary"></i>
                   </a>
-                  <i title="Comment" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-share-square-o text-primary"></i>
-                  <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success ${is_new_uploaded ? 'btn_accept' :'disable'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                  <i title="Upload New" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
+                  <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success btn_accept" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                   <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${is_new_uploaded ? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                  
               </td>
@@ -114,14 +115,21 @@ $(document).ready(()=>{
 
       if(isSubmit) return
       if(imageExt.includes(ext) || ext === 'pdf'){
-         window.open(`${baseURL}${id}`);
+          window.open(`${baseURL}${id}`);
       }else{
-         message_func([{status: 409, message: 'This file is not supported of browser to preview. You can only download the file.'}], 'warning')
+          message_func([{status: 409, message: 'This file is not supported of browser to preview. You can only download the file.'}], 'warning')
       }
   })
 
   $('#btn_cancel_upload_document').click(()=>{
      $('#new_file').val('')
+  })
+
+  $('#new_file').change(()=>{
+    $('#error_file').addClass('hide');
+    $('#new_file').css('color','#555')
+    $('#new_file').css('border-color','#ccc')
+    $('#feedback_move').focus()
   })
 
   $('#btn_save_upload_document').click(()=>{
@@ -133,30 +141,37 @@ $(document).ready(()=>{
       formData.append('new_file', $(`#new_file`)[0].files[0] ?? '')
       formData.append('userId', $('#userId').val())
       formData.append('createdAt', moment(new Date()).format('MMMM D, y hh:mm:ss'))
+      formData.append('sender_name', userName)
 
-      $.ajax({
-         url: '.././api/drafter.php',
-         type: 'POST',
-         cache: false,
-         data: formData,
-         processData: false,
-         contentType: false,
-         success: (res)=>{
-            const { status_code, message } = res && JSON.parse(res)
-            getListOfStudies('get_all_studies');
-            $('#modal_upload_new_document').modal('hide');
-            $('#new_file').val('');
-            message_func([{status: status_code, message}]);
-         },
-         error: (err)=>{
-          console.log(`Error`, err);
-         }
-      })
+      if(!$('#new_file')[0].files[0]){
+         $('#error_file').removeClass('hide');
+         $('#new_file').css('color','#f76556')
+         $('#new_file').css('border-color','#f76556')
+         return;
+      }else{
+          $.ajax({
+            url: '.././api/drafter.php',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: (res)=>{
+                const { status_code, message } = res && JSON.parse(res)
+                getListOfStudies('get_all_studies');
+                $('#modal_upload_new_document').modal('hide');
+                $('#new_file').val('');
+                message_func([{status: status_code, message}]);
+            },
+            error: (err)=>{
+              message_func([{status: 500, message: err}])
+            }
+        })
+      }
   })
 
   $(document).on('click', '.btn_accept', (event)=>{
     const { id } = event?.currentTarget
-    $('#maker_id').val(id)
     $('#maker_id').val(id)
       $('#modal_accept').modal({
           backdrop: 'static',
@@ -171,50 +186,51 @@ $(document).ready(()=>{
           keyboard: false,            
      });
      $('#userId_decline').val($('.btn_decline').attr('user-id'))
+
   })
 
-  const message_func = (messages = [], status) => {
+  const message_func = (messages = [], status = '') => {
     const messageContainer = $("#message-container");
-      timeOut = 3500
-      messages.map((e) => {
-        spanElement = document.createElement("span");
-        spanElement.innerText = e?.message;
-        isSubmit = true
-        if(!status){
-          if(e?.status !== 200){
-            if (e?.message) {
-              spanElement.className = "error";
-              messageContainer.addClass("error");
-              messageContainer.append(spanElement);
-      
-              setTimeout(() => {
-                messageContainer.removeClass("error");
-                isSubmit = false;
-              }, [4000]);
-            }
-          }else{
-              spanElement.className = "success";
-              messageContainer.addClass("success");
-              messageContainer.append(spanElement);
-      
-              setTimeout(() => {
-                messageContainer.removeClass("success");
-                isSubmit = false;
-              }, [4000]);
+    timeOut = 3500
+    messages.map((e) => {
+      spanElement = document.createElement("span");
+      spanElement.innerText = e?.message;
+      isSubmit = true
+      if(!status){
+        if(e?.status !== 200){
+          if (e?.message) {
+            spanElement.className = "error";
+            messageContainer.addClass("error");
+            messageContainer.append(spanElement);
+    
+            setTimeout(() => {
+              messageContainer.removeClass("error");
+              isSubmit = false;
+            }, [4000]);
           }
         }else{
-          spanElement.className = status;
-          messageContainer.addClass(status);
-          messageContainer.append(spanElement);
-  
-          setTimeout(() => {
-            messageContainer.removeClass(status);
-            isSubmit = false;
-          }, [4000]);
+            spanElement.className = "success";
+            messageContainer.addClass("success");
+            messageContainer.append(spanElement);
+    
+            setTimeout(() => {
+              messageContainer.removeClass("success");
+              isSubmit = false;
+            }, [4000]);
         }
+      }else{
+        spanElement.className = status;
+        messageContainer.addClass(status);
+        messageContainer.append(spanElement);
 
-        setTimeout(() => messageContainer.children().remove(), timeOut);
-      });
+        setTimeout(() => {
+          messageContainer.removeClass(status);
+          isSubmit = false;
+        }, [4000]);
+      }
+
+      setTimeout(() => messageContainer.children().remove(), timeOut);
+    });
   }
 
   const pushToArray = (id, value) => {
@@ -248,6 +264,8 @@ $(document).ready(()=>{
       formData.append('maker_id', $('#maker_id').val())
       formData.append('status', 'Accept')
       formData.append('color', 'a5ffc5')
+      formData.append('senderName', userName)
+      formData.append('createdAt', moment(new Date()).format('MMMM D, y hh:mm:ss'))
 
       $.ajax({
         url: '.././api/drafter.php',

@@ -30,7 +30,7 @@
          $file = $_FILES['formality']['name'];
          $fileName = 'formality_result_'.$_POST['maker_id'].'_'.$file;
          
-         $query = "Insert into tbl_documents values ('', '".$fileName."', '', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+         $query = "Insert into tbl_documents values ('', '".$fileName."', '', '', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
          $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
          $executeQuery = mysqli_query($conn, $selectQuery);
          if(mysqli_num_rows($executeQuery) > 0){
@@ -48,7 +48,7 @@
         $file = $_FILES['acknowledgement']['name'];
         $fileName = 'acknowledgement_receipt_'.$_POST['maker_id'].'_'.$file;
 
-        $query = "Insert into tbl_documents values ('', '', '".$fileName."', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+        $query = "Insert into tbl_documents values ('', '', '".$fileName."', '', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
         $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
         $executeQuery = mysqli_query($conn, $selectQuery);
         if(mysqli_num_rows($executeQuery) > 0){
@@ -66,7 +66,7 @@
         $file = $_FILES['withdrawal']['name'];
         $fileName = 'notice_of_withdrawal_'.$_POST['maker_id'].'_'.$file;
 
-        $query = "Insert into tbl_documents values ('', '', '', '".$fileName."', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+        $query = "Insert into tbl_documents values ('', '', '', '".$fileName."', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
         $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
         $executeQuery = mysqli_query($conn, $selectQuery);
         if(mysqli_num_rows($executeQuery) > 0){
@@ -84,7 +84,7 @@
         $file = $_FILES['publication']['name'];
         $fileName = 'notice_of_publication_'.$_POST['maker_id'].'_'.$file;
 
-        $query = "Insert into tbl_documents values ('', '', '', '', '".$fileName."', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+        $query = "Insert into tbl_documents values ('', '', '', '', '".$fileName."', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
         $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
         $executeQuery = mysqli_query($conn, $selectQuery);
         if(mysqli_num_rows($executeQuery) >0){
@@ -106,7 +106,7 @@
         $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
         $executeQuery = mysqli_query($conn, $selectQuery);
         while($row = mysqli_fetch_array($executeQuery)){
-         $query = "Insert into tbl_documents values ('', '', '', '', '', '".$fileName."', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+         $query = "Insert into tbl_documents values ('', '', '', '', '', '".$fileName."', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
          $updateQuery = "Update tbl_documents set certification = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
          
          saveNewDocument($_FILES['certification'], $_POST['maker_id'], $_POST['patent_id'], $query, $_POST['status'], $_POST['color'], $updateQuery, $row['certification'], $fileName);
@@ -119,7 +119,7 @@
         $file = $_FILES['log_submission']['name'];
         $fileName = 'log_submission_status_'.$_POST['maker_id'].'_'.$file;
         
-        $query = "Insert into tbl_documents values ('', '', '', '', '', '', '".$fileName."', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+        $query = "Insert into tbl_documents values ('', '', '', '', '', '', '".$fileName."', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
         $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
         $executeQuery = mysqli_query($conn, $selectQuery);
         if(mysqli_num_rows($executeQuery) > 0){
@@ -134,7 +134,7 @@
         $file = $_FILES['response']['name'];
         $fileName = 'response_'.$_POST['maker_id'].'_'.$file;
 
-        $query = "Insert into tbl_documents values ('', '', '', '', '', '', '', '".$fileName."', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+        $query = "Insert into tbl_documents values ('', '', '', '', '', '', '', '".$fileName."', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
         $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
         $executeQuery = mysqli_query($conn, $selectQuery);
         if(mysqli_num_rows($executeQuery)){
@@ -144,6 +144,25 @@
          saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], $query, $_POST['status'], $_POST['color'], $updateQuery, $row['response'], $fileName);
         }else{
           saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], $query, $_POST['status'], $_POST['color'], '', '', $fileName);
+        }
+
+        $senderName = $_POST['senderName'];
+        $senderFeedback = "$senderName uploaded a response.";
+        sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
+      } else if($api === 'drafted_documents'){
+        $file = $_FILES['drafted_documents']['name'];
+        $fileName = 'drafted_documents'.$_POST['maker_id'].'_'.$file;
+
+        $query = "Insert into tbl_documents values ('', '', '', '', '', '', '', '', '".$fileName."', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+        $selectQuery = "Select * from tbl_documents where maker_id = '".$_POST['maker_id']."'";
+        $executeQuery = mysqli_query($conn, $selectQuery);
+        if(mysqli_num_rows($executeQuery)){
+         $row = mysqli_fetch_assoc($executeQuery);
+         $updateQuery = "Update tbl_documents set drafted_documents = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+         
+         saveNewDocument($_FILES['drafted_documents'], $_POST['maker_id'], $_POST['patent_id'], $query, $_POST['status'], $_POST['color'], $updateQuery, $row['drafted_documents'], $fileName);
+        }else{
+          saveNewDocument($_FILES['drafted_documents'], $_POST['maker_id'], $_POST['patent_id'], $query, $_POST['status'], $_POST['color'], '', '', $fileName);
         }
 
         $senderName = $_POST['senderName'];
@@ -277,15 +296,21 @@
           $senderName = $_POST['senderName'];
           $file = $_FILES['formality_result']['name'];
           $fileName = 'formality_result_'.$_POST['maker_id'].'_'.$file;
-          $query = "Insert into tbl_documents values ('', '".$fileName."', '', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+          $query = "Insert into tbl_documents values ('', '".$fileName."', '', '', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
           $selectQuery = "Select * from tbl_documents where study_id = '".$_POST['maker_id']."'";
           $executeQuery = mysqli_query($conn, $selectQuery);
           if(mysqli_num_rows($executeQuery) > 0){
             $row = mysqli_fetch_assoc($executeQuery);
             $senderFeedback = $row['formality_result'] === $file ? "$senderName uploaded a formality result." : "$senderName uploaded a new formality result.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            $updateQuery = "Update tbl_documents set formality_result = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
-            saveNewDocument($_FILES['formality_result'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['formality_result'], $fileName);
+            if(isset($_POST['rowId'])){
+              $updateQuery = "Update tbl_documents set formality_result = '".$fileName."' where id = '".$_POST['rowId']."'";
+              saveNewDocument($_FILES['formality_result'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['formality_result'], $fileName);
+            }else{
+              $updateQuery = "Update tbl_documents set formality_result = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+              saveNewDocument($_FILES['formality_result'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['formality_result'], $fileName);
+            }
+           
             echo $fileName;
           }else{
             $senderFeedback = "$senderName uploaded a formality result.";
@@ -296,15 +321,20 @@
           $senderName = $_POST['senderName'];
           $file = $_FILES['acknowledgement_receipt']['name'];
           $fileName = 'acknowledgement_receipt_'.$_POST['maker_id'].'_'.$file;
-          $query = "Insert into tbl_documents values ('', '', '".$fileName."', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+          $query = "Insert into tbl_documents values ('', '', '".$fileName."', '', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
           $selectQuery = "Select * from tbl_documents where study_id = '".$_POST['maker_id']."'";
           $executeQuery = mysqli_query($conn, $selectQuery);
           if(mysqli_num_rows($executeQuery) > 0){
             $row = mysqli_fetch_assoc($executeQuery);
             $senderFeedback = $row['acknowledgement_receipt'] !== $file ? "$senderName uploaded acknowledgement reciept." : "$senderName uploaded a new acknowledgement reciept.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            $updateQuery = "Update tbl_documents set acknowledgement_receipt = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
-            saveNewDocument($_FILES['acknowledgement_receipt'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['acknowledgement_receipt'], $fileName);
+            if(isset($_POST['rowId'])){
+              $updateQuery = "Update tbl_documents set acknowledgement_receipt = '".$fileName."' where id = '".$_POST['rowId']."'";
+              saveNewDocument($_FILES['acknowledgement_receipt'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['acknowledgement_receipt'], $fileName);
+            }else{
+              $updateQuery = "Update tbl_documents set acknowledgement_receipt = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+              saveNewDocument($_FILES['acknowledgement_receipt'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['acknowledgement_receipt'], $fileName);
+            }
             echo $fileName;
          }else{
             $senderFeedback = "$senderName uploaded acknowledgement receipt.";
@@ -315,58 +345,73 @@
           $senderName = $_POST['senderName'];
           $file = $_FILES['notice_of_withdrawal']['name'];
           $fileName = 'notice_of_withdrawal_'.$_POST['maker_id'].'_'.$file;
-          $query = "Insert into tbl_documents values ('', '', '', '".$fileName."', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+          $query = "Insert into tbl_documents values ('', '', '', '".$fileName."', '', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
           $selectQuery = "Select * from tbl_documents where study_id = '".$_POST['maker_id']."'";
           $executeQuery = mysqli_query($conn, $selectQuery);
           if(mysqli_num_rows($executeQuery) > 0){
             $row = mysqli_fetch_assoc($executeQuery);
             $senderFeedback = $row['notice_of_withdrawal'] !== $file ? "$senderName uploaded notice of withdrawal." : "$senderName uploaded a new notice of withdrawal.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            $updateQuery = "Update tbl_documents set notice_of_withdrawal = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
-            saveNewDocument($_FILES['notice_of_withdrawal'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_withdrawal'], $fileName);
+            if(isset($_POST['rowId'])){
+              $updateQuery = "Update tbl_documents set notice_of_withdrawal = '".$fileName."' where id = '".$_POST['rowId']."'";
+              saveNewDocument($_FILES['notice_of_withdrawal'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_withdrawal'], $fileName);
+            }else{
+              $updateQuery = "Update tbl_documents set notice_of_withdrawal = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+              saveNewDocument($_FILES['notice_of_withdrawal'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_withdrawal'], $fileName);
+            }
             echo $fileName;
          }else{
             $senderFeedback = "$senderName uploaded notice of withdrawal.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            saveNewDocument($_FILES['notice_of_withdrawal'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_withdrawal'], $fileName);
+            saveNewDocument($_FILES['notice_of_withdrawal'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_withdrawal'], $fileName);
          }
       } else if($api === 'updt_notice_of_publication'){
           $senderName = $_POST['senderName'];
           $file = $_FILES['notice_of_publication']['name'];
           $fileName = 'notice_of_publication_'.$_POST['maker_id'].'_'.$file;
-          $query = "Insert into tbl_documents values ('', '', '', '', '".$fileName."', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+          $query = "Insert into tbl_documents values ('', '', '', '', '".$fileName."', '', '', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
           $selectQuery = "Select * from tbl_documents where study_id = '".$_POST['maker_id']."'";
           $executeQuery = mysqli_query($conn, $selectQuery);
           if(mysqli_num_rows($executeQuery) > 0){
             $row = mysqli_fetch_assoc($executeQuery);
             $senderFeedback = $row['notice_of_publication'] !== $file ? "$senderName uploaded notice of publication." : "$senderName uploaded a new notice of publication.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            $updateQuery = "Update tbl_documents set notice_of_publication = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
-            saveNewDocument($_FILES['notice_of_publication'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_publication'], $fileName);
+            if(isset($_POST['rowId'])){
+              $updateQuery = "Update tbl_documents set notice_of_publication = '".$fileName."' where id = '".$_POST['rowId']."'";
+              saveNewDocument($_FILES['notice_of_publication'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_publication'], $fileName);
+            }else{
+              $updateQuery = "Update tbl_documents set notice_of_publication = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+              saveNewDocument($_FILES['notice_of_publication'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_publication'], $fileName);
+            }
             echo $fileName;
          }else{
             $senderFeedback = "$senderName uploaded notice of publication.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            saveNewDocument($_FILES['notice_of_publication'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_publication'], $fileName);
+            saveNewDocument($_FILES['notice_of_publication'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['notice_of_publication'], $fileName);
          }
       } else if($api === 'updt_certification'){
           $senderName = $_POST['senderName'];
           $file = $_FILES['certification']['name'];
           $fileName = 'certification_'.$_POST['maker_id'].'_'.$file;
-          $query = "Insert into tbl_documents values ('', '', '', '', '', '', '".$fileName."', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+          $query = "Insert into tbl_documents values ('', '', '', '', '', '', '".$fileName."', '', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
           $selectQuery = "Select * from tbl_documents where study_id = '".$_POST['maker_id']."'";
           $executeQuery = mysqli_query($conn, $selectQuery);
           if(mysqli_num_rows($executeQuery) > 0){
             $row = mysqli_fetch_assoc($executeQuery);
             $senderFeedback = $row['certification'] !== $file ? "$senderName uploaded a certification." : "$senderName uploaded a new certification.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            $updateQuery = "Update tbl_documents set certification = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
-            saveNewDocument($_FILES['certification'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['certification'], $fileName);
+            if(isset($_POST['rowId'])){
+              $updateQuery = "Update tbl_documents set certification = '".$fileName."' where id = '".$_POST['rowId']."'";
+              saveNewDocument($_FILES['certification'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['certification'], $fileName);
+            }else{
+              $updateQuery = "Update tbl_documents set certification = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+              saveNewDocument($_FILES['certification'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['certification'], $fileName);
+            }
             echo $fileName;
          }else{
             $senderFeedback = "$senderName uploaded a certification.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            saveNewDocument($_FILES['certification'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['certification'], $fileName);
+            saveNewDocument($_FILES['certification'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['certification'], $fileName);
          }
       } else if($api === 'updt_log_submission_status'){
           $selectQuery = "Select * from tbl_documents where study_id = '".$_POST['maker_id']."'";
@@ -383,19 +428,47 @@
           $senderName = $_POST['senderName'];
           $file = $_FILES['response']['name'];
           $fileName = 'response_'.$_POST['maker_id'].'_'.$file;
-          $query = "Insert into tbl_documents values ('', '', '', '', '', '', '', '".$fileName."', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+          $query = "Insert into tbl_documents values ('', '', '', '', '', '', '', '".$fileName."', '', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
           $selectQuery = "Select * from tbl_documents where study_id = '".$_POST['maker_id']."'";
           $executeQuery = mysqli_query($conn, $selectQuery);
           if(mysqli_num_rows($executeQuery) > 0){
             $row = mysqli_fetch_assoc($executeQuery);
             $senderFeedback = $row['response'] !== $file ? "$senderName uploaded a response." : "$senderName uploaded a new response.";
             sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-            $updateQuery = "Update tbl_documents set response = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
-            saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['response'], $fileName);
+            if(isset($_POST['rowId'])){
+              $updateQuery = "Update tbl_documents set response = '".$fileName."' where id = '".$_POST['rowId']."'";
+              saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['response'], $fileName);
+            }else{
+              $updateQuery = "Update tbl_documents set response = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+              saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['response'], $fileName);
+            }
         }else{
           $senderFeedback = "$senderName uploaded a response.";
           sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
-          saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], '', 'Accept', 'a5ffc5', $updateQuery, $row['response'], $fileName);
+          saveNewDocument($_FILES['response'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['response'], $fileName);
+        }
+      } else if($api === 'updt_drafted_documents'){
+          $senderName = $_POST['senderName'];
+          $file = $_FILES['drafted_documents']['name'];
+          $fileName = 'drafted_documents_'.$_POST['maker_id'].'_'.$file;
+          $query = "Insert into tbl_documents values ('', '', '', '', '', '', '', '', '".$fileName."', '".$_POST['patent_id']."', '".$_POST['maker_id']."', '".$_POST['maker_id']."')";
+          $selectQuery = "Select * from tbl_documents where study_id = '".$_POST['maker_id']."'";
+          $executeQuery = mysqli_query($conn, $selectQuery);
+          if(mysqli_num_rows($executeQuery) > 0){
+            $row = mysqli_fetch_assoc($executeQuery);
+            $senderFeedback = $row['drafted_documents'] !== $file ? "$senderName uploaded a drafted document." : "$senderName uploaded a new drafted document.";
+            sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
+            if(isset($_POST['rowId'])){
+              $updateQuery = "Update tbl_documents set drafted_documents = '".$fileName."' where id = '".$_POST['rowId']."'";
+              saveNewDocument($_FILES['drafted_documents'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['drafted_documents'], $fileName);
+            }else{
+              $updateQuery = "Update tbl_documents set drafted_documents = '".$fileName."' where maker_id = '".$_POST['maker_id']."'";
+              saveNewDocument($_FILES['drafted_documents'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['drafted_documents'], $fileName);
+            }
+        }else{
+          $senderFeedback = "$senderName uploaded a drafted document.";
+          sendFeedback($_POST['maker_id'], $_POST['patent_id'], $senderFeedback, $_POST['maker_id'], $_POST['createdAt'], $senderName);
+          saveNewDocument($_FILES['drafted_documents'], $_POST['maker_id'], $_POST['patent_id'], $query, 'Accept', 'a5ffc5', $updateQuery, $row['drafted_documents'], $fileName);
         }
       } else if ($api === 'get_studies_with_no_log_submission'){
          if(isset($_POST['technology_type'])){

@@ -3,6 +3,8 @@ $(document).ready(()=>{
     const filepath = urlPath.slice(-1).toString();
     const usertype = urlPath[urlPath.length - 2] ?? ''
     const [file, _ext] = filepath.split('.');
+    const userTypeField = $('#profile_user_type').val()
+
     const arrOfMenus = [
       {
         usertype: 'admin',
@@ -66,10 +68,17 @@ $(document).ready(()=>{
             active: false
           }
         ]
-    }
+      }
     ]
 
-    const getUrls = arrOfMenus.find((menu)=> menu.usertype === usertype).urls ?? []
+    if(userTypeField){
+      $('#logo').attr('src', './assets/images/logo.png')
+    }else{
+      $('#logo').attr('src', '../assets/images/logo.png')
+    }
+
+
+    const getUrls = arrOfMenus.find((menu)=> userTypeField ? userTypeField === 'patent drafter' ? menu.usertype ===  'patent-drafter' : menu.usertype === userTypeField : menu.usertype === usertype)?.urls ?? []
 
     $('#burger').click(()=>{
        $('.navbar_wrapper').toggleClass('expand')
@@ -98,7 +107,11 @@ $(document).ready(()=>{
        return  $(`#${url.id}`).click(event=> {
          const { id } = event?.currentTarget
          activeMenu(id)
-         window.location.href = `../${usertype}/${id}.php`
+         if(userTypeField){
+           window.location.href = `./${userTypeField?.toLowerCase() === 'patent drafter' ? 'patent-drafter': userTypeField}/${id}.php`
+         }else{
+           window.location.href = `../${usertype}/${id}.php`
+         }
        })
 
     })
@@ -109,6 +122,20 @@ $(document).ready(()=>{
         $('.settings').toggleClass('show')
     })
 
-    $('#signout').click(()=> window.location.href = '../logout.php')
+    $('#signout').click(()=> {
+      if(userTypeField){
+        window.location.href = './logout.php'
+      }else{
+        window.location.href = '../logout.php'
+      }
+    })
+
+    $('#profile').click(()=> {
+      if(userTypeField){
+        window.location.href = './profile.php'
+      }else{
+        window.location.href = '../profile.php'
+      }
+    })
 
 })

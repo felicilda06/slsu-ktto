@@ -63,8 +63,8 @@ $(document).ready(()=>{
       }
 
     const renderMenus = (studies = [], active, _studyId) =>{
+      $('.feedback_menus > div.feedback_menu').remove();
         if(studies.length){
-            $('.feedback_menus > div.feedback_menu').remove();
             studies.map((study, index)=>{
                 $('.feedback_menus').append(`
                    <div key="${index}" study-id="${study?.id}" receiver="${study?.userId}" class="feedback_menu ${active === study?.id ? 'active': ''}" id="${study?.id}">
@@ -106,7 +106,7 @@ $(document).ready(()=>{
                             <img src="../assets/images/profile.jpg" alt="Profile" id="profile"/>
                             <div class="info">
                             <div class="comment_information">
-                                <span id="account_name">${feedback?.sender_name} - ${userType}</span>
+                                <span id="account_name">${feedback?.usertype === 'admin'? userType : `${feedback?.sender_name} - ${userType}`}</span>
                                 <p>${feedback?.comments}</p>
                             </div>
                             <small>${feedback?.created_at}</small>

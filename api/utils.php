@@ -3,7 +3,7 @@
 
    function isDocumentExist($maker_id, $patent_id){
       global $conn;
-      $query = "Select * from tbl_documents where maker_id = '".$maker_id."' and patent_id = '".$patent_id."'";
+      $query = "Select * from tbl_documents where maker_id = '".$maker_id."'";
       $executeQuery = mysqli_query($conn, $query);
       
       if(mysqli_num_rows($executeQuery) > 0){

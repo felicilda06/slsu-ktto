@@ -183,6 +183,19 @@
                 </div>
               </div>
             </div>
+            <div class="input mt-4" id="drafted_documents" data-title="Drafted Documents">
+              <div class="d-flex justify-content-between" id="label_wrapper">
+                <span>Drafted Documents</span>
+                <span id="drafted_documents" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
+              </div>
+              <div class="input_wrapper d-flex align-items-center">
+                <input type="file" class="form-control mt-1" id="drafted_documents" accept="image/*,.doc, .docx, .pdf, .odt">
+                <div class="icon_wrapper d-flex align-items-center ml-3">
+                  <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="drafted_documents"></i>
+                  <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="drafted_documents"></i>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" id="btn_close_accept_modal" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>

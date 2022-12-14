@@ -68,8 +68,8 @@ $(document).ready(()=>{
    ]
 
    const renderTable = (logs = [], activeRow)=>{
+    $('#tbl_body_drafter_log  tr.fetch_logs').remove();
      if(logs.length > 0){
-        $('#tbl_body_drafter_log  tr.fetch_logs').remove();
         logs.map((log, i)=> {
             const color = statusColor.find(stat=> stat.status ===log?.status)?.color
             $('#tbl_body_drafter_log').append(`<tr key="${i}" id="${log?.id}" class='fetch_logs ${log?.id === activeRow ? 'selected': ''}' style="background: ${color};">

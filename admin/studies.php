@@ -50,6 +50,7 @@
     <div class="drafter_studies_wrapper pt-5 px-3">
         <input type="text" class="d-none" value="<?php echo $type_of_technology;?>" id="type_of_technology">
         <input type="text" class="d-none" value="<?php echo $userId;?>" id="patent_id">
+        <input type="text" class="d-none" value="<?php echo $_SESSION['usertype'];?>" id="user_type">
         <div class="wrapper d-flex justify-content-between">
           <div class="drafter_studies_filter d-flex">
               <input type="date" class="form-control mr-3" id="filter_date_accepted">
@@ -179,6 +180,20 @@
                   <div class="icon_wrapper d-flex align-items-center ml-3 hide" id="response">
                     <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="response"></i>
                     <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="response"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="input mt-4" id="drafted_documents" data-title="Drafted Documents">
+                <div class="d-flex justify-content-between" id="label_wrapper">
+                  <span>Drafted Documents</span>
+                  <span id="drafted_documents" class="hide text-danger" style="font-size:11px;">File Already Exist.</span>
+                </div>
+                <div class="input_wrapper d-flex align-items-center">
+                  <input readonly type="text" class="form-control mt-1" id="drafted_documents" accept="image/*,.doc, .docx, .pdf, .odt">
+                  <i class="fa fa-pencil ml-3 text-secondary" id="drafted_documents"></i>
+                  <div class="icon_wrapper d-flex align-items-center ml-3 hide" id="drafted_documents">
+                    <i title="Save" class="btn_save fa fa-check text-success mr-3 disable" id="drafted_documents"></i>
+                    <i title="Cancel" class="btn_cancel fa fa-times text-danger" id="drafted_documents"></i>
                   </div>
                 </div>
               </div>

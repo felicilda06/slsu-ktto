@@ -137,7 +137,7 @@ $(document).ready(()=>{
                         <img src="../assets/images/profile.jpg" alt="Profile" id="profile"/>
                         <div class="info">
                         <div class="comment_information">
-                            <span id="account_name">${feedback?.sender_name} - ${feedback?.usertype?.at(0).toUpperCase() + feedback?.usertype.slice(1)}</span>
+                            <span id="account_name">${feedback?.usertype === 'admin' ? 'Director' : `${feedback?.sender_name} - ${feedback?.usertype?.at(0).toUpperCase() + feedback?.usertype.slice(1)}`}</span>
                             <p>${feedback?.comments}</p>
                         </div>
                         <small>${feedback?.created_at}</small>
@@ -155,8 +155,8 @@ $(document).ready(()=>{
     }
     //<div class="dot"></div>
     renderMenu = (arrOfStudies = [], activeId, status, bgColor)=>{
+        $('.document_menus > div.menu').remove();
        if(arrOfStudies.length){
-            $('.document_menus > div.menu').remove();
             arrOfStudies.map((studies, index)=> {
                 console.log(studies);
                 const [_fn, ext] = studies?.file.split('.')

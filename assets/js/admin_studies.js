@@ -9,14 +9,17 @@ $(document).ready(()=>{
     {id: 'notice_of_publication', value: {}},
     {id: 'certification', value: {}},
     {id: 'log_submission_status', value: {}},
-    {id: 'response', value: {}}
+    {id: 'response', value: {}},
+    {id: 'drafted_documents', value: {}}
   ]
   const type_of_technology = $('#type_of_technology').val()
   const patent_id = $('#patent_id').val()
+  const userName = $('#user_name').val()
+  const userType = $('#user_type').val()
 
   const renderTable = (studies = [])=>{
+    $('#tbl_drafter_studies tr.studies').remove();
      if(studies.length > 0){
-       $('#tbl_drafter_studies tr.studies').remove();
        studies.map((study, i)=>{
               $('#tbl_drafter_studies').append(`<tr class="studies">
               <td class="text-center py-3">${i + 1}</td>
@@ -100,7 +103,7 @@ $(document).ready(()=>{
       },
       success: (res)=>{
         const documents = res && JSON.parse(res)
-        Object.entries(documents[0]).map(([key, value])=>{
+        Object.entries(documents[0] ?? []).map(([key, value])=>{
            $(`.input_wrapper > input#${key}`).val(value)
            $(document).on('click', `.fa-pencil#${key}`, (event)=>{
               const { id } = event?.currentTarget
@@ -117,15 +120,20 @@ $(document).ready(()=>{
               $(`.input_wrapper > input#${key}`).val(value)
               $(`.input_wrapper .fa-pencil#${id}`).removeClass('hide')
               $(`.input_wrapper .icon_wrapper#${id}`).addClass('hide')
+              $(`.btn_save#${key}`).addClass('disable')
            })
 
            $(document).on('click', `.btn_save#${key}`, (event)=>{
               const { id } = event?.currentTarget
               const getFile = arrOfDocuments.find(doc=> doc.id === id)
-              formData.append('api', getFile.id === 'certification' ||  getFile.id === 'response' ? `updt_${getFile.id}` : getFile.id)
+              userType === 'admin' ? formData.append('rowId', documents[0]?.id) : ''
+              formData.append('api', getFile.id === 'certification' ||  getFile.id === 'response' ? `updt_${getFile.id}` : `updt_${getFile.id}`)
               formData.append(getFile.id, getFile.value[0])
               formData.append('maker_id',  $('#maker_id_update_studies').val())
               formData.append('patent_id', patent_id)
+              formData.append('senderName', userName)
+              formData.append('createdAt', moment(new Date()).format('MMMM D, y hh:mm:ss'))
+              const fileName = `${getFile.id}_${$('#maker_id_update_studies').val()}_${getFile.value[0]?.name}`;
               $.ajax({
                 url: '.././api/drafter.php',
                 type: 'POST',
@@ -133,16 +141,17 @@ $(document).ready(()=>{
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: (res)=>{
-                  console.log(res, `res`);
+                success: (_res)=>{
+                  console.log(_res);
                     $('#notification').removeClass('hide');
                     $('#notification_message').text('Document Successfully Updated.');
                     $(`.input_wrapper > input#${id}`).attr('readonly', true)
                     $(`.input_wrapper > input#${id}`).attr('type', 'text')
-                    $(`.input_wrapper > input#${id}`).val(res)
+                    $(`.input_wrapper > input#${id}`).val(fileName)
                     $(`.input_wrapper .fa-pencil#${id}`).removeClass('hide')
                     $(`.input_wrapper .icon_wrapper#${id}`).addClass('hide')
-
+                    
+                    $('#btn_drafer_upload_done').removeAttr('disabled')
                     setTimeout(()=>  $('#notification').addClass('hide'), 3000)
                 },
                 error: (err)=>{
@@ -165,6 +174,7 @@ $(document).ready(()=>{
     $(`.input_wrapper > input`).attr('readonly', true)
     $(`.input_wrapper > input`).attr('type', 'text')
     $(`.btn_save`).addClass('disable')
+    arrOfDocuments.map(doc=> $(`.input_wrapper > input#${doc.id}`).val(''))
   })
 
   arrOfDocuments.map(doc=>{

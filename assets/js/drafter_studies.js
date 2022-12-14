@@ -9,15 +9,16 @@ $(document).ready(()=>{
       {id: 'notice_of_publication', value: {}},
       {id: 'certification', value: {}},
       {id: 'log_submission_status', value: {}},
-      {id: 'response', value: {}}
+      {id: 'response', value: {}},
+      {id: 'drafted_documents', value: {}}
     ]
     const type_of_technology = $('#type_of_technology').val()
     const patent_id = $('#patent_id').val()
     const userName = $('#user_name').val()
 
     const renderTable = (studies = [])=>{
+      $('#tbl_drafter_studies tr.studies').remove();
        if(studies.length > 0){
-         $('#tbl_drafter_studies tr.studies').remove();
          studies.map((study, i)=>{
                 $('#tbl_drafter_studies').append(`<tr class="studies">
                 <td class="text-center py-3">${i + 1}</td>
@@ -101,6 +102,7 @@ $(document).ready(()=>{
         },
         success: (res)=>{
           const documents = res && JSON.parse(res)
+          console.log(documents);
           Object.entries(documents[0] ?? []).map(([key, value])=>{
              $(`.input_wrapper > input#${key}`).val(value)
              $(document).on('click', `.fa-pencil#${key}`, (event)=>{

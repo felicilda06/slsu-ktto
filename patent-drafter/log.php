@@ -120,7 +120,7 @@
                       <div class="input_wrapper w-100 mx-2">
                           <div class="d-flex justify-content-between">
                             <span>Creator(s)</span>
-                            <small class="text-danger">This field is muted.</small>
+                            <small class="text-secondary">This field is muted.</small>
                           </div>
                           <input type="text" class="form-control mx-2" placeholder="" id="creator" autocomplete="off" readonly style="background: white;">
                       </div>
@@ -268,7 +268,7 @@
                       <div class="input_wrapper w-100 mx-2">
                         <div class="d-flex justify-content-between">
                             <span>Title</span>
-                            <small class="text-danger">This field is muted.</small>
+                            <small class="text-secondary">This field is muted.</small>
                         </div>
                         <select id="updt_title" class="form-control" disabled style="background: white;">
                           <?php
@@ -290,7 +290,7 @@
                       <div class="input_wrapper w-100 mx-2">
                           <div class="d-flex justify-content-between">
                             <span>Creator(s)</span>
-                            <small class="text-danger">This field is muted.</small>
+                            <small class="text-secondary">This field is muted.</small>
                           </div>
                           <input type="text" class="form-control mx-2" placeholder="" id="updt_creator" autocomplete="off" disabled style="background: white;">
                       </div>

@@ -18,13 +18,14 @@ $(document).ready(()=>{
       {id: 'certification', value: ''},
       {id: 'log_submission', value: ''},
       {id: 'response', value: ''},
+      {id: 'drafted_documents', value: ''},
     ];
     const userId = $('#user_id').val()
     const userName = $('#user_name').val()
 
     const renderTable = (studies = [])=>{
+      $('#tbl_body_drafter_studies tr.studies').remove();
         if(studies.length > 0){
-            $('#tbl_body_drafter_studies tr.studies').remove();
             studies.map((study, i)=>{
                const is_new_uploaded = study?.is_new_uploaded !== '0' ? true : false
               $('#tbl_body_drafter_studies').append(`<tr class="studies">
@@ -277,7 +278,7 @@ $(document).ready(()=>{
             console.log(res, `res`);
           },
           error: (err)=>{
-            console.log(`Error`, err);
+            message_func([{status: 500, message: err}])
           }
         })
     }

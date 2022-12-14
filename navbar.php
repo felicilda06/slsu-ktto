@@ -1,7 +1,7 @@
 <div class="navbar_wrapper">
     <i class="fa fa-bars" id="burger"></i>
     <div class="logo">
-        <img src="../assets/images/logo.png" alt="logo">
+        <img src="" alt="logo" id="logo">
         <h1 class="title">SLSU-KTTO DOCUMENT MANAGEMENT SYSTEM</h1>
     </div>
     <nav>
@@ -33,7 +33,7 @@
             <div class="settings_wrapper">
                 <i class="fa fa-caret-down" id="caret_down"></i>
                 <div class="settings">
-                    <div class="settings_menu">
+                    <div class="settings_menu" id="profile">
                         <i class="fa fa-user"></i>
                         <span>Profile</span>
                     </div>
