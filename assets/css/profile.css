@@ -40,3 +40,30 @@ body{
 .profile_container::-webkit-scrollbar-thumb:hover{
     background: rgb(193, 193, 193);
 }
+
+.profile_container .personal_information .main_wrapper .wrapper_1,
+.profile_container .personal_information .main_wrapper .wrapper_2{
+    width: 100%;
+}
+
+.profile_container .personal_information .main_wrapper .wrapper_1 #upload_profile{
+    position: relative;
+}
+
+.profile_container .personal_information .main_wrapper .wrapper_1 #upload_profile img{
+    width: 85px;
+    height: 75px;
+    object-fit: cover;
+    border: 1px solid #d8d8d8;
+}
+
+.profile_container .personal_information .main_wrapper .wrapper_1 #upload_profile #btn_upload_image{
+    position: absolute;
+    bottom: 5%;
+    right: -3%;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+.profile_container .personal_information .main_wrapper .wrapper_1 #upload_profile #btn_upload_image:hover{
+    color: #466ec4 !important;
+}
