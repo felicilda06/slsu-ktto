@@ -1,12 +1,122 @@
 $(document).ready(()=>{
     const userId = $('#user_id').val()
-    let arrOfInputs = [
-      
-    ]
+    const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let timeOut;
+    let validationResult = [];
+    let spanElement;
+    let messages = [];
+    let isSubmit = false;
+    let arrOfInputs = []
+
+    const validationMessage = (id, value, status, message) => {
+      if (status === 400) {
+        switch (id) {
+          case "email": {
+            if (!value) {
+              return {
+                id,
+                message: `${
+                  id?.charAt(0).toUpperCase() + id.slice(1)
+                } address is required.`,
+              };
+            } else if (!emailRegEx.test(value)) {
+              return {
+                id,
+                message: `Must be valid email address.`,
+              };
+            } else {
+              return false;
+            }
+          }
+          default: {
+            return false;
+          }
+        }
+      }else{
+        return {
+          message: message ?? `An error occur in updating data.`,
+        };
+      }
+    };
+  
+    const validator = () => {
+      arrOfInputs.map((input) => {
+        const isExist = validationResult.find((res) => res?.id === input.id);
+        return (
+          !isExist &&
+          validationResult?.push(validationMessage(input.id, input.value, 400))
+        );
+      });
+      return validationResult;
+    };
+
+    const message_func = (messages = []) => {
+      const messageContainer = $("#message-container");
+      timeOut = messages.length > 2 ? 4150 : 2500
+      messages.map((e) => {
+        spanElement = document.createElement("span");
+        if (e?.message) {
+          isSubmit = true;
+          spanElement.innerText = e?.message;
+          spanElement.className = "error";
+          messageContainer.addClass("error");
+          messageContainer.append(spanElement);
+  
+          setTimeout(() => {
+            messageContainer.removeClass("error");
+            isSubmit = false;
+          }, [4000]);
+  
+          setTimeout(() => messageContainer.children().remove(), timeOut);
+        }
+      });
+    }
+
+    const onChangeInput = (id, value) => {
+      const isHasPassword = arrOfInputs.find(arr=> arr?.id === id)
+      validationResult = [];
+      if(!isHasPassword){
+        arrOfInputs.push({id, value})
+      }else{
+        arrOfInputs = arrOfInputs.map((input) =>
+          input.id === id ? { ...input, value } : input
+        );
+      }
+    };
 
     const renderValue = (values = [])=>{
-
+       if(values.length){
+         Object.entries(values[0]).map(([key, value])=>{
+            if(key === 'profile'){
+               if(value){
+                  $('#user_profile').attr('src', `./profiles/${value}`)
+               }else{
+                  $('#user_profile').attr('src', './assets/images/profile.jpg');
+               }
+            }else{
+              $(`#${key}`).val(value)
+            }
+            arrOfInputs.push({id: key, value})
+            if(key === 'contact_no'){
+            }
+            $(`#${key}`).change(event=>{
+              validationResult = [];
+              if(event?.target.id === 'contact_no'){
+                if(!event?.target.value?.match(/^([\d]+)/g)){
+                  $('#contact_no').val('')
+                  return
+                }
+              }
+              onChangeInput(event?.target.id, event?.target.value)
+            })
+         })
+       }
     }
+
+    $('#password').change(event=>{
+      const { id, value } = event?.target
+      onChangeInput(id, value)
+    })
 
     const getAccountInfo = ()=>{
        $.ajax({
@@ -18,7 +128,8 @@ $(document).ready(()=>{
             userId
            },
            success: (res)=>{
-             console.log(res);
+             const accountData = res && JSON.parse(res)
+             renderValue(accountData)
            },
            error: (err)=>{
             console.log(`Error`, err);
@@ -27,4 +138,47 @@ $(document).ready(()=>{
     }
 
     getAccountInfo()
+
+    function openDialog() {
+       $('#upload_profile #profile').remove()
+       const profile = document.createElement('input')
+       profile.id = 'profile'
+       profile.type = 'file'
+       profile.className = 'd-none'
+       profile.accept = 'image/*'
+       profile.click()
+       $('#upload_profile').append(profile)
+    }
+
+    $(document).on('click', '#btn_upload_image', openDialog)
+
+    $(document).on('change', '#profile', function(e){
+      const myProfile = URL.createObjectURL(e.target.files[0]);
+      $('#user_profile').attr('src', myProfile);
+    })
+
+    $('#btn_show_pass').click(()=>{
+        if($('#password').attr('type') === 'password'){
+          $('#password').attr('type', 'text')
+          $('#btn_show_pass').removeClass('fa-eye-slash')
+          $('#btn_show_pass').addClass('fa-eye')
+        }else{
+          $('#password').attr('type', 'password')
+          $('#btn_show_pass').removeClass('fa-eye')
+          $('#btn_show_pass').addClass('fa-eye-slash')
+        }
+    })
+
+    setTimeout(()=> $('#studentId').focus() , 1000)
+
+    $('#btn_update_profile').click(()=>{
+      messages = [...validator()];
+      const hasNoError = messages.filter((res) => !!res?.message)
+      if (isSubmit) return;
+      if (hasNoError.length) {
+       message_func(messages);
+      }else{
+        console.log(arrOfInputs);
+      }
+    })
 })

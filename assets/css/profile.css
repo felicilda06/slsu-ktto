@@ -23,6 +23,24 @@ body{
     gap: 10px;
 }
 
+.profile_container .account_information .input_wrapper .input_2 .password_wrapper{
+    position: relative;
+    height: 100%;
+}
+
+.profile_container .account_information .input_wrapper .input_2 .password_wrapper #btn_show_pass{
+    position: absolute;
+    right: 2%;
+    color: #808080;
+    cursor: pointer;
+    top: 7%;
+    transition: .2s ease-in-out;
+}
+
+.profile_container .account_information .input_wrapper .input_2 .password_wrapper #btn_show_pass:hover{
+    color: #646464;
+}
+
 .profile_container::-webkit-scrollbar{
     width: 8px;
 }

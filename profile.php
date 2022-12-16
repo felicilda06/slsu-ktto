@@ -51,7 +51,10 @@
                  </div>
                 <div class="input_2 w-100">
                     <input type="email" class="form-control my-3" placeholder="Email address" id="email">
-                    <input type="password" class="form-control my-3" placeholder="Password" id="password">
+                    <div class="password_wrapper">
+                     <input type="password" class="form-control my-3" placeholder="Password" id="password">
+                     <i class="fa fa-eye-slash bg-white" id="btn_show_pass"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,13 +65,12 @@
          <div class="main_wrapper d-flex justify-content-between">
             <div class="wrapper_1 d-flex pr-4 mr-2">
               <div id="upload_profile">
-                <img src="./assets/images/profile.jpg" id="user_profile">
-                <input type="file" class="d-none" id="profile">
+                <img src="" id="user_profile">
                 <i title="Update Profile Picture" class="fa fa-camera text-primary" id="btn_upload_image"></i>
               </div>
               <div class="input_1 w-100">
-                <input type="text" class="form-control ml-3 mr-2 my-2" id="" placeholder="Individual's name" id="name">
-                <input type="number" class="form-control ml-3 mr-2 my-2" id="" placeholder="Age" id="age">
+                <input type="text" class="form-control ml-3 mr-2 my-2" placeholder="Individual's name" id="name">
+                <input type="number" class="form-control ml-3 mr-2 my-2" placeholder="Age" id="age">
               </div>
             </div>
             <div class="wrapper_2 w-100">
@@ -78,12 +80,12 @@
                    <option value="female">Female</option>
                    <option value="others">Others</option>
                  </select>
-                <input type="text" class="form-control my-2" id="contact_no" placeholder="Contact No.">
+                <input type="text" class="form-control my-2" id="contact_no" placeholder="Contact No." maxlength="11">
             </div>
          </div>
 
         </div>
-        <button class="btn btn-primary btn-sm mt-3" style="float: right;">Save Changes</button>
+        <button class="btn btn-primary btn-sm mt-3" style="float: right; outline: none;" id="btn_update_profile">Save Changes</button>
     </div>
     <footer></footer>
 

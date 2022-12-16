@@ -11,10 +11,10 @@
            $arrayData = array();
            
            if(mysqli_num_rows($executeQuery) > 0){
-                $getAccountQuery = "Select studentId,email,name,usertype,technology_type from tbl_accounts INNER JOIN tbl_profiles ON tbl_accounts.id = tbl_profiles.userId where tbl_profiles.userId = '".$_POST['userId']."'";
+                $getAccountQuery = "Select studentId,name,usertype,email,technology_type, tbl_profiles.* from tbl_profiles INNER JOIN tbl_accounts ON tbl_profiles.userId = tbl_accounts.id where tbl_accounts.id = '".$_POST['userId']."'";
                 $executeGetAccountQuery = mysqli_query($conn, $getAccountQuery);
                 while($row = mysqli_fetch_assoc($executeGetAccountQuery)){
-                $arrayData[] = $row;
+                    $arrayData[] = $row;
                 }
            }else{
               $getAccountQuery = "Select id,studentId,email,name,usertype,technology_type from tbl_accounts where id = '".$_POST['userId']."'";
