@@ -60,7 +60,7 @@ $(document).ready(()=>{
             success: (res)=>{
                 const documents = res && JSON.parse(res)
                 const docs = documents?.length && Object.entries(documents[0]).map(([_key, value])=> ({file: value})).splice(1)
-                const finalDocs = Array.isArray(docs) && docs.filter((_d, index)=> index <= 6 )
+                const finalDocs = Array.isArray(docs) && docs.filter((_d, index)=> index <= 7 )
                 $('.files div.file').remove()
                 $('.comments_wrapper').removeClass('bordered')
                 if(finalDocs?.length){

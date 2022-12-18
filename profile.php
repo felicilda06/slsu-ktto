@@ -85,7 +85,7 @@
          </div>
 
         </div>
-        <button class="btn btn-primary btn-sm mt-3" style="float: right; outline: none;" id="btn_update_profile">Save Changes</button>
+        <button class="btn btn-primary btn-sm mt-3" style="float: right; outline: none;" id="btn_update_profile" disabled>Save Changes</button>
     </div>
     <footer></footer>
 

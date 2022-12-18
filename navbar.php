@@ -15,7 +15,7 @@
                 ';
                 $output2 = '<li class="menu relative" id="documents">
                     View Documents
-                    <span id="notification_counter">5</span>
+                    <span class="d-none" id="notification_counter">5</span>
                 </li>
                 <li class="menu" id="studies">View Studies</li>
                 ';

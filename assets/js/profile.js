@@ -7,6 +7,7 @@ $(document).ready(()=>{
     let messages = [];
     let isSubmit = false;
     let arrOfInputs = []
+    let formData = new FormData()
 
     const validationMessage = (id, value, status, message) => {
       if (status === 400) {
@@ -27,6 +28,26 @@ $(document).ready(()=>{
             } else {
               return false;
             }
+          }
+          case "contact_no": {
+              if (!value) {
+                return {
+                  id,
+                  message: `Contact Information is required.`,
+                };
+              }else if(value?.length !== 11){
+                return {
+                  id,
+                  message: `Must be valid Contact Number.`,
+                };
+              } else if(!value?.match(/^([\d]+)/g)){
+                return {
+                  id,
+                  message: `Contact No allowed only digits.`,
+                };
+              } else {
+                return false;
+              }
           }
           default: {
             return false;
@@ -55,20 +76,35 @@ $(document).ready(()=>{
       timeOut = messages.length > 2 ? 4150 : 2500
       messages.map((e) => {
         spanElement = document.createElement("span");
-        if (e?.message) {
-          isSubmit = true;
-          spanElement.innerText = e?.message;
-          spanElement.className = "error";
-          messageContainer.addClass("error");
-          messageContainer.append(spanElement);
-  
-          setTimeout(() => {
-            messageContainer.removeClass("error");
-            isSubmit = false;
-          }, [4000]);
-  
-          setTimeout(() => messageContainer.children().remove(), timeOut);
-        }
+        if(e?.status !== 200){
+          if (e?.message) {
+            isSubmit = true;
+            spanElement.innerText = e?.message;
+            spanElement.className = "error";
+            messageContainer.addClass("error");
+            messageContainer.append(spanElement);
+    
+            setTimeout(() => {
+              messageContainer.removeClass("error");
+              isSubmit = false;
+            }, [4000]);
+    
+            setTimeout(() => messageContainer.children().remove(), timeOut);
+          }
+        }else{
+            isSubmit = true;
+            spanElement.innerText = e?.message;
+            spanElement.className = "success";
+            messageContainer.addClass("success");
+            messageContainer.append(spanElement);
+    
+            setTimeout(() => {
+              messageContainer.removeClass("success");
+              isSubmit = false;
+            }, [4000]);
+    
+            setTimeout(() => messageContainer.children().remove(), timeOut);
+          }
       });
     }
 
@@ -107,6 +143,7 @@ $(document).ready(()=>{
                   return
                 }
               }
+              $('#btn_update_profile').removeAttr('disabled');
               onChangeInput(event?.target.id, event?.target.value)
             })
          })
@@ -147,6 +184,12 @@ $(document).ready(()=>{
        profile.className = 'd-none'
        profile.accept = 'image/*'
        profile.click()
+       profile.onchange = _ => {
+         // you can use this method to get file and perform respective operations
+                let files =   Array.from(profile.files);
+                arrOfInputs = arrOfInputs.map(arr=> arr?.id === 'profile' ? {...arr, value: files} : arr)
+                $('#btn_update_profile').removeAttr('disabled');
+             };
        $('#upload_profile').append(profile)
     }
 
@@ -178,7 +221,25 @@ $(document).ready(()=>{
       if (hasNoError.length) {
        message_func(messages);
       }else{
-        console.log(arrOfInputs);
+          arrOfInputs.map(arr=> formData.append(arr?.id, arr?.id !== 'profile' ? arr?.value : arr?.value[0]))
+          formData.append('api', 'update_profile');
+          $.ajax({
+            url:'./api/profile-api.php',
+            type:'POST',
+            cache: false,
+            data:formData,
+            processData: false,
+            contentType: false,
+            success: (res)=>{
+               const { status_code, message } = res && JSON.parse(res)
+               message_func([{status: status_code, message}])
+               $('#btn_update_profile').attr('disabled', true);
+               getAccountInfo();
+            },
+            error: (err)=>{
+              message_func([{status: 500, message: err}])
+            }
+        })
       }
     })
 })
