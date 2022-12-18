@@ -66,7 +66,7 @@
             <div class="wrapper_1 d-flex pr-4 mr-2">
               <div id="upload_profile">
                 <img src="" id="user_profile">
-                <i title="Update Profile Picture" class="fa fa-camera text-primary" id="btn_upload_image"></i>
+                <i title="Update Profile Picture" class="fa fa-camera text-primary bg-white" id="btn_upload_image" style="border-radius: 50%;"></i>
               </div>
               <div class="input_1 w-100">
                 <input type="text" class="form-control ml-3 mr-2 my-2" placeholder="Individual's name" id="name">
