@@ -6,6 +6,7 @@
        include '../api/connection.php';
        session_start();
        global $type_of_technology;
+       global $user;
 
 
        $query = "Select * from tbl_accounts where email = '".$_SESSION['email']."'";
@@ -51,6 +52,7 @@
        <input type="text" class="form-control" placeholder="Type something..." id="log_filter">
       </div>
       <div class="tbl_drafter_log_wrapper mt-4">
+          <input type="text" class="d-none" id="user_type" value="<?php echo $user;?>">
           <table class="table table-stripped" id="tbl_patent_drafter_studies">
                 <thead id="tbl_head_drafter_log">
                   <tr id="tbl_head_row">
