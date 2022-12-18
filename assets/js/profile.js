@@ -35,26 +35,26 @@ $(document).ready(()=>{
               return false;
             }
           }
-          // case "contact_no": {
-          //     if (!value) {
-          //       return {
-          //         id,
-          //         message: `Contact Information is required.`,
-          //       };
-          //     }else if(value?.length !== 11){
-          //       return {
-          //         id,
-          //         message: `Must be valid Contact Number.`,
-          //       };
-          //     } else if(!value?.match(/^([\d]+)/g)){
-          //       return {
-          //         id,
-          //         message: `Contact No allowed only digits.`,
-          //       };
-          //     } else {
-          //       return false;
-          //     }
-          // }
+          case "contact_no": {
+              if (!value) {
+                return {
+                  id,
+                  message: `Contact Information is required.`,
+                };
+              }else if(value?.length !== 11){
+                return {
+                  id,
+                  message: `Must be valid Contact Number.`,
+                };
+              } else if(!value?.match(/^([\d]+)/g)){
+                return {
+                  id,
+                  message: `Contact No allowed only digits.`,
+                };
+              } else {
+                return false;
+              }
+          }
           default: {
             return false;
           }
@@ -145,6 +145,7 @@ $(document).ready(()=>{
               $(`#${key}`).val(value)
             }
             arrOfInputs.push({id: key, value})
+            onChangeInput(key, value)
             $(`#${key}`).change(event=>{
               validationResult = [];
               $('#btn_update_profile').removeAttr('disabled');
