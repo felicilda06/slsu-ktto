@@ -1,12 +1,18 @@
 $(document).ready(()=>{
     const userId = $('#user_id').val()
+    const userType = $('#profile_user_type').val();
     const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     let timeOut;
     let validationResult = [];
     let spanElement;
     let messages = [];
     let isSubmit = false;
-    let arrOfInputs = []
+    let arrOfInputs = [
+      {id: 'age', value:''},
+      {id: 'contact_no', value:''},
+      {id: 'gender', value:''},
+      {id: 'profile', value:[]},
+    ]
     let formData = new FormData()
 
     const validationMessage = (id, value, status, message) => {
@@ -29,26 +35,26 @@ $(document).ready(()=>{
               return false;
             }
           }
-          case "contact_no": {
-              if (!value) {
-                return {
-                  id,
-                  message: `Contact Information is required.`,
-                };
-              }else if(value?.length !== 11){
-                return {
-                  id,
-                  message: `Must be valid Contact Number.`,
-                };
-              } else if(!value?.match(/^([\d]+)/g)){
-                return {
-                  id,
-                  message: `Contact No allowed only digits.`,
-                };
-              } else {
-                return false;
-              }
-          }
+          // case "contact_no": {
+          //     if (!value) {
+          //       return {
+          //         id,
+          //         message: `Contact Information is required.`,
+          //       };
+          //     }else if(value?.length !== 11){
+          //       return {
+          //         id,
+          //         message: `Must be valid Contact Number.`,
+          //       };
+          //     } else if(!value?.match(/^([\d]+)/g)){
+          //       return {
+          //         id,
+          //         message: `Contact No allowed only digits.`,
+          //       };
+          //     } else {
+          //       return false;
+          //     }
+          // }
           default: {
             return false;
           }
@@ -59,6 +65,7 @@ $(document).ready(()=>{
         };
       }
     };
+    
   
     const validator = () => {
       arrOfInputs.map((input) => {
@@ -122,27 +129,24 @@ $(document).ready(()=>{
 
     const renderValue = (values = [])=>{
        if(values.length){
+         if(userType === 'patent drafter'){
+           $('#technology_type').removeClass('d-none')
+         }else{
+            $('#technology_type').addClass('d-none')
+         }
          Object.entries(values[0]).map(([key, value])=>{
             if(key === 'profile'){
                if(value){
-                  $('#user_profile').attr('src', `./profiles/${value}`)
+                 $('#user_profile').attr('src', `./profiles/${value}`)
                }else{
-                  $('#user_profile').attr('src', './assets/images/profile.jpg');
+                $('#user_profile').attr('src', './assets/images/profile.jpg');
                }
             }else{
               $(`#${key}`).val(value)
             }
             arrOfInputs.push({id: key, value})
-            if(key === 'contact_no'){
-            }
             $(`#${key}`).change(event=>{
               validationResult = [];
-              if(event?.target.id === 'contact_no'){
-                if(!event?.target.value?.match(/^([\d]+)/g)){
-                  $('#contact_no').val('')
-                  return
-                }
-              }
               $('#btn_update_profile').removeAttr('disabled');
               onChangeInput(event?.target.id, event?.target.value)
             })
@@ -151,9 +155,20 @@ $(document).ready(()=>{
     }
 
     $('#password').change(event=>{
-      const { id, value } = event?.target
-      onChangeInput(id, value)
+      const { id, value }  = event?.target
+       onChangeInput(id, value)
+       $('#btn_update_profile').removeAttr('disabled');
     })
+    
+
+    arrOfInputs.map(arr=>{
+      $(`#${arr?.id}`).change(event=>{
+        validationResult = [];
+        onChangeInput(event?.target.id, event?.target.value)
+        $('#btn_update_profile').removeAttr('disabled');
+      })
+    })
+
 
     const getAccountInfo = ()=>{
        $.ajax({
@@ -221,8 +236,9 @@ $(document).ready(()=>{
       if (hasNoError.length) {
        message_func(messages);
       }else{
-          arrOfInputs.map(arr=> formData.append(arr?.id, arr?.id !== 'profile' ? arr?.value : arr?.value[0]))
+          arrOfInputs.map(arr=> formData.append(arr?.id, arr?.id !== 'profile' ? arr?.value ?? '' : arr?.value[0]))
           formData.append('api', 'update_profile');
+          formData.append('userId', userId);
           $.ajax({
             url:'./api/profile-api.php',
             type:'POST',
@@ -231,6 +247,7 @@ $(document).ready(()=>{
             processData: false,
             contentType: false,
             success: (res)=>{
+              console.log(res);
                const { status_code, message } = res && JSON.parse(res)
                message_func([{status: status_code, message}])
                $('#btn_update_profile').attr('disabled', true);

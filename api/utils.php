@@ -31,6 +31,18 @@
       }
    }
 
+   function declineStudy($maker_id, $patent_id, $feedback, $receiver, $created, $senderName){
+      global $conn;
+      $query = "Insert into tbl_comments values ('', '".$feedback."', '".$maker_id."', '".$patent_id."', '".$patent_id."', '".$receiver."', '".$senderName."' ,0, '".$created."')";
+      $executeQuery = mysqli_query($conn, $query);
+      if($executeQuery){
+         updateStatusOfStudy($maker_id, 'Decline', 'ffa39e');
+         return 1;
+      }else{
+         return 0;
+      }
+   }
+
    function saveNewDocument($file, $maker_id, $patent_id, $query, $status, $color, $queryUpdate, $removeFile, $fileName){
      global $conn;
      $isExist = isDocumentExist($maker_id, $patent_id);

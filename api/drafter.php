@@ -275,7 +275,7 @@
            echo json_encode($res);
        } else if($api === 'send_feedback'){
           $response = new Response();
-          if(sendFeedback($_POST['maker_id'], $_POST['patent_id'], $_POST['feedback'], $_POST['userId'], $_POST['createdAt'], $_POST['senderName'])){
+          if(declineStudy($_POST['maker_id'], $_POST['patent_id'], $_POST['feedback'], $_POST['userId'], $_POST['createdAt'], $_POST['senderName'])){
             $response->status_code = 200;
             $response->message = "Successfully send a feedback.";
           }else{

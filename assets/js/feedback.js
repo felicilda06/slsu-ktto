@@ -92,13 +92,7 @@ $(document).ready(()=>{
                 const feedbacks = res && JSON.parse(res)
                 $('.comments > div.comment').remove()
                 if(feedbacks?.length){
-                   const unread = feedbacks?.filter(feedback=> feedback?.sender !== userId)?.length
-                   if(unread){
-                        $('#feedback_counter').text(unread)
-                        $('#feedback_counter').removeClass('hide')
-                    }else{
-                        $('#feedback_counter').addClass('hide')
-                    } 
+                   const unread = feedbacks?.filter(feedback=> feedback?.sender !== userId)?.length 
                    feedbacks?.map((feedback, index)=>{
                       const userType = feedback?.usertype === 'admin' ? 'Director' : feedback?.usertype?.at(0).toUpperCase() + feedback?.usertype.slice(1)
                       $('.comments').append(`
