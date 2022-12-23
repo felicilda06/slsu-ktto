@@ -76,6 +76,9 @@
     <script src="../assets/js/navbar.js"></script>
     <script src="../assets/js/document.js"></script>
 
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>  
+
 </body>
 
 </html>

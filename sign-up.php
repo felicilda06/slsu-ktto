@@ -53,7 +53,7 @@
                 <div class="form-input" id='form-input-student-id'>
                     <i class="fa fa-id-badge"></i>
                     <div class="input">
-                        <input type="text" id='studentId' autocomplete="off" placeholder="Student Id">
+                        <input type="text" id='studentId' autocomplete="off" placeholder="Employee Id">
                     </div>
                 </div>
                 <div class="form-input">

@@ -78,6 +78,7 @@
     padding: 0px 5px 18px;
     margin-top: 10px;
     overflow-x: auto;
+    overflow-y: hidden;
     position: relative;
 }
 
@@ -105,17 +106,51 @@
     padding: 5px 8px;
     border-radius: 5px;
     font-size: 13px;
+    position: relative;
+    cursor: pointer;
+}
+
+.document_maker_wrapper .document_body .files .file #tooltip{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    background-color: rgb(114, 114, 114);
+    color: #f1f1f1;
+    white-space: nowrap;
+    padding: 10px 15px;
+    border-radius: 7px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.document_maker_wrapper .document_body .files .file #tooltip::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    border: 15px solid;
+    border-color: rgb(114, 114, 114) #0000 #0000 #0000;
+}
+
+.document_maker_wrapper .document_body .files .file:hover #tooltip{
+    top: -170%;
+    visibility: visible;
+    opacity: 1;
 }
 
 .document_maker_wrapper .document_body .files .file:hover{
-    background-color: #dedede;
+    background-color: #b3c6ff;
+    color: #616161;
 }
 .document_maker_wrapper .document_body .files .file .document_title{
     width: 100px;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
-    cursor: default;
+    cursor: pointer;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical; 

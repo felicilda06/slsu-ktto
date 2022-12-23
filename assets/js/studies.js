@@ -9,6 +9,7 @@ $(document).ready(()=>{
         {id: 'proponent', value:''},
         {id: 'technology_type', value:''},
         {id: 'contact_info', value:''},
+        {id: 'intellectual_property', value:''},
         {id: 'file', value:{}},
         {id: 'status', value:'Pending'},
         {id: 'color', value:'e3e5e6'},
@@ -240,6 +241,16 @@ $(document).ready(()=>{
                   return {
                     id,
                     message: `Type of Technology is required.`,
+                  };
+                } else {
+                  return false;
+                }
+            }
+            case "intellectual_property": {
+                if (!value) {
+                  return {
+                    id,
+                    message: `Intellectual Property is required.`,
                   };
                 } else {
                   return false;

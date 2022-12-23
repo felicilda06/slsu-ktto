@@ -7,6 +7,7 @@ $(document).ready(()=>{
     const userName = $('#user_name').val()
     const userId = $('#user_id').val()
     const commentsDiv = document.getElementById("comments");
+    let tooltipText;
 
     const message_func = (messages = []) => {
         const messageContainer = $("#message-container");
@@ -68,7 +69,7 @@ $(document).ready(()=>{
                         $('.loading').addClass('hide')
                         finalDocs?.map((doc, index)=>{
                             $('.files').append(doc?.file ?`
-                                <div class="file d-flex align-items-center" key="${index}">
+                                <div class="file d-flex align-items-center" key="${index}" id="${index}" tooltip="${doc?.file}">
                                    <span class="document_title">${doc?.file}</span>
                                    <i title="Open External Link" class="open_file fa fa-external-link text-primary ml-4 mr-2" id="${doc?.file}"></i>
                                    <a title="Download" href="${dir}/${doc?.file}" download>
@@ -82,7 +83,7 @@ $(document).ready(()=>{
                         setTimeout(()=> {
                             finalDocs?.map((doc, index)=>{
                                 $('.files').append(doc?.file ? `
-                                    <div class="file d-flex align-items-center" key="${index}">
+                                    <div class="file d-flex align-items-center" id="${index}" key="${index}" tooltip="${doc?.file}">
                                        <span class="document_title">${doc?.file}</span>
                                        <i title="Open External Link" class="open_file fa fa-external-link text-primary ml-4 mr-2" id="${doc?.file}"></i>
                                        <a title="Download" href="${dir}/${doc?.file}" download>
@@ -94,6 +95,16 @@ $(document).ready(()=>{
                             $('.loading').addClass('hide')
                             $('.document_body').removeClass('empty')
                             $('.comments_wrapper').addClass('bordered')
+                            $(`.file`).mouseover((event)=>{
+                                const { id } = event?.currentTarget
+                                tooltipText = null
+                                tooltipText = $(`.file#${id}`).attr('tooltip')
+                                tippy(`.file`, {
+                                    content: tooltipText,
+                                    placement:'bottom'
+                                })
+                            })
+                            $(`.file`).mouseleave(()=>  tooltipText = null)
                         } , 1000)
                     }
                    

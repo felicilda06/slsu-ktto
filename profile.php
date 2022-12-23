@@ -45,7 +45,7 @@
             </div>
             <div class="input_wrapper w-100">
                  <div class="input_1 w-100">
-                    <input type="text" class="form-control my-3" placeholder="Employee Id/Student Id" id="studentId">
+                    <input type="text" class="form-control my-3" placeholder="Employee Id" id="studentId">
                     <input type="text" class="form-control my-3 bg-white" placeholder="Type of User" disabled id="usertype">
                     <input type="text" class="form-control my-3 bg-white" placeholder="Type of Technology" disabled id="technology_type">
                  </div>

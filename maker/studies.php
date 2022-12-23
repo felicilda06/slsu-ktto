@@ -103,6 +103,13 @@
                     <option value="non-chemical">Non-Chemical</option>
                     <option value="chemical">Chemical</option>
                   </select>
+                  <select id="intellectual_property" class="form-control my-3">
+                    <option value="">Type of Intellectual Property</option>
+                    <option value="UM">UM</option>
+                    <option value="Industrial">Industrial</option>
+                    <option value="Copyright">Copyright</option>
+                    <option value="Patent">Patent</option>
+                  </select>
                   <input type="text" id="contact_info" class="form-control my-3" placeholder="Contact Information" autocomplete="off" maxlength="11">
                   <input type="file" id="file" class="form-control my-3" accept="image/*,.doc, .docx, .pdf, .odt">
           </div>
