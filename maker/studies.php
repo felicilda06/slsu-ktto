@@ -3,6 +3,9 @@
 <head>
   <?php
   include '../dependencies.php';
+  include_once '../api/connection.php';
+  global $conn;
+
   session_start();
 
   $user = $_SESSION['usertype'];
@@ -67,6 +70,8 @@
               <th class="text-center" scope="col">Title</th>
               <th class="text-center" scope="col">Proponent</th>
               <th class="text-center" scope="col">Type of Technology</th>
+              <th class="text-center" scope="col">Intellectual Property</th>
+              <th class="text-center" scope="col">College</th>
               <th class="text-center" scope="col">Contact Information</th>
               <th class="text-center" scope="col">File</th>
               <th class="text-center" scope="col">Authors</th>
@@ -76,7 +81,7 @@
           </thead>
           <tbody id="tbl_body_documents">
             <tr id="tbl_row_placeholder" class="hide">
-              <td colspan="9">
+              <td colspan="11">
                 <?php
                 include_once '../placeholder.php';
                 ?>
@@ -120,7 +125,7 @@
           <input type="file" id="file" class="form-control my-3" accept="image/*,.doc, .docx, .pdf, .odt">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_maker_cancel">Cancel</button>
           <button type="button" class="btn btn-primary" id="btn_maker_save">Submit</button>
         </div>
       </div>
@@ -165,6 +170,26 @@
             <option value="">Type of Technology</option>
             <option value="non-chemical">Non-Chemical</option>
             <option value="chemical">Chemical</option>
+          </select>
+          <select id="updt_intellectual_property" class="form-control my-3">
+            <option value="">Type of Intellectual Property</option>
+            <option value="UM">UM</option>
+            <option value="Industrial">Industrial</option>
+            <option value="Copyright">Copyright</option>
+            <option value="Patent">Patent</option>
+          </select>
+          <select id="updt_college" class="form-control my-3">
+            <option value="">College</option>
+            <?php 
+              $query = "Select * from tbl_college where userId = '" . $_SESSION['user_id'] . "' or userId = 0";
+              $executeQuery = mysqli_query($conn, $query);
+              $college='';
+              while($row = mysqli_fetch_array($executeQuery)){
+                $college.="<option value=".$row['college'].">".$row['college']."</option>";
+              }
+
+              echo $college;
+            ?>
           </select>
           <input type="text" id="updt_contact_information" class="form-control my-3" placeholder="Contact Information" autocomplete="off" maxlength="11">
           <div class="files d-flex align-items-center">

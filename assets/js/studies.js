@@ -27,6 +27,8 @@ $(document).ready(() => {
     { id: "updt_proponent", value: "" },
     { id: "updt_technology_type", value: "" },
     { id: "updt_contact_information", value: "" },
+    { id: "updt_intellectual_property", value: "" },
+    { id: "updt_college", value: ""},
     { id: "updt_file", value: {} },
   ];
   const userId = $("#userId").val();
@@ -51,6 +53,8 @@ $(document).ready(() => {
                 <td class="text-center py-3">${document?.title}</td>
                 <td class="text-center py-3">${document?.proponent}</td>
                 <td class="text-center py-3">${document?.technology_type}</td>
+                <td class="text-center py-3">${document?.intellectual_property}</td>
+                <td class="text-center py-3">${document?.college}</td>
                 <td class="text-center py-3">${
                   document?.contact_information
                 }</td>
@@ -462,7 +466,6 @@ $(document).ready(() => {
         contentType: false,
         success: (res) => {
           const { status_code, message } = res && JSON.parse(res);
-          // arrOfInputs = arrOfInputs.map((arr, i)=> i > 0 ? {...arr, value: ''} : arr)
           arrOfInputs.map((arr) => $(`#${arr.id}`).val(""));
           message_func([validationMessage("", "", status_code, message)]);
           $("#modal_document").modal("hide");
@@ -526,7 +529,7 @@ $(document).ready(() => {
                 <span>${col?.college}</span>
                 ${
                   col?.default_item === "0"
-                    ? `<i class="remove_college fa fa-minus text-danger" style="position:relative; z-index:999;"></i>`
+                    ? `<i class="remove_college fa fa-minus text-danger hide" style="position:relative; z-index:999;"></i>`
                     : ""
                 }
               </div>
@@ -598,9 +601,14 @@ $(document).ready(() => {
           const { status_code, message } = res && JSON.parse(res);
           message_func([{ status: status_code, message }]);
           fetchCollege(undefined);
+          $("#modal_create_college").modal("hide");
+          $('#new_college').val('')
         },
         error: (err) => message_func([{ status_code: 400, message: err }]),
       });
     }
   });
+  
+
+  $('#btn_maker_cancel').click(()=> arrOfInputs.map(arr=> $(`#${arr.id}`).val('')))
 });

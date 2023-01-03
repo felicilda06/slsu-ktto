@@ -192,6 +192,7 @@
     border-radius: 0px;
     outline: none;
     border: none;
+    border-bottom: 1px solid #767676;
 }
 
 .college .college_option button#btn_create_item:hover{
