@@ -1,5 +1,4 @@
 <div class="dashboard_wrapper w-100">
-    <input type="date" class="form-control w-25 block">
     <div class="main-wrapper">
         <div class="cards w-100">
             <div class="count">
