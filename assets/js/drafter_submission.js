@@ -24,6 +24,7 @@ $(document).ready(()=>{
     const userName = $('#user_name').val()
 
     const renderTable = (studies = [])=>{
+      console.log(studies);
       $('#tbl_body_drafter_studies tr.studies').remove();
         if(studies.length > 0){
             studies.map((study, i)=>{
@@ -34,10 +35,12 @@ $(document).ready(()=>{
                 <td class="text-center py-3">${study?.proponent}</td>
                 <td class="text-center py-3">${study?.technology_type}</td>
                 <td class="text-center py-3">${study?.contact_information}</td>
+                <td class="text-center py-3">${study?.intellectual_property}</td>
+                <td class="text-center py-3">${study?.college}</td>
                 <td class="text-center py-3">${study?.file}</td>
                 <td class="text-center py-3">${study?.authors}</td>
                 <td class="text-center py-3">${study?.created_at}</td>
-                <td width="20%" class="text-center py-3 align-items-center" style="font-size:14px;">
+                <td width="16%" class="text-center py-3 align-items-center" style="font-size:14px;">
                     <a href='#' class="btn_view" id="${study?.file}" style='text-decoration:none;'>
                         <i title="View" class="fa fa-external-link mx-2 text-secondary"></i>
                     </a>

@@ -72,15 +72,17 @@
                   <th class="text-center" scope="col">Proponent</th>
                   <th class="text-center" scope="col">Type of Technology</th>
                   <th class="text-center" scope="col">Contact Information</th>
+                  <th class="text-center" scope="col">Intellectual Property</th>
+                  <th class="text-center" scope="col">College</th>
                   <th class="text-center" scope="col">File</th>
                   <th class="text-center" scope="col">Authors</th>
                   <th class="text-center" scope="col">Create At</th>
-                  <th class="text-center" scope="col">Actions</th>
+                  <th class="text-center hide" scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody id="tbl_body_drafter_studies">
                 <tr id="tbl_row_placeholder" class="hide">
-                  <td colspan="10">
+                  <td colspan="11">
                     <?php
                       include_once '../placeholder.php';
                     ?>

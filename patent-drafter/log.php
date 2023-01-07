@@ -46,6 +46,7 @@
 
     <div class="drafter_log_wrapper pt-5 px-4">
       <div class="wrapper_2 d-flex justify-content-between">
+      <input type="text" class="hide" id="user_type" value="<?php echo $user; ?>">
        <input type="text" class="form-control" placeholder="Type something..." id="log_filter">
        <input type="text" class="d-none" id="technology_type" value="<?php echo $type_of_technology; ?>">
        <button class="btn btn-primary btn-sm" id="btn_drafter_new_log">Add New Record</button>
