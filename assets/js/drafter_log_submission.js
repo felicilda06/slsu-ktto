@@ -189,6 +189,8 @@ $(document).ready(()=>{
            const getData = res && JSON.parse(res)
            Object.entries(getData[0]).map(([key, value])=> {
              $(`#updt_${key}`).val(value)
+
+             arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value} : fields)
               
               if($(`#updt_title`).val()){
                 $('#btn_drafter_next_update_log').removeAttr('disabled')
