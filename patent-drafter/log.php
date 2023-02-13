@@ -209,7 +209,7 @@
                             <option value="Forfeited">Forfeited</option>
                             <option value="Published">Published</option>
                           </select>
-                      </div>   
+                      </div>  
                   </div>
                   <div class="input d-flex mt-4">
                       <div class="input_wrapper w-100 mx-2">
@@ -217,25 +217,31 @@
                             <input type="text" class="form-control" placeholder="" id="remark_1" autocomplete="off">
                       </div>
                       <div class="input_wrapper w-100 mx-2">
-                          <span>IPOPHL Remarks 2</span>
-                          <input type="text" class="form-control" placeholder="" id="remark_2" autocomplete="off">
+                          <span>Expiration Date</span>
+                          <input type="date" class="form-control" placeholder="" id="expiration_date">
                       </div>
                   </div>
                   <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>IPOPHL Remarks 2</span>
+                          <input type="text" class="form-control" placeholder="" id="remark_2" autocomplete="off">
+                      </div>
                       <div class="input_wrapper w-100 mx-2">
                             <span>Office Remarks</span>
                             <input type="text" class="form-control" placeholder="" id="office_remark" autocomplete="off">
                       </div>
-                      <div class="input_wrapper w-100 mx-2">
+                  </div>
+                  <div class="input d-flex mt-4">
+                     <div class="input_wrapper w-100 mx-2">
                           <span>Action Steps</span>
                           <input type="text" class="form-control" placeholder="" id="action_step_1" autocomplete="off">
                       </div>
-                  </div>
-                  <div class="input d-flex mt-4">
                       <div class="input_wrapper w-100 mx-2">
                             <span>Action Steps 2</span>
                             <input type="text" class="form-control" placeholder="" id="action_step_2" autocomplete="off">
                       </div>
+                  </div>
+                  <div class="input d-flex mt-4">
                       <div class="input_wrapper w-100 mx-2">
                           <span>CERTIFICATE IN OFFICE?</span>
                           <input type="text" class="form-control" placeholder="" id="certificate_office" autocomplete="off">
@@ -379,7 +385,7 @@
                             <option value="Forfeited">Forfeited</option>
                             <option value="Published">Published</option>
                           </select>
-                      </div>   
+                      </div>
                   </div>
                   <div class="input d-flex mt-4">
                       <div class="input_wrapper w-100 mx-2">

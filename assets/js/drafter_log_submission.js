@@ -24,6 +24,7 @@ $(document).ready(()=>{
     {id: 'registration_date_no', value: ''},
     {id: 'examiner', value: ''},
     {id: 'status', value: ''},
+    {id: 'expiration_date', value: ''},
     {id: 'remark_1', value: ''},
     {id: 'remark_2', value: ''},
     {id: 'office_remark', value: ''},
@@ -358,6 +359,7 @@ $(document).ready(()=>{
             $('#btn_drafter_cancel_log').removeClass('btn-secondary')
         }else{
             $('#btn_drafter_cancel_log').attr('data-dismiss', 'modal')
+            $('#btn_drafter_next_log').attr('disabled', true)
             arrOfLogFields.map(field=> $(`#${field.id}`).val(''))
         }
    })
@@ -388,12 +390,18 @@ $(document).ready(()=>{
         }
     };
 
+    const setMindateInExpiryDate =  (id, value)=>{
+      if(id === 'registration_date'){
+        $('#expiration_date').attr('min', value)
+      }
+    }
 
    arrOfLogFields.map(field=>{
       $(`#${field.id}`).change(event=>{
          const { id, value } = event?.target
          const val = $(`#${field.id}`).attr('type') === 'date' ? moment(value).format('MMMM d, y') : value
          pushToArray(id, val)
+         setMindateInExpiryDate(id,value)
          
          if(id === 'title'){
             if(value){

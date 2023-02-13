@@ -611,4 +611,6 @@ $(document).ready(() => {
   
 
   $('#btn_maker_cancel').click(()=> arrOfInputs.map(arr=> $(`#${arr.id}`).val('')))
+
+  
 });
