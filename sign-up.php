@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./assets/css/loader.css">
     <link rel="stylesheet" href="./assets/css/message.css">
 
-    <title>SLSU-KTTO Document Management System</title>
+    <title>SOUTHERN LEYTE STATE U <br> ITSO DOCUMENT MANAGEMENT SYSTEM </title>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
         <div class="form-register">
             <div class="logo">
                 <img src="./assets/images/logo.png" alt="logo" class="img-logo">
-                <h1>SLSU-KTTO Document Management System</h1>
+                <h1>SOUTHERN LEYTE STATE U <br> ITSO DOCUMENT MANAGEMENT SYSTEM</h1>
             </div>
             <span class="sign-up">Sign Up</span>
             <form>

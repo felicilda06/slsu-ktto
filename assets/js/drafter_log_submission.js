@@ -65,7 +65,8 @@ $(document).ready(()=>{
      {status: 'Under Substantive Examination', color:'#2e6bde'}, //blue
      {status: 'Under Formality Examination', color:'#e4e4e4'}, // gray
      {status: 'Published', color:'#83f0fb'}, //lightBlue
-     {status: 'Forfeited', color:'#fbafa3'} // red
+     {status: 'Forfeited', color:'#fbafa3'}, // red
+     {status: 'Withdrawn', color:'#ffa600c8'} // orange
    ]
    const userType = $('#user_type').val()
 

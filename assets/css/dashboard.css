@@ -83,6 +83,12 @@
 .dashboard_wrapper .cards:nth-child(7):hover{
     background-color: #fe9d8f;
 }
+.dashboard_wrapper .cards:nth-child(8){
+    background-color: #ffa600c8;
+}
+.dashboard_wrapper .cards:nth-child(8):hover{
+    background-color: #ffa600fb;
+}
 
 .dashboard_wrapper .cards .count{
     display: flex;

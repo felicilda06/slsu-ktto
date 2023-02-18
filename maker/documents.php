@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../assets/css/document.css">
     <link rel="stylesheet" href="../assets/css/placeholder.css">
 
-    <title>SLSU-KTTO Document Management System</title>
+    <title>SOUTHERN LEYTE STATE U - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
 </head>
 
 <body>

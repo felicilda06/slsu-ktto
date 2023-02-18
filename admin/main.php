@@ -63,5 +63,14 @@
                 <span>Forfeited</span> 
             </div>
         </div>
+        <div class="cards w-100">
+            <div class="count">
+                <span id="count_withdrawn">4</span>
+            </div>
+            <div class="text">
+                <i class="fa fa-wordpress"></i>
+                <span>Withdrawn</span> 
+            </div>
+        </div>
     </div>
 </div>

@@ -50,8 +50,9 @@ $(document).ready(()=>{
                     $('#count_published').text(fetchData?.length)
                 } else if(status === 'Forfeited'){
                     $('#count_forfeited').text(fetchData?.length)
+                } else if(status === 'Withdrawn'){
+                    $('#count_withdrawn').text(fetchData?.length)
                 }
-              
             },
             error: (err)=>{
                 console.log(`Error`, err);
@@ -66,9 +67,9 @@ $(document).ready(()=>{
    getTotatCountStudiesByStatus('Registered');
    getTotatCountStudiesByStatus('Published');
    getTotatCountStudiesByStatus('Forfeited');
-   getTotatCountStudiesByStatus('Under Substantive Examination')
+   getTotatCountStudiesByStatus('Under Substantive Examination');
    getTotatCountStudiesByStatus('Under Formality Examination');
-   
+   getTotatCountStudiesByStatus('Withdrawn');
 
   setInterval(()=> {
     getTotatCountUserByUserType('patent drafter');
@@ -76,8 +77,9 @@ $(document).ready(()=>{
     getTotatCountStudiesByStatus('Registered');
     getTotatCountStudiesByStatus('Published');
     getTotatCountStudiesByStatus('Forfeited');
-    getTotatCountStudiesByStatus('Under Substantive Examination')
+    getTotatCountStudiesByStatus('Under Substantive Examination');
     getTotatCountStudiesByStatus('Under Formality Examination');
+    getTotatCountStudiesByStatus('Withdrawn');
   } , 1000)
 })
 

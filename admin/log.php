@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="../assets/css/drafter_log.css">
     <link rel="stylesheet" href="../assets/css/placeholder.css">
 
-    <title>SLSU-KTTO Document Management System</title>
+    <title>SOUTHERN LEYTE STATE U - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
 </head>
 
 <body>
@@ -131,6 +131,8 @@
                           <select id="ip_type" class="form-control">
                             <option value="INV">INV</option>
                             <option value="UM">UM</option>
+                            <option value="CR">CR</option>
+                            <option value="ID">ID</option>
                           </select>
                       </div>  
                   </div>
@@ -209,6 +211,7 @@
                             <option value="Under Formality Examination">Under Formality Examination</option>
                             <option value="Forfeited">Forfeited</option>
                             <option value="Published">Published</option>
+                            <option value="Withdrawn">Withdrawn</option>
                           </select>
                       </div>   
                   </div>
@@ -301,6 +304,8 @@
                           <select id="updt_ip_type" class="form-control">
                             <option value="INV">INV</option>
                             <option value="UM">UM</option>
+                            <option value="CR">CR</option>
+                            <option value="ID">ID</option>
                           </select>
                       </div>  
                   </div>
@@ -379,6 +384,8 @@
                             <option value="Under Formality Examination">Under Formality Examination</option>
                             <option value="Forfeited">Forfeited</option>
                             <option value="Published">Published</option>
+                            <option value="Withdrawn">Withdrawn</option>
+
                           </select>
                       </div>   
                   </div>
