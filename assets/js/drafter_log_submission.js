@@ -51,6 +51,7 @@ $(document).ready(()=>{
     {id: 'updt_registration_date_no', value: ''},
     {id: 'updt_examiner', value: ''},
     {id: 'updt_status', value: ''},
+    {id: 'updt_expiration_date', value: ''},
     {id: 'updt_remark_1', value: ''},
     {id: 'updt_remark_2', value: ''},
     {id: 'updt_office_remark', value: ''},
@@ -95,6 +96,7 @@ $(document).ready(()=>{
                 <td class="text-center py-4 px-3">${log?.registration_date_no}</td>
                 <td class="text-center py-4 px-3">${log?.examiner}</td>
                 <td class="text-center py-4 px-3">${log?.status}</td>
+                <td class="text-center py-4 px-3">${log?.expiration_date}</td>
                 <td class="text-center py-4 px-3">${log?.remark_1}</td>
                 <td class="text-center py-4 px-3">${log?.remark_2}</td>
                 <td class="text-center py-4 px-3">${log?.office_remark}</td>
@@ -189,11 +191,18 @@ $(document).ready(()=>{
         },
         success: (res)=>{
            const getData = res && JSON.parse(res)
+          //  console.log(getData)
            Object.entries(getData[0]).map(([key, value])=> {
              $(`#updt_${key}`).val(value)
-
-             arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value} : fields)
-              
+            
+             if(key === 'registration_date' || key === 'expiration_date'){
+              const dateValue = moment(value).format('MM/DD/yyyy')
+              arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: dateValue} : fields)
+             }
+             else{
+              arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value} : fields)
+             }
+             
               if($(`#updt_title`).val()){
                 $('#btn_drafter_next_update_log').removeAttr('disabled')
               }

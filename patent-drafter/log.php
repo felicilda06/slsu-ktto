@@ -74,6 +74,7 @@
                     <th class="text-center"><span>No.</span></th>
                     <th class="text-center"><span>Examiner</span></th>
                     <th class="text-center"><span>Status</span></th>
+                    <th class="text-center"><span>Expiration Date</span></th>
                     <th class="text-center"><span>IPOPHL Remarks 1</span></th>
                     <th class="text-center"><span>IPOPHL Remarks 2</span></th>
                     <th class="text-center"><span>Office Remarks</span></th>
@@ -84,7 +85,7 @@
                 </thead>
                 <tbody id="tbl_body_drafter_log">
                   <tr id="tbl_row_placeholder" class="hide">
-                    <td colspan="25">
+                    <td colspan="26">
                       <?php
                         include_once '../placeholder.php';
                       ?>
@@ -425,6 +426,12 @@
                       <div class="input_wrapper w-100 mx-2">
                           <span>CERTIFICATE IN OFFICE?</span>
                           <input type="text" class="form-control" placeholder="" id="updt_certificate_office" autocomplete="off">
+                      </div>
+                  </div>
+                  <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                          <span>Expiration Date</span>
+                          <input type="date" class="form-control" placeholder="" id="updt_expiration_date" autocomplete="off">
                       </div>
                   </div>
               </div>
