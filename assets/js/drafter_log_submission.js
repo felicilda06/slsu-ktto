@@ -191,22 +191,35 @@ $(document).ready(()=>{
         },
         success: (res)=>{
            const getData = res && JSON.parse(res)
-          //  console.log(getData)
            Object.entries(getData[0]).map(([key, value])=> {
-             $(`#updt_${key}`).val(value)
-            
-             if(key === 'registration_date' || key === 'expiration_date'){
-              const dateValue = moment(value).format('MM/DD/yyyy')
-              arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: dateValue} : fields)
-             }
-             else{
-              arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value} : fields)
-             }
-             
-              if($(`#updt_title`).val()){
-                $('#btn_drafter_next_update_log').removeAttr('disabled')
+
+             switch(key){
+                case 'registration_date':{
+                  $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
+                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: value ? moment(value).format('yyyy-MM-DD') : ''} : fields)
+                }
+                case 'expiration_date':{
+                  $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
+                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: value? moment(value).format('yyyy-MM-DD') : ''} : fields)
+                }
+                case 'publication_date':{
+                  $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
+                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: value ? moment(value).format('yyyy-MM-DD') : ''} : fields)
+                }
+                case 'application_date':{
+                  $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
+                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: value ? moment(value).format('yyyy-MM-DD'): ''} : fields)
+                }
+                default: {
+                  $(`#updt_${key}`).val(value)
+                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value} : fields)
+                }
               }
-           })
+            })
+            
+           if($(`#updt_title`).val()){
+            $('#btn_drafter_next_update_log').removeAttr('disabled')
+          }
         },
         error: (err)=>{
             console.log(`Error`, err);
@@ -229,7 +242,16 @@ $(document).ready(()=>{
             $('#btn_drafter_cancel_update_log').removeAttr('data-dismiss')
         }else{
            apiType = 'update_log_submission'
-           arrOfUpdateDataLogFields.map(fields=> formData.append(fields?.id, fields?.value ?? ''))
+           arrOfUpdateDataLogFields.map(fields=> {
+              switch(fields?.id) {
+                case 'updt_registration_date':
+                case 'updt_expiration_date':
+                case 'updt_publication_date':
+                case 'updt_application_date': 
+                return formData.append(fields?.id, fields?.value ? moment(fields?.value).format('MMMM d, y') : '')
+                default: return formData.append(fields?.id, fields?.value ?? '')
+              }
+           })
            formData.append('api', apiType)
             $.ajax({
                 url: '.././api/drafter.php',
