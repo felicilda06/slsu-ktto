@@ -192,23 +192,23 @@ $(document).ready(()=>{
         success: (res)=>{
            const getData = res && JSON.parse(res)
            Object.entries(getData[0]).map(([key, value])=> {
-
+             const regDate = moment(getData[0]?.registration_date).format('yyyy-MM-DD')
+             const today = moment(new Date()).format('yyyy-MM-DD')
              switch(key){
                 case 'registration_date':{
-                  $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
-                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: value ? moment(value).format('yyyy-MM-DD') : ''} : fields)
+                  $(`#updt_${key}`).attr('min', today)
+                  return $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
                 }
                 case 'expiration_date':{
-                  $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
-                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: value? moment(value).format('yyyy-MM-DD') : ''} : fields)
+                  $(`#updt_${key}`).attr('min', regDate)
+                  return $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
                 }
                 case 'publication_date':{
-                  $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
-                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: value ? moment(value).format('yyyy-MM-DD') : ''} : fields)
+                  $(`#updt_${key}`).attr('min', regDate)
+                  return $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
                 }
                 case 'application_date':{
-                  $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
-                  return arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map(fields=> fields.id === `updt_${key}` ? {...fields, value: value ? moment(value).format('yyyy-MM-DD'): ''} : fields)
+                  return $(`#updt_${key}`).val(moment(value).format('yyyy-MM-DD'))
                 }
                 default: {
                   $(`#updt_${key}`).val(value)
@@ -242,16 +242,7 @@ $(document).ready(()=>{
             $('#btn_drafter_cancel_update_log').removeAttr('data-dismiss')
         }else{
            apiType = 'update_log_submission'
-           arrOfUpdateDataLogFields.map(fields=> {
-              switch(fields?.id) {
-                case 'updt_registration_date':
-                case 'updt_expiration_date':
-                case 'updt_publication_date':
-                case 'updt_application_date': 
-                return formData.append(fields?.id, fields?.value ? moment(fields?.value).format('MMMM d, y') : '')
-                default: return formData.append(fields?.id, fields?.value ?? '')
-              }
-           })
+           arrOfUpdateDataLogFields.map(fields=> formData.append(fields?.id, fields?.value ?? ''))
            formData.append('api', apiType)
             $.ajax({
                 url: '.././api/drafter.php',
@@ -412,14 +403,37 @@ $(document).ready(()=>{
     const pushToUpdtArray = (id, value) => {
         const newValue = { id, value };
         const isExist = arrOfUpdateDataLogFields.find((arr) => arr?.id === id);
-
         if (isExist) {
-            arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map((arr) =>
-            arr?.id === id ? { ...arr, value } : arr
+          arrOfUpdateDataLogFields = arrOfUpdateDataLogFields.map((arr) =>
+            {
+              if(arr?.id === id){
+                switch(arr?.id){
+                  case 'updt_registration_date': {
+                    return {...arr, value: moment(value).format('MMMM DD, YYYY')}
+                  }
+                  case 'updt_expiration_date': {
+                    return {...arr, value: moment(value).format('MMMM DD, YYYY')}
+                  }
+                  case 'updt_publication_date': {
+                    return {...arr, value: moment(value).format('MMMM DD, YYYY')}
+                  }
+                  case 'updt_application_date': {
+                    return {...arr, value: moment(value).format('MMMM DD, YYYY')}
+                  }
+                  default: return { ...arr, value }
+                }
+              }else{
+                return arr
+              }
+              
+           }
+           
         );
         } else {
-            arrOfUpdateDataLogFields.push(newValue);
+            return arrOfUpdateDataLogFields.push(newValue);
         }
+
+
     };
 
     const setMindateInExpiryDate =  (id, value)=>{

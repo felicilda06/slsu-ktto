@@ -122,7 +122,7 @@
             </div>
           </div>
           <input type="text" id="contact_info" class="form-control my-3" placeholder="Contact Information" autocomplete="off" maxlength="11">
-          <input type="file" id="file" class="form-control my-3" accept="image/*,.doc, .docx, .pdf, .odt">
+          <input type="file" id="file" class="form-control my-3" accept=".doc, .docx, .pdf, .odt">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_maker_cancel">Cancel</button>
@@ -193,7 +193,7 @@
           </select>
           <input type="text" id="updt_contact_information" class="form-control my-3" placeholder="Contact Information" autocomplete="off" maxlength="11">
           <div class="files d-flex align-items-center">
-            <input readonly type="text" id="updt_file" class="form-control my-3" accept="image/*,.doc, .docx, .pdf, .odt" placeholder="File">
+            <input readonly type="text" id="updt_file" class="form-control my-3" accept=".doc, .docx, .pdf, .odt" placeholder="File">
             <i title="Edit File" id="btn_edit_file" class="fa fa-pencil-square-o text-warning ml-3" style="cursor: pointer; font-size:15px;"></i>
             <i title="Cancel" id="btn_edit_cancel" class="fa fa-times text-danger ml-3 hide" style="cursor: pointer; font-size:15px;"></i>
           </div>

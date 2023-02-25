@@ -24,11 +24,11 @@ $(document).ready(()=>{
     const userName = $('#user_name').val()
 
     const renderTable = (studies = [])=>{
-      console.log(studies);
       $('#tbl_body_drafter_studies tr.studies').remove();
         if(studies.length > 0){
             studies.map((study, i)=>{
                const is_new_uploaded = study?.is_new_uploaded !== '0' ? true : false
+               const isDeclined = study?.status === 'Decline' ?? false
               $('#tbl_body_drafter_studies').append(`<tr class="studies">
                 <td class="text-center py-3">${i + 1}</td>
                 <td class="text-center py-3">${study?.title}</td>
@@ -48,8 +48,8 @@ $(document).ready(()=>{
                         <i title="Download" class="fa fa-download mx-2 text-primary"></i>
                     </a>
                     <i title="Upload New" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
-                    <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success btn_accept" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
-                    <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${is_new_uploaded ? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                    <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success ${isDeclined && !is_new_uploaded? 'disable': 'btn_accept'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                    <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${!is_new_uploaded? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                    
                 </td>
               </tr>`)
