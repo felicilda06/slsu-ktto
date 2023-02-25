@@ -63,8 +63,8 @@ $(document).ready(()=>{
    let arrOfLogs = []
    const statusColor = [
      {status: 'Registered', color:'#c7fdb5'}, //green
-     {status: 'Under Substantive Examination', color:'#2e6bde'}, //blue
-     {status: 'Under Formality Examination', color:'#e4e4e4'}, // gray
+     {status: 'Under Substantive Examination', color:'#92cbdf'}, //blue
+     {status: 'Under Formality Examination', color:'#ECC5FB'}, // violet
      {status: 'Published', color:'#83f0fb'}, //lightBlue
      {status: 'Forfeited', color:'#fbafa3'}, // red
      {status: 'Withdrawn', color:'#ffa600c8'} // orange

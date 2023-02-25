@@ -2,6 +2,15 @@
     width: 100%;
     height: 100%;
 }
+h3{
+    text-align: center;
+    font-size: 30px;
+    font-family: Arial; 
+    background-color: rgba(13,126,219,255);
+    color: rgb(255, 255, 255);
+    font-weight:bold;
+    
+}
 .drafter_log_wrapper input#log_filter{
     width: 275px;
 }
