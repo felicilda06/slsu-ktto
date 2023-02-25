@@ -85,7 +85,7 @@ if ($apiType) {
             unlink('../uploads/' . $row['file']);
          }
 
-         $query = "Update tbl_studies set title = '" . $_POST['updt_title'] . "', proponent= '" . $_POST['updt_proponent'] . "', technology_type = '" . $_POST['updt_technology_type'] . "', contact_information = '" . $_POST['updt_contact_information'] . "', file = '" . $file . "', intellectual_property = '".$_POST['updt_intellectual_property']."', college = '".$_POST['updt_college']."' where id = '" . $_POST['rowId'] . "'";
+         $query = "Update tbl_studies set title = '" . $_POST['updt_title'] . "', proponent= '" . $_POST['updt_proponent'] . "', technology_type = '" . $_POST['updt_technology_type'] . "', contact_information = '" . $_POST['updt_contact_information'] . "', file = '" . $file . "', intellectual_property = '".$_POST['updt_intellectual_property']."', college = '".$_POST['updt_college']."', is_new_uploaded = 1 where id = '" . $_POST['rowId'] . "'";
          $executeQuery = mysqli_query($conn, $query);
          if ($executeQuery) {
             move_uploaded_file($file_tmp_name, $filepath);
