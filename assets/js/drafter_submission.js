@@ -49,7 +49,7 @@ $(document).ready(()=>{
                     </a>
                     <i title="Upload New" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
                     <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success ${isDeclined && !is_new_uploaded? 'disable': 'btn_accept'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
-                    <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${!is_new_uploaded? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                    <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${is_new_uploaded? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                    
                 </td>
               </tr>`)
