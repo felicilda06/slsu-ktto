@@ -14,6 +14,7 @@ $(document).ready(() => {
     { id: "file", value: {} },
     { id: "status", value: "Pending" },
     { id: "color", value: "e3e5e6" },
+    { id: "photos", value: [] },
   ];
   let validationResult = [];
   let spanElement;
@@ -401,17 +402,48 @@ $(document).ready(() => {
     });
   };
 
+  const previewPhotos = ()=>{
+      const photos = arrOfInputs.find(arr=> arr.id === 'photos')?.value ?? []
+      if(!photos.length) return
+      const image = document.createElement('img')
+      photos.map((photo)=> {
+        image.setAttribute('src', photo.src)
+        image.classList.add('preview')
+        if(photos.length > 4){
+          $('#photo_view_container').css('height', '230px')
+        }else{
+          $('#photo_view_container').css('height', '150px')
+        }
+        $('#render_photos').append(image)
+    })
+  }
+
   const pushToArray = (id, value) => {
     const newValue = { id, value };
     const isExist = arrOfInputs.find((arr) => arr?.id === id);
-
+    const index = arrOfInputs.map(arr=> arr?.id).indexOf(id)
+    const currentValue = arrOfInputs[index]?.value
     if (isExist) {
       arrOfInputs = arrOfInputs.map((arr) =>
-        arr?.id === id ? { ...arr, value } : arr
+        {
+          if(arr?.id === id){
+             if(id === 'photos'){
+              return arrOfInputs[index] ={
+                ...arrOfInputs[index],
+                value: currentValue.includes(value) ? currentValue : [...currentValue, value]
+              }
+             }else{
+               return { ...arr, value }
+             }
+          }else{
+            return arr
+          }
+        }
       );
     } else {
       arrOfInputs.push(newValue);
     }
+    previewPhotos()
   };
 
   const pushToUpdateArray = (id, value) => {
@@ -431,7 +463,26 @@ $(document).ready(() => {
     $(`#${arr.id}`).change((event) => {
       validationResult = [];
       const { id, value } = event?.target;
-      return pushToArray(id, value);
+      const type =  $(`#${arr.id}`).attr('type')
+      if(type === 'file'){
+        const photos = event.target.files
+        Object.entries(photos).map(([_, value])=>{
+          const { name, type, size } = value
+          const fr = new FileReader()
+          fr.onload = ()=> {
+              const newValue = {
+                  name,
+                  type,
+                  size,
+                  src: fr.result
+              }
+            return pushToArray(id, newValue);
+          }
+          fr.readAsDataURL(value)
+        })
+      }else{
+        return pushToArray(id, value);
+      }
     });
   });
 
@@ -610,7 +661,19 @@ $(document).ready(() => {
   });
   
 
-  $('#btn_maker_cancel').click(()=> arrOfInputs.map(arr=> $(`#${arr.id}`).val('')))
-
-  
+  $('#btn_maker_cancel').click(()=> {
+     arrOfInputs = arrOfInputs.map(arr=> {
+        $(`#${arr.id}`).val('')
+        if(arr?.id === 'photos'){
+          return {
+            ...arr,
+            value: []
+          }
+        }else{
+          return arr
+        }
+      })
+      $('#render_photos > img').remove()
+      $('#photo_view_container').css('height', 'auto')
+  })
 });

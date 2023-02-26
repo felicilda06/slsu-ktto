@@ -123,6 +123,14 @@
           </div>
           <input type="text" id="contact_info" class="form-control my-3" placeholder="Contact Information" autocomplete="off" maxlength="11">
           <input type="file" id="file" class="form-control my-3" accept=".doc, .docx, .pdf, .odt">
+          <div id="photo_wrapper">
+            <input type="file" id="photos" class="form-control my-3 hidden" accept="image/*" multiple>
+            <label for="photos" id="btn_upload_photos">Upload Photos</label>
+          </div>
+          <div id="photo_view_container">
+            <div id="render_photos">
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_maker_cancel">Cancel</button>

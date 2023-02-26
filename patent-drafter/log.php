@@ -51,7 +51,7 @@
        <input type="text" class="d-none" id="technology_type" value="<?php echo $type_of_technology; ?>">
        <button class="btn btn-primary btn-sm" id="btn_drafter_new_log">Add New Record</button>
       </div>
-      <h3>SLSU INTELLECTUAL PROPERTY PORTFOLIO MATRIX</h3>
+      <h3 class="p-2">SLSU INTELLECTUAL PROPERTY PORTFOLIO MATRIX</h3>
       <div class="tbl_drafter_log_wrapper mt-4">
           <table class="table table-stripped" id="tbl_patent_drafter_studies">
                 <thead id="tbl_head_drafter_log">

@@ -171,6 +171,7 @@
     border: 1px solid #7e7d7d;
     max-height: 25rem;
     overflow-y: auto;
+    z-index: 99;
 }
 
 .college .college_option .college_item {
@@ -197,4 +198,58 @@
 
 .college .college_option button#btn_create_item:hover{
     background: #2172a8;
+}
+div.photo_wrapper{
+   position: relative;
+}
+div#photo_wrapper #btn_upload_photos{
+    background-color: #2785c4;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    padding: 6px 10px;
+    width: 100%;
+    color: white;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 13px;
+}
+div#photo_wrapper #btn_upload_photos:hover{
+    background-color: #2172a8;
+}
+div#photo_view_container{
+   position: relative;
+   display: flex;
+   justify-content: center;
+   overflow-y: auto;
+}
+div#photo_view_container::-webkit-scrollbar{
+    width: 6px;
+    height: 6px;
+}
+div#photo_view_container::-webkit-scrollbar-track {
+    background: #d8d8d8;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+div#photo_view_container::-webkit-scrollbar-thumb {
+    background: rgb(182, 182, 182);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+div#photo_view_container #render_photos{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 4px;
+    position: absolute;
+    top: 0;
+}
+div#photo_view_container #render_photos img.preview{
+    width: 102px;
+    height: 100px;
+    object-fit: cover;
+    margin: 5px;
+    border: 1px solid #d4d4d4;
+    border-radius: 3px;
 }
