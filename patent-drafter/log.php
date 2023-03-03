@@ -405,34 +405,34 @@
                             <input type="text" class="form-control" placeholder="" id="updt_remark_1" autocomplete="off">
                       </div>
                       <div class="input_wrapper w-100 mx-2">
-                          <span>IPOPHL Remarks 2</span>
-                          <input type="text" class="form-control" placeholder="" id="updt_remark_2" autocomplete="off">
+                          <span>Expiration Date</span>
+                          <input type="date" class="form-control" placeholder="" id="updt_expiration_date" autocomplete="off">
                       </div>
                   </div>
                   <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>IPOPHL Remarks 2</span>
+                            <input type="text" class="form-control" placeholder="" id="updt_remark_2" autocomplete="off">
+                      </div>
                       <div class="input_wrapper w-100 mx-2">
                             <span>Office Remarks</span>
                             <input type="text" class="form-control" placeholder="" id="updt_office_remark" autocomplete="off">
                       </div>
-                      <div class="input_wrapper w-100 mx-2">
-                          <span>Action Steps</span>
-                          <input type="text" class="form-control" placeholder="" id="updt_action_step_1" autocomplete="off">
-                      </div>
                   </div>
                   <div class="input d-flex mt-4">
+                      <div class="input_wrapper w-100 mx-2">
+                            <span>Action Steps</span>
+                            <input type="text" class="form-control" placeholder="" id="updt_action_step_1" autocomplete="off">
+                      </div>
                       <div class="input_wrapper w-100 mx-2">
                             <span>Action Steps 2</span>
                             <input type="text" class="form-control" placeholder="" id="updt_action_step_2" autocomplete="off">
                       </div>
-                      <div class="input_wrapper w-100 mx-2">
-                          <span>CERTIFICATE IN OFFICE?</span>
-                          <input type="text" class="form-control" placeholder="" id="updt_certificate_office" autocomplete="off">
-                      </div>
                   </div>
                   <div class="input d-flex mt-4">
                       <div class="input_wrapper w-100 mx-2">
-                          <span>Expiration Date</span>
-                          <input type="date" class="form-control" placeholder="" id="updt_expiration_date" autocomplete="off">
+                          <span>CERTIFICATE IN OFFICE?</span>
+                          <input type="text" class="form-control" placeholder="" id="updt_certificate_office" autocomplete="off">
                       </div>
                   </div>
               </div>
