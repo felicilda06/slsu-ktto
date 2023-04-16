@@ -47,7 +47,6 @@
 .documents_wrapper .table_wrapper .search_options .filter_wrapper .legends .box_wrapper .box {
     width: 11px;
     height: 11px;
-
 }
 
 .documents_wrapper .table_wrapper .search_options .filter_wrapper .legends .box_wrapper span {
@@ -132,7 +131,9 @@
     display: none;
 }
 
+
 /* #modal_document .modal-dialog .modal-content .modal-body  */
+
 .college {
     padding: 6px 12px;
     width: 100%;
@@ -196,37 +197,44 @@
     border-bottom: 1px solid #767676;
 }
 
-.college .college_option button#btn_create_item:hover{
+.college .college_option button#btn_create_item:hover {
     background: #2172a8;
 }
-div.photo_wrapper{
-   position: relative;
+
+div.photo_wrapper {
+    position: relative;
 }
-div#photo_wrapper #btn_upload_photos{
-    background-color: #2785c4;
+
+div#photo_wrapper #btn_upload_photos {
+    border: 1px solid #c2c2c2;
     border-radius: 4px;
     cursor: pointer;
     transition: .2s ease-in-out;
     padding: 6px 10px;
     width: 100%;
-    color: white;
+    background-color: #f1f0f0;
     text-align: center;
     letter-spacing: 1px;
+    color: #6d6d6d;
     font-size: 13px;
 }
-div#photo_wrapper #btn_upload_photos:hover{
-    background-color: #2172a8;
+
+div#photo_wrapper #btn_upload_photos:hover {
+    background-color: #e6e6e6;
 }
-div#photo_view_container{
-   position: relative;
-   display: flex;
-   justify-content: center;
-   overflow-y: auto;
+
+div#photo_view_container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
 }
-div#photo_view_container::-webkit-scrollbar{
+
+div#photo_view_container::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
+
 div#photo_view_container::-webkit-scrollbar-track {
     background: #d8d8d8;
     border-top-left-radius: 10px;
@@ -238,14 +246,16 @@ div#photo_view_container::-webkit-scrollbar-thumb {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-div#photo_view_container #render_photos{
+
+div#photo_view_container #render_photos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin-top: 4px;
     position: absolute;
     top: 0;
 }
-div#photo_view_container #render_photos img.preview{
+
+div#photo_view_container #render_photos img.preview {
     width: 102px;
     height: 100px;
     object-fit: cover;
