@@ -52,6 +52,7 @@
        <input type="text" class="d-none" id="technology_type" value="<?php echo $type_of_technology; ?>">
        <button class="btn btn-primary btn-sm hide" id="btn_drafter_new_log">Add New Record</button>
       </div>
+      <h3 class="p-2">SLSU INTELLECTUAL PROPERTY PORTFOLIO MATRIX</h3>
       <div class="tbl_drafter_log_wrapper mt-4">
           <table class="table table-stripped" id="tbl_patent_drafter_studies">
                 <thead id="tbl_head_drafter_log">
@@ -75,6 +76,7 @@
                     <th class="text-center"><span>No.</span></th>
                     <th class="text-center"><span>Examiner</span></th>
                     <th class="text-center"><span>Status</span></th>
+                    <th class="text-center"><span>Expiration Date</span></th>
                     <th class="text-center"><span>IPOPHL Remarks 1</span></th>
                     <th class="text-center"><span>IPOPHL Remarks 2</span></th>
                     <th class="text-center"><span>Office Remarks</span></th>

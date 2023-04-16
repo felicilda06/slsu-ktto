@@ -51,6 +51,7 @@
       <div class="wrapper_2 d-flex justify-content-between">
        <input type="text" class="form-control" placeholder="Type something..." id="log_filter">
       </div>
+      <h3 class="p-2">SLSU INTELLECTUAL PROPERTY PORTFOLIO MATRIX</h3>
       <div class="tbl_drafter_log_wrapper mt-4">
           <input type="text" class="d-none" id="user_type" value="<?php echo $user;?>">
           <table class="table table-stripped" id="tbl_patent_drafter_studies">

@@ -65,10 +65,10 @@
 }
 
 .dashboard_wrapper .cards:nth-child(5){
-    background-color: #ECC5FB;
+    background-color: #d68ff3;
 }
 .dashboard_wrapper .cards:nth-child(5):hover{
-    background-color: #F9BCDD;
+    background-color: #d06bf8;
 }
 .dashboard_wrapper .cards:nth-child(6){
     background-color: #93f4ff;
