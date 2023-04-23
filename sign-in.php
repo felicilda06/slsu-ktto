@@ -73,7 +73,7 @@
     </div>
 
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/signin.js" type="text/javascript"></script>
+    <script src="./assets/js/signin.js"></script>
 
 </body>
 

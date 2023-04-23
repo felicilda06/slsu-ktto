@@ -76,7 +76,7 @@ $(document).ready(()=>{
      if(logs.length > 0){
         logs.map((log, i)=> {
             const color = statusColor.find(stat=> stat.status ===log?.status)?.color
-            $('#tbl_body_drafter_log').append(`<tr key="${i}" id="${log?.id}" class='fetch_logs ${userType == 'patent drafter' ? log?.id === activeRow ? 'selected': '': ''}' style="background: ${color}; ${userType == "maker" ? "pointer-events: none;": "pointer-events: fill;"}">
+            $('#tbl_body_drafter_log').append(`<tr key="${i}" id="${log?.id}" class='fetch_logs ${userType == 'patent drafter' ? log?.id === activeRow ? 'selected': '': ''}' style="background: ${color}; ${userType == "maker" || userType === 'clerk' ? "pointer-events: none;": "pointer-events: fill;"}">
                 <td class="text-center py-4 px-3">${i + 1}</td>
                 <td class="text-center py-4 px-3">${log?.application_no}</td>
                 <td class="text-center py-4 px-3">${log?.title}</td>

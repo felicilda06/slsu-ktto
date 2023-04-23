@@ -68,7 +68,28 @@ $(document).ready(()=>{
             active: false
           }
         ]
-      }
+      },
+      {
+        usertype: 'clerk',
+        urls: [
+        {
+          id: 'dashboard',
+          active: false
+        },
+        {
+          id: 'log',
+          active: false
+        },
+        {
+          id: 'submission',
+          active: false
+        },
+        {
+          id: 'studies',
+          active: false
+        }
+      ]
+    },
     ]
 
     if(userTypeField){

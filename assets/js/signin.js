@@ -118,6 +118,7 @@ $(document).ready(() => {
     });
   }
 
+
   $("#btn-submit").click((event) => {
     event.preventDefault();
     apiType = "login";
@@ -140,6 +141,7 @@ $(document).ready(() => {
         success: (res) => {
           const res_obj = res && JSON.parse(res)
           const { status_code, message, usertype } = res_obj
+          
           if(status_code !== 200 && message){
             message_func([validationMessage('', '', status_code, message)]);
           }else{
@@ -149,7 +151,10 @@ $(document).ready(() => {
               window.location.href = './admin/dashboard.php';
             }else if(usertype === 'maker'){
               window.location.href = './maker/dashboard.php';
-            }else{return}
+            }else if(usertype === 'clerk'){
+              window.location.href = './clerk/dashboard.php';
+            }
+            else{return}
           }
           
           

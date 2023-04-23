@@ -20,7 +20,7 @@
                 <li class="menu" id="studies">View Studies</li>
                 ';
                 
-                if(isset($user) && $user === 'patent drafter' || $user === 'admin'){
+                if(isset($user) && $user === 'patent drafter' || $user === 'admin' || $user == 'clerk'){
                     echo $output;
                 }else{
                     echo $output2;
