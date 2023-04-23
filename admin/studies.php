@@ -72,7 +72,7 @@
                     <th class="text-center" scope="col">Authors</th>
                     <th class="text-center" scope="col">Create At</th>
                     <th class="text-center" scope="col">Status</th>
-                    <th class="text-center hide" scope="col">Actions</th>
+                    <th class="text-center" scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="tbl_drafter_studies">

@@ -50,7 +50,7 @@
        <input type="text" class="hide" id="user_type" value="<?php echo $user; ?>">
        <input type="text" class="form-control" placeholder="Type something..." id="log_filter">
        <input type="text" class="d-none" id="technology_type" value="<?php echo $type_of_technology; ?>">
-       <button class="btn btn-primary btn-sm hide" id="btn_drafter_new_log">Add New Record</button>
+       <button class="btn btn-primary btn-sm" id="btn_drafter_new_log">Add New Record</button>
       </div>
       <h3 class="p-2">SLSU INTELLECTUAL PROPERTY PORTFOLIO MATRIX</h3>
       <div class="tbl_drafter_log_wrapper mt-4">

@@ -134,24 +134,25 @@ $(document).ready(()=>{
          }else{
             $('#technology_type').addClass('d-none')
          }
-         Object.entries(values[0]).map(([key, value])=>{
-            if(key === 'profile'){
-               if(value){
-                 $('#user_profile').attr('src', `./profiles/${value}`)
-               }else{
-                $('#user_profile').attr('src', './assets/images/profile.jpg');
-               }
-            }else{
-              $(`#${key}`).val(value)
-            }
-            arrOfInputs.push({id: key, value})
-            onChangeInput(key, value)
-            $(`#${key}`).change(event=>{
-              validationResult = [];
-              $('#btn_update_profile').removeAttr('disabled');
-              onChangeInput(event?.target.id, event?.target.value)
-            })
-         })
+         if(!Object.keys(values[0]).includes('profile')){
+          $('#user_profile').attr('src', './assets/images/profile.jpg');
+         }
+         else{
+            Object.entries(values[0]).map(([key, value])=>{
+              if(key === 'profile'){
+                $('#user_profile').attr('src', `./profiles/${value}`)
+              }else{
+                $(`#${key}`).val(value)
+              }
+              arrOfInputs.push({id: key, value})
+              onChangeInput(key, value)
+              $(`#${key}`).change(event=>{
+                validationResult = [];
+                $('#btn_update_profile').removeAttr('disabled');
+                onChangeInput(event?.target.id, event?.target.value)
+              })
+          })
+         }
        }
     }
 

@@ -125,7 +125,8 @@
           <input type="file" id="file" class="form-control my-3" accept=".doc, .docx, .pdf, .odt">
           <div id="photo_wrapper">
             <input type="file" id="photos" class="form-control my-3 hidden" accept="image/*" multiple>
-            <label for="photos" id="btn_upload_photos">Upload Photos</label>
+            <i class='fa fa-photo'></i>
+            <label for="photos" id="btn_upload_photos">Add Photos</label>
           </div>
           <div id="photo_view_container">
             <div id="render_photos">

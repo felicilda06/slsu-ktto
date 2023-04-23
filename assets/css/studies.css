@@ -201,26 +201,35 @@
     background: #2172a8;
 }
 
-div.photo_wrapper {
+div#photo_wrapper {
     position: relative;
 }
 
+div#photo_wrapper i {
+    position: absolute;
+    color: #f0f0f0;
+    top: 25%;
+    left: 37%;
+    pointer-events: none;
+}
+
 div#photo_wrapper #btn_upload_photos {
-    border: 1px solid #c2c2c2;
     border-radius: 4px;
     cursor: pointer;
     transition: .2s ease-in-out;
     padding: 6px 10px;
     width: 100%;
-    background-color: #f1f0f0;
+    background-color: #4396da;
     text-align: center;
     letter-spacing: 1px;
-    color: #6d6d6d;
+    color: white;
     font-size: 13px;
+    z-index: 999;
+    font-weight: normal;
 }
 
 div#photo_wrapper #btn_upload_photos:hover {
-    background-color: #e6e6e6;
+    background-color: #317dbb
 }
 
 div#photo_view_container {

@@ -34,7 +34,7 @@ $(document).ready(()=>{
               <td class="text-center py-3">${study?.authors}</td>
               <td class="text-center py-3">${study?.created_at}</td>
               <td class="text-center py-3">${study?.status}</td>
-              <td class="text-center py-3 align-items-center hide" style="font-size:14px;">
+              <td class="text-center py-3 align-items-center" style="font-size:14px;">
                   <i title="Edit" id="${study?.id}" user-id="${study?.userId}" class="btn_drafter_studies_edit fa fa-pencil-square-o mx-2 text-info" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
               </td>
           </tr>`)
