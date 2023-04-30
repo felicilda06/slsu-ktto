@@ -23,6 +23,8 @@ $(document).ready(() => {
   let isSubmit = false;
   let arrOfCollege = [];
   let focus = false;
+  let imgIndex = 0;
+  let images = [];
   let arrOfUpdateInputs = [
     { id: "updt_title", value: "" },
     { id: "updt_proponent", value: "" },
@@ -402,18 +404,70 @@ $(document).ready(() => {
     });
   };
 
+  const previewImage = (url, index)=>{
+    images = arrOfInputs.find(arr=> arr.id === 'photos')?.value ?? []
+    $('#image_render_preview').attr('src', url)
+    imgIndex = index
+    $('.remove_image').attr('id', imgIndex)
+    $('#btn_next').mouseover(()=> {
+      if(images.length - 1 === imgIndex){
+        $('#btn_next').css('cursor', 'not-allowed')
+        $('#btn_next').attr('title', '')
+        return
+      }
+    })
+    $('#btn_previous').mouseover(()=> {
+      if(imgIndex === 0){
+        $('#btn_previous').css('cursor', 'not-allowed')
+        $('#btn_previous').attr('title', '')
+        return
+      }
+    })
+    $('#btn_next').click(()=> {
+      if(images.length - 1 === imgIndex) return
+      else imgIndex += 1
+      $('#image_render_preview').attr('src',images[imgIndex]?.Url)
+      $('#btn_next').css('cursor', 'not-allowed')
+      $('#btn_previous').css('cursor', 'pointer')
+      $('#btn_previous').attr('title', 'Previous')
+      $('.remove_image').attr('id', imgIndex)
+    })
+    $('#btn_previous').click(()=> {
+      if(imgIndex === 0){
+        $('#btn_previous').css('cursor', 'not-allowed')
+        $('#btn_previous').attr('title', '')
+        return
+      }
+      else{
+        imgIndex -= 1
+        $('#image_render_preview').attr('src',images[imgIndex]?.Url)
+        $('#btn_next').css('cursor', 'pointer')
+        $('#btn_next').attr('title', 'Next')
+        $('.remove_image').attr('id', imgIndex)
+      }
+
+    })
+
+  }
+  $('.remove_image').click(e=>{
+    const index = parseInt(e.currentTarget.id) + 1
+    let photos = arrOfInputs.find(arr=> arr.id === 'photos')?.value ?? []
+    $(`#render_photos > img:nth-child(${index})`).remove()
+    photos.splice(index, 1)
+  })
 
   const previewPhotos = ()=>{
       const photos = arrOfInputs.find(arr=> arr.id === 'photos')?.value ?? []
       if(!photos.length) return
       const image = document.createElement('img')
       photos.map((photo, i)=> {
-        image.setAttribute('src', photo.src)
+        image.setAttribute('src', photo?.Url)
         image.classList.add('preview')
-        image.id = i
+        image.id = photo?.FileName
+        image.key = i
         image.addEventListener('click', ()=> {
           $('#image_previewer_wrapper').removeClass('hide')
-          // $('#image_render_preview').attr('src', '')
+          previewImage(photo?.Url, i)
         })
         if(photos.length > 4){
           $('#photo_view_container').css('height', '230px')
@@ -424,7 +478,7 @@ $(document).ready(() => {
     })
     image.addEventListener('mouseover', e=> {
       tippy(".preview", {
-        content:  `image_00${parseInt(e.currentTarget.id) + 1}`,
+        content: e.currentTarget.id,
         placement: "top",
       });
     })
@@ -471,26 +525,32 @@ $(document).ready(() => {
     }
   };
 
+  const uploadImage = async (file)=> {
+    const formData = new FormData()
+    formData.append('image', file)
+    const result = await axios.post(
+      'https://v2.convertapi.com/upload',
+      formData
+    )
+    const { FileName, FileExt, Url } = result.data
+    return {
+      FileName, FileExt, Url
+    }
+  }
+
   arrOfInputs.map((arr) => {
     $(`#${arr.id}`).change((event) => {
       validationResult = [];
       const { id, value } = event?.target;
       const type =  $(`#${arr.id}`).attr('type')
       if(type === 'file'){
-        const photos = event.target.files
-        Object.entries(photos).map(([_, value])=>{
-          const { name, type, size } = value
-          const fr = new FileReader()
-          fr.onload = ()=> {
-              const newValue = {
-                  name,
-                  type,
-                  size,
-                  src: fr.result
-              }
-            return pushToArray(id, newValue);
+        const files = event.target.files
+        Object.entries(files).map(([_, value])=>{
+          const func = async ()=> {
+            const image = await uploadImage(value)
+            return pushToArray(id, image)
           }
-          fr.readAsDataURL(value)
+          func()
         })
       }else{
         return pushToArray(id, value);
@@ -691,5 +751,10 @@ $(document).ready(() => {
 
   $('#btn_close_image_previewer').click(()=> {
     $('#image_previewer_wrapper').addClass('hide')
+    imgIndex = 0;
+    $('#btn_next').css('cursor', 'pointer')
+    $('#btn_previous').css('cursor', 'pointer')
+    $('#btn_next').attr('title', 'Next')
+    $('#btn_previous').attr('title', 'Previous')
   })
 });

@@ -36,7 +36,7 @@
       <i class='fa fa-caret-left' id='btn_previous' title='Previous'></i>
       <i class='fa fa-caret-right' id='btn_next' title='Next'></i>
       <img id='image_render_preview' src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnN8ZW58MHx8MHx8&w=1000&q=80">
-      <i class='fa fa-trash' id='remove_image' title='Remove'></i>
+      <i class='fa fa-trash remove_image' title='Remove'></i>
     </div>
   </div>
   <div id="message-container"></div>
