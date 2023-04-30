@@ -30,7 +30,16 @@
 
 <body>
   <input type="text" class="d-none" value="<?php echo $_SESSION['email'] ?>" id="user_email">
-  <div class="" id="message-container"></div>
+  <div class='hide' id='image_previewer_wrapper'>
+    <div id='image_previewer'>
+      <i class='fa fa-close' id='btn_close_image_previewer' title='Close'></i>
+      <i class='fa fa-caret-left' id='btn_previous' title='Previous'></i>
+      <i class='fa fa-caret-right' id='btn_next' title='Next'></i>
+      <img id='image_render_preview' src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnN8ZW58MHx8MHx8&w=1000&q=80">
+      <i class='fa fa-trash' id='remove_image' title='Remove'></i>
+    </div>
+  </div>
+  <div id="message-container"></div>
   <div class="loader">
     <img src="../assets/images/loader1.gif" class="img-loader">
   </div>
