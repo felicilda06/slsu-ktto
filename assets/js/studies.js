@@ -450,10 +450,17 @@ $(document).ready(() => {
 
   }
   $('.remove_image').click(e=>{
-    const index = parseInt(e.currentTarget.id) + 1
+    const id = parseInt(e.currentTarget.id)
+    const index = id + 1
     let photos = arrOfInputs.find(arr=> arr.id === 'photos')?.value ?? []
     $(`#render_photos > img:nth-child(${index})`).remove()
-    photos.splice(index, 1)
+    photos.splice(id, 1)
+    if(!photos.length){
+      $('#image_previewer_wrapper').addClass('hide')
+      $('#photo_view_container').css('height', 'unset')
+    }else{
+      previewImage(photos[id]?.Url, id)
+    }
   })
 
   const previewPhotos = ()=>{
@@ -509,7 +516,6 @@ $(document).ready(() => {
     } else {
       arrOfInputs.push(newValue);
     }
-    previewPhotos()
   };
 
   const pushToUpdateArray = (id, value) => {
@@ -534,7 +540,10 @@ $(document).ready(() => {
     )
     const { FileName, FileExt, Url } = result.data
     return {
-      FileName, FileExt, Url
+      userId,
+      FileName, 
+      FileExt,
+      Url
     }
   }
 
@@ -542,16 +551,18 @@ $(document).ready(() => {
     $(`#${arr.id}`).change((event) => {
       validationResult = [];
       const { id, value } = event?.target;
-      const type =  $(`#${arr.id}`).attr('type')
-      if(type === 'file'){
+      const type =  $(`#${id}`).attr('type')
+      if(id === 'photos' && type === 'file'){
         const files = event.target.files
         Object.entries(files).map(([_, value])=>{
           const func = async ()=> {
             const image = await uploadImage(value)
-            return pushToArray(id, image)
+            pushToArray(id, image)
+            previewPhotos()
           }
           func()
         })
+
       }else{
         return pushToArray(id, value);
       }
@@ -562,6 +573,7 @@ $(document).ready(() => {
     apiType = "add_new_study";
     let file = $("#file")[0].files;
     pushToArray("file", file);
+    const photos = arrOfInputs.find(arr=> arr.id === 'photos')?.value ?? []
     const created_at = moment(new Date()).format("MMMM DD, y");
 
     messages = [...validator()];
@@ -579,6 +591,7 @@ $(document).ready(() => {
       formData.append("api", apiType);
       formData.append("created_at", created_at);
       formData.append("userId", userId);
+      formData.append('photos', JSON.stringify(photos))
 
       $.ajax({
         url: ".././api/maker.php",
@@ -592,6 +605,7 @@ $(document).ready(() => {
           arrOfInputs.map((arr) => $(`#${arr.id}`).val(""));
           message_func([validationMessage("", "", status_code, message)]);
           $("#modal_document").modal("hide");
+          $('#photo_view_container').css('height', 'unset')
           fetchStudies("get_record_studies");
         },
         error: (err) => message_func([{ status: 501, message: err }]),

@@ -17,16 +17,25 @@ if ($apiType) {
       $status = $_POST['status'];
       $color = $_POST['color'];
       $userId = $_POST['userId'];
+      $photos = json_decode($_POST['photos']);
 
       $file = $_FILES['file']['name'];
       $file_tmp_name = $_FILES['file']['tmp_name'];
       $file_ex = pathinfo($file, PATHINFO_EXTENSION);
       $file_ex_loc = strtolower($file_ex);
       $filepath = '../uploads/' . $_FILES['file']['name'];
-      move_uploaded_file($file_tmp_name, $filepath);
+      //move_uploaded_file($file_tmp_name, $filepath);
 
       $query = "Insert into tbl_studies values ('', '" . $title . "', '" . $proponent . "', '" . $technology_type . "', '" . $contact_info . "', '" . $file . "', '" . $author . "', '" . $created_at . "', '" . $status . "', '" . $color . "', 0, '" . $userId . "', 0, '".$_POST['college_text']."', '".$_POST['intellectual_property']."')";
       $executeQuery = mysqli_query($conn, $query);
+      $getLastStudyId = mysqli_query($conn, "Select id from tbl_studies order by id DESC limit 1");
+      $studyId = mysqli_fetch_assoc($getLastStudyId);
+
+      foreach($photos as $ph)
+      {
+         $queryInsertPhoto = "Insert into tbl_photos values ('', '".$ph->FileName."', '".$ph->FileExt."', '".$ph->Url."', '".$userId."', '".$studyId['id']."')";
+         mysqli_query($conn, $queryInsertPhoto);
+      }
 
       $response = new Response();
 
