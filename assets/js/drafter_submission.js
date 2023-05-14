@@ -50,7 +50,7 @@ $(document).ready(()=>{
                     <i title="Upload New" id="${study?.id}" user-id="${study?.userId}" data-new-uploaded="${study?.is_new_uploaded}" class="btn_upload fa fa-upload text-primary"></i>
                     <i title="Accept" id="${study?.id}" user-id="${study?.userId}" class="fa fa-check mx-2 text-success ${isDeclined && !is_new_uploaded? 'disable': 'btn_accept'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                     <i title="Decline" id="${study?.id}" user-id="${study?.userId}" class="fa fa-times mx-2 text-danger ${is_new_uploaded? 'disable' : 'btn_decline'}" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
-                    <i title="See Photos" id="${study?.id}" study_title="${study?.title}" user-id="${study?.userId}" class="fa fa-image mx-2 text-info btn_see_photos" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
+                    <i title="See Photos" id="${study?.id}" authors="${study?.proponent}" study_title="${study?.title}" user-id="${study?.userId}" class="fa fa-image mx-2 text-info btn_see_photos" data-toggle="modal" data-backdrop="static" data-keyboard="false"></i>
                 </td>
               </tr>`)
             })
@@ -64,6 +64,9 @@ $(document).ready(()=>{
 
     $(document).on('click', '.btn_see_photos', (event)=>{
       const { id } = event.currentTarget
+      const title = event.currentTarget.getAttribute("study_title")
+      const authors = event.currentTarget.getAttribute("authors")
+      const defaultImg = 'https://static.thenounproject.com/png/3237447-200.png'
         $.ajax({
             url: '.././api/drafter.php',
             type: 'POST',
@@ -76,9 +79,10 @@ $(document).ready(()=>{
               const photos = res && JSON.parse(res);
               if(photos?.length){
                 photos.map(photo=> {
-                  $('#image_renderer').append(`<img src="${photo?.url}" alt="${photo.filename}" key="${photo?.id}"/>`)
+                  $('#image_renderer').append(`<img src="${photo?.url ?? defaultImg}" alt="${photo.filename}" key="${photo?.id}"/>`)
                   $('#image_previewer').removeClass('hide')
-                  $('')
+                  $('#study_title').text(title)
+                  $('#authors').text(authors)
                 })
               }
             },
