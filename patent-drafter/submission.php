@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/placeholder.css">
     <link rel="stylesheet" href="../assets/css/feedback.css">
+    <link rel="stylesheet" href="../assets/css/image_preview.css">
     <link rel="stylesheet" href="../assets/css/drafter_submission.css">
 
     <title>SOUTHERN LEYTE STATE U - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
@@ -41,6 +42,7 @@
     <input type="text" class="d-none" value="<?php echo $type_of_technology;?>" id="type_of_technology">
     <input type="text" class="d-none" value="<?php echo $_SESSION['user_id'];?>" id="user_id">
     <input type="text" class="d-none" value="<?php echo $_SESSION['name']; ?>" id="user_name">
+    <?php include_once('../image_preview.php');?>
     <div class="" id="message-container"></div>
     <div class="loader">
       <img src="../assets/images/loader1.gif" class="img-loader">

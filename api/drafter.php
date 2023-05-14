@@ -501,6 +501,15 @@
       } else if($api === 'reply_to_feedback'){
          replyToComment($_POST['studyId'], $_POST['sender'], $_POST['feedback'], $_POST['receiver'], $_POST['createdAt'], $_POST['senderName'], $_POST['sender']);
       }
+      else if($api === 'get_photos'){
+        $query = "Select * from tbl_photos where studyId = '".$_POST['studyId']."'";
+        $executeQuery = mysqli_query($conn, $query);
+        $photos = array();
+        while($r = mysqli_fetch_array($executeQuery)){
+          $photos[] = $r;
+        }
+        echo json_encode($photos);
+      }
     }else{
       return;
     }
