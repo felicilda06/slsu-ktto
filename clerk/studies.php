@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../assets/css/drafter_studies.css">
     <link rel="stylesheet" href="../assets/css/placeholder.css">
 
-    <title>SOUTHERN LEYTE STATE U - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
+    <title>SOUTHERN LEYTE STATE UNIVERSITY - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
 </head>
 
 <body>

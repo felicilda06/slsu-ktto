@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="./assets/css/confirmation.css">
     <link rel="stylesheet" href="./assets/css/message.css">
 
-    <title>SOUTHERN LEYTE STATE U - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
+    <title>SOUTHERN LEYTE STATE UNIVERSITY - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
 </head>
 
 <body>

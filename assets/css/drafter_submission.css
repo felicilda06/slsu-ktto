@@ -16,18 +16,13 @@ body{
     gap: 6px;
     margin-top: 15px;
     padding-left: 5px;
-    justify-content: flex-start;
-}
-.submission_wrapper .filter_settings #input_anything{
-  width: 225px;
+    justify-content: space-between;
 }
 .submission_wrapper .filter_settings .filter_inputs{
     display: flex;
     gap: 7px;
+    width: 100%;
     align-items: center;
-}
-.submission_wrapper .filter_settings .sub_container input{
-    width: 160px;
 }
 
 .submission_wrapper .filter_settings .sub_container button{
@@ -138,4 +133,21 @@ body{
 }
 .modal .modal-dialog .modal-content .modal-body #notification{
     transition: .2s ease-in-out !important;
+}
+
+@media only screen and (max-width: 480px) {
+    .submission_wrapper .filter_settings .filter_inputs{
+        display: block;
+        align-items: unset;
+    }
+    .submission_wrapper .filter_settings .filter_inputs input{
+        margin-top: 10px;
+    }
+    .submission_wrapper .filter_settings{
+        display: block;
+    }
+    .submission_wrapper .filter_settings .sub_container button{
+      margin: 10px 0px;
+      width: 100%;
+    }
 }

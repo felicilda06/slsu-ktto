@@ -534,17 +534,26 @@ $(document).ready(() => {
   const uploadImage = async (file)=> {
     const formData = new FormData()
     formData.append('image', file)
-    const result = await axios.post(
-      'https://v2.convertapi.com/upload',
-      formData
-    )
-    const { FileName, FileExt, Url } = result.data
-    return {
-      userId,
-      FileName, 
-      FileExt,
-      Url
+    const settings = {
+      "timeout": 0,
+      "processData": false,
+      "mimeType": "multipart/form-data",
+      "contentType": false,
     }
+    const result = await axios.post(
+      'https://api.imgbb.com/1/upload?key=0e4ec45c1b719b6382d30d6ceb51b6e7',
+      formData,
+      settings
+    )
+
+    const { url, image } = result?.data?.data
+    const newImage = {
+      userId,
+      FileName: image?.filename,
+      FileExt: image?.extension,
+      Url: url
+    }
+    return newImage
   }
 
   arrOfInputs.map((arr) => {

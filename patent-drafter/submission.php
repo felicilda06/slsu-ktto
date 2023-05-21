@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../assets/css/image_preview.css">
     <link rel="stylesheet" href="../assets/css/drafter_submission.css">
 
-    <title>SOUTHERN LEYTE STATE U - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
+    <title>SOUTHERN LEYTE STATE UNIVERSITY - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
 </head>
 
 <body>
@@ -56,9 +56,9 @@
        <div class="filter_settings">
           <div class="filter_inputs">
             <input type="date" class="form-control" id="filter_by_date">
-          </div>
-          <div class="sub_container w-100 d-flex justify-content-between">
             <input type="text" class="form-control" placeholder="Type something..." id="input_anything">
+          </div>
+          <div class="sub_container">
             <button class="btn btn-primary" id="btn_see_feedback">
               See Feedback
               <span class="hide" id="feedback_counter">0</span>

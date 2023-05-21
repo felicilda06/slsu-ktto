@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="./assets/css/loader.css">
     <link rel="stylesheet" href="./assets/css/message.css">
 
-    <title>SOUTHERN LEYTE STATE U - ITSO Document Management System</title>
+    <title>SOUTHERN LEYTE STATE UNIVERSITY - ITSO Document Management System</title>
 </head>
 
 <body>
@@ -37,7 +37,7 @@
         <div class="form-login">
             <div class="logo">
                 <img src="./assets/images/logo.png" alt="logo" class="img-logo">
-                <h1>SOUTHERN LEYTE STATE U <br> ITSO DOCUMENT MANAGEMENT SYSTEM</h1>
+                <h1>SOUTHERN LEYTE STATE UNIVERSITY <br> ITSO DMS</h1>
             </div>
             <span class="sign-in">Sign In</span>
             <form id="sign-in-form">

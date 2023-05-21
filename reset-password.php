@@ -21,7 +21,7 @@ if (!$email) {
     <link rel="stylesheet" href="./assets/css/reset-pass.css">
     <link rel="stylesheet" href="./assets/css/message.css">
 
-    <title>SOUTHERN LEYTE STATE U - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
+    <title>SOUTHERN LEYTE STATE UNIVERSITY - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
 </head>
 <div class="loader">
     <img src="./assets/images/loader1.gif" class="img-loader">

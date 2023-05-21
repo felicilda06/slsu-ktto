@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./assets/css/message.css">
     <link rel="stylesheet" href="./assets/css/forgot.css">
 
-    <title>SOUTHERN LEYTE STATE U - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
+    <title>SOUTHERN LEYTE STATE UNIVERSITY - ITSO DOCUMENT MANAGEMENT SYSTEM</title>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
         <div class="form-forgot">
             <div class="logo">
                 <img src="./assets/images/logo.png" alt="logo" class="img-logo">
-                <h1>SOUTHERN LEYTE STATE U <br> ITSO Document Management System</h1>
+                <h1>SOUTHERN LEYTE STATE UNIVERSITY <br> ITSO DMS</h1>
             </div>
             <p>Enter the email address associated with your account and we will send you the OTP Code.</p>
             <form>

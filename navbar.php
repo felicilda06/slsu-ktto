@@ -2,7 +2,7 @@
     <i class="fa fa-bars" id="burger"></i>
     <div class="logo">
         <img src="" alt="logo" id="logo">
-        <h1 class="title">SOUTHERN LEYTE STATE U <br> ITSO DOCUMENT MANAGEMENT SYSTEM</h1>
+        <h1 class='title'>SOUTHERN LEYTE STATE UNIVERSITY <br> ITSO DMS</h1>
     </div>
     <nav>
         <ul class="menus">

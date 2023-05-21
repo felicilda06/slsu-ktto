@@ -150,6 +150,9 @@
     .navbar_wrapper nav ul li{
         font-size: 13px;
     }
+    h3.p-2{
+        font-size: 23px;
+    }
 }
 
 @media only screen and (max-width: 768px) {
@@ -168,8 +171,12 @@
     }
 
     .navbar_wrapper .logo{
-        gap: 10px;
         border-right: 0px;
+    }
+
+    .navbar_wrapper .logo img#logo{
+        width: 40px;
+        height: 40px;
     }
 
     .navbar_wrapper nav ul{
@@ -193,13 +200,21 @@
     .navbar_wrapper nav ul.show{
         display: flex;
     }
+    h3.p-2{
+        font-size: 16px;
+    }
 
-    
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
+    h3.p-2{
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
     .navbar_wrapper{
-        padding: 35px 4px;
+        padding: 10px 0px;
     }
     .navbar_wrapper.expand{
         height: 100vh;
@@ -209,16 +224,14 @@
         top: 8%;
         right: 5%;
     }
-    .navbar_wrapper .logo{
-        gap: 15px;
-    }
+
     .navbar_wrapper .logo img{
-        width: 80px;
-        height: 80px;
+        width: 30px;
+        height: 35px;
     }
     .navbar_wrapper .logo h1.title{
-       width: 75%;
-       font-size: 18px;
+       width: 100%;
+       font-size: 13px;
     }
     .navbar_wrapper nav ul{
         gap: 8px;
@@ -226,5 +239,8 @@
     }
     .navbar_wrapper nav ul li{
         font-size: 16px;
+    }
+    h3.p-2{
+        font-size: 12px;
     }
 }

@@ -97,3 +97,16 @@ h3{
     padding: 0;
     border: 1px solid #a9a9a9 !important;
 }
+
+@media only screen and (max-width: 600px) {
+    .drafter_log_wrapper input#log_filter{
+        width: 230px;
+    }
+}
+
+
+@media only screen and (max-width: 400px) {
+    .drafter_log_wrapper input#log_filter{
+        width: 50% !important;
+    }
+}
